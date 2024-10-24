@@ -50,7 +50,11 @@
                                                         <div class="modal-body p-4">
                                                             <form action="{{route('admin.dashboard.user.store')}}" method="POST" enctype="multipart/form-data">
                                                                 @csrf
-                                                                @include('admin.blades.user.form')                                                  
+                                                                @include('admin.blades.user.form')  
+                                                                <div class="d-flex justify-content-between">
+                                                                    <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cancelar</button>
+                                                                    <button type="submit" class="btn btn-success waves-effect waves-light">Cadastrar</button>
+                                                                </div>                                                 
                                                             </form>
                                                         </div>
                                                     </div><!-- /.modal-content -->
@@ -122,7 +126,7 @@
                                                                         <form action="{{ route('admin.dashboard.user.update', ['user' => $user->id]) }}" method="POST" enctype="multipart/form-data">
                                                                             @csrf
                                                                             @method('PUT')
-                                                                            @include('admin.blades.user.modal-group')                                                                                                                         
+                                                                            @include('admin.blades.user.modal-group')                                                                                                                                                                                               
                                                                         </form>                                                                    
                                                                     </div>
                                                                 </div><!-- /.modal-content -->
@@ -143,7 +147,11 @@
                                                                         <form action="{{ route('admin.dashboard.user.update', ['user' => $user->id]) }}" method="POST" enctype="multipart/form-data">
                                                                             @csrf
                                                                             @method('PUT')
-                                                                            @include('admin.blades.user.form')                                                                                                                         
+                                                                            @include('admin.blades.user.form')   
+                                                                            <div class="d-flex justify-content-between">
+                                                                                <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cancelar</button>
+                                                                                <button type="submit" class="btn btn-success waves-effect waves-light">Salvar</button>
+                                                                            </div>                                                                                                                      
                                                                         </form>                                                                    
                                                                     </div>
                                                                 </div><!-- /.modal-content -->

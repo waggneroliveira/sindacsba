@@ -1,5 +1,15 @@
 <!DOCTYPE html>
-<html lang="{{config('app.locale')}}" data-layout-mode="{{$settingTheme->data_layout_mode}}" data-topbar-color="{{$settingTheme->data_topbar_color}}" data-bs-theme="{{$settingTheme->data_bs_theme}}" data-two-column-color="{{$settingTheme->data_two_column_color}}" data-layout-width="{{$settingTheme->data_layout_width}}" data-menu-color="{{$settingTheme->data_menu_color}}" data-menu-icon="{{$settingTheme->data_menu_icon}}" data-sidenav-size="{{$settingTheme->data_sidenav_size}}" data-sidenav-user="true">
+<html lang="{{ config('app.locale') }}" 
+    data-layout-mode="{{ $settingTheme->data_layout_mode }}" 
+    data-topbar-color="{{ $settingTheme->data_topbar_color }}"
+    data-bs-theme="{{ $settingTheme->data_bs_theme }}" 
+    data-two-column-color="{{ $settingTheme->data_two_column_color }}" 
+    data-layout-width="{{ $settingTheme->data_layout_width }}" 
+    data-menu-color="{{ $settingTheme->data_menu_color }}" 
+    data-menu-icon="{{ $settingTheme->data_menu_icon }}" 
+    data-sidenav-size="{{ $settingTheme->data_sidenav_size }}" 
+    data-sidenav-user="true">
+  
     <head>
         <meta charset="utf-8" />
         <title>{{env('APP_NAME')}} - Painel Gerenciador</title>
@@ -12,9 +22,13 @@
         <meta name="copyright" content="© 2024 WHI - Web de Alta Inspiração." />
         <meta name="robots" content="none">
         <meta name="googlebot" content="noarchive">
-
+        
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ asset('build/admin/images/logo-hoom.png') }}">
+
+        <!-- Load da pagina -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{{ asset('build/admin/js/load.js') }}"></script>
 
         <!-- plugin css -->
         <link rel="stylesheet" href="{{ asset('build/admin/js/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css') }}">
@@ -39,7 +53,7 @@
         </script>
     </head>
 
-    <body>
+    <body class="loading">
 
         <!-- Begin page -->
         <div id="wrapper">
@@ -568,6 +582,7 @@
                                     <form action="{{ route('admin.dashboard.settingTheme') }}" method="POST">
                                         @csrf
                                         <i class="ri-moon-line font-22"></i>
+                                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                                         <input type="hidden" name="data-bs-theme" value="{{ $settingTheme->data_bs_theme ?? 'light' }}">
                                         <input type="hidden" name="data-layout-width" value="{{ $settingTheme->data_layout_width }}">
                                         <input type="hidden" name="data-layout-mode" value="{{ $settingTheme->data_layout_mode }}">
@@ -700,6 +715,8 @@
                         <form action="{{route('admin.dashboard.settingTheme')}}" method="POST">
                             @csrf
                             @method('POST')
+                            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+
                             <div class="mt-n3">
                                 <h6 class="fw-medium py-2 px-3 font-13 text-uppercase bg-light mx-n3 mt-n3 mb-3">
                                     <span class="d-block py-1">Theme Settings</span>
@@ -876,7 +893,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Vendor js -->
         <script src="{{ asset('build/admin/js/vendor.min.js') }}"></script>
 
@@ -897,28 +914,55 @@
         <!-- Dashboard 2 init -->
         <script src="{{ asset('build/admin/js/pages/dashboard-2.init.js') }}"></script>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        
+        {{-- Modais alert --}}
+        @include('sweetalert::alert')
+
         @if(Session::has('success'))
             <div id="successMessage" class="alert alert-success notification-message">
                 <span class="mdi mdi-checkbox-marked-circle"></span>
                 {{ Session::get('success') }}
             </div>
         @endif
-
         @if(Session::has('error'))
-            <div id="errorMessage" class="alert alert-warning notification-message">
+            <div id="errorMessage" class="alert alert-warning notification-message" >
                 <span class="mdi mdi-alert-circle"></span>
                 {{ Session::get('error') }}
             </div>
         @endif
+
+        @if ($errors->any())
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Crie uma string para armazenar todos os erros
+                    let errors = '';
+                    @foreach ($errors->all() as $error)
+                        errors += '{{ $error }}\n'; // Adiciona cada erro a string
+                    @endforeach
+
+                    // Usando SweetAlert para exibir os erros em um modal
+                    Swal.fire({
+                        title: 'Erros de Validação',
+                        text: errors,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                });
+            </script>
+        @endif
+
+        <script>
+            var userThemeSettings = {
+                data_bs_theme: "{{ $settingTheme->data_bs_theme }}",
+                data_layout_width: "{{ $settingTheme->data_layout_width }}",
+                data_layout_mode: "{{ $settingTheme->data_layout_mode }}",
+                data_topbar_color: "{{ $settingTheme->data_topbar_color }}",
+                data_menu_color: "{{ $settingTheme->data_menu_color }}",
+                data_two_column_color: "{{ $settingTheme->data_two_column_color }}",
+                data_menu_icon: "{{ $settingTheme->data_menu_icon }}",
+                data_sidenav_size: "{{ $settingTheme->data_sidenav_size }}"
+            };
+        </script>
+
+        @include('admin.loadPage.loading')
     </body>
 </html>

@@ -7,6 +7,7 @@ use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingThemeController;
 
 Route::get('painel/', function () {
@@ -22,9 +23,14 @@ Route::prefix('painel/')->group(function () {
     ->name('admin.user.authenticate');
 
     Route::middleware([Authenticate::class])->group(function(){ 
+        Route::get('/carregamento', function () {
+            return view('admin.loadPage.login');
+        })->name('loading');
+
         Route::get('/dashboard', function () {
             return view('admin.dashboard');
         })->name('admin.dashboard');
+
 
         //USUARIOS
         Route::resource('usuario', UserController::class)
@@ -36,8 +42,7 @@ Route::prefix('painel/')->group(function () {
         ->name('admin.dashboard.user.sorting');
         
         // SETTINGS THEME
-        Route::post('setting', [SettingThemeController::class, 'setting'])->name('admin.dashboard.settingTheme');
-        Route::post('settingUpdate', [SettingThemeController::class, 'settingupdate'])->name('admin.dashboard.settingTheme');
+        Route::post('setting', [SettingThemeController::class, 'setting'])->name('admin.dashboard.settingTheme'); 
     });
 
     // LOGOUT
@@ -45,7 +50,13 @@ Route::prefix('painel/')->group(function () {
 });
 
 View::composer('admin.core.admin', function ($view) {
-    $settingTheme = SettingTheme::where('user_id', Auth::user()->id)->first();
-
-    return $view->with('settingTheme', $settingTheme);
+    $user = Auth::user();
+    
+    if ($user) {
+        $settingTheme = SettingTheme::where('user_id', $user->id)->first();
+    } else {
+        $settingTheme = new SettingTheme();
+    }
+    // dd($settingTheme);
+    return $view->with('settingTheme', $settingTheme)->with('user', $user);
 });

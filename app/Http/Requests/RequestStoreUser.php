@@ -3,7 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class RequestStoreUser extends FormRequest
 {
@@ -40,5 +42,4 @@ class RequestStoreUser extends FormRequest
             'password.min' => 'A senha deve ter pelo menos 8 caracteres.',
         ];
     }
-
 }

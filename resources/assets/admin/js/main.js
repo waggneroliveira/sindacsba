@@ -176,7 +176,7 @@ $('.table-sortable tbody').sortable({
     $(this).find('tr').each(function() {
         var id = $(this).data('code')
         arrId.push(id)
-    })
+    });
 
     $.ajax({
         headers: {
@@ -185,28 +185,35 @@ $('.table-sortable tbody').sortable({
         type: 'POST',
         url: $(this).data('route'),        
         data: { arrId: arrId },
-        // success: function(data) {
-        //     if (data.status) {
-        //         $.NotificationApp.send("Sucesso!", "Registro ordenado com sucesso!", "bottom-left", "#00000080", "success", '3000');
-        //     } else {
-        //         $.NotificationApp.send("Erro!", "Ocorreu um erro ao ordenar o registro.", "bottom-left", "#00000080", "error", '10000');
-        //     }
-        // },
-        // error: function() {
-        //     $.NotificationApp.send("Erro!", "Ocorreu um erro ao ordenar o registro.", "bottom-left", "#00000080", "error", '10000');
-        // }
+
         success: function(data) {
             if (data.status) {
-                console.log("Sucesso! Registro ordenado com sucesso!");
+                Swal.fire({
+                    title: 'Sucesso!',
+                    text: 'Registro ordenado com sucesso!',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
             } else {
-                console.log("Erro! Ocorreu um erro ao ordenar o registro.");
+                Swal.fire({
+                    title: 'Erro!',
+                    text: 'Ocorreu um erro ao ordenar o registro.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
             }
         },
         error: function() {
-            console.log("Erro! Ocorreu um erro ao ordenar o registro.");
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Ocorreu um erro ao ordenar o registro.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         }
-    })
+    });
 });
+
 
 $('input[name=btnSelectItem]').on('click', function() {
     var btnDelete = $(this).closest('table').find('input[name=btnSelectAll]').val();
@@ -291,11 +298,19 @@ $('.btConfirmDelete, #btSubmitDelete').on('click', function() {
         }
     });
 });
+
 //Alterar configurações de thema do painel, pela barra lateral
 $("#settingTheme input[type=checkbox]").on("click", function () {
     setTimeout(() => {
         var formData = new FormData(),
             route = $(this).parents("form").attr("action");
+        formData.append(
+            "user_id",
+            $(this)
+                .parents("form")
+                .find("[name=user_id]")
+                .val()
+        );
         formData.append(
             "data_bs_theme",
             $(this)
@@ -367,6 +382,7 @@ $("#settingTheme input[type=checkbox]").on("click", function () {
         console.log(route);
     }, 800);
 });
+
 //Atualizar thema no click do icno superio do painel
 $("#light-dark-mode").on("click", function() {
     var form = $(this).find("form");
@@ -379,7 +395,15 @@ $("#light-dark-mode").on("click", function() {
     // Verifique se o novo valor é realmente definido
     console.log("Novo tema definido:", newTheme);
 
+    // Pega o ID do usuário autenticado
+    var userId = form.find('input[name="user_id"]').val();
+    console.log("ID do usuário:", userId);
+
     var formData = new FormData(form[0]);
+
+    // Certifica que o ID do usuário está correto no formData
+    formData.set('user_id', userId);
+
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -402,4 +426,19 @@ $("#light-dark-mode").on("click", function() {
     });
 });
 
+$(document).ready(function() {
+    // Aguarde até que as configurações sejam definidas corretamente
+    if (userThemeSettings) {
+        document.documentElement.setAttribute('data-bs-theme', userThemeSettings.data_bs_theme);
+        document.documentElement.setAttribute('data-layout-width', userThemeSettings.data_layout_width);
+        document.documentElement.setAttribute('data-layout-mode', userThemeSettings.data_layout_mode);
+        document.documentElement.setAttribute('data-two-column-color', userThemeSettings.data_two_column_color);
+        document.documentElement.setAttribute('data-menu-icon', userThemeSettings.data_menu_icon);
+        document.documentElement.setAttribute('data-sidenav-size', userThemeSettings.data_sidenav_size);
+        setTimeout(function() {
+            document.documentElement.setAttribute('data-topbar-color', userThemeSettings.data_topbar_color);
+            document.documentElement.setAttribute('data-menu-color', userThemeSettings.data_menu_color);
+        }, 500);
+    }
+});
 

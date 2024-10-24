@@ -10,7 +10,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 class SettingThemeSeeder extends Seeder
 {
     public function run(): void
-    {
+    {   
         DB::table('setting_themes')->insert([
             'user_id' => User::first()->id,
             'data_bs_theme' => 'dark',

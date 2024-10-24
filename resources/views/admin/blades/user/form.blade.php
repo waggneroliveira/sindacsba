@@ -6,12 +6,14 @@
     <label for="exampleInputEmail1" class="form-label">Email <span class="text-danger">*</span></label>
     <input type="email" name="email" value="{{isset($user)?$user->email:''}}" class="form-control" id="exampleInputEmail1{{isset($user->id)?$user->id:''}}" placeholder="Digite seu email" required>
 </div>
+
 <div class="mb-3">
     <label for="password" class="form-label">Senha <span class="text-danger">*</span></label>
     <div class="input-group input-group-merge">
-        <input type="password" name="password" id="password-{{isset($user->id)?$user->id:''}}" class="form-control" placeholder="Digite sua senha" required>
+        <input type="password" name="password" id="password-{{ isset($user->id) ? $user->id : '' }}" class="form-control" placeholder="Digite sua senha" {{ !isset($user) ? 'required' : '' }}>
     </div>
 </div>
+
 <div class="col-lg-12">
     <div class="mt-3">
         <input type="file" name="path_image" data-plugins="dropify" data-default-file="{{isset($user)?$user->path_image<>''?url('storage/'.$user->path_image):'':''}}"  />
@@ -26,8 +28,4 @@
             You must agree before submitting.
         </div>
     </div>
-</div>
-<div class="d-flex justify-content-between">
-    <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cancelar</button>
-    <button type="submit" class="btn btn-success waves-effect waves-light">Cadastrar</button>
 </div>

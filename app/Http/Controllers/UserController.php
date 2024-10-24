@@ -12,9 +12,10 @@ use App\Http\Requests\RequestStoreUser;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
+use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Console\View\Components\Alert;
 use App\Http\Controllers\Helpers\HelperArchive;
+use App\Models\SettingTheme;
 
 class UserController extends Controller
 {
@@ -70,39 +71,52 @@ class UserController extends Controller
     {
         $data = $request->all();
         $helper = new HelperArchive();
-
+        
         try {
             DB::beginTransaction();
-
+            
             $path_image = $helper->renameArchiveUpload($request, 'path_image');
             if ($path_image) {
                 $data['path_image'] = $this->pathUpload . $path_image;
             }
             $data['password'] = Hash::make($request->password);
             $data['active'] = $request->active ? 1 : 0;
-            $data['email_verified_at'] = now();
-
+            
             $userExist = User::where('email', $data['email'])->first();
-
+            
             if ($userExist) {
                 Storage::delete($this->pathUpload . $path_image);
 
-                return redirect()->back()->with('error', 'Erro ao cadastrar Usuário! Este e-mail já existe em nossos registros.');
+                return redirect()->back();
             } else {
-                User::create($data);
+                $user = User::create($data);
 
+                if($user){
+                    DB::table('setting_themes')->insert([
+                        'user_id' => $user->id,
+                        'data_bs_theme' => 'dark',
+                        'data_layout_width' => 'default',
+                        'data_layout_mode' => 'detached',
+                        'data_topbar_color' => 'light',
+                        'data_menu_color' => 'light',
+                        'data_two_column_color' => 'light',
+                        'data_menu_icon' => 'default',
+                        'data_sidenav_size' => 'condensed',
+                        'created_at' => now()
+                    ]);                    
+                }
                 if ($path_image) {
                     $request->file('path_image')->storeAs($this->pathUpload, $path_image);
                 }
                 DB::commit();
-                Alert::success('success', 'Mensagem de sucesso!');
-                // Session::flash('success', 'Usuário cadastrado com sucesso!');
+                Alert::success('success', 'Usuário cadastrado com sucesso!');
                 return redirect()->route('admin.dashboard.user.index');
             }
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Erro ao cadastrar o Usuário: ' . $e->getMessage());
+            Alert::success('error', 'Erro ao cadastrar o Usuário!');
+            return redirect()->back();
         }
     }
 
@@ -111,7 +125,6 @@ class UserController extends Controller
         if(!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can(['usuario.visualizar','usuario.editar'])){
             return view('admin.error.403');
         }
-
 
         return view('admin.cruds.user.edit', [
             'user' => $user,
@@ -151,15 +164,12 @@ class UserController extends Controller
             if ($path_image) {Storage::delete($this->pathUpload.$path_image);}
             if ($path_image) {$request->file('path_image')->storeAs($this->pathUpload, $path_image);}
             DB::commit();
-            Session::flash('success', 'Usuário atualizado com sucesso!');
+            Alert::success('success', 'Usuário atualizado com sucesso!');
             return redirect()->route('admin.dashboard.user.index');
         }catch(\Exception $exception){
             DB::rollBack();
-            Session::flash('error', 'Erro ao atualizar o Usuário!');
-            return redirect()
-                ->back()
-                ->withInput()
-                ->withErrors(['message-error'=>$exception->getMessage()]);
+            Alert::success('error', 'Erro ao atualizar o Usuário!');
+            return redirect()->back();
         }
     }
 
@@ -170,8 +180,12 @@ class UserController extends Controller
         }
         Storage::delete(isset($user->path_image) ? $user->path_image : '');
         $user->delete();
-
-        Session::flash('success','Usuário deletado com sucesso!');
+       
+        if(isset($settingTheme)){
+            $settingTheme = SettingTheme::find($user->id);
+            $settingTheme->delete();
+        }
+        
         return redirect()->back();
     }
     public function destroySelected(Request $request)
