@@ -50,7 +50,7 @@
                                                         <div class="modal-body p-4">
                                                             <form action="{{route('admin.dashboard.user.store')}}" method="POST" enctype="multipart/form-data">
                                                                 @csrf
-                                                                @include('admin.cruds.user.form')                                                  
+                                                                @include('admin.blades.user.form')                                                  
                                                             </form>
                                                         </div>
                                                     </div><!-- /.modal-content -->
@@ -122,7 +122,7 @@
                                                                         <form action="{{ route('admin.dashboard.user.update', ['user' => $user->id]) }}" method="POST" enctype="multipart/form-data">
                                                                             @csrf
                                                                             @method('PUT')
-                                                                            @include('admin.cruds.user.modal-group')                                                                                                                         
+                                                                            @include('admin.blades.user.modal-group')                                                                                                                         
                                                                         </form>                                                                    
                                                                     </div>
                                                                 </div><!-- /.modal-content -->
@@ -143,7 +143,7 @@
                                                                         <form action="{{ route('admin.dashboard.user.update', ['user' => $user->id]) }}" method="POST" enctype="multipart/form-data">
                                                                             @csrf
                                                                             @method('PUT')
-                                                                            @include('admin.cruds.user.form')                                                                                                                         
+                                                                            @include('admin.blades.user.form')                                                                                                                         
                                                                         </form>                                                                    
                                                                     </div>
                                                                 </div><!-- /.modal-content -->

@@ -23,7 +23,7 @@
             <div class="row col-12">
                 <div class="col-12 col-lg-12">
                     <div class="card card-body">
-                        @include('admin.cruds.user.form')
+                        @include('admin.blades.user.form')
                     </div>
                 </div>
             </div>

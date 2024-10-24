@@ -24,7 +24,7 @@
         <div class="col-md-5 col-xl-3">
             <div class="card borda-cx ratio ratio-4x3">
                 <div class="d-flex align-items-center justify-content-center">
-                    <a href="">
+                    <a href="{{route('admin.dashboard.user.index')}}">
                         <div class="row">
                             <div class="col-12 d-flex align-items-center justify-content-center">
                                 <div class="avatar-xl bg-hoom rounded-circle">

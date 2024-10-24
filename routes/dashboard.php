@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\SettingThemeController;
 
@@ -23,16 +24,17 @@ Route::prefix('painel/')->group(function () {
     Route::middleware([Authenticate::class])->group(function(){ 
         Route::get('/dashboard', function () {
             return view('admin.dashboard');
-        });
+        })->name('admin.dashboard');
 
         //USUARIOS
-        // Route::resource('usuario', UserController::class)
-        // ->names('admin.dashboard.user')
-        // ->parameters(['usuario'=>'user']);
-        // Route::post('usuario/delete', [UserController::class, 'destroySelected'])
-        // ->name('admin.dashboard.user.destroySelected');
-        // Route::post('usuario/sorting', [UserController::class, 'sorting'])
-        // ->name('admin.dashboard.user.sorting');
+        Route::resource('usuario', UserController::class)
+        ->names('admin.dashboard.user')
+        ->parameters(['usuario'=>'user']);
+        Route::post('usuario/delete', [UserController::class, 'destroySelected'])
+        ->name('admin.dashboard.user.destroySelected');
+        Route::post('usuario/sorting', [UserController::class, 'sorting'])
+        ->name('admin.dashboard.user.sorting');
+        
         // SETTINGS THEME
         Route::post('setting', [SettingThemeController::class, 'setting'])->name('admin.dashboard.settingTheme');
         Route::post('settingUpdate', [SettingThemeController::class, 'settingupdate'])->name('admin.dashboard.settingTheme');

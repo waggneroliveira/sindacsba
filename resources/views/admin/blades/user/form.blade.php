@@ -27,7 +27,7 @@
         </div>
     </div>
 </div>
-<div class="text-end">
-    <button type="submit" class="btn btn-success waves-effect waves-light">Salvar</button>
+<div class="d-flex justify-content-between">
     <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cancelar</button>
+    <button type="submit" class="btn btn-success waves-effect waves-light">Cadastrar</button>
 </div>
