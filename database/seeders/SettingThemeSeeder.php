@@ -9,9 +9,6 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SettingThemeSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         DB::table('setting_themes')->insert([

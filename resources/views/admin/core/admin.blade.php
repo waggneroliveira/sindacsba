@@ -897,6 +897,22 @@
         <!-- Dashboard 2 init -->
         <script src="{{ asset('build/admin/js/pages/dashboard-2.init.js') }}"></script>
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        
+        @if(Session::has('success'))
+            <div id="successMessage" class="alert alert-success notification-message">
+                <span class="mdi mdi-checkbox-marked-circle"></span>
+                {{ Session::get('success') }}
+            </div>
+        @endif
 
         @if(Session::has('error'))
             <div id="errorMessage" class="alert alert-warning notification-message">
