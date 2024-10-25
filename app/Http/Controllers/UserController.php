@@ -116,7 +116,7 @@ class UserController extends Controller
                     $request->file('path_image')->storeAs($this->pathUpload, $path_image);
                 }
                 DB::commit();
-                Alert::success('success', 'Usuário cadastrado com sucesso!');
+                session()->flash('success', 'Usuário cadastrado com sucesso!');
                 return redirect()->route('admin.dashboard.user.index');
             }
 

@@ -922,8 +922,6 @@
         <script src="{{ asset('build/admin/js/pages/dashboard-2.init.js') }}"></script>
 
         {{-- Modais alert --}}
-        @include('sweetalert::alert')
-
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 let successMessage = '{{ session('success') }}';
@@ -941,14 +939,6 @@
                 }
             });
         </script>
-        
-        
-        @if(Session::has('success'))
-            <div id="successMessage" class="alert alert-success notification-message">
-                <span class="mdi mdi-checkbox-marked-circle"></span>
-                {{ Session::get('success') }}
-            </div>
-        @endif
 
         @if(Session::has('error'))
             <div id="errorMessage" class="alert alert-warning notification-message" >
