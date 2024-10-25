@@ -12,7 +12,7 @@ $(document).ready(function () {
         if (window.pageFullyLoaded) {
             $("#loading-indicator").fadeOut("slow");
         }
-    }, 1000); // 5 segundos de tempo mínimo
+    }, 3000); // 5 segundos de tempo mínimo
 });
 
 // Quando a página e todos os recursos forem carregados

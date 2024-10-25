@@ -23,6 +23,13 @@
         <meta name="robots" content="none">
         <meta name="googlebot" content="noarchive">
         
+        <link href="{{ asset('build/admin/css/custom.css') }}" rel="stylesheet" type="text/css" />
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                document.body.classList.add('loaded');
+            });
+        </script>
+
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ asset('build/admin/images/logo-hoom.png') }}">
 

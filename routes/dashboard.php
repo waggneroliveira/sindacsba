@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
@@ -23,11 +24,13 @@ Route::prefix('painel/')->group(function () {
     ->name('admin.user.authenticate');
 
     Route::middleware([Authenticate::class])->group(function(){ 
-        Route::get('/carregamento', function () {
-            return view('admin.loadPage.login');
+        Route::get('/loading', function () {
+            return view('admin.loadPage.loading');
         })->name('loading');
 
+
         Route::get('/dashboard', function () {
+            Session::forget('just_logged_in');
             return view('admin.dashboard');
         })->name('admin.dashboard');
 
