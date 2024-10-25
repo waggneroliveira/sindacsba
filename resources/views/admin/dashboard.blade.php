@@ -58,6 +58,24 @@
                 </div>
             </div> <!-- end card-->
         </div> <!-- end col -->
+        <div class="col-md-5 col-xl-3">
+            <div class="card borda-cx ratio ratio-4x3">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="{{route('admin.dashboard.group.index')}}">
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <div class="avatar-xl bg-hoom rounded-circle">
+                                    <i class="mdi mdi-chart-areaspline avatar-title font-22 text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 col-12 text-center">
+                            <h5 class="text-uppercase">Grupos</h5>
+                        </div>
+                    </a>
+                </div>
+            </div> <!-- end card-->
+        </div> <!-- end col -->
     </div>
     <!-- end row -->
 

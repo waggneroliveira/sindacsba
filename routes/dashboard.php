@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\View;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
@@ -34,8 +35,16 @@ Route::prefix('painel/')->group(function () {
             Session::forget('just_logged_in');
             return view('admin.dashboard');
         })->name('admin.dashboard');
-
-
+        //AUDITORIA
+        Route::resource('auditoria', AuditActivityController::class)
+        ->names('admin.dashboard.audit')
+        ->parameters(['auditoria'=>'activitie']);
+        //GRUPOS
+        Route::resource('grupos', RoleController::class)
+        ->names('admin.dashboard.group')
+        ->parameters(['grupos' => 'role']);
+        Route::post('grupos/delete', [RoleController::class, 'destroySelected'])
+        ->name('admin.dashboard.group.destroySelected');
         //USUARIOS
         Route::resource('usuario', UserController::class)
         ->names('admin.dashboard.user')
@@ -45,10 +54,6 @@ Route::prefix('painel/')->group(function () {
         Route::post('usuario/sorting', [UserController::class, 'sorting'])
         ->name('admin.dashboard.user.sorting');
         
-        //AUDITORIA
-        Route::resource('auditoria', AuditActivityController::class)
-        ->names('admin.dashboard.audit')
-        ->parameters(['auditoria'=>'activitie']);
         // SETTINGS THEME
         Route::post('setting', [SettingThemeController::class, 'setting'])->name('admin.dashboard.settingTheme'); 
     });

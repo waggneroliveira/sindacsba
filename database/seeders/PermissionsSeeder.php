@@ -17,6 +17,12 @@ class PermissionsSeeder extends Seeder
             'auditoria'=>[
                 'Visualizar',
             ],
+            'grupo'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
             'usuario'=>[
                 'Criar',
                 'Editar',
@@ -25,12 +31,6 @@ class PermissionsSeeder extends Seeder
                 'Visualizar outros usuarios',
                 'Atribuir grupos',
                 'Tornar usuario master'
-            ],
-            'grupo'=>[
-                'Criar',
-                'Editar',                
-                'Visualizar',
-                'Remover'
             ],
         ];
 
