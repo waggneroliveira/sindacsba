@@ -164,7 +164,8 @@ class UserController extends Controller
             if ($path_image) {Storage::delete($this->pathUpload.$path_image);}
             if ($path_image) {$request->file('path_image')->storeAs($this->pathUpload, $path_image);}
             DB::commit();
-            Alert::success('success', 'Usuário atualizado com sucesso!');
+
+            session()->flash('success', 'Usuário atualizado com sucesso!');
             return redirect()->route('admin.dashboard.user.index');
         }catch(\Exception $exception){
             DB::rollBack();

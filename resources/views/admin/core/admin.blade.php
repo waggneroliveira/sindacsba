@@ -922,8 +922,30 @@
         <script src="{{ asset('build/admin/js/pages/dashboard-2.init.js') }}"></script>
 
         {{-- Modais alert --}}
-        @include('sweetalert::alert')
+        {{-- @include('sweetalert::alert') --}}
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Obtém a mensagem de sucesso da sessão
+                let successMessage = '{{ session('success') }}';
+        
+                // Se a mensagem existir, exibe o SweetAlert após o atraso
+                if (successMessage) {
+                    setTimeout(function() {
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                title: 'Sucesso',
+                                text: successMessage,
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    }, 2150); // Atraso de 2,15 segundos
+                }
+            });
+        </script>
+        
+        
         @if(Session::has('success'))
             <div id="successMessage" class="alert alert-success notification-message">
                 <span class="mdi mdi-checkbox-marked-circle"></span>
@@ -938,23 +960,24 @@
         @endif
 
         @if ($errors->any())
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    // Crie uma string para armazenar todos os erros
-                    let errors = '';
-                    @foreach ($errors->all() as $error)
-                        errors += '{{ $error }}\n'; // Adiciona cada erro a string
-                    @endforeach
-
-                    // Usando SweetAlert para exibir os erros em um modal
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let errors = '';
+                @foreach ($errors->all() as $error)
+                    errors += '{{ $error }}\n'; 
+                @endforeach
+        
+                setTimeout(function() {
                     Swal.fire({
                         title: 'Erros de Validação',
                         text: errors,
                         icon: 'error',
                         confirmButtonText: 'OK'
                     });
-                });
-            </script>
+                }, 2150);
+            });
+        </script>
+        
         @endif
 
         <script>
