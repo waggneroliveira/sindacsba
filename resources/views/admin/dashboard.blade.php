@@ -52,5 +52,6 @@
             </div>
         </div>
     </footer>
+    @include('admin.loadPage.loading')
     <!-- end Footer -->
 @endsection

@@ -75,8 +75,8 @@
     justify-content: center;
     align-items: center;" class="loading-indicator">
     <div class="row">
-        <img id="load" src="{{asset('build/admin/images/whi.png')}}" alt="Carregando..." />
+        <img id="load" src="{{asset('build/admin/images/whi.png')}}" alt="Sincronizando suas preferências..." />
         
-        <h4 >Carregando...</h4>
+        <h4 >Sincronizando suas preferências...</h4>
     </div>
 </div>

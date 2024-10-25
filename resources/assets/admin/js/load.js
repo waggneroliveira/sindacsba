@@ -1,26 +1,30 @@
 $(document).ready(function () {
-    $("#loading-indicator").fadeIn("fast"); // Mostra o indicador quando o DOM está pronto
+    if ($("#loading-indicator")) {
+        $("#loading-indicator").fadeIn("fast"); 
+    
+        let minimumLoadTimePassed = false;
+    
+        setTimeout(function () {
+            minimumLoadTimePassed = true;
 
-    // Variável para controlar se o carregamento mínimo de 5 segundos foi concluído
-    let minimumLoadTimePassed = false;
-
-    // Garante que o indicador de carregamento seja exibido por pelo menos 5 segundos
-    setTimeout(function () {
-        minimumLoadTimePassed = true;
-
-        // Se a página já tiver sido completamente carregada, oculta o indicador
-        if (window.pageFullyLoaded) {
-            $("#loading-indicator").fadeOut("slow");
-        }
-    }, 2000); // 5 segundos de tempo mínimo
+            if (window.pageFullyLoaded) {
+                $("#loading-indicator").fadeOut("slow");
+            }
+        }, 2000); 
+    }
 });
 
-// Quando a página e todos os recursos forem carregados
 $(window).on('load', function () {
-    window.pageFullyLoaded = true; // Marca que a página foi carregada completamente
+    window.pageFullyLoaded = true; 
+
+    // Define um valor padrão para minimumLoadTimePassed caso não exista
+    if (typeof minimumLoadTimePassed === "undefined") {
+        minimumLoadTimePassed = false;
+    }
 
     // Se o tempo mínimo de exibição já passou, oculta o indicador de carregamento
     if (minimumLoadTimePassed) {
         $("#loading-indicator").fadeOut("slow");
     }
 });
+

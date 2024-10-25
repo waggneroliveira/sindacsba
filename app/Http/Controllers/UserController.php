@@ -24,8 +24,15 @@ class UserController extends Controller
     public function index()
     {
         $users = User::query();
+        $currentUser = Auth::user();
+        if ($currentUser) {
+            $settingTheme = SettingTheme::where('user_id', $currentUser->id)->first();
+        } else {
+            $settingTheme = new SettingTheme();
+        }
+
         if(!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can('usuario.visualizar')){
-            return view('admin.error.403');
+            return view('admin.error.403', compact('settingTheme'));
         }
         if(Auth::user()->can(['usuario.visualizar','usuario.visualizar outros usuarios'])){
             $users = $users->where('id', '<>', 1);
@@ -59,7 +66,7 @@ class UserController extends Controller
         ->groupBy('permissions.name')
         ->select('permissions.name')
         ->get();
-
+            
         return view('admin.blades.user.index', [
             'users'=>$users,
             'otherRoles'=>$otherRoles,
