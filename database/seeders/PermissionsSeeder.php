@@ -14,6 +14,9 @@ class PermissionsSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
+            'auditoria'=>[
+                'Visualizar',
+            ],
             'usuario'=>[
                 'Criar',
                 'Editar',

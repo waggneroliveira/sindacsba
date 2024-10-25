@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingThemeController;
+use App\Http\Controllers\AuditActivityController;
 
 Route::get('painel/', function () {
     return redirect()->route('admin.dashboard.painel');
@@ -44,6 +45,10 @@ Route::prefix('painel/')->group(function () {
         Route::post('usuario/sorting', [UserController::class, 'sorting'])
         ->name('admin.dashboard.user.sorting');
         
+        //AUDITORIA
+        Route::resource('auditoria', AuditActivityController::class)
+        ->names('admin.dashboard.audit')
+        ->parameters(['auditoria'=>'activitie']);
         // SETTINGS THEME
         Route::post('setting', [SettingThemeController::class, 'setting'])->name('admin.dashboard.settingTheme'); 
     });

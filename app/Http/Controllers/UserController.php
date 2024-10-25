@@ -16,6 +16,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Permission;
 use App\Http\Controllers\Helpers\HelperArchive;
 use App\Models\SettingTheme;
+use Illuminate\Support\Facades\Log; 
 
 class UserController extends Controller
 {
@@ -196,22 +197,93 @@ class UserController extends Controller
         
         return redirect()->back();
     }
+
     public function destroySelected(Request $request)
     {
-        if (!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can(['usuario.visualizar','usuario.remover'])) {
+        if (!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can(['usuario.visualizar', 'usuario.remover'])) {
             return view('admin.error.403');
         }
-
-        if($deleted = User::whereIn('id', $request->deleteAll)->delete()){
-            return Response::json(['status' => 'success', 'message' => $deleted.' itens deletados com sucessso!']);
+    
+        foreach ($request->deleteAll as $userId) {
+            $user = User::find($userId);
+    
+            if ($user) {
+                // Log para verificar os dados do usuário
+                \Log::info('Dados do usuário antes da exclusão:', [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'active' => $user->active,
+                    'sorting' => $user->sorting,
+                    'path_image' => $user->path_image,
+                ]);
+    
+                activity()
+                    ->causedBy(Auth::user())
+                    ->performedOn($user)
+                    ->event('multiple_deleted')
+                    ->withProperties([
+                        'attributes' => [
+                            'id' => $userId,
+                            'name' => $user->name,
+                            'email' => $user->email,
+                            'active' => $user->active,
+                            'path_image' => $user->path_image,
+                            'sorting' => $user->sorting,
+                            'event' => 'multiple_deleted',
+                        ]
+                    ])
+                    ->log('multiple_deleted');
+            } else {
+                \Log::warning("Usuário com ID $userId não encontrado.");
+            }
         }
+    
+        $deleted = User::whereIn('id', $request->deleteAll)->delete();
+    
+        if ($deleted) {
+            return Response::json(['status' => 'success', 'message' => $deleted . ' itens deletados com sucesso!']);
+        }
+    
+        return Response::json(['status' => 'error', 'message' => 'Nenhum item foi deletado.'], 500);
     }
-
+    
     public function sorting(Request $request)
     {
-        foreach($request->arrId as $sorting => $id){
-            User::where('id', $id)->update(['sorting' => $sorting]);
+        foreach($request->arrId as $sorting => $id) {
+            $user = User::find($id);
+    
+            if($user) {
+                // Atualiza o sorting do usuário
+                $user->sorting = $sorting;
+                $user->save(); 
+
+                // Log para verificar os dados do usuário
+                \Log::info('Dados do usuário antes da exclusão:', [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'sorting' => $user->sorting,
+                ]);
+
+                activity()
+                    ->causedBy(Auth::user())
+                    ->performedOn($user)
+                    ->event('order_updated')
+                    ->withProperties([
+                        'attributes' => [
+                            'id' => $id,
+                            'name' => $user->name,
+                            'sorting' => $sorting,
+                            'event' => 'order_updated',
+                        ]
+                    ])
+                    ->log('order_updated');
+            } else {
+                \Log::warning("Usuário com ID $id não encontrado.");
+            }
         }
+    
         return Response::json(['status' => 'success']);
     }
+    
 }
