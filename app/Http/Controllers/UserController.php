@@ -254,10 +254,7 @@ class UserController extends Controller
             $user = User::find($id);
     
             if($user) {
-                // Atualiza o sorting do usuário
-                $user->sorting = $sorting;
-                $user->save(); 
-
+                
                 // Log para verificar os dados do usuário
                 \Log::info('Dados do usuário antes da exclusão:', [
                     'id' => $user->id,
