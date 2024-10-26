@@ -29,3 +29,9 @@
         </div>
     </div>
 </div>
+
+@if ($currentRoles->isNotEmpty())
+    @foreach($currentRoles as $role)  
+        <input type="hidden" name="roles[]" value="{{ $role->name }}">                    
+    @endforeach        
+@endif

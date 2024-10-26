@@ -3,20 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\SettingTheme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log; 
 use App\Http\Requests\RequestStoreUser;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\Response;
 use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Permission;
 use App\Http\Controllers\Helpers\HelperArchive;
-use App\Models\SettingTheme;
-use Illuminate\Support\Facades\Log; 
 
 class UserController extends Controller
 {
@@ -31,7 +32,7 @@ class UserController extends Controller
         } else {
             $settingTheme = new SettingTheme();
         }
-
+        dd($currentUser);
         if(!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can('usuario.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
@@ -67,16 +68,17 @@ class UserController extends Controller
         ->groupBy('permissions.name')
         ->select('permissions.name')
         ->get();
-            
+        
         return view('admin.blades.user.index', [
             'users'=>$users,
             'otherRoles'=>$otherRoles,
             'permissions'=>$permissions,
+            'currentRoles'=>$user->currentRoles,
         ]);
     }
 
     public function store(RequestStoreUser $request)
-    {
+    {   
         $data = $request->all();
         $helper = new HelperArchive();
         
@@ -139,9 +141,10 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        $data = $request->all();
+        $data = $request->except('password');
+        $password = Hash::make($request->password);
         $helper = new HelperArchive();
         $roles = $request->input('roles', []);
 
@@ -162,10 +165,9 @@ class UserController extends Controller
                 Storage::delete($user->$inputFile);
                 $data['path_image'] = null;
             }
-
-            $data['password'] = Hash::make($request->password);
+            $data['password'] = $password;
             $data['active'] = $request->active ? 1 : 0;
-            if($request->password == '') unset($data['password']);
+            if($password == '') unset($data['password']);
             $user->fill($data)->save();
             $user->syncRoles($roles);
 

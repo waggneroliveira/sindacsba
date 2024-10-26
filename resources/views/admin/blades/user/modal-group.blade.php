@@ -1,5 +1,5 @@
 <div class="row">
-    <input type="hidden" name="active" value="{{ isset($user->active) && $user->active == 1 ? $user->active : 0 }}">
+    <input type="hidden" name="active" value="{{ isset($user->active) && $user->active == 1 ? 'on' : 'off' }}">
 
     @if ($user->currentRoles->isNotEmpty())
         <h5 class="page-title">Grupos Pertencentes</h5>

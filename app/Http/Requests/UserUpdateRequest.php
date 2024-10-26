@@ -3,11 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class RequestStoreUser extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -16,7 +14,7 @@ class RequestStoreUser extends FormRequest
         }
         return true;
     }
-
+    
     protected function prepareForValidation()
     {
         $this->merge([
@@ -27,9 +25,9 @@ class RequestStoreUser extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8'],
+            'name' => ['string', 'max:255'],
+            'email' => ['string', 'email', 'max:255'],
+            'password' => ['string', 'min:8'],
             'active' => 'boolean',
             'path_image' => ['nullable', 'string'],
             'sorting' => ['nullable', 'integer'],
