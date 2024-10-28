@@ -72,13 +72,13 @@
                 <!-- Brand Logo -->
                 <div class="logo-box">
                     <!-- Brand Logo Light -->
-                    <a href="" class="logo-light">
+                    <a href="{{route('admin.dashboard')}}" class="logo-light">
                         <img src="{{asset('build/admin/images/logo-light.png')}}" alt="logo" class="logo-lg">
                         <img src="{{asset('build/admin/images/logo-sm.png')}}" alt="small logo" class="logo-sm">
                     </a>
 
                     <!-- Brand Logo Dark -->
-                    <a href="" class="logo-dark">
+                    <a href="{{route('admin.dashboard')}}" class="logo-dark">
                         <img src="{{asset('build/admin/images/logo-dark.png')}}" alt="dark logo" class="logo-lg">
                         <img src="{{asset('build/admin/images/logo-sm.png')}}" alt="small logo" class="logo-sm">
                     </a>
@@ -124,13 +124,13 @@
                             <!-- Topbar Brand Logo -->
                             <div class="logo-box">
                                 <!-- Brand Logo Light -->
-                                <a href="" class="logo-light">
+                                <a href="{{route('admin.dashboard')}}" class="logo-light">
                                     <img src="{{asset('build/admin/images/logo-light.png')}}" alt="logo" class="logo-lg">
                                     <img src="{{asset('build/admin/images/logo-sm.png')}}" alt="small logo" class="logo-sm">
                                 </a>
 
                                 <!-- Brand Logo Dark -->
-                                <a href="" class="logo-dark">
+                                <a href="{{route('admin.dashboard')}}" class="logo-dark">
                                     <img src="{{asset('build/admin/images/logo-dark.png')}}" alt="dark logo" class="logo-lg">
                                     <img src="{{asset('build/admin/images/logo-sm.png')}}" alt="small logo" class="logo-sm">
                                 </a>
@@ -586,7 +586,7 @@
                             <!-- Light/Dark Mode Toggle Button -->
                             <li class="d-none d-sm-inline-block">
                                 <div class="nav-link waves-effect waves-light" id="light-dark-mode">
-                                    <form action="{{ route('admin.dashboard.settingTheme') }}" method="POST">
+                                    <form action="{{ route('admin.dashboard.settingThemeUpdate') }}" method="POST">
                                         @csrf
                                         <i class="ri-moon-line font-22"></i>
                                         <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
@@ -739,12 +739,16 @@
                             <div class="colorscheme-cardradio">
                                 <div class="d-flex flex-column gap-2">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-bs-theme" {{isset($settingTheme) && $settingTheme->data_bs_theme=='light'?'checked':''}} id="layout-color-light" value="light">
+                                        <input class="form-check-input" type="radio" name="data-bs-theme" 
+                                            {{ isset($settingTheme) && $settingTheme->data_bs_theme == 'light' ? 'checked' : '' }}
+                                            id="layout-color-light" value="light">
                                         <label class="form-check-label" for="layout-color-light">Light</label>
                                     </div>
 
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-bs-theme" {{isset($settingTheme) && $settingTheme->data_bs_theme=='dark'?'checked':''}} id="layout-color-dark" value="dark">
+                                        <input class="form-check-input" type="radio" name="data-bs-theme" 
+                                            {{ isset($settingTheme) && $settingTheme->data_bs_theme == 'dark' ? 'checked' : '' }}
+                                            id="layout-color-dark" value="dark">
                                         <label class="form-check-label" for="layout-color-dark">Dark</label>
                                     </div>
                                 </div>
@@ -753,12 +757,12 @@
                             <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Content Width</h5>
                             <div class="d-flex flex-column gap-2">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="data-layout-width" {{isset($settingTheme) && $settingTheme->data_layout_width=='default'?'checked':''}} id="layout-width-default" value="default">
+                                    <input class="form-check-input" type="radio" name="data-layout-width" {{isset($settingTheme) && $settingTheme->data_layout_width=='default'?'checked':''}} id="layout-width-default" value="default">
                                     <label class="form-check-label" for="layout-width-default">Fluid (Default)</label>
                                 </div>
 
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="data-layout-width" {{isset($settingTheme) && $settingTheme->data_layout_width=='boxed'?'checked':''}} id="layout-width-boxed" value="boxed">
+                                    <input class="form-check-input" type="radio" name="data-layout-width" {{isset($settingTheme) && $settingTheme->data_layout_width=='boxed'?'checked':''}} id="layout-width-boxed" value="boxed">
                                     <label class="form-check-label" for="layout-width-boxed">Boxed</label>
                                 </div>
                             </div>
@@ -768,14 +772,14 @@
 
                                 <div class="d-flex flex-column gap-2">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-layout-mode" {{isset($settingTheme) && $settingTheme->data_layout_mode=='default'?'checked':''}} id="layout-mode-default" value="default">
+                                        <input class="form-check-input" type="radio" name="data-layout-mode" {{isset($settingTheme) && $settingTheme->data_layout_mode=='default'?'checked':''}} id="layout-mode-default" value="default">
                                         <label class="form-check-label" for="layout-mode-default">Default</label>
                                     </div>
 
 
                                     <div id="layout-detached">
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" name="data-layout-mode" {{isset($settingTheme) && $settingTheme->data_layout_mode=='detached'?'checked':''}} id="layout-mode-detached" value="detached">
+                                            <input class="form-check-input" type="radio" name="data-layout-mode" {{isset($settingTheme) && $settingTheme->data_layout_mode=='detached'?'checked':''}} id="layout-mode-detached" value="detached">
                                             <label class="form-check-label" for="layout-mode-detached">Detached</label>
                                         </div>
                                     </div>
@@ -786,17 +790,17 @@
 
                             <div class="d-flex flex-column gap-2">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="data-topbar-color" {{isset($settingTheme) && $settingTheme->data_topbar_color=='light'?'checked':''}} id="topbar-color-light" value="light">
+                                    <input class="form-check-input" type="radio" name="data-topbar-color" {{isset($settingTheme) && $settingTheme->data_topbar_color=='light'?'checked':''}} id="topbar-color-light" value="light">
                                     <label class="form-check-label" for="topbar-color-light">Light</label>
                                 </div>
 
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="data-topbar-color" {{isset($settingTheme) && $settingTheme->data_topbar_color=='dark'?'checked':''}} id="topbar-color-dark" value="dark">
+                                    <input class="form-check-input" type="radio" name="data-topbar-color" {{isset($settingTheme) && $settingTheme->data_topbar_color=='dark'?'checked':''}} id="topbar-color-dark" value="dark">
                                     <label class="form-check-label" for="topbar-color-dark">Dark</label>
                                 </div>
 
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="data-topbar-color" {{isset($settingTheme) && $settingTheme->data_topbar_color=='brand'?'checked':''}} id="topbar-color-brand" value="brand">
+                                    <input class="form-check-input" type="radio" name="data-topbar-color" {{isset($settingTheme) && $settingTheme->data_topbar_color=='brand'?'checked':''}} id="topbar-color-brand" value="brand">
                                     <label class="form-check-label" for="topbar-color-brand">Brand</label>
                                 </div>
                             </div>
@@ -806,20 +810,20 @@
 
                                 <div class="d-flex flex-column gap-2">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='light'?'checked':''}} id="leftbar-color-light" value="light">
+                                        <input class="form-check-input" type="radio" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='light'?'checked':''}} id="leftbar-color-light" value="light">
                                         <label class="form-check-label" for="leftbar-color-light">Light</label>
                                     </div>
 
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='dark'?'checked':''}} id="leftbar-color-dark" value="dark">
+                                        <input class="form-check-input" type="radio" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='dark'?'checked':''}} id="leftbar-color-dark" value="dark">
                                         <label class="form-check-label" for="leftbar-color-dark">Dark</label>
                                     </div>
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='brand'?'checked':''}} id="leftbar-color-brand" value="brand">
+                                        <input class="form-check-input" type="radio" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='brand'?'checked':''}} id="leftbar-color-brand" value="brand">
                                         <label class="form-check-label" for="leftbar-color-brand">Brand</label>
                                     </div>
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='gradient'?'checked':''}} id="leftbar-color-gradient" value="gradient">
+                                        <input class="form-check-input" type="radio" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='gradient'?'checked':''}} id="leftbar-color-gradient" value="gradient">
                                         <label class="form-check-label" for="leftbar-color-gradient">Gradient</label>
                                     </div>
                                 </div>
@@ -830,20 +834,20 @@
 
                                 <div class="d-flex flex-column gap-2">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-two-column-color" {{isset($settingTheme) && $settingTheme->data_two_column_color=='light'?'checked':''}} id="twocolumn-menu-color-light" value="light">
+                                        <input class="form-check-input" type="radio" name="data-two-column-color" {{isset($settingTheme) && $settingTheme->data_two_column_color=='light'?'checked':''}} id="twocolumn-menu-color-light" value="light">
                                         <label class="form-check-label" for="twocolumn-menu-color-light">Light</label>
                                     </div>
 
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-two-column-color" {{isset($settingTheme) && $settingTheme->data_two_column_color=='dark'?'checked':''}} id="twocolumn-menu-color-dark" value="dark">
+                                        <input class="form-check-input" type="radio" name="data-two-column-color" {{isset($settingTheme) && $settingTheme->data_two_column_color=='dark'?'checked':''}} id="twocolumn-menu-color-dark" value="dark">
                                         <label class="form-check-label" for="twocolumn-menu-color-dark">Dark</label>
                                     </div>
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-two-column-color" {{isset($settingTheme) && $settingTheme->data_two_column_color=='brand'?'checked':''}} id="twocolumn-menu-color-brand" value="brand">
+                                        <input class="form-check-input" type="radio" name="data-two-column-color" {{isset($settingTheme) && $settingTheme->data_two_column_color=='brand'?'checked':''}} id="twocolumn-menu-color-brand" value="brand">
                                         <label class="form-check-label" for="twocolumn-menu-color-brand">Brand</label>
                                     </div>
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-two-column-color" {{isset($settingTheme) && $settingTheme->data_two_column_color=='gradient'?'checked':''}} id="twocolumn-menu-color-gradient" value="gradient">
+                                        <input class="form-check-input" type="radio" name="data-two-column-color" {{isset($settingTheme) && $settingTheme->data_two_column_color=='gradient'?'checked':''}} id="twocolumn-menu-color-gradient" value="gradient">
                                         <label class="form-check-label" for="twocolumn-menu-color-gradient">Gradient</label>
                                     </div>
                                 </div>
@@ -854,12 +858,12 @@
 
                                 <div class="d-flex flex-column gap-2">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-menu-icon" {{isset($settingTheme) && $settingTheme->data_menu_icon=='default'?'checked':''}} id="menu-icon-default" value="default">
+                                        <input class="form-check-input" type="radio" name="data-menu-icon" {{isset($settingTheme) && $settingTheme->data_menu_icon=='default'?'checked':''}} id="menu-icon-default" value="default">
                                         <label class="form-check-label" for="menu-icon-default">Default</label>
                                     </div>
 
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-menu-icon" {{isset($settingTheme) && $settingTheme->data_menu_icon=='twotones'?'checked':''}} id="menu-icon-twotone" value="twotones">
+                                        <input class="form-check-input" type="radio" name="data-menu-icon" {{isset($settingTheme) && $settingTheme->data_menu_icon=='twotones'?'checked':''}} id="menu-icon-twotone" value="twotones">
                                         <label class="form-check-label" for="menu-icon-twotone">Twotone</label>
                                     </div>
                                 </div>
@@ -870,27 +874,27 @@
 
                                 <div class="d-flex flex-column gap-2">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='default'?'checked':''}} id="leftbar-size-default" value="default">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='default'?'checked':''}} id="leftbar-size-default" value="default">
                                         <label class="form-check-label" for="leftbar-size-default">Default</label>
                                     </div>
 
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='compact'?'checked':''}} id="leftbar-size-compact" value="compact">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='compact'?'checked':''}} id="leftbar-size-compact" value="compact">
                                         <label class="form-check-label" for="leftbar-size-compact">Compact (Medium Width)</label>
                                     </div>
 
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='condensed'?'checked':''}} id="leftbar-size-small" value="condensed">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='condensed'?'checked':''}} id="leftbar-size-small" value="condensed">
                                         <label class="form-check-label" for="leftbar-size-small">Condensed (Icon View)</label>
                                     </div>
 
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='full'?'checked':''}} id="leftbar-size-full" value="full">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='full'?'checked':''}} id="leftbar-size-full" value="full">
                                         <label class="form-check-label" for="leftbar-size-full">Full Layout</label>
                                     </div>
 
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='fullscreen'?'checked':''}} id="leftbar-size-fullscreen" value="fullscreen">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='fullscreen'?'checked':''}} id="leftbar-size-fullscreen" value="fullscreen">
                                         <label class="form-check-label" for="leftbar-size-fullscreen">Fullscreen Layout</label>
                                     </div>
                                 </div>

@@ -14,7 +14,7 @@ use App\Models\Permission;
 class RoleController extends Controller
 {
     public function index()
-    {        
+    {
 
         if(!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can('grupo.visualizar')){
             return view('admin.error.403'); 
@@ -28,49 +28,25 @@ class RoleController extends Controller
             'permissions'=>$permissions
         ]);
     }
-    public function create()
-    {   
-        if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['grupo.visualizar','grupo.criar'])) {
-            $permissions = Permission::all();
-            return view('admin.blades.group.create', [
-                'permissions'=>$permissions
-            ]);
-        }else{
-             return view('admin.error.403');
-        }         
-    }
-
     public function store(Request $request)
     {   
         $data = $request->all();
-        $role = Role::create($data);
-        $role->syncPermissions($request->permissions);
 
-        Session::flash('success','Grupo cadastrado com sucesso!');
-        return redirect()->route('admin.dashboard.group.index');
-    }
-    public function edit(Request $request,Role $role)
-    {   
-        if(Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['grupo.visualizar','grupo.editar'])){
-            $permissions = Permission::all();
-            return view('admin.blades.group.edit', [
-                'role'=>$role,
-                'permissions'=>$permissions
-            ]);
-        }else{
-            return view('admin.error.403');
-        }         
-    }
-
-    public function show(Role $role){
-        if(!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can('grupo.visualizar')){
-            return view('admin.error.403');
-        } 
-        $role = Role::find('id');
-
-        return redirect()->route('admin.dashboard.group.show')->with($role);
+        try {
+            DB::beginTransaction();
+                $role = Role::create($data);
+                $role->syncPermissions($request->permissions);
+                Session::flash('success','Grupo cadastrado com sucesso!');
+            DB::commit();
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Session::flash('error','Erro ao criar grupo!');
+            return redirect()->back();
+        }
 
     }
+
     public function update(Request $request,Role $role)
     {
         try{
@@ -79,13 +55,14 @@ class RoleController extends Controller
                 'name'=>$request->name,
             ]);
             $role->syncPermissions($request->permissions);
-            // dd($role, $request->permissions);
+
             DB::commit();
-            Session::flash('success','Grupo alterado com sucesso!');
-            return redirect()->route('admin.dashboard.group.index');
+            Session::flash('success','Grupo atualizado com sucesso!');
+            return redirect()->back();
         }catch (\Exception $exception){
             DB::rollBack();
-            return redirect()->back()->withInput();
+            Session::flash('success','Erro ao atualizar!');
+            return redirect()->back();
         }
     }
 
@@ -101,14 +78,6 @@ class RoleController extends Controller
     }
     public function destroySelected(Request $request)
     {
-        if(!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can(['grupo.visualizar','grupo.remover'])){
-            return view('admin.error.403');
-        } 
-
-        if($deleted = Role::whereIn('id', $request->deleteAll)->delete()){
-            
-            return Response::json(['status' => 'success', 'message' => $deleted.' itens deletados com sucessso!']);
-        }
 
         if (!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can(['usuario.visualizar', 'usuario.remover'])) {
             return view('admin.error.403');

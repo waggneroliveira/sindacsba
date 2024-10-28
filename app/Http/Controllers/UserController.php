@@ -17,6 +17,7 @@ use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\Response;
 use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Permission;
+use App\Repositories\SettingThemeRepository;
 use App\Http\Controllers\Helpers\HelperArchive;
 
 class UserController extends Controller
@@ -26,26 +27,21 @@ class UserController extends Controller
     public function index()
     {
         $users = User::excludeSuper()->with('roles');
-        $currentUser = Auth::user();
-        if ($currentUser) {
-            $settingTheme = SettingTheme::where('user_id', $currentUser->id)->first();
-        } else {
-            $settingTheme = new SettingTheme();
-        }
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
 
         if(!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can('usuario.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
-        // if(Auth::user()->can(['usuario.visualizar','usuario.visualizar outros usuarios'])){
-        //     $users = $users->where('id', '<>', 1);
-        // }
-        // if(Auth::user()->can('usuario.visualizar') && !Auth::user()->can('usuario.visualizar outros usuarios')){
-        //     $users = $users->where('id', '<>', 1)
-        //         ->where('id', Auth::user()->id);
-        // }
-        // if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master')) {
-        //     $users = $users->where('id', '<>', 1);
-        // }
+        if(Auth::user()->can(['usuario.visualizar','usuario.visualizar outros usuarios'])){
+            $users = $users->where('id', '<>', 1);
+        }
+        if(Auth::user()->can('usuario.visualizar') && !Auth::user()->can('usuario.visualizar outros usuarios')){
+            $users = $users->where('id', '<>', 1)
+                ->where('id', Auth::user()->id);
+        }
+        if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master')) {
+            $users = $users->where('id', '<>', 1);
+        }
         $users = $users->sorting()->get();
         $otherRoles = collect();
         $currentRoles = collect();
@@ -146,7 +142,6 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, User $user)
     {
         $data = $request->except('password');
-        $password = Hash::make($request->password);
         $helper = new HelperArchive();
         $roles = $request->input('roles', []);
 
@@ -156,32 +151,37 @@ class UserController extends Controller
 
         try {
             DB::beginTransaction();
+
             $path_image = $helper->renameArchiveUpload($request, 'path_image');
-            if ($path_image) $data['path_image'] = $this->pathUpload . $path_image;
             if ($path_image) {
+                $data['path_image'] = $this->pathUpload . $path_image;
                 Storage::delete($user->path_image);
                 $request->file('path_image')->storeAs($this->pathUpload, $path_image);
             }
-            if(isset($request->delete_path_image) && !$path_image){
-                $inputFile = $request->delete_path_image;
-                Storage::delete($user->$inputFile);
+
+            if (isset($request->delete_path_image) && !$path_image) {
+                Storage::delete($user->path_image);
                 $data['path_image'] = null;
             }
-            $data['password'] = $password;
+
+            if ($request->filled('password')) {
+                $data['password'] = Hash::make($request->password);
+            } else {
+                unset($data['password']);
+            }
+
             $data['active'] = $request->active ? 1 : 0;
-            if($password == '') unset($data['password']);
+
             $user->fill($data)->save();
             $user->syncRoles($roles);
 
-            if ($path_image) {Storage::delete($this->pathUpload.$path_image);}
-            if ($path_image) {$request->file('path_image')->storeAs($this->pathUpload, $path_image);}
             DB::commit();
 
             session()->flash('success', 'Usuário atualizado com sucesso!');
             return redirect()->route('admin.dashboard.user.index');
-        }catch(\Exception $exception){
+        } catch (\Exception $exception) {
             DB::rollBack();
-            Alert::success('error', 'Erro ao atualizar o Usuário!');
+            Alert::error('Erro', 'Erro ao atualizar o Usuário!');
             return redirect()->back();
         }
     }

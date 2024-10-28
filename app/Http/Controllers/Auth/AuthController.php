@@ -13,9 +13,8 @@ class AuthController extends Controller
 {
     public function authenticate(Request $request)
     {
-        // Validação dos dados antes de tentar autenticar
         $credentials = $request->only('email', 'password');
-        $credentials['active'] = 1; // Verifica se o usuário está ativo
+        $credentials['active'] = 1;
 
         if (!Auth::attempt($credentials)) {
             $user = User::where('email', $request->email)->active()->first();
@@ -33,10 +32,6 @@ class AuthController extends Controller
             }
         }
 
-        $userId = User::where('email', $request->email)->select('id')->active()->first();
-        Session::put('user_id', $userId);
-
-        // Se autenticado, redireciona para o dashboard
         return redirect()->intended('painel/dashboard');
     }
 

@@ -299,73 +299,46 @@ $('.btConfirmDelete, #btSubmitDelete').on('click', function() {
     });
 });
 
-//Alterar configurações de thema do painel, pela barra lateral
-$("#settingTheme input[type=checkbox]").on("click", function () {
+$("#settingTheme input[type=radio]").on("click", function () {
     setTimeout(() => {
         var formData = new FormData(),
             route = $(this).parents("form").attr("action");
+
         formData.append(
             "user_id",
-            $(this)
-                .parents("form")
-                .find("[name=user_id]")
-                .val()
+            $(this).parents("form").find("[name=user_id]").val()
         );
         formData.append(
             "data_bs_theme",
-            $(this)
-                .parents("form")
-                .find("[name=data-bs-theme]:checked")
-                .val()
+            $(this).parents("form").find("[name=data-bs-theme]:checked").val()
         );
         formData.append(
             "data_layout_width",
-            $(this)
-                .parents("form")
-                .find("[name=data-layout-width]:checked")
-                .val()
+            $(this).parents("form").find("[name=data-layout-width]:checked").val()
         );
         formData.append(
             "data_layout_mode",
-            $(this)
-                .parents("form")
-                .find("[name=data-layout-mode]:checked")
-                .val()
+            $(this).parents("form").find("[name=data-layout-mode]:checked").val()
         );
         formData.append(
             "data_topbar_color",
-            $(this)
-                .parents("form")
-                .find("[name=data-topbar-color]:checked")
-                .val()
+            $(this).parents("form").find("[name=data-topbar-color]:checked").val()
         );
         formData.append(
             "data_menu_color",
-            $(this)
-                .parents("form")
-                .find("[name=data-menu-color]:checked")
-                .val()
+            $(this).parents("form").find("[name=data-menu-color]:checked").val()
         );
         formData.append(
             "data_two_column_color",
-            $(this)
-                .parents("form")
-                .find("[name=data-two-column-color]:checked")
-                .val()
+            $(this).parents("form").find("[name=data-two-column-color]:checked").val()
         );
         formData.append(
             "data_menu_icon",
-            $(this)
-                .parents("form")
-                .find("[name=data-menu-icon]:checked")
-                .val()
+            $(this).parents("form").find("[name=data-menu-icon]:checked").val()
         );
         formData.append(
             "data_sidenav_size",
-            $(this)
-                .parents("form")
-                .find("[name=data-sidenav-size]:checked")
-                .val()
+            $(this).parents("form").find("[name=data-sidenav-size]:checked").val()
         );
 
         $.ajax({
@@ -376,7 +349,6 @@ $("#settingTheme input[type=checkbox]").on("click", function () {
             url: route,
             data: formData,
             processData: false,
-            
             contentType: false,
         });
         console.log(route);
@@ -387,12 +359,11 @@ $("#settingTheme input[type=checkbox]").on("click", function () {
 $("#light-dark-mode").on("click", function() {
     var form = $(this).find("form");
     var currentTheme = form.find('input[name="data-bs-theme"]').val();
-
     // Alterna entre "light" e "dark"
     var newTheme = (currentTheme === 'light') ? 'dark' : 'light';
+
     form.find('input[name="data-bs-theme"]').val(newTheme); // Atualiza o valor do input
 
-    // Verifique se o novo valor é realmente definido
     console.log("Novo tema definido:", newTheme);
 
     // Pega o ID do usuário autenticado
@@ -401,7 +372,6 @@ $("#light-dark-mode").on("click", function() {
 
     var formData = new FormData(form[0]);
 
-    // Certifica que o ID do usuário está correto no formData
     formData.set('user_id', userId);
 
     $.ajax({
@@ -416,6 +386,7 @@ $("#light-dark-mode").on("click", function() {
         success: function(data) {
             if (data.status) {
                 console.log("Tema atualizado com sucesso!");
+                location.reload();
             } else {
                 console.log("Erro ao atualizar o tema.");
             }
@@ -425,6 +396,7 @@ $("#light-dark-mode").on("click", function() {
         }
     });
 });
+
 
 $(document).ready(function() {
     // Aguarde até que as configurações sejam definidas corretamente

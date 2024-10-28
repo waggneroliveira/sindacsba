@@ -13,6 +13,6 @@ class SuperAdminScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        $builder->where('roles.name', '<>', 'Super');
+        $builder->where('roles.id', '<>', 1);
     }
 }

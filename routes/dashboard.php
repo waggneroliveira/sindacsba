@@ -1,11 +1,11 @@
 <?php
 
+use App\Models\User;
 use App\Models\SettingTheme;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthController;
@@ -30,11 +30,8 @@ Route::prefix('painel/')->group(function () {
             return view('admin.loadPage.loading');
         })->name('loading');
 
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-        Route::get('/dashboard', function () {
-            Session::forget('just_logged_in');
-            return view('admin.dashboard');
-        })->name('admin.dashboard');
         //AUDITORIA
         Route::resource('auditoria', AuditActivityController::class)
         ->names('admin.dashboard.audit')
@@ -56,6 +53,7 @@ Route::prefix('painel/')->group(function () {
         
         // SETTINGS THEME
         Route::post('setting', [SettingThemeController::class, 'setting'])->name('admin.dashboard.settingTheme'); 
+        Route::post('setting/update', [SettingThemeController::class, 'settingUpdate'])->name('admin.dashboard.settingThemeUpdate'); 
     });
 
     // LOGOUT
@@ -63,13 +61,18 @@ Route::prefix('painel/')->group(function () {
 });
 
 View::composer('admin.core.admin', function ($view) {
-    $user = Auth::user();
-    
+    $currentUser = Auth::user();
+    $user = User::where('id', $currentUser->id)->active()->first();
+
     if ($user) {
         $settingTheme = SettingTheme::where('user_id', $user->id)->first();
+
+        if (!$settingTheme) {
+            $settingTheme = new SettingTheme();
+        }
     } else {
         $settingTheme = new SettingTheme();
     }
-    // dd($settingTheme);
+
     return $view->with('settingTheme', $settingTheme)->with('user', $user);
 });
