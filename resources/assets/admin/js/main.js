@@ -386,7 +386,7 @@ $("#light-dark-mode").on("click", function() {
         success: function(data) {
             if (data.status) {
                 console.log("Tema atualizado com sucesso!");
-                location.reload();
+                // location.reload();
             } else {
                 console.log("Erro ao atualizar o tema.");
             }

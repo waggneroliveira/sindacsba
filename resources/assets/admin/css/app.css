@@ -1442,7 +1442,7 @@ html[data-layout=horizontal][data-layout-width=boxed] #wrapper footer > * {
 }
 
 body.authentication-bg {
-  background-color: #00acc1;
+  background-color: #38414a;
   background-size: cover;
   background-position: center;
 }

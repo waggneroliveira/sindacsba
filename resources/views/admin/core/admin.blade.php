@@ -936,13 +936,16 @@
                                 title: 'Sucesso',
                                 text: successMessage,
                                 icon: 'success',
-                                confirmButtonText: 'OK'
+                                confirmButtonText: 'OK',
+                                timer: 1800, // O alerta desaparecerá automaticamente após 1,5 segundos
+                                showConfirmButton: false // Oculta o botão para fechar automaticamente
                             });
                         }
-                    }, 1300);
+                    }, 1300); // Exibe o alert 1,3 segundos após a página carregar
                 }
             });
         </script>
+        
 
         @if(Session::has('error'))
             <div id="errorMessage" class="alert alert-warning notification-message" >
@@ -952,24 +955,23 @@
         @endif
 
         @if ($errors->any())
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                let errors = '';
-                @foreach ($errors->all() as $error)
-                    errors += '{{ $error }}\n'; 
-                @endforeach
-        
-                setTimeout(function() {
-                    Swal.fire({
-                        title: 'Erros de Validação',
-                        text: errors,
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                }, 1300);
-            });
-        </script>
-        
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    let errors = '';
+                    @foreach ($errors->all() as $error)
+                        errors += '{{ $error }}\n'; 
+                    @endforeach
+            
+                    setTimeout(function() {
+                        Swal.fire({
+                            title: 'Erros de Validação',
+                            text: errors,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }, 1300);
+                });
+            </script>        
         @endif
 
         <script>

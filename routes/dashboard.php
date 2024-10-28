@@ -8,6 +8,7 @@ use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Repositories\SettingThemeRepository;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingThemeController;
@@ -22,6 +23,10 @@ Route::prefix('painel/')->group(function () {
         return view('admin.auth.login');
     })->name('admin.dashboard.painel');
 
+    Route::get('/success-logout', function () {
+        return view('admin.success.success-logout');
+    })->name('success-logout');
+    
     Route::post('login.do', [AuthController::class, 'authenticate'])
     ->name('admin.user.authenticate');
 
@@ -64,15 +69,7 @@ View::composer('admin.core.admin', function ($view) {
     $currentUser = Auth::user();
     $user = User::where('id', $currentUser->id)->active()->first();
 
-    if ($user) {
-        $settingTheme = SettingTheme::where('user_id', $user->id)->first();
-
-        if (!$settingTheme) {
-            $settingTheme = new SettingTheme();
-        }
-    } else {
-        $settingTheme = new SettingTheme();
-    }
+    $settingTheme = (new SettingThemeRepository())->settingTheme();
 
     return $view->with('settingTheme', $settingTheme)->with('user', $user);
 });

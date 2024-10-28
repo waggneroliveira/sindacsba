@@ -1,4 +1,4 @@
-@extends('Admin.core.admin')
+@extends('admin.core.admin')
 @section('content')
     <div class="forbidden account-pages mt-5 mb-5">
         <div class="container">
