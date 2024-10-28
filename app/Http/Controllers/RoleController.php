@@ -77,9 +77,9 @@ class RoleController extends Controller
             DB::beginTransaction();
             $role->update([
                 'name'=>$request->name,
-                'description'=>$request->description
             ]);
             $role->syncPermissions($request->permissions);
+            // dd($role, $request->permissions);
             DB::commit();
             Session::flash('success','Grupo alterado com sucesso!');
             return redirect()->route('admin.dashboard.group.index');

@@ -21,7 +21,7 @@
                         <strong>{{ ucfirst($permission->index()) }}:</strong>
                         <ul class="pl-3 list-unstyled"> <!-- Inicia nova lista -->
                 @endif
-                @if($permission->id != 9 || Auth::user()->hasRole('Super'))
+                @if(Auth::user()->hasRole('Super'))
                     <li>
                         <label>                        
                         <input name="permissions[]"

@@ -47,23 +47,25 @@ class UserController extends Controller
         //     $users = $users->where('id', '<>', 1);
         // }
         $users = $users->sorting()->get();
-        $otherRoles = '';
-        dd($users);
-        foreach ($users as $user) {
-            $currentRoleIds = Role::join('model_has_roles', 'roles.id', 'model_has_roles.role_id')
-                ->join('users', 'model_has_roles.model_id', 'users.id')
-                ->where('users.id', $user->id)
-                ->pluck('roles.id');
+        $otherRoles = collect();
+        $currentRoles = collect();
         
-            $currentRoles = Role::whereIn('id', $currentRoleIds)->get();
-            if ($currentRoleIds) {
-                $otherRoles = Role::whereNotIn('id', $currentRoleIds)->get();
-            }            
+        $otherRolesBase = Role::where('id', '!=', 1)->get(); 
         
-            $user->currentRoles = $currentRoles;
-            $user->otherRoles = $otherRoles;
+        if ($users->isNotEmpty()) {
+            foreach ($users as $user) {
+                $currentRoleIds = Role::join('model_has_roles', 'roles.id', 'model_has_roles.role_id')
+                    ->join('users', 'model_has_roles.model_id', 'users.id')
+                    ->where('users.id', $user->id)
+                    ->pluck('roles.id');
+        
+                $currentRoles = Role::whereIn('id', $currentRoleIds)->get();
+                $otherRoles = $otherRolesBase->whereNotIn('id', $currentRoleIds->toArray());
+        
+                $user->currentRoles = $currentRoles;
+                $user->otherRoles = $otherRoles;
+            }
         }
-        
         $permissions = Permission::join('role_has_permissions', 'permissions.id', 'role_has_permissions.permission_id')
         ->groupBy('permissions.name')
         ->select('permissions.name')
@@ -73,7 +75,7 @@ class UserController extends Controller
             'users'=>$users,
             'otherRoles'=>$otherRoles,
             'permissions'=>$permissions,
-            'currentRoles'=>$user->currentRoles,
+            'currentRoles'=>$currentRoles,
         ]);
     }
 
