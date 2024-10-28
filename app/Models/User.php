@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable
 {
@@ -53,4 +54,10 @@ class User extends Authenticatable
             ->logOnly($activityLogService->getLoggableAttributes());
     }
 
+    public function scopeExcludeSuper(Builder $query): Builder
+    {
+        return $query->whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'Super'); // Certifique-se de que o nome do papel está correto
+        });
+    }
 }

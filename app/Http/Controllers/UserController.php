@@ -25,30 +25,30 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::query();
+        $users = User::excludeSuper()->with('roles');
         $currentUser = Auth::user();
         if ($currentUser) {
             $settingTheme = SettingTheme::where('user_id', $currentUser->id)->first();
         } else {
             $settingTheme = new SettingTheme();
         }
-        dd($currentUser);
+
         if(!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can('usuario.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
-        if(Auth::user()->can(['usuario.visualizar','usuario.visualizar outros usuarios'])){
-            $users = $users->where('id', '<>', 1);
-        }
-        if(Auth::user()->can('usuario.visualizar') && !Auth::user()->can('usuario.visualizar outros usuarios')){
-            $users = $users->where('id', '<>', 1)
-                ->where('id', Auth::user()->id);
-        }
-        if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master')) {
-            $users = $users->where('id', '<>', 1);
-        }
+        // if(Auth::user()->can(['usuario.visualizar','usuario.visualizar outros usuarios'])){
+        //     $users = $users->where('id', '<>', 1);
+        // }
+        // if(Auth::user()->can('usuario.visualizar') && !Auth::user()->can('usuario.visualizar outros usuarios')){
+        //     $users = $users->where('id', '<>', 1)
+        //         ->where('id', Auth::user()->id);
+        // }
+        // if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master')) {
+        //     $users = $users->where('id', '<>', 1);
+        // }
         $users = $users->sorting()->get();
         $otherRoles = '';
-
+        dd($users);
         foreach ($users as $user) {
             $currentRoleIds = Role::join('model_has_roles', 'roles.id', 'model_has_roles.role_id')
                 ->join('users', 'model_has_roles.model_id', 'users.id')
