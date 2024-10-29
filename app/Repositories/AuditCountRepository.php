@@ -9,7 +9,7 @@ class AuditCountRepository
         $today = today();
         $auditorias = Activity::with('causer')
             ->whereDate('created_at', '=', $today)
-            ->where('is_read', false)
+            ->where('is_read', 0)
             ->orderBy('created_at', 'DESC')
             ->get();
 
@@ -19,7 +19,7 @@ class AuditCountRepository
         $today = today();
         $auditorias = Activity::with('causer')
             ->whereDate('created_at', '=', $today)
-            ->where('is_read', false)
+            ->where('is_read', 0)
             ->orderBy('created_at', 'DESC')
             ->get();
         

@@ -31,7 +31,6 @@ class RequestStoreUser extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8'],
             'active' => 'boolean',
-            'path_image' => ['nullable', 'string'],
             'sorting' => ['nullable', 'integer'],
             'roles'=>'array',
         ];

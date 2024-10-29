@@ -16,6 +16,8 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingThemeController;
 use App\Http\Controllers\AuditActivityController;
+use App\Http\Controllers\Auth\PasswordEmailController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 Route::get('painel/', function () {
     return redirect()->route('admin.dashboard.painel');
@@ -32,6 +34,36 @@ Route::prefix('painel/')->group(function () {
 
     Route::post('login.do', [AuthController::class, 'authenticate'])
     ->name('admin.user.authenticate');
+
+    /*=====================REDEFINICAO DE SENHA=========================*/
+
+    // Rota para exibir o formulário "Esqueci a senha"
+    Route::get('password/reset', function(){
+        return view('admin.auth.recover-password');
+    })->name('password.request');
+
+    // Rota para processar o formulário "Esqueci a senha"
+    Route::post('/password/email', [PasswordEmailController::class, 'passwordEmail'])
+    ->name('password.email');
+
+    // Rota para exibir o formulário de redefinição de senha
+    Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])
+    ->name('password.reset');
+    
+    // Rota para processar a redefinição de senha
+    Route::post('/password/reset', [ResetPasswordController::class, 'processPasswordReset'])
+    ->name('password.update');
+    
+    Route::get('/send-success', [PasswordEmailController::class, 'showSuccess'])
+    ->name('send-success');
+
+    Route::get('/password-success-reset', function () {
+        return view('emails.password-success-reset');
+    })->name('success-reset-password');
+
+
+
+    /*=====================FINAL REDEFINICAO DE SENHA=========================*/
 
     Route::middleware([Authenticate::class])->group(function(){ 
         Route::get('/loading', function () {
@@ -79,7 +111,7 @@ View::composer('admin.core.admin', function ($view) {
     $notifications = (new AuditCountRepository());
     $auditorias = $notifications->allAudit();
     $auditCount = $notifications->auditCount();
-
+    // dd($auditCount, $auditorias);
     $settingTheme = (new SettingThemeRepository())->settingTheme();
 
     return $view->with('settingTheme', $settingTheme)->with('user', $user)->with('auditorias', $auditorias)->with('auditCount', $auditCount);

@@ -52,13 +52,21 @@ class UserController extends Controller
 
     public function store(RequestStoreUser $request)
     {   
-        $data = $request->all();
+        $data = $request->except('path_image');
         $helper = new HelperArchive();
-        
+
+        $request->validate([
+            'path_image' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
+        ]);
+    
+        $path_image = null;
+        if ($request->hasFile('path_image')) {
+            $path_image = $helper->renameArchiveUpload($request, 'path_image');
+        }
+
         try {
             DB::beginTransaction();
-            
-            $path_image = $helper->renameArchiveUpload($request, 'path_image');
+
             if ($path_image) {
                 $data['path_image'] = $this->pathUpload . $path_image;
             }
@@ -123,10 +131,19 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request, User $user)
     {
-        $data = $request->except('password');
+        $data = $request->except('password','path_image');
         $helper = new HelperArchive();
         $roles = $request->input('roles', []);
 
+        $request->validate([
+            'path_image' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
+        ]);
+    
+        $path_image = null;
+        if ($request->hasFile('path_image')) {
+            $path_image = $helper->renameArchiveUpload($request, 'path_image');
+        }
+    
         if (Auth::user()->hasRole('Super') && $user->id == 1) {
             $roles[] = 'Super';
         }
@@ -134,15 +151,18 @@ class UserController extends Controller
         try {
             DB::beginTransaction();
 
-            $path_image = $helper->renameArchiveUpload($request, 'path_image');
             if ($path_image) {
                 $data['path_image'] = $this->pathUpload . $path_image;
-                Storage::delete($user->path_image);
+                if ($user->path_image) { 
+                    Storage::delete($user->path_image);
+                }
                 $request->file('path_image')->storeAs($this->pathUpload, $path_image);
             }
 
             if (isset($request->delete_path_image) && !$path_image) {
-                Storage::delete($user->path_image);
+                if ($user->path_image) {
+                    Storage::delete($user->path_image);
+                }
                 $data['path_image'] = null;
             }
 

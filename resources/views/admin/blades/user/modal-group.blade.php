@@ -1,5 +1,5 @@
 <div class="row">
-    @if (!Auth::user()->can('usuario.atribuir grupos'))
+    @if (!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can('usuario.atribuir grupos'))
         <span class="text-danger mt-0 mb-3"><i class="mdi mdi-alert-circle"></i> Você não tem permissão para atribuir grupos</span>
     @endif
     <input type="hidden" name="active" value="{{ isset($user->active) && $user->active == 1 ? 'on' : 'off' }}">

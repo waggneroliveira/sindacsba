@@ -42,7 +42,7 @@
                                         @endif
                                         <!-- Modal -->
                                         <div class="modal fade" id="group-create" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-dialog modal-dialog-centered" style="max-width: 760px">
                                                 <div class="modal-content">
                                                     <div class="modal-header bg-light">
                                                         <h4 class="modal-title" id="myCenterModalLabel">Adicionar novo grupo</h4>
@@ -95,7 +95,7 @@
                                                         <button data-bs-toggle="modal" data-bs-target="#group-edit-{{$group->id}}" class="tabledit-edit-button btn btn-success" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
                                                     @endif
                                                     <div class="modal fade" id="group-edit-{{$group->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-dialog modal-dialog-centered" style="max-width: 760px">
                                                             <div class="modal-content">
                                                                 <div class="modal-header bg-light">
                                                                     <h4 class="modal-title" id="myCenterModalLabel">Editar grupo</h4>

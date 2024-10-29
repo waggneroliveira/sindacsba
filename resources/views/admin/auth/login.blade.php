@@ -68,8 +68,8 @@
 
                             <div class="row mt-3">
                                 <div class="col-12 text-center">
-                                    <p> <a href="auth-recoverpw.html" class="text-white-50 ms-1">Esqueceu sua senha?</a></p>
-                                    <p class="text-white-50">Não tem uma conta? <a href="auth-register.html" class="text-white ms-1"><b>Inscrever-se</b></a></p>
+                                    <p> <a href="{{route('password.request')}}" class="text-muted ms-1">Esqueceu sua senha?</a></p>
+                                    <p class="text-muted">Não tem uma conta? <a href="auth-register.html" class="text-muted ms-1"><b>Inscrever-se</b></a></p>
                                 </div> <!-- end col -->
                             </div>
                             <!-- end row -->

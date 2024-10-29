@@ -451,88 +451,64 @@
 
                                 </div>
                             </li>
-
-                            <!-- Notofication dropdown -->
-                            <li class="dropdown notification-list">
-                                <a class="nav-link dropdown-toggle waves-effect waves-light arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                    <i class="fe-bell font-22"></i>
-                                    <span class="badge bg-danger rounded-circle noti-icon-badge">{{ isset($auditCount) ? $auditCount : "0" }}</span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
-                                    <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <h6 class="m-0 font-16 fw-semibold"> Notificações</h6>
-                                            </div>
-                                            <div class="col-auto">
-                                                <a href="javascript: void(0);" class="text-dark text-decoration-underline" id="clear-all-notifications">
-                                                    <small>Limpar todas</small>
-                                                </a>
-                                            </div>                                                                                       
-                                        </div>
-                                    </div>
-
-                                    <div class="px-1" style="max-height: 300px;" data-simplebar>
-
-                                        @if (empty($auditorias))
-                                            <h5 class="text-muted font-13 fw-normal mt-2">Hoje</h5>
-                                            <!-- item-->
-                                            @foreach ($auditorias as $auditoria)
-                                                <div id="notificacao-{{ $auditoria->id }}" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-1">
-                                                    <div class="card-body">
-                                                        <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close" onclick="marcarComoLida({{ $auditoria->id }})"></i></span>
-                                                        <a href="{{route('admin.dashboard.audit.index')}}">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="flex-shrink-0">
-                                                                    <div class="notify-icon bg-primary">
-                                                                        <i class="mdi mdi-comment-account-outline"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="flex-grow-1 text-truncate ms-2">
-                                                                    <h5 class="noti-item-title fw-semibold font-14">{{ isset($auditoria->causer->name)?$auditoria->causer->name:'Não encontrado' }} <small class="fw-normal text-muted ms-1">{{$auditoria->created_at->format("F j, Y, H:i:s")}}</small></h5>
-                                                                    <small class="noti-item-subtitle text-muted">
-                                                                        {{ 'Modificações foram feitas em ' . ($modelName = \App\Models\AuditActivity::getModelName($auditoria->subject_type)) . ' pelo usuário ' . ($auditoria->causer->name ?? 'Não encontrado') }}
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            @endforeach
+                            @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can('notificacao.visualizar'))
+                                <!-- Notofication dropdown -->
+                                <li class="dropdown notification-list">
+                                    <a class="nav-link dropdown-toggle waves-effect waves-light arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                        <i class="fe-bell font-22"></i>
+                                        @if (Auth::user()->hasRole('Super') || 
+                                            Auth::user()->can('usuario.tornar usuario master') || 
+                                            Auth::user()->can('notificacao.visualizar') &&  Auth::user()->can('notificacao.notificacao de auditoria'))
+                                            <span class="badge bg-danger rounded-circle noti-icon-badge">{{ isset($auditCount) ? $auditCount : "0" }}</span>
                                         @endif
-
-                                        <h5 class="text-muted font-13 fw-normal mt-0">Ontem</h5>
-
-                                        <!-- item-->
-                                        <a href="" class="dropdown-item p-0 notify-item card read-noti shadow-none mb-1">
-                                            <div class="card-body">
-                                                <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <div class="notify-icon">
-                                                            <img src="{{asset('build/admin/images/users/avatar-2.jpg')}}" class="img-fluid rounded-circle" alt="" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-grow-1 text-truncate ms-2">
-                                                        <h5 class="noti-item-title fw-semibold font-14">Cristina Pride <small class="fw-normal text-muted ms-1">1 day ago</small></h5>
-                                                        <small class="noti-item-subtitle text-muted">Hi, How are you? What about our next meeting</small>
-                                                    </div>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
+                                        <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
+                                            <div class="row align-items-center">
+                                                <div class="col">
+                                                    <h6 class="m-0 font-16 fw-semibold"> Notificações</h6>
                                                 </div>
+                                                <div class="col-auto">
+                                                    <a href="javascript: void(0);" class="text-dark text-decoration-underline" id="clear-all-notifications">
+                                                        <small>Limpar todas</small>
+                                                    </a>
+                                                </div>                                                                                       
                                             </div>
-                                        </a>
+                                        </div>
 
-                                        <div class="text-center">
-                                            <i class="mdi mdi-dots-circle mdi-spin text-muted h3 mt-0"></i>
+                                        <div class="px-1" style="max-height: 300px;" data-simplebar>
+                                            @if (Auth::user()->hasRole('Super') || Auth::user()->can('notificacao.notificacao de auditoria'))
+                                                @if (isset($auditorias) && $auditorias->count() > 0)
+                                                    <h5 class="text-muted font-13 fw-normal mt-2">Hoje</h5>
+                                                    <!-- item-->
+                                                    @foreach ($auditorias as $auditoria)
+                                                        <div id="notificacao-{{ $auditoria->id }}" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-1">
+                                                            <div class="card-body" title="{{ 'Modificações foram feitas em ' . ($modelName = \App\Models\AuditActivity::getModelName($auditoria->subject_type)) . ' pelo usuário ' . ($auditoria->causer->name ?? 'Não encontrado') }}">
+                                                                <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close" onclick="marcarComoLida({{ $auditoria->id }})"></i></span>
+                                                                <a href="{{route('admin.dashboard.audit.index')}}">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="flex-shrink-0">
+                                                                            <div class="notify-icon bg-primary">
+                                                                                <i class="mdi mdi-comment-account-outline"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="flex-grow-1 text-truncate ms-2">
+                                                                            <h5 class="noti-item-title fw-semibold font-14">{{ isset($auditoria->causer->name)?$auditoria->causer->name:'Não encontrado' }} <small class="fw-normal text-muted ms-1">{{$auditoria->created_at->format("F j, Y, H:i:s")}}</small></h5>
+                                                                            <small class="noti-item-subtitle text-muted">
+                                                                                {{ 'Modificações foram realizadas em ' . ($modelName = \App\Models\AuditActivity::getModelName($auditoria->subject_type)) . ' pelo usuário ' . ($auditoria->causer->name ?? 'Não encontrado') }}
+                                                                            </small>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                            @endif
                                         </div>
                                     </div>
-
-                                    <!-- All-->
-                                    <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item border-top border-light py-2">
-                                        View All
-                                    </a>
-
-                                </div>
-                            </li>
+                                </li>
+                            @endif
 
                             <!-- Light/Dark Mode Toggle Button -->
                             <li class="d-none d-sm-inline-block">
@@ -965,34 +941,5 @@
             }
 
         </style>
-        <script>
-            document.getElementById("lockScreenButton").addEventListener("click", function() {
-                document.getElementById("lockScreenModal").style.display = 'block';
-                document.querySelector(".locked-overlay").style.display = 'block';
-            });
-
-            document.getElementById("unlockButton").addEventListener("click", function() {
-                const password = document.getElementById("unlockPassword").value;
-
-                fetch('/verify-password', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: JSON.stringify({ password: password })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        document.getElementById("lockScreenModal").style.display = 'none';
-                        document.querySelector(".locked-overlay").style.display = 'none';
-                    } else {
-                        alert("Senha incorreta!");
-                    }
-                });
-            });
-
-        </script>
     </body>
 </html>

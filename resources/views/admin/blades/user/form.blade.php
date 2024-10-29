@@ -17,7 +17,7 @@
 <div class="col-lg-12">
     <div class="mt-3">
         <input type="file" name="path_image" data-plugins="dropify" data-default-file="{{isset($user)?$user->path_image<>''?url('storage/'.$user->path_image):'':''}}"  />
-        <p class="text-muted text-center mt-2 mb-0">Adicione uma imagem</p>
+        <p class="text-muted text-center mt-2 mb-0">Adicione uma imagem com tamanho máximo de <b class="text-danger">2 MB</b>.</p>
     </div>
 </div>
 <div class="mb-3">

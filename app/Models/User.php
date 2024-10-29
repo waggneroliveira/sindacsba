@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable
 {
-    use HasFactory, HasRoles, LogsActivity;
+    use Notifiable, HasFactory, HasRoles, LogsActivity;
     
     protected $fillable = [
         'name',

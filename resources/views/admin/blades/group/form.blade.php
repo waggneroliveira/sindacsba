@@ -3,8 +3,8 @@
     <input type="text" name="name" required class="form-control" id="name{{isset($group->id)?$group->id:''}}" value="{{isset($group)?$group->name:''}}" placeholder="Digite o nome do grupo">
 </div>
 <div class="text-end">
-    <button type="submit" class="btn btn-success waves-effect waves-light">Salvar</button>
     <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cancelar</button>
+    <button type="submit" class="btn btn-success waves-effect waves-light">Salvar</button>
 </div>
 @if ($permissions->count())
     <div class="row mt-3">
@@ -21,7 +21,17 @@
                         <strong>{{ ucfirst($permission->index()) }}:</strong>
                         <ul class="pl-3 list-unstyled"> <!-- Inicia nova lista -->
                 @endif
-                @if(Auth::user()->hasRole('Super'))
+                @if(Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['grupo.visualizar', 'grupo.criar']))
+                    <li>
+                        <label>                        
+                        <input name="permissions[]"
+                            type="checkbox"
+                            @if(isset($group) && $group->hasPermissionTo($permission->name)) checked @endif
+                            value="{{ $permission->name }}">
+                        </label>
+                        {{ ucfirst($permission->name()) }}
+                    </li>
+                    @elseif(Auth::user()->can(['grupo.visualizar', 'grupo.editar']))
                     <li>
                         <label>                        
                         <input name="permissions[]"
