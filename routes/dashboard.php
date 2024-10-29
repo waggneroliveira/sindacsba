@@ -41,9 +41,13 @@ Route::prefix('painel/')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
         //AUDITORIA
-        Route::resource('auditoria', AuditActivityController::class)
+        Route::resource('auditorias', AuditActivityController::class)
         ->names('admin.dashboard.audit')
-        ->parameters(['auditoria'=>'activitie']);
+        ->parameters(['auditorias'=>'activitie']);
+        Route::post('auditorias/{id}/mark-as-read', [AuditActivityController::class, 'markAsRead']);
+        Route::post('/auditorias/mark-all-as-read', [AuditActivityController::class, 'markAllAsRead']);
+
+
         //GRUPOS
         Route::resource('grupos', RoleController::class)
         ->names('admin.dashboard.group')

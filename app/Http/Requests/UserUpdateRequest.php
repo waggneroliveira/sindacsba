@@ -27,7 +27,7 @@ class UserUpdateRequest extends FormRequest
         return [
             'name' => ['string', 'max:255'],
             'email' => ['string', 'email', 'max:255'],
-            'password' => ['string', 'min:8'],
+            'password' => ['string'],
             'active' => 'boolean',
             'path_image' => ['nullable', 'string'],
             'sorting' => ['nullable', 'integer'],

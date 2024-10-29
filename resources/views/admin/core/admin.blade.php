@@ -456,7 +456,7 @@
                             <li class="dropdown notification-list">
                                 <a class="nav-link dropdown-toggle waves-effect waves-light arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                                     <i class="fe-bell font-22"></i>
-                                    <span class="badge bg-danger rounded-circle noti-icon-badge">{{isset($auditCount)?$auditCount:"0"}}</span>
+                                    <span class="badge bg-danger rounded-circle noti-icon-badge">{{ isset($auditCount) ? $auditCount : "0" }}</span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
                                     <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
@@ -465,10 +465,10 @@
                                                 <h6 class="m-0 font-16 fw-semibold"> Notification</h6>
                                             </div>
                                             <div class="col-auto">
-                                                <a href="javascript: void(0);" class="text-dark text-decoration-underline">
+                                                <a href="javascript: void(0);" class="text-dark text-decoration-underline" id="clear-all-notifications">
                                                     <small>Clear All</small>
                                                 </a>
-                                            </div>
+                                            </div>                                                                                       
                                         </div>
                                     </div>
 
@@ -478,24 +478,26 @@
                                         <!-- item-->
                                         @if (isset($auditorias))
                                             @foreach ($auditorias as $auditoria)
-                                                <a href="" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-1">
+                                                <div id="notificacao-{{ $auditoria->id }}" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-1">
                                                     <div class="card-body">
-                                                        <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-shrink-0">
-                                                                <div class="notify-icon bg-primary">
-                                                                    <i class="mdi mdi-comment-account-outline"></i>
+                                                        <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close" onclick="marcarComoLida({{ $auditoria->id }})"></i></span>
+                                                        <a href="{{route('admin.dashboard.audit.index')}}">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="flex-shrink-0">
+                                                                    <div class="notify-icon bg-primary">
+                                                                        <i class="mdi mdi-comment-account-outline"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                                    <h5 class="noti-item-title fw-semibold font-14">{{ isset($auditoria->causer->name)?$auditoria->causer->name:'Não encontrado' }} <small class="fw-normal text-muted ms-1">{{$auditoria->created_at->format("F j, Y, H:i:s")}}</small></h5>
+                                                                    <small class="noti-item-subtitle text-muted">
+                                                                        {{ 'Modificações foram feitas em ' . ($modelName = \App\Models\AuditActivity::getModelName($auditoria->subject_type)) . ' pelo usuário ' . ($auditoria->causer->name ?? 'Não encontrado') }}
+                                                                    </small>
                                                                 </div>
                                                             </div>
-                                                            <div class="flex-grow-1 text-truncate ms-2">
-                                                                <h5 class="noti-item-title fw-semibold font-14">{{ isset($auditoria->causer->name)?$auditoria->causer->name:'Não encontrado' }} <small class="fw-normal text-muted ms-1">{{$auditoria->created_at->format("F j, Y, H:i:s")}}</small></h5>
-                                                                <small class="noti-item-subtitle text-muted">
-                                                                    {{ 'Modificações foram feitas em ' . ($modelName = \App\Models\AuditActivity::getModelName($auditoria->subject_type)) . ' pelo usuário ' . ($auditoria->causer->name ?? 'Não encontrado') }}
-                                                                </small>
-                                                            </div>
-                                                        </div>
+                                                        </a>
                                                     </div>
-                                                </a>
+                                                </div>
                                             @endforeach
                                         @endif
 

@@ -43,4 +43,29 @@ class AuditActivityController extends Controller
             'modelName'=>$modelName
         ]);
     }
+
+    public function markAsRead($id)
+    {
+        $auditoria = Activity::findOrFail($id);
+        $auditoria->is_read = true;
+        $auditoria->save();
+
+        return response()->json(['status' => 'success']);
+    }
+    public function markAllAsRead()
+    {
+        // Obter o usuário autenticado
+        $user = auth()->user();
+
+        // Marcar todas as notificações como lidas
+        $is_read = Activity::where('causer_id', $user->id)
+            ->update(['is_read' => true]); // Atualize o campo correspondente que marca como lido
+
+        if (!$is_read) {
+            Activity::where('is_read', false)->update(['is_read' => true]);
+        }
+        return response()->json(['status' => 'success']);
+    }
+
+    
 }
