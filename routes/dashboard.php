@@ -2,12 +2,15 @@
 
 use App\Models\User;
 use App\Models\SettingTheme;
+use App\Models\AuditActivity;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
+use Spatie\Activitylog\Models\Activity;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Repositories\AuditCountRepository;
 use App\Repositories\SettingThemeRepository;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
@@ -26,7 +29,7 @@ Route::prefix('painel/')->group(function () {
     Route::get('/success-logout', function () {
         return view('admin.success.success-logout');
     })->name('success-logout');
-    
+
     Route::post('login.do', [AuthController::class, 'authenticate'])
     ->name('admin.user.authenticate');
 
@@ -68,8 +71,12 @@ Route::prefix('painel/')->group(function () {
 View::composer('admin.core.admin', function ($view) {
     $currentUser = Auth::user();
     $user = User::where('id', $currentUser->id)->active()->first();
+    
+    $notifications = (new AuditCountRepository());
+    $auditorias = $notifications->allAudit();
+    $auditCount = $notifications->auditCount();
 
     $settingTheme = (new SettingThemeRepository())->settingTheme();
 
-    return $view->with('settingTheme', $settingTheme)->with('user', $user);
+    return $view->with('settingTheme', $settingTheme)->with('user', $user)->with('auditorias', $auditorias)->with('auditCount', $auditCount);
 });
