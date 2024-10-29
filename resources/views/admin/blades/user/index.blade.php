@@ -51,7 +51,7 @@
                                                             <form action="{{route('admin.dashboard.user.store')}}" method="POST" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @include('admin.blades.user.form')  
-                                                                <div class="d-flex justify-content-between">
+                                                                <div class="d-flex justify-content-end gap-2">
                                                                     <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cancelar</button>
                                                                     <button type="submit" class="btn btn-success waves-effect waves-light">Cadastrar</button>
                                                                 </div>                                                 
@@ -77,7 +77,7 @@
                                             <th>Email</th>
                                             <th>Criado em</th>
                                             <th>Status</th>
-                                            <th style="width: 85px;">Action</th>
+                                            <th style="width: 85px;">Ação</th>
                                         </tr>
                                     </thead>
                                     <tbody data-route="{{route('admin.dashboard.user.sorting')}}">
@@ -113,7 +113,7 @@
                                                 </td>
             
                                                 <td class="d-flex gap-lg-1 justify-center" style="padding: 18px 15px 0px 0px;">
-                                                    @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['usuario.visualizar', 'usuario.atribuir grupos']))
+                                                    @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can('grupo.visualizar'))
                                                         <button class="table-edit-button btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-group-edit-{{$user->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-account-group-outline"></span></button>
                                                         <div class="modal fade" id="modal-group-edit-{{$user->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
@@ -148,9 +148,9 @@
                                                                             @csrf
                                                                             @method('PUT')
                                                                             @include('admin.blades.user.form')   
-                                                                            <div class="d-flex justify-content-between">
+                                                                            <div class="d-flex justify-content-end gap-2">
                                                                                 <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cancelar</button>
-                                                                                <button type="submit" class="btn btn-success waves-effect waves-light">Salvar</button>
+                                                                                <button type="submit" class="btn btn-success waves-effect waves-light">Atualizar</button>
                                                                             </div>                                                                                                                      
                                                                         </form>                                                                    
                                                                     </div>

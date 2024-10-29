@@ -70,7 +70,7 @@
                                             </th>
                                             <th>Nome do grupo</th>
                                             <th>Criado em</th>
-                                            <th style="width: 85px;">Action</th>
+                                            <th style="width: 85px;">Ação</th>
                                         </tr>
                                     </thead>
                                     <tbody data-route="">

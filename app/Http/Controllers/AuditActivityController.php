@@ -12,11 +12,13 @@ class AuditActivityController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
+
         $settingTheme = (new SettingThemeRepository())->settingTheme();
         $notifications = (new AuditCountRepository());
         $auditorias = $notifications->allAudit();
         $auditCount = $notifications->auditCount();
-
+        
         if(!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can('auditoria.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
@@ -28,6 +30,7 @@ class AuditActivityController extends Controller
             'settingTheme' => $settingTheme,
             'auditorias' => $auditorias,
             'auditCount' => $auditCount,
+            'user' => $user,
         ]);
     }
 

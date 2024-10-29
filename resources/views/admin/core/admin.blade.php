@@ -462,11 +462,11 @@
                                     <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
                                         <div class="row align-items-center">
                                             <div class="col">
-                                                <h6 class="m-0 font-16 fw-semibold"> Notification</h6>
+                                                <h6 class="m-0 font-16 fw-semibold"> Notificações</h6>
                                             </div>
                                             <div class="col-auto">
                                                 <a href="javascript: void(0);" class="text-dark text-decoration-underline" id="clear-all-notifications">
-                                                    <small>Clear All</small>
+                                                    <small>Limpar todas</small>
                                                 </a>
                                             </div>                                                                                       
                                         </div>
@@ -474,9 +474,9 @@
 
                                     <div class="px-1" style="max-height: 300px;" data-simplebar>
 
-                                        <h5 class="text-muted font-13 fw-normal mt-2">Today</h5>
-                                        <!-- item-->
-                                        @if (isset($auditorias))
+                                        @if (empty($auditorias))
+                                            <h5 class="text-muted font-13 fw-normal mt-2">Hoje</h5>
+                                            <!-- item-->
                                             @foreach ($auditorias as $auditoria)
                                                 <div id="notificacao-{{ $auditoria->id }}" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-1">
                                                     <div class="card-body">
@@ -501,7 +501,7 @@
                                             @endforeach
                                         @endif
 
-                                        <h5 class="text-muted font-13 fw-normal mt-0">Yesterday</h5>
+                                        <h5 class="text-muted font-13 fw-normal mt-0">Ontem</h5>
 
                                         <!-- item-->
                                         <a href="" class="dropdown-item p-0 notify-item card read-noti shadow-none mb-1">
@@ -569,25 +569,21 @@
                                 <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
                                     <!-- item-->
                                     <div class="dropdown-header noti-title">
-                                        <h6 class="text-overflow m-0">Welcome !</h6>
-                                    </div>
+                                        <h6 class="text-overflow m-0">Bem vindo!</h6>
+                                    </div>                            
+                                    
+                                    @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['usuario.visualizar', 'usuario.editar']))
+                                        <!-- item-->
+                                        <a href="{{route('admin.dashboard.user.edit', ['user' => $user->id])}}" class="dropdown-item notify-item">
+                                            <i class="fe-user"></i>
+                                            <span>Minha conta</span>
+                                        </a>                                    
+                                    @endif
 
                                     <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <i class="fe-user"></i>
-                                        <span>My Account</span>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <a href="#theme-settings-offcanvas" class="dropdown-item notify-item"  data-bs-toggle="offcanvas" >
                                         <i class="fe-settings"></i>
-                                        <span>Settings</span>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <i class="fe-lock"></i>
-                                        <span>Lock Screen</span>
+                                        <span>Configuração</span>
                                     </a>
 
                                     <div class="dropdown-divider"></div>
@@ -595,7 +591,7 @@
                                     <!-- item-->
                                     <a href="{{route('admin.dashboard.user.logout')}}" class="dropdown-item notify-item">
                                         <i class="fe-log-out"></i>
-                                        <span>Logout</span>
+                                        <span>Sair</span>
                                     </a>
 
                                 </div>
@@ -677,15 +673,15 @@
 
                             <div class="mt-n3">
                                 <h6 class="fw-medium py-2 px-3 font-13 text-uppercase bg-light mx-n3 mt-n3 mb-3">
-                                    <span class="d-block py-1">Theme Settings</span>
+                                    <span class="d-block py-1">configuração do Tema</span>
                                 </h6>
                             </div>
 
                             <div class="alert alert-warning" role="alert">
-                                <strong>Customize </strong> the overall color scheme, sidebar menu, etc.
+                                <strong>Personalize </strong> o esquema geral de cores, o menu da barra lateral, etc.
                             </div>
 
-                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Color Scheme</h5>
+                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Esquema de cores</h5>
 
                             <div class="colorscheme-cardradio">
                                 <div class="d-flex flex-column gap-2">
@@ -693,61 +689,61 @@
                                         <input class="form-check-input" type="radio" name="data-bs-theme" 
                                             {{ isset($settingTheme) && $settingTheme->data_bs_theme == 'light' ? 'checked' : '' }}
                                             id="layout-color-light" value="light">
-                                        <label class="form-check-label" for="layout-color-light">Light</label>
+                                        <label class="form-check-label" for="layout-color-light">Claro</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-bs-theme" 
                                             {{ isset($settingTheme) && $settingTheme->data_bs_theme == 'dark' ? 'checked' : '' }}
                                             id="layout-color-dark" value="dark">
-                                        <label class="form-check-label" for="layout-color-dark">Dark</label>
+                                        <label class="form-check-label" for="layout-color-dark">Escuro</label>
                                     </div>
                                 </div>
                             </div>
 
-                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Content Width</h5>
+                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Largura do conteúdo</h5>
                             <div class="d-flex flex-column gap-2">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="radio" name="data-layout-width" {{isset($settingTheme) && $settingTheme->data_layout_width=='default'?'checked':''}} id="layout-width-default" value="default">
-                                    <label class="form-check-label" for="layout-width-default">Fluid (Default)</label>
+                                    <label class="form-check-label" for="layout-width-default">Fluido (Padrão)</label>
                                 </div>
 
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="radio" name="data-layout-width" {{isset($settingTheme) && $settingTheme->data_layout_width=='boxed'?'checked':''}} id="layout-width-boxed" value="boxed">
-                                    <label class="form-check-label" for="layout-width-boxed">Boxed</label>
+                                    <label class="form-check-label" for="layout-width-boxed">Encaixotado</label>
                                 </div>
                             </div>
 
                             <div id="layout-mode">
-                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Layout Mode</h5>
+                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Modo de layout</h5>
 
                                 <div class="d-flex flex-column gap-2">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-layout-mode" {{isset($settingTheme) && $settingTheme->data_layout_mode=='default'?'checked':''}} id="layout-mode-default" value="default">
-                                        <label class="form-check-label" for="layout-mode-default">Default</label>
+                                        <label class="form-check-label" for="layout-mode-default">Padrão</label>
                                     </div>
 
 
                                     <div id="layout-detached">
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="radio" name="data-layout-mode" {{isset($settingTheme) && $settingTheme->data_layout_mode=='detached'?'checked':''}} id="layout-mode-detached" value="detached">
-                                            <label class="form-check-label" for="layout-mode-detached">Detached</label>
+                                            <label class="form-check-label" for="layout-mode-detached">Desanexado</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Topbar Color</h5>
+                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Cor da barra superior</h5>
 
                             <div class="d-flex flex-column gap-2">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="radio" name="data-topbar-color" {{isset($settingTheme) && $settingTheme->data_topbar_color=='light'?'checked':''}} id="topbar-color-light" value="light">
-                                    <label class="form-check-label" for="topbar-color-light">Light</label>
+                                    <label class="form-check-label" for="topbar-color-light">Claro</label>
                                 </div>
 
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="radio" name="data-topbar-color" {{isset($settingTheme) && $settingTheme->data_topbar_color=='dark'?'checked':''}} id="topbar-color-dark" value="dark">
-                                    <label class="form-check-label" for="topbar-color-dark">Dark</label>
+                                    <label class="form-check-label" for="topbar-color-dark">Escuro</label>
                                 </div>
 
                                 <div class="form-check form-switch">
@@ -757,17 +753,17 @@
                             </div>
 
                             <div>
-                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Menu Color</h5>
+                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Cor do Menu</h5>
 
                                 <div class="d-flex flex-column gap-2">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='light'?'checked':''}} id="leftbar-color-light" value="light">
-                                        <label class="form-check-label" for="leftbar-color-light">Light</label>
+                                        <label class="form-check-label" for="leftbar-color-light">Claro</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='dark'?'checked':''}} id="leftbar-color-dark" value="dark">
-                                        <label class="form-check-label" for="leftbar-color-dark">Dark</label>
+                                        <label class="form-check-label" for="leftbar-color-dark">Escuro</label>
                                     </div>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='brand'?'checked':''}} id="leftbar-color-brand" value="brand">
@@ -775,23 +771,23 @@
                                     </div>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='gradient'?'checked':''}} id="leftbar-color-gradient" value="gradient">
-                                        <label class="form-check-label" for="leftbar-color-gradient">Gradient</label>
+                                        <label class="form-check-label" for="leftbar-color-gradient">Gradiente</label>
                                     </div>
                                 </div>
                             </div>
 
                             <div id="menu-icon-color">
-                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Menu Icon Color</h5>
+                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Cor do ícone do menu</h5>
 
                                 <div class="d-flex flex-column gap-2">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-two-column-color" {{isset($settingTheme) && $settingTheme->data_two_column_color=='light'?'checked':''}} id="twocolumn-menu-color-light" value="light">
-                                        <label class="form-check-label" for="twocolumn-menu-color-light">Light</label>
+                                        <label class="form-check-label" for="twocolumn-menu-color-light">Claro</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-two-column-color" {{isset($settingTheme) && $settingTheme->data_two_column_color=='dark'?'checked':''}} id="twocolumn-menu-color-dark" value="dark">
-                                        <label class="form-check-label" for="twocolumn-menu-color-dark">Dark</label>
+                                        <label class="form-check-label" for="twocolumn-menu-color-dark">Escuro</label>
                                     </div>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-two-column-color" {{isset($settingTheme) && $settingTheme->data_two_column_color=='brand'?'checked':''}} id="twocolumn-menu-color-brand" value="brand">
@@ -799,54 +795,54 @@
                                     </div>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-two-column-color" {{isset($settingTheme) && $settingTheme->data_two_column_color=='gradient'?'checked':''}} id="twocolumn-menu-color-gradient" value="gradient">
-                                        <label class="form-check-label" for="twocolumn-menu-color-gradient">Gradient</label>
+                                        <label class="form-check-label" for="twocolumn-menu-color-gradient">Gradiente</label>
                                     </div>
                                 </div>
                             </div>
 
                             <div>
-                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Menu Icon Tone</h5>
+                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Tom do ícone do menu</h5>
 
                                 <div class="d-flex flex-column gap-2">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-menu-icon" {{isset($settingTheme) && $settingTheme->data_menu_icon=='default'?'checked':''}} id="menu-icon-default" value="default">
-                                        <label class="form-check-label" for="menu-icon-default">Default</label>
+                                        <label class="form-check-label" for="menu-icon-default">Padrão</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-menu-icon" {{isset($settingTheme) && $settingTheme->data_menu_icon=='twotones'?'checked':''}} id="menu-icon-twotone" value="twotones">
-                                        <label class="form-check-label" for="menu-icon-twotone">Twotone</label>
+                                        <label class="form-check-label" for="menu-icon-twotone">Dois tons</label>
                                     </div>
                                 </div>
                             </div>
 
                             <div id="sidebar-size">
-                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Sidebar Size</h5>
+                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Tamanho da barra lateral</h5>
 
                                 <div class="d-flex flex-column gap-2">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='default'?'checked':''}} id="leftbar-size-default" value="default">
-                                        <label class="form-check-label" for="leftbar-size-default">Default</label>
+                                        <label class="form-check-label" for="leftbar-size-default">Padrão</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='compact'?'checked':''}} id="leftbar-size-compact" value="compact">
-                                        <label class="form-check-label" for="leftbar-size-compact">Compact (Medium Width)</label>
+                                        <label class="form-check-label" for="leftbar-size-compact">Compacto (largura média)</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='condensed'?'checked':''}} id="leftbar-size-small" value="condensed">
-                                        <label class="form-check-label" for="leftbar-size-small">Condensed (Icon View)</label>
+                                        <label class="form-check-label" for="leftbar-size-small">Condensado (Visualização de Ícone)</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='full'?'checked':''}} id="leftbar-size-full" value="full">
-                                        <label class="form-check-label" for="leftbar-size-full">Full Layout</label>
+                                        <label class="form-check-label" for="leftbar-size-full">Layout completo</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='fullscreen'?'checked':''}} id="leftbar-size-fullscreen" value="fullscreen">
-                                        <label class="form-check-label" for="leftbar-size-fullscreen">Fullscreen Layout</label>
+                                        <label class="form-check-label" for="leftbar-size-fullscreen">Layout de tela cheia</label>
                                     </div>
                                 </div>
                             </div>
@@ -875,6 +871,24 @@
 
         <!-- Dashboard 2 init -->
         <script src="{{ asset('build/admin/js/pages/dashboard-2.init.js') }}"></script>
+
+        <div class="modal fade" id="lockScreenModal" tabindex="-1" aria-labelledby="lockScreenModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="lockScreenModalLabel">Tela Bloqueada</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Para desbloquear, insira sua senha:</p>
+                        <input type="password" id="unlockPassword" class="form-control" placeholder="Senha">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="unlockButton" class="btn btn-primary">Desbloquear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
 
         {{-- Modais alert --}}
         <script>
@@ -936,6 +950,49 @@
                 data_menu_icon: "{{ isset($settingTheme)?$settingTheme->data_menu_icon: 'default' }}",
                 data_sidenav_size: "{{ isset($settingTheme)?$settingTheme->data_sidenav_size: 'condensed' }}"
             };
+        </script>
+
+        <style>
+            .locked-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.6);
+                z-index: 1050; /* Acima da interface normal */
+                display: none;
+            }
+
+        </style>
+        <script>
+            document.getElementById("lockScreenButton").addEventListener("click", function() {
+                document.getElementById("lockScreenModal").style.display = 'block';
+                document.querySelector(".locked-overlay").style.display = 'block';
+            });
+
+            document.getElementById("unlockButton").addEventListener("click", function() {
+                const password = document.getElementById("unlockPassword").value;
+
+                fetch('/verify-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({ password: password })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById("lockScreenModal").style.display = 'none';
+                        document.querySelector(".locked-overlay").style.display = 'none';
+                    } else {
+                        alert("Senha incorreta!");
+                    }
+                });
+            });
+
         </script>
     </body>
 </html>

@@ -57,7 +57,7 @@ class User extends Authenticatable
     public function scopeExcludeSuper(Builder $query): Builder
     {
         return $query->whereDoesntHave('roles', function ($query) {
-            $query->where('name', 'Super'); // Certifique-se de que o nome do papel está correto
+            $query->where('name', 'Super');
         });
     }
 }

@@ -14,65 +14,40 @@ use App\Http\Requests\RequestStoreUser;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserUpdateRequest;
+use App\Repositories\UserRoleRepository;
 use Illuminate\Support\Facades\Response;
 use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Permission;
 use App\Repositories\SettingThemeRepository;
+use App\Repositories\UserPermissionRepository;
 use App\Http\Controllers\Helpers\HelperArchive;
 
 class UserController extends Controller
 {
     protected $pathUpload = 'admin/uploads/images/usuario/';
 
-    public function index()
+    public function index(UserPermissionRepository $userPermissionRepository)
     {
+
         $users = User::excludeSuper()->with('roles');
         $settingTheme = (new SettingThemeRepository())->settingTheme();
+        $filteredUsers = $userPermissionRepository->filterUsersByPermissions($users);
 
-        if(!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can('usuario.visualizar')){
+        if ($filteredUsers === 'forbidden') {
             return view('admin.error.403', compact('settingTheme'));
         }
-        if(Auth::user()->can(['usuario.visualizar','usuario.visualizar outros usuarios'])){
-            $users = $users->where('id', '<>', 1);
-        }
-        if(Auth::user()->can('usuario.visualizar') && !Auth::user()->can('usuario.visualizar outros usuarios')){
-            $users = $users->where('id', '<>', 1)
-                ->where('id', Auth::user()->id);
-        }
-        if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master')) {
-            $users = $users->where('id', '<>', 1);
-        }
-        $users = $users->sorting()->get();
-        $otherRoles = collect();
-        $currentRoles = collect();
-        
-        $otherRolesBase = Role::where('id', '!=', 1)->get(); 
-        
-        if ($users->isNotEmpty()) {
-            foreach ($users as $user) {
-                $currentRoleIds = Role::join('model_has_roles', 'roles.id', 'model_has_roles.role_id')
-                    ->join('users', 'model_has_roles.model_id', 'users.id')
-                    ->where('users.id', $user->id)
-                    ->pluck('roles.id');
-        
-                $currentRoles = Role::whereIn('id', $currentRoleIds)->get();
-                $otherRoles = $otherRolesBase->whereNotIn('id', $currentRoleIds->toArray());
-        
-                $user->currentRoles = $currentRoles;
-                $user->otherRoles = $otherRoles;
-            }
-        }
+
+        $users = $filteredUsers->sorting()->get();
+        $roles = (new UserRoleRepository())->userRole($users);
+        $otherRoles = $roles['otherRoles'] ?? collect();
+        $currentRoles = $roles['currentRoles'] ?? collect();
+            
         $permissions = Permission::join('role_has_permissions', 'permissions.id', 'role_has_permissions.permission_id')
         ->groupBy('permissions.name')
         ->select('permissions.name')
         ->get();
         
-        return view('admin.blades.user.index', [
-            'users'=>$users,
-            'otherRoles'=>$otherRoles,
-            'permissions'=>$permissions,
-            'currentRoles'=>$currentRoles,
-        ]);
+        return view('admin.blades.user.index', compact('users','otherRoles','permissions','currentRoles'));
     }
 
     public function store(RequestStoreUser $request)
@@ -128,14 +103,21 @@ class UserController extends Controller
         }
     }
 
-    public function edit(User $user)
+    public function edit(UserPermissionRepository $usersWithPermissionsForEdit, User $user)
     {
-        if(!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can(['usuario.visualizar','usuario.editar'])){
+        $userHasPermission = $usersWithPermissionsForEdit->usersWithPermissionsForEdit($user);
+
+        if ($userHasPermission === 'forbidden') {
             return view('admin.error.403');
         }
 
-        return view('admin.cruds.user.edit', [
+        $currentRoles = $user->roles;
+        $otherRoles = Role::where('id', '!=', 1)->whereNotIn('id', $currentRoles->pluck('id'))->get();
+
+        return view('admin.blades.user.edit', [
             'user' => $user,
+            'currentRoles' => $currentRoles,
+            'otherRoles' => $otherRoles,
         ]);
     }
 
@@ -286,5 +268,4 @@ class UserController extends Controller
     
         return Response::json(['status' => 'success']);
     }
-    
 }
