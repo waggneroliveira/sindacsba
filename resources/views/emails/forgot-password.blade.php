@@ -1,64 +1,51 @@
-<table class="wrapper" width="600px" border="0" cellspacing="0" cellpadding="0" align="center">
-    <tbody>
-       <tr>
-          <td class="100%" colspan="2">
-             <div class="topo-newsletter" style="height: 198px;background: #ECECEC;box-sizing: border-box;">
-                <img width="185.62px" style="margin:0 auto;display:table;padding: 70px 0;" src="{{asset('storage/assets/log-pad.png')}}" alt="Eco Plural">
-             </div>
-          </td>
-       </tr>
-       <tr width="100%" border="0" cellspacing="0" cellpadding="0" style="background:#fff;">
-          <td class="engloba-conteudo-eco" colspan="2" style="
-             padding: 40px 63px;
-             padding-bottom: 71.11px;
-             ">
-             <h4 class="titulo" style="
-                font-family: 'Nunito', sans-serif;
-                color: #515050;
-                font-size: 32px;
-                line-height: 43px;
-                margin: auto;
-                font-weight: bold;
-                ">Recuperação de senha</h4>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redefinição de Senha</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4;">
+    <table class="wrapper" width="600" border="0" cellspacing="0" cellpadding="0" align="center" style="background-color: #fff; margin: 20px auto; border-radius: 8px; overflow: hidden;">
+        <tbody>
+            <!-- Header -->
+            <tr>
+                <td colspan="2" style="background: #ECECEC; text-align: center; padding: 40px 0;">
+                    <img src="{{ asset('build/admin/images/whi.png') }}" alt="WHI - Web de Alta Inspiração" style="width: 185px; display: block; margin: 0 auto;">
+                </td>
+            </tr>
 
-             <p style="
-               font-family: 'Nunito', sans-serif;
-               color: #707070;
-               font-size: 15px;
-               line-height: 24px;
-               margin: auto;
-               font-weight: 400;
-               ">
-                 Não compartilhe esse codigo com terceiros {{$token}}
-            </p>
-          </td>
-       </tr>
-       <tr width="100%" border="0" cellspacing="0" cellpadding="0" style="background:#f3f3f3;">
-          <td class="engloba-conteudo-eco" colspan="2">
-             <div class="linha" style="
-                width: 100%;
-                height: 4px;
-                background: #4BAD6C;
-                margin-bottom: 3px;
-                "></div>
-             <div class="footer-newsletter" style="height: 198px;background: #06666F;padding: 28.52px 40px;box-sizing: border-box;">
-                <div class="box-footer-newsletter" style="
-                   float: left;
-                   ">
-                   <div class="image" style="
-                      width: 107px;
-                      float: left;
-                      height: 108px;
-                      margin-top: 8px;
-                      ">
-                      <img src="{{asset('storage/assets/logo-footer.png')}}" alt="Eco Plural" style="
-                         width: 107px;
-                         ">
-                   </div>
-                </div>
-             </div>
-          </td>
-       </tr>
-    </tbody>
- </table>
+            <!-- Main Content -->
+            <tr>
+                <td colspan="2" style="padding: 40px 63px;">
+                    <h1 style="color: #333; font-size: 24px; margin: 0 0 20px; text-align: center;">Redefinição de Senha</h1>
+                    <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">Olá,</p>
+                    <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+                        Você solicitou a redefinição de sua senha. Clique no link abaixo para redefini-la:
+                    </p>
+                    <p style="text-align: center; margin-bottom: 30px;">
+                        <a href="{{ $url }}" style="background-color: #4BAD6C; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;">
+                            Redefinir Senha
+                        </a>
+                    </p>
+                    <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+                        Se você não solicitou esta alteração, nenhuma ação é necessária.
+                    </p>
+                    <p style="color: #555; font-size: 16px; line-height: 1.5;">Atenciosamente,<br>WHI</p>
+                </td>
+            </tr>
 
+            <!-- Footer -->
+            <tr>
+                <td colspan="2" style="background: #f3f3f3; padding: 0;">
+                    <div style="width: 100%; height: 4px; background-color: #4BAD6C;"></div>
+                    <div style="background: #06666F; padding: 28px 40px; text-align: center;">
+                        <img src="{{ asset('build/admin/images/whi.png') }}" alt="WHI - Web de Alta Inspiração" style="width: 107px; margin: 0 auto;">
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
