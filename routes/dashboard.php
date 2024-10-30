@@ -61,8 +61,6 @@ Route::prefix('painel/')->group(function () {
         return view('emails.password-success-reset');
     })->name('success-reset-password');
 
-
-
     /*=====================FINAL REDEFINICAO DE SENHA=========================*/
 
     Route::middleware([Authenticate::class])->group(function(){ 
