@@ -502,7 +502,37 @@ document.getElementById('clear-all-notifications').addEventListener('click', fun
     });
 });
 
-
+$("#testSmtp").on("click", function (event) {
+    event.preventDefault();
+    var action = $(this).attr("href");
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            'Content-Type': 'application/json'
+        },
+        type: "POST",
+        url: action,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            switch (response.status) {
+                case "success":
+                    $(".detailsTestSmtp").append(
+                        `<span class="badge bg-success mt-2">${response.message}</span>`
+                    );
+                    break;
+                case "error":
+                    $(".detailsTestSmtp").append(`
+                        <span class="badge bg-danger my-2">${response.message}</span>
+                        <p><b>Confira detalhes do erro abaixo.</b></p>
+                        <p>${response.details}</p>
+                    `);
+                    break;
+            }
+        },
+        error: function (error) {},
+    });
+});
 
 
 

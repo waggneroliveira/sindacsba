@@ -82,6 +82,7 @@ Route::prefix('painel/')->group(function () {
         Route::resource('configuracao-de-email', SettingEmailController::class)
         ->names('admin.dashboard.settingEmail')
         ->parameters(['configuracao-de-email' => 'settingEmail']);
+        Route::post('configuracoes/smtp/verify', [SettingEmailController::class, 'smtpVerify'])->name('admin.dashboard.settingEmail.smtpVerify');
         //GRUPOS
         Route::resource('grupos', RoleController::class)
         ->names('admin.dashboard.group')

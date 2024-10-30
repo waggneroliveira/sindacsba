@@ -19,6 +19,11 @@
     </div>
     <!-- end page title -->
     <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title "><i class="mdi mdi-email-edit"></i> Configuração SMTP</h4>
+            </div>
+        </div>
         <div class="col-md-5 col-xl-3">
             <div class="card borda-cx ratio ratio-4x3">
                 <div class="d-flex align-items-center justify-content-center">

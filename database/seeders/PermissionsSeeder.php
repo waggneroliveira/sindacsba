@@ -17,6 +17,11 @@ class PermissionsSeeder extends Seeder
             'auditoria'=>[
                 'Visualizar',
             ],
+            'email'=>[
+                'Visualizar',
+                'configurar smtp',
+                'testar conexao smtp'
+            ],
             'grupo'=>[
                 'Criar',
                 'Editar',                
