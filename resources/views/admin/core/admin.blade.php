@@ -93,8 +93,20 @@
                         <li class="menu-title">Listagem</li>
 
                         <li class="menu-item">
-                            <a href="apps-calendar.html" class="menu-link">
-                                <span class="menu-icon"><i data-feather="calendar"></i></span>
+                            <a href="{{route('admin.dashboard.audit.index')}}" class="menu-link">
+                                <span class="menu-icon"><i class="mdi mdi-clipboard-text"></i></span>
+                                <span class="menu-text"> Auditoria </span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{route('admin.dashboard.group.index')}}" class="menu-link">
+                                <span class="menu-icon"><i class="mdi mdi-account-group"></i></span>
+                                <span class="menu-text"> Grupos de permissões</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{route('admin.dashboard.user.index')}}" class="menu-link">
+                                <span class="menu-icon"><i class="mdi mdi-account-multiple"></i></span>
                                 <span class="menu-text"> Usuário </span>
                             </a>
                         </li>
@@ -503,6 +515,8 @@
                                                             </div>
                                                         </div>
                                                     @endforeach
+                                                    @else
+                                                    <h5 class="m-0 p-2 ps-1 font-11 fw-semibold">Nenhuma notificação disponível no momento.</h5>
                                                 @endif
                                             @endif
                                         </div>
@@ -552,7 +566,7 @@
                                         <!-- item-->
                                         <a href="{{route('admin.dashboard.user.edit', ['user' => $user->id])}}" class="dropdown-item notify-item">
                                             <i class="fe-user"></i>
-                                            <span>Minha conta</span>
+                                            <span>Meu perfil</span>
                                         </a>                                    
                                     @endif
 
@@ -846,25 +860,7 @@
         <script src="{{ asset('build/admin/js/main.js') }}"></script>
 
         <!-- Dashboard 2 init -->
-        <script src="{{ asset('build/admin/js/pages/dashboard-2.init.js') }}"></script>
-
-        <div class="modal fade" id="lockScreenModal" tabindex="-1" aria-labelledby="lockScreenModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="lockScreenModalLabel">Tela Bloqueada</h5>
-                    </div>
-                    <div class="modal-body">
-                        <p>Para desbloquear, insira sua senha:</p>
-                        <input type="password" id="unlockPassword" class="form-control" placeholder="Senha">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="unlockButton" class="btn btn-primary">Desbloquear</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+        <script src="{{ asset('build/admin/js/pages/dashboard-2.init.js') }}"></script>       
 
         {{-- Modais alert --}}
         <script>

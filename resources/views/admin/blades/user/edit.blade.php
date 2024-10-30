@@ -27,7 +27,6 @@
                             @csrf
                             @method('put')
 
-                            {{-- @include('admin.blades.user.form') --}}
                             <div class="row">
                                 <div class="col-6 col-md-6">
                                     <div class="mb-3">
@@ -57,19 +56,11 @@
                                 <div class="col-6 col-md-6">
                                     <div class="mt-3">
                                         <input type="file" name="path_image" data-plugins="dropify" data-default-file="{{isset($user)?$user->path_image<>''?url('storage/'.$user->path_image):'':''}}"  />
-                                        <p class="text-muted text-center mt-2 mb-0">Adicione uma imagem</p>
+                                        <p class="text-muted text-center mt-2 mb-0">Adicione uma imagem com tamanho máximo de <b class="text-danger">2 MB</b>.</p>
                                     </div>
                                 </div>
                             </div>                           
-                            <div class="row">
-                                <h2>Grupos</h2>
 
-                                @if ($currentRoles->isNotEmpty())
-                                @foreach($currentRoles as $role)  
-                                    <input type="hidden" name="roles[]" value="{{ $role->name }}">                    
-                                @endforeach        
-                            @endif
-                            </div>
                             <div class="d-flex justify-content-end gap-2">
                                 <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cancelar</button>
                                 <button type="submit" class="btn btn-success waves-effect waves-light">Atualizar</button>
