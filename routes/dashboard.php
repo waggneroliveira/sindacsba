@@ -14,6 +14,7 @@ use App\Repositories\AuditCountRepository;
 use App\Repositories\SettingThemeRepository;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SettingEmailController;
 use App\Http\Controllers\SettingThemeController;
 use App\Http\Controllers\AuditActivityController;
 use App\Http\Controllers\Auth\PasswordEmailController;
@@ -77,7 +78,10 @@ Route::prefix('painel/')->group(function () {
         Route::post('auditorias/{id}/mark-as-read', [AuditActivityController::class, 'markAsRead']);
         Route::post('/auditorias/mark-all-as-read', [AuditActivityController::class, 'markAllAsRead']);
 
-
+        //E-MAIL CONFIG
+        Route::resource('configuracao-de-email', SettingEmailController::class)
+        ->names('admin.dashboard.settingEmail')
+        ->parameters(['configuracao-de-email' => 'settingEmail']);
         //GRUPOS
         Route::resource('grupos', RoleController::class)
         ->names('admin.dashboard.group')
