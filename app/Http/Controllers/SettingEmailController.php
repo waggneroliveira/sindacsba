@@ -6,6 +6,7 @@ use Exception;
 use App\Models\SettingEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Artisan;
@@ -16,6 +17,10 @@ class SettingEmailController extends Controller
 {
     public function index()
     {
+        if(!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can('email.visualizar')){
+            return view('admin.error.403'); 
+        }
+
         $settingEmail = SettingEmail::first();
 
         return view('admin.blades.seetingEmail.form', compact('settingEmail'));

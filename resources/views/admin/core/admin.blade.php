@@ -91,26 +91,46 @@
                     <ul class="menu">
 
                         <li class="menu-title">Listagem</li>
-
-                        <li class="menu-item">
-                            <a href="{{route('admin.dashboard.audit.index')}}" class="menu-link">
-                                <span class="menu-icon"><i class="mdi mdi-clipboard-text"></i></span>
-                                <span class="menu-text"> Auditoria </span>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="{{route('admin.dashboard.group.index')}}" class="menu-link">
-                                <span class="menu-icon"><i class="mdi mdi-account-group"></i></span>
-                                <span class="menu-text"> Grupos de permissões</span>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="{{route('admin.dashboard.user.index')}}" class="menu-link">
-                                <span class="menu-icon"><i class="mdi mdi-account-multiple"></i></span>
-                                <span class="menu-text"> Usuário </span>
-                            </a>
-                        </li>
-
+                        @if (Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('auditoria.visualizar'))
+                            <li class="menu-item">
+                                <a href="{{route('admin.dashboard.audit.index')}}" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-clipboard-text"></i></span>
+                                    <span class="menu-text"> Auditoria </span>
+                                </a>
+                            </li>
+                        @endif
+                        @if (Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('email.visualizar'))                            
+                            <li class="menu-item">
+                                <a href="{{route('admin.dashboard.settingEmail.index')}}" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-email"></i></span>
+                                    <span class="menu-text"> Configuração SMTP </span>
+                                </a>
+                            </li>
+                        @endif
+                        @if (Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('grupo.visualizar'))                            
+                            <li class="menu-item">
+                                <a href="{{route('admin.dashboard.group.index')}}" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-account-group"></i></span>
+                                    <span class="menu-text"> Grupos de permissões</span>
+                                </a>
+                            </li>
+                        @endif
+                        @if (Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('usuario.visualizar'))                            
+                            <li class="menu-item">
+                                <a href="{{route('admin.dashboard.user.index')}}" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-account-multiple"></i></span>
+                                    <span class="menu-text"> Usuário </span>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                     <!--- End Menu -->
                     <div class="clearfix"></div>

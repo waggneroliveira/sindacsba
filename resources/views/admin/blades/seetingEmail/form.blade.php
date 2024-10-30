@@ -75,17 +75,23 @@
                             </div>
             
                         </div>
-                         <div class="col-2">
-                             <a href="{{route('admin.dashboard.settingEmail.smtpVerify')}}" id="testSmtp" class="btn btn-warning">Testar Conexão</a>
-                         </div>
-                        <div class="detailsTestSmtp"></div>
+                        @if (Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('email.visualizar') && Auth::user()->can('email.testar conexao smtp'))
+                            <div class="col-2">
+                                <a href="{{route('admin.dashboard.settingEmail.smtpVerify')}}" id="testSmtp" class="btn btn-warning">Testar Conexão</a>
+                            </div>
+                            <div class="detailsTestSmtp"></div>
+                        @endif
                     </div> <!-- end card-body-->
                 </div> <!-- end card-->
     
                 <div class="col-12 col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ isset($settingEmail) ? route('admin.dashboard.settingEmail.update', $settingEmail->id) : route('admin.dashboard.settingEmail.store') }}" method="post">
+                            <form action="{{Auth::user()->hasRole('Super') || 
+                                Auth::user()->can('usuario.tornar usuario master') || 
+                                Auth::user()->can('email.visualizar') && Auth::user()->can('email.configurar smtp') ? isset($settingEmail) ? route('admin.dashboard.settingEmail.update', $settingEmail->id) : route('admin.dashboard.settingEmail.store') : '' }}" method="post">
                                 @csrf
                                 @if(isset($settingEmail))
                                     @method('PUT')
@@ -93,46 +99,50 @@
                                 <div class="row">
                                     <div class="mb-3 col-6">
                                         <label for="mail_mailer" class="form-label">Mail Mailer <span class="text-danger">*</span></label>
-                                        <input type="text" name="mail_mailer" class="form-control" id="mail_mailer{{isset($settingEmail->id)?$settingEmail->id:''}}" value="{{isset($settingEmail)?$settingEmail->mail_mailer:''}}" required>
+                                        <input type="text" name="mail_mailer" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }}  class="form-control" id="mail_mailer{{isset($settingEmail->id)?$settingEmail->id:''}}" value="{{isset($settingEmail)?$settingEmail->mail_mailer:''}}" required>
                                     </div>
                                     
                                     <div class="mb-3 col-6">
                                         <label for="mail_port" class="form-label">Porta<span class="text-danger">*</span></label>
-                                        <input type="text" name="mail_port" value="{{isset($settingEmail)?$settingEmail->mail_port:''}}" class="form-control" id="mail_port{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
+                                        <input type="text" name="mail_port" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_port:''}}" class="form-control" id="mail_port{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
                                     </div>
                                     <div class="mb-3 col-12">
                                         <label for="mail_host" class="form-label">Host<span class="text-danger">*</span></label>
-                                        <input type="text" name="mail_host" value="{{isset($settingEmail)?$settingEmail->mail_host:''}}" class="form-control" id="mail_host{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
+                                        <input type="text" name="mail_host" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_host:''}}" class="form-control" id="mail_host{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
                                     </div>                                    
                                 </div>
                                 <div class="row">
                                     <div class="mb-3 col-8">
                                         <label for="mail_username" class="form-label">E-mail<span class="text-danger">*</span></label>
-                                        <input type="email" name="mail_username" value="{{isset($settingEmail)?$settingEmail->mail_username:''}}" class="form-control" id="mail_username{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
+                                        <input type="email" name="mail_username" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_username:''}}" class="form-control" id="mail_username{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
                                     </div>                              
                                     <div class="mb-3 col-4">
                                         <label for="mail_password" class="form-label">Senha<span class="text-danger">*</span></label>
-                                        <input type="text" name="mail_password" value="{{isset($settingEmail)?$settingEmail->mail_password:''}}" class="form-control" id="mail_password{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
+                                        <input type="password" name="mail_password" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_password:''}}" class="form-control" id="mail_password{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
                                     </div>                              
                                 </div>
                                 <div class="row">
                                     <div class="mb-3 col-2">
                                         <label for="mail_encryption" class="form-label">Criptografia<span class="text-danger">*</span></label>
-                                        <input type="text" name="mail_encryption" value="{{isset($settingEmail)?$settingEmail->mail_encryption:''}}" class="form-control" id="mail_encryption{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
+                                        <input type="text" name="mail_encryption" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_encryption:''}}" class="form-control" id="mail_encryption{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
                                     </div>                              
                                     <div class="mb-3 col-6">
                                         <label for="mail_from_address" class="form-label">E-mail remetente<span class="text-danger">*</span></label>
-                                        <input type="email" name="mail_from_address" value="{{isset($settingEmail)?$settingEmail->mail_from_address:''}}" class="form-control" id="mail_from_address{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
+                                        <input type="email" name="mail_from_address" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_from_address:''}}" class="form-control" id="mail_from_address{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
                                     </div>                              
                                     <div class="mb-3 col-4">
                                         <label for="mail_from_name" class="form-label">Identificador do e-mail</label>
-                                        <input type="text" name="mail_from_name" value="{{isset($settingEmail)?$settingEmail->mail_from_name:''}}" class="form-control" id="mail_from_name{{isset($settingEmail->id)?$settingEmail->id:''}}">
+                                        <input type="text" name="mail_from_name" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_from_name:''}}" class="form-control" id="mail_from_name{{isset($settingEmail->id)?$settingEmail->id:''}}">
                                     </div>                              
                                 </div>
-                                <div class="d-flex justify-content-end gap-2">
-                                    <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-success waves-effect waves-light">Salvar</button>
-                                </div> 
+                                @if (Auth::user()->hasRole('Super') || 
+                                Auth::user()->can('usuario.tornar usuario master') || 
+                                Auth::user()->can('email.visualizar') && Auth::user()->can('email.configurar smtp'))
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-success waves-effect waves-light">Salvar</button>
+                                    </div> 
+                                @endif
                             </form>
                         </div> <!-- end card-body-->
                     </div> <!-- end card-->
