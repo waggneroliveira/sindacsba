@@ -38,13 +38,13 @@ class SettingEmailController extends Controller
     public function update(Request $request, SettingEmail $settingEmail)
     {
         $data = $request->all();
-
+        // dd($data);
         try {
             DB::beginTransaction();
                 $settingEmail->fill($data)->save();
                 Session::flash('success', 'Configuração atualizada com sucesso!');
-                return redirect()->back();
             DB::commit();
+            return redirect()->back();
         } catch (\Exception $e) {
             DB::rollback();
                 Session::flash('error', 'Erro ao atualizar configuração!');
