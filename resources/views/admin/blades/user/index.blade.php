@@ -74,7 +74,7 @@
                                                 <label><input name="btnSelectAll" type="checkbox"></label>
                                             </th>
                                             <th>{{__('dashboard.users')}}</th>
-                                            <th>Email</th>
+                                            <th>{{__('blades/configEmail.email')}}</th>
                                             <th>{{__('dashboard.created_at')}}</th>
                                             <th>{{__('dashboard.status')}}</th>
                                             <th style="width: 85px;">{{__('dashboard.action')}}</th>
@@ -107,8 +107,8 @@
                                                 </td>
                                                 <td>
                                                     @switch($user->active)
-                                                        @case(0) <span class="badge bg-soft text-danger">Inativo</span> @break
-                                                        @case(1) <span class="badge bg-soft-success text-success">Active</span>@break
+                                                        @case(0) <span class="badge bg-soft text-danger">{{__('dashboard.inactive')}}</span> @break
+                                                        @case(1) <span class="badge bg-soft-success text-success">{{__('dashboard.active')}}</span>@break
                                                     @endswitch                                                    
                                                 </td>
             

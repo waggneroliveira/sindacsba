@@ -57,4 +57,8 @@ return [
     "created_at" => "Creado en",
     "status" => "Estado", 
     "btn_edit" => "Editar",
+    "active" => "Activo",               
+    "inactive" => "Inactivo", 
+    'text_img_size' => "Adicione uma imagem com tamanho máximo de",   
+    'text_img_size' => "Agregue una imagen con un tamaño máximo de",         
 ];

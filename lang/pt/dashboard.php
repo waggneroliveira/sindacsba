@@ -57,4 +57,6 @@ return [
     "action" => "Ação",
     "created_at" => "Criado em",
     "status" => "Status", 
+    "active" => "Ativo", 
+    "inactive" => "inativo", 
 ];

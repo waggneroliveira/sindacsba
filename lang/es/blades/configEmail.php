@@ -9,6 +9,7 @@ return [
     "password_outlook" => "Contraseña del correo electrónico", 
     "host" => "Host",               
     "user" => "Usuario",               
+    "email" => "Correo electrónico",            
     "password" => "Contraseña",       
     "port" => "Puerto",                                                 
     "protocol" => "Protocolo",                        

@@ -57,4 +57,7 @@ return [
     "created_at" => "Created At", 
     "status" => "Status", 
     "btn_edit" => "Edit",
+    "active" => "Active",  
+    "inactive" => "Inactive", 
+    'text_img_size' => "Add an image with a maximum size of",          
 ];
