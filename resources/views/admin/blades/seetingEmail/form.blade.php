@@ -121,7 +121,7 @@
                                     </div>                              
                                     <div class="mb-3 col-5">
                                         <label for="mail_password" class="form-label">Senha<span class="text-danger">*</span></label>
-                                        <input type="password" name="mail_password" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_password:''}}" class="form-control" id="mail_password{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
+                                        <input type="password" name="mail_password" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_password:''}}" class="form-control" id="mail_password{{isset($settingEmail->id)?$settingEmail->id:''}}" {{ !isset($settingEmail) ? 'required' : '' }}>
                                         <div class="row">
                                             <span class="mt-2 text-warning"><i class="mdi mdi-alert"></i> Sua senha não ficará visível por questões de segurança.</span>
                                         </div>

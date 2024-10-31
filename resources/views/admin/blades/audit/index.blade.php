@@ -52,6 +52,7 @@
                                                     @case('deleted') <span>Deleção</span> @break
                                                     @case('order_updated') <span>Mudança na ordenação do item</span> @break
                                                     @case('multiple_deleted') <span>Deleção multipla de itens</span> @break
+                                                    @case('test_conection_smtp') <span>Teste de conexão SMTP</span> @break
                                                 @endswitch
                                             </td>
                                             <td>
@@ -66,6 +67,8 @@
                                                         <span>{{$activitie->updated_at->format('d/m/Y H:i:s')}}</span> @break
                                                     @case('multiple_deleted')
                                                         <span>{{$activitie->updated_at->format('d/m/Y H:i:s')}}</span> @break
+                                                    @case('test_conection_smtp')
+                                                        <span>{{$activitie->created_at->format('d/m/Y H:i:s')}}</span> @break
                                                 @endswitch
                                             </td>
                                             <td>

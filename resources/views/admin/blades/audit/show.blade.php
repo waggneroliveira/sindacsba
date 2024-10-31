@@ -53,8 +53,9 @@
                             @case('created') <span>Criação</span> @break
                             @case('updated') <span>Atualização</span> @break
                             @case('deleted') <span>Deleção</span> @break
-                            @case('Student Synced') <span>Adição/Remoção do Aluno a disciplina</span> @break
-                            @case('Subject Synced') <span>Adição/Remoção da disciplina ao aluno</span> @break
+                            @case('order_updated') <span>Mudança na ordenação do item</span> @break
+                            @case('multiple_deleted') <span>Deleção multipla de itens</span> @break
+                            @case('test_conection_smtp') <span>Teste de conexão SMTP</span> @break
                         @endswitch
                     </div>
                     <div class="mb-2">
@@ -68,10 +69,12 @@
                                 <span>{{$activitie->updated_at->format('d/m/Y H:i:s')}}</span> @break
                             @case('deleted')
                                 <span>{{$activitie->created_at->format('d/m/Y H:i:s')}}</span> @break
-                            @case('Student Synced')
-                                <span>{{$activitie->created_at->format('d/m/Y H:i:s')}}</span> @break
-                            @case('Subject Synced')
-                                <span>{{$activitie->created_at->format('d/m/Y H:i:s')}}</span> @break
+                            @case('order_updated')
+                                <span>{{$activitie->updated_at->format('d/m/Y H:i:s')}}</span> @break
+                            @case('multiple_deleted')
+                                <span>{{$activitie->updated_at->format('d/m/Y H:i:s')}}</span> @break
+                            @case('test_conection_smtp')
+                            <span>{{$activitie->created_at->format('d/m/Y H:i:s')}}</span> @break
                         @endswitch
                     </div>
                     <div class="mb-2">

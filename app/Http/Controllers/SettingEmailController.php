@@ -23,7 +23,7 @@ class SettingEmailController extends Controller
 
         $settingEmail = SettingEmail::first();
         unset($settingEmail->mail_password);
-        
+
         return view('admin.blades.seetingEmail.form', compact('settingEmail'));
     }
 
@@ -49,9 +49,14 @@ class SettingEmailController extends Controller
     public function update(Request $request, SettingEmail $settingEmail)
     {
         $data = $request->all();
-        // dd($data);
+
         try {
             DB::beginTransaction();
+                if ($request->filled('mail_password')) {
+                    $data['mail_password'] = $request->mail_password;
+                } else {
+                    unset($data['mail_password']);
+                }
                 $settingEmail->fill($data)->save();
                 Session::flash('success', 'Configuração atualizada com sucesso!');
             DB::commit();
@@ -73,6 +78,7 @@ class SettingEmailController extends Controller
     public function smtpVerify()
     {
         try {
+            $user = Auth::user();
             $emailSettings = SettingEmail::first();
 
             // Atualizando as configurações do Mail
@@ -89,11 +95,28 @@ class SettingEmailController extends Controller
             ]);
 
             // Enviando o e-mail de teste
-            Mail::raw('Olá, Este e-mail é um teste automático para validar a conexão do seu site com o servidor SMTP. Caso tenha recebido esta mensagem, a conexão foi estabelecida com sucesso. Se não foi você quem solicitou este teste, ignore este e-mail.', function($msg) use ($emailSettings) {
+            $teste = Mail::raw('Olá, Este e-mail é um teste automático para validar a conexão do seu site com o servidor SMTP. Caso tenha recebido esta mensagem, a conexão foi estabelecida com sucesso. Se não foi você quem solicitou este teste, ignore este e-mail.', function($msg) use ($emailSettings) {
                 $msg->to('waggner.dev@gmail.com')
                     ->subject('Teste de conexão SMTP')
                     ->from(isset($emailSettings)?$emailSettings->mail_username:'waggner.447@gmail.com', 'WHI - Web de Alta Inspiração');
             });
+
+            if($teste){
+                activity()
+                ->causedBy($user)
+                ->performedOn($emailSettings)
+                ->event('multiple_deleted')
+                ->withProperties([
+                    'attributes' => [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'active' => $user->active,
+                        'event' => 'test_conection_smtp',
+                    ]
+                ])
+                ->log('test_conection_smtp');
+            }
 
             return Response::json(['status'=> 'success', 'message' => 'Teste de SMTP realizado com sucesso']);
         } catch (Exception $e) {

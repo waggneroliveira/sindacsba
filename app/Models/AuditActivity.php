@@ -11,6 +11,7 @@ class AuditActivity extends Model
 
     public const USERS = 'Usuários';
     public const ROLES = 'Grupos';
+    public const SETTINGEMAIL = 'Configuração SMTP';
 
     public static function getModelName($subjectType)
     {
@@ -20,6 +21,8 @@ class AuditActivity extends Model
                 return self::USERS;           
             case Role::class:
                 return self::ROLES;
+            case SettingEmail::class:
+                return self::SETTINGEMAIL;
             
             default:
                 return 'Desconhecido';

@@ -447,60 +447,62 @@ function marcarComoLida(notificacaoId) {
 }
 
 //Remover todas as notificaç~eos de um vez 
-document.getElementById('clear-all-notifications').addEventListener('click', function() {
-    Swal.fire({
-        title: 'Você tem certeza?',
-        text: "Deseja marcar todas as notificações como lidas?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, marcar como lidas!',
-        cancelButtonText: 'Não, cancelar!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            fetch('/painel/auditorias/mark-all-as-read', {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error('Network response was not ok.');
-            })
-            .then(data => {
-                if (data.status === 'success') {
-                    // Remover a classe de notificação não lida de todas as notificações
-                    const notificationList = document.querySelectorAll('.notify-item'); // Supondo que suas notificações tenham a classe notify-item
-                    notificationList.forEach(notification => {
-                        notification.classList.remove('unread-noti'); // Altere conforme a classe que indica notificação não lida
-                    });
-
-                    // Atualizar o contador de notificações
-                    const badge = document.querySelector('.noti-icon-badge');
-                    badge.innerText = "0"; // Atualiza para zero
-
-                    // Mostrar mensagem de sucesso
-                    Swal.fire(
-                        'Marcou como lidas!',
-                        'Todas as notificações foram marcadas como lidas.',
-                        'success'
-                    );
-
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1500);
-
-                }
-            })
-            .catch(error => console.error('Erro:', error));
-        }
+if (document.getElementById('clear-all-notifications')) {
+    document.getElementById('clear-all-notifications').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Você tem certeza?',
+            text: "Deseja marcar todas as notificações como lidas?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, marcar como lidas!',
+            cancelButtonText: 'Não, cancelar!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch('/painel/auditorias/mark-all-as-read', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Remover a classe de notificação não lida de todas as notificações
+                        const notificationList = document.querySelectorAll('.notify-item'); // Supondo que suas notificações tenham a classe notify-item
+                        notificationList.forEach(notification => {
+                            notification.classList.remove('unread-noti'); // Altere conforme a classe que indica notificação não lida
+                        });
+    
+                        // Atualizar o contador de notificações
+                        const badge = document.querySelector('.noti-icon-badge');
+                        badge.innerText = "0"; // Atualiza para zero
+    
+                        // Mostrar mensagem de sucesso
+                        Swal.fire(
+                            'Marcou como lidas!',
+                            'Todas as notificações foram marcadas como lidas.',
+                            'success'
+                        );
+    
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1500);
+    
+                    }
+                })
+                .catch(error => console.error('Erro:', error));
+            }
+        });
     });
-});
+}
 
 $("#testSmtp").on("click", function (event) {
     event.preventDefault();
