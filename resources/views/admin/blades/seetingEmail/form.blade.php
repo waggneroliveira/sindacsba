@@ -157,7 +157,7 @@
                                 Auth::user()->can('usuario.tornar usuario master') || 
                                 Auth::user()->can('email.visualizar') && Auth::user()->can('email.configurar smtp'))
                                     <div class="d-flex justify-content-end gap-2">
-                                        <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
+                                        <a href="{{route('admin.dashboard')}}" class="btn btn-danger waves-effect waves-light">{{__('dashboard.btn_cancel')}}</a>
                                         <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_save')}}</button>
                                     </div> 
                                 @endif
