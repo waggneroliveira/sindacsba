@@ -22,7 +22,8 @@ class SettingEmailController extends Controller
         }
 
         $settingEmail = SettingEmail::first();
-
+        unset($settingEmail->mail_password);
+        
         return view('admin.blades.seetingEmail.form', compact('settingEmail'));
     }
 

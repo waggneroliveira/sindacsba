@@ -31,7 +31,7 @@
         </script>
 
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{ asset('build/admin/images/logo-hoom.png') }}">
+        <link rel="shortcut icon" href="{{ asset('build/admin/images/whi.png') }}">
 
         <!-- Load da pagina -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -73,14 +73,14 @@
                 <div class="logo-box">
                     <!-- Brand Logo Light -->
                     <a href="{{route('admin.dashboard')}}" class="logo-light">
-                        <img src="{{asset('build/admin/images/logo-light.png')}}" alt="logo" class="logo-lg">
-                        <img src="{{asset('build/admin/images/logo-sm.png')}}" alt="small logo" class="logo-sm">
+                        <img src="{{asset('build/admin/images/whi.png')}}" alt="logo" class="logo-lg">
+                        <img src="{{asset('build/admin/images/whi.png')}}" alt="small logo" class="logo-sm">
                     </a>
 
                     <!-- Brand Logo Dark -->
                     <a href="{{route('admin.dashboard')}}" class="logo-dark">
-                        <img src="{{asset('build/admin/images/logo-dark.png')}}" alt="dark logo" class="logo-lg">
-                        <img src="{{asset('build/admin/images/logo-sm.png')}}" alt="small logo" class="logo-sm">
+                        <img src="{{asset('build/admin/images/whi.png')}}" alt="dark logo" class="logo-lg">
+                        <img src="{{asset('build/admin/images/whi.png')}}" alt="small logo" class="logo-sm">
                     </a>
                 </div>
 
@@ -157,14 +157,14 @@
                             <div class="logo-box">
                                 <!-- Brand Logo Light -->
                                 <a href="{{route('admin.dashboard')}}" class="logo-light">
-                                    <img src="{{asset('build/admin/images/logo-light.png')}}" alt="logo" class="logo-lg">
-                                    <img src="{{asset('build/admin/images/logo-sm.png')}}" alt="small logo" class="logo-sm">
+                                    <img src="{{asset('build/admin/images/whi.png')}}" alt="logo" class="logo-lg">
+                                    <img src="{{asset('build/admin/images/whi.png')}}" alt="small logo" class="logo-sm">
                                 </a>
 
                                 <!-- Brand Logo Dark -->
                                 <a href="{{route('admin.dashboard')}}" class="logo-dark">
-                                    <img src="{{asset('build/admin/images/logo-dark.png')}}" alt="dark logo" class="logo-lg">
-                                    <img src="{{asset('build/admin/images/logo-sm.png')}}" alt="small logo" class="logo-sm">
+                                    <img src="{{asset('build/admin/images/whi.png')}}" alt="dark logo" class="logo-lg">
+                                    <img src="{{asset('build/admin/images/whi.png')}}" alt="small logo" class="logo-sm">
                                 </a>
                             </div>
 

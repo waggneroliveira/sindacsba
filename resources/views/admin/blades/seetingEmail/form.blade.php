@@ -100,37 +100,39 @@
                                     <div class="mb-3 col-6">
                                         <label for="mail_mailer" class="form-label">Mail Mailer <span class="text-danger">*</span></label>
                                         <input type="text" name="mail_mailer" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }}  class="form-control" id="mail_mailer{{isset($settingEmail->id)?$settingEmail->id:''}}" value="{{isset($settingEmail)?$settingEmail->mail_mailer:''}}" required>
-                                    </div>
-                                    
+                                    </div>                                    
                                     <div class="mb-3 col-6">
                                         <label for="mail_port" class="form-label">Porta<span class="text-danger">*</span></label>
                                         <input type="text" name="mail_port" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_port:''}}" class="form-control" id="mail_port{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
                                     </div>
-                                    <div class="mb-3 col-12">
+                                    <div class="mb-3 col-2">
+                                        <label for="mail_encryption" class="form-label">Criptografia<span class="text-danger">*</span></label>
+                                        <input type="text" name="mail_encryption" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_encryption:''}}" class="form-control" id="mail_encryption{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
+                                    </div>   
+                                    <div class="mb-3 col-10">
                                         <label for="mail_host" class="form-label">Host<span class="text-danger">*</span></label>
                                         <input type="text" name="mail_host" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_host:''}}" class="form-control" id="mail_host{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
                                     </div>                                    
                                 </div>
                                 <div class="row">
-                                    <div class="mb-3 col-8">
-                                        <label for="mail_username" class="form-label">E-mail<span class="text-danger">*</span></label>
+                                    <div class="mb-3 col-7">
+                                        <label for="mail_username" class="form-label">Usuário<span class="text-danger">*</span></label>
                                         <input type="email" name="mail_username" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_username:''}}" class="form-control" id="mail_username{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
                                     </div>                              
-                                    <div class="mb-3 col-4">
+                                    <div class="mb-3 col-5">
                                         <label for="mail_password" class="form-label">Senha<span class="text-danger">*</span></label>
                                         <input type="password" name="mail_password" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_password:''}}" class="form-control" id="mail_password{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
+                                        <div class="row">
+                                            <span class="mt-2 text-warning"><i class="mdi mdi-alert"></i> Sua senha não ficará visível por questões de segurança.</span>
+                                        </div>
                                     </div>                              
                                 </div>
-                                <div class="row">
-                                    <div class="mb-3 col-2">
-                                        <label for="mail_encryption" class="form-label">Criptografia<span class="text-danger">*</span></label>
-                                        <input type="text" name="mail_encryption" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_encryption:''}}" class="form-control" id="mail_encryption{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
-                                    </div>                              
+                                <div class="row">                           
                                     <div class="mb-3 col-6">
                                         <label for="mail_from_address" class="form-label">E-mail remetente<span class="text-danger">*</span></label>
                                         <input type="email" name="mail_from_address" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_from_address:''}}" class="form-control" id="mail_from_address{{isset($settingEmail->id)?$settingEmail->id:''}}" required>
                                     </div>                              
-                                    <div class="mb-3 col-4">
+                                    <div class="mb-3 col-6">
                                         <label for="mail_from_name" class="form-label">Identificador do e-mail</label>
                                         <input type="text" name="mail_from_name" {{ (Auth::user()->can('email.visualizar') && !Auth::user()->can('email.configurar smtp')) ? 'readonly' : '' }} value="{{isset($settingEmail)?$settingEmail->mail_from_name:''}}" class="form-control" id="mail_from_name{{isset($settingEmail->id)?$settingEmail->id:''}}">
                                     </div>                              
