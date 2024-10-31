@@ -15,11 +15,11 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Grupos</li>
+                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('dashboard.title_dashboard')}}</a></li>
+                                <li class="breadcrumb-item active">{{__('dashboard.group_and_permission')}}</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Grupos</h4>
+                        <h4 class="page-title">{{__('dashboard.group_and_permission')}}</h4>
                     </div>
                 </div>
             </div>     
@@ -38,14 +38,14 @@
                                     </div>
                                     <div class="col-6 d-flex justify-content-end">
                                         @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['grupo.visualizar', 'grupo.criar']))                                                        
-                                            <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#group-create"><i class="mdi mdi-plus-circle me-1"></i> Adicionar novo grupo</button>
+                                            <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#group-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}} </button>
                                         @endif
                                         <!-- Modal -->
                                         <div class="modal fade" id="group-create" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" style="max-width: 760px">
                                                 <div class="modal-content">
                                                     <div class="modal-header bg-light">
-                                                        <h4 class="modal-title" id="myCenterModalLabel">Adicionar novo grupo</h4>
+                                                        <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.btn_create')}} </h4>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                     </div>
                                                     <div class="modal-body p-4">
@@ -68,9 +68,9 @@
                                             <th class="bs-checkbox">
                                                 <label><input name="btnSelectAll" type="checkbox"></label>
                                             </th>
-                                            <th>Nome do grupo</th>
-                                            <th>Criado em</th>
-                                            <th style="width: 85px;">Ação</th>
+                                            <th>{{__('blades/group.name_of_group')}}</th>
+                                            <th>{{__('dashboard.created_at')}}</th>
+                                            <th style="width: 85px;">{{__('dashboard.action')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody data-route="">
@@ -83,8 +83,17 @@
                                                    {{$group->name}}
                                                 </td>
                                                 <td>
+                                                    @php
+                                                        $locales = [
+                                                            'pt' => 'd/m/Y H:i:s',
+                                                            'en' => 'Y-m-d H:i A',          
+                                                            'es' => 'Y-m-d H:i A',          
+
+                                                        ];
+                                                        $locale = session()->get('locale');
+                                                    @endphp
                                                     @if ($group && $group->created_at)
-                                                        {{$group->created_at->format('d/m/Y')}}
+                                                        {{$group->created_at->format($locales[$locale])}}
                                                         @else
                                                         -
                                                     @endif

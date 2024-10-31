@@ -10,12 +10,12 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard.user.index')}}">Usuários</a></li>
-                                <li class="breadcrumb-item active">Meu perfil</li>
+                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('dashboard.title_dashboard')}}</a></li>
+                                <li class="breadcrumb-item active"><a href="{{route('admin.dashboard.user.index')}}">{{__('dashboard.users')}}</a></li>
+                                <li class="breadcrumb-item active">{{__('dashboard.profile')}}</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Editar Usuário</h4>
+                        <h4 class="page-title">{{__('dashboard.btn_edit')}}</h4>
                     </div>
                 </div>
             </div>     
@@ -62,8 +62,8 @@
                             </div>                           
 
                             <div class="d-flex justify-content-end gap-2">
-                                <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-success waves-effect waves-light">Atualizar</button>
+                                <a href="{{route('admin.dashboard.user.index')}}" class="btn btn-danger waves-effect waves-light">{{__('dashboard.btn_cancel')}}</a>
+                                <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
                             </div>
                         </form>
                     </div>

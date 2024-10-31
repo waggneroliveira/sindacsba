@@ -15,11 +15,11 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Usuários</li>
+                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('dashboard.title_dashboard')}}</a></li>
+                                <li class="breadcrumb-item active">{{__('dashboard.users')}}</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Usuários</h4>
+                        <h4 class="page-title">{{__('dashboard.users')}}</h4>
                     </div>
                 </div>
             </div>     
@@ -33,18 +33,18 @@
                                 <div class="col-12 d-flex justify-between">
                                     <div class="col-6">
                                         @if(Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['usuario.visualizar', 'usuario.remover']))
-                                            <button id="btSubmitDelete" data-route="{{route('admin.dashboard.user.destroySelected')}}" type="button" class="btSubmitDelete btn btn-danger" style="display: none;">Deletar selecionados</button>
+                                            <button id="btSubmitDelete" data-route="{{route('admin.dashboard.user.destroySelected')}}" type="button" class="btSubmitDelete btn btn-danger" style="display: none;">{{__('dashboard.btn_delete_all')}}</button>
                                         @endif
                                     </div>
                                     <div class="col-6 d-flex justify-content-end">
                                         @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['usuario.visualizar', 'usuario.criar']))
-                                            <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#user-create"><i class="mdi mdi-plus-circle me-1"></i> Adicionar novo usuário</button>
+                                            <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#user-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="user-create" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header bg-light">
-                                                            <h4 class="modal-title" id="myCenterModalLabel">Adicionar novo usuário</h4>
+                                                            <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.btn_create')}}</h4>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                         </div>
                                                         <div class="modal-body p-4">
@@ -52,8 +52,8 @@
                                                                 @csrf
                                                                 @include('admin.blades.user.form')  
                                                                 <div class="d-flex justify-content-end gap-2">
-                                                                    <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cancelar</button>
-                                                                    <button type="submit" class="btn btn-success waves-effect waves-light">Cadastrar</button>
+                                                                    <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
+                                                                    <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
                                                                 </div>                                                 
                                                             </form>
                                                         </div>
@@ -73,11 +73,11 @@
                                             <th class="bs-checkbox">
                                                 <label><input name="btnSelectAll" type="checkbox"></label>
                                             </th>
-                                            <th>Usuário</th>
+                                            <th>{{__('dashboard.users')}}</th>
                                             <th>Email</th>
-                                            <th>Criado em</th>
-                                            <th>Status</th>
-                                            <th style="width: 85px;">Ação</th>
+                                            <th>{{__('dashboard.created_at')}}</th>
+                                            <th>{{__('dashboard.status')}}</th>
+                                            <th style="width: 85px;">{{__('dashboard.action')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody data-route="{{route('admin.dashboard.user.sorting')}}">
@@ -119,7 +119,7 @@
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header bg-light">
-                                                                        <h4 class="modal-title" id="myCenterModalLabel">Grupos de permissões</h4>
+                                                                        <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.group_and_permission')}}</h4>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                                     </div>
                                                                     <div class="modal-body p-4">
@@ -140,7 +140,7 @@
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header bg-light">
-                                                                        <h4 class="modal-title" id="myCenterModalLabel">Editar usuário</h4>
+                                                                        <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.btn_edit')}}</h4>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                                     </div>
                                                                     <div class="modal-body p-4">
@@ -149,8 +149,8 @@
                                                                             @method('PUT')
                                                                             @include('admin.blades.user.form')   
                                                                             <div class="d-flex justify-content-end gap-2">
-                                                                                <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cancelar</button>
-                                                                                <button type="submit" class="btn btn-success waves-effect waves-light">Atualizar</button>
+                                                                                <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
+                                                                                <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_save')}}</button>
                                                                             </div>                                                                                                                      
                                                                         </form>                                                                    
                                                                     </div>

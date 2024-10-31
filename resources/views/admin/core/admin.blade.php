@@ -97,7 +97,7 @@
                             <li class="menu-item">
                                 <a href="{{route('admin.dashboard.audit.index')}}" class="menu-link">
                                     <span class="menu-icon"><i class="mdi mdi-clipboard-text"></i></span>
-                                    <span class="menu-text"> Auditoria </span>
+                                    <span class="menu-text"> {{__('dashboard.audit')}} </span>
                                 </a>
                             </li>
                         @endif
@@ -107,7 +107,7 @@
                             <li class="menu-item">
                                 <a href="{{route('admin.dashboard.settingEmail.index')}}" class="menu-link">
                                     <span class="menu-icon"><i class="mdi mdi-email"></i></span>
-                                    <span class="menu-text"> Configuração SMTP </span>
+                                    <span class="menu-text"> {{__('dashboard.setting_smtp')}} </span>
                                 </a>
                             </li>
                         @endif
@@ -117,7 +117,7 @@
                             <li class="menu-item">
                                 <a href="{{route('admin.dashboard.group.index')}}" class="menu-link">
                                     <span class="menu-icon"><i class="mdi mdi-account-group"></i></span>
-                                    <span class="menu-text"> Grupos de permissões</span>
+                                    <span class="menu-text"> {{__('dashboard.group_and_permission')}}</span>
                                 </a>
                             </li>
                         @endif
@@ -127,7 +127,7 @@
                             <li class="menu-item">
                                 <a href="{{route('admin.dashboard.user.index')}}" class="menu-link">
                                     <span class="menu-icon"><i class="mdi mdi-account-multiple"></i></span>
-                                    <span class="menu-text"> Usuário </span>
+                                    <span class="menu-text"> {{__('dashboard.users')}} </span>
                                 </a>
                             </li>
                         @endif
@@ -172,152 +172,6 @@
                             <button class="button-toggle-menu">
                                 <i class="mdi mdi-menu"></i>
                             </button>
-
-                            <!-- Dropdown Menu -->
-                            <div class="dropdown d-none d-xl-block">
-                                <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                    Create New
-                                    <i class="mdi mdi-chevron-down ms-1"></i>
-                                </a>
-                                <div class="dropdown-menu">
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <i class="fe-briefcase me-1"></i>
-                                        <span>New Projects</span>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <i class="fe-user me-1"></i>
-                                        <span>Create Users</span>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <i class="fe-bar-chart-line- me-1"></i>
-                                        <span>Revenue Report</span>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <i class="fe-settings me-1"></i>
-                                        <span>Settings</span>
-                                    </a>
-
-                                    <div class="dropdown-divider"></div>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <i class="fe-headphones me-1"></i>
-                                        <span>Help & Support</span>
-                                    </a>
-
-                                </div>
-                            </div>
-
-                            <!-- Mega Menu Dropdown -->
-                            <div class="dropdown dropdown-mega d-none d-xl-block">
-                                <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                    Mega Menu
-                                    <i class="mdi mdi-chevron-down  ms-1"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-megamenu">
-                                    <div class="row">
-                                        <div class="col-sm-8">
-
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <h5 class="text-dark mt-0">UI Components</h5>
-                                                    <ul class="list-unstyled megamenu-list">
-                                                        <li>
-                                                            <a href="widgets.html">Widgets</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="extended-nestable.html">Nestable List</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0);">Range Sliders</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="pages-gallery.html">Masonry Items</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="extended-sweet-alert.html">Sweet Alerts</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0);">Treeview Page</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="extended-tour.html">Tour Page</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <h5 class="text-dark mt-0">Applications</h5>
-                                                    <ul class="list-unstyled megamenu-list">
-                                                        <li>
-                                                            <a href="ecommerce-products.html">eCommerce Pages</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="crm-dashboard.html">CRM Pages</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="email-inbox.html">Email</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="apps-calendar.html">Calendar</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="contacts-list.html">Team Contacts</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="task-kanban-board.html">Task Board</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="email-templates.html">Email Templates</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <h5 class="text-dark mt-0">Extra Pages</h5>
-                                                    <ul class="list-unstyled megamenu-list">
-                                                        <li>
-                                                            <a href="javascript:void(0);">Left Sidebar with User</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0);">Menu Collapsed</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0);">Small Left Sidebar</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0);">New Header Style</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="pages-search-results.html">Search Result</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="pages-gallery.html">Gallery Pages</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="pages-coming-soon.html">Maintenance & Coming Soon</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="text-center mt-3">
-                                                <h3 class="text-dark">Special Discount Sale!</h3>
-                                                <h4>Save up to 70% off.</h4>
-                                                <a href="https://1.envato.market/uboldadmin" target="_blank" class="btn btn-primary rounded-pill mt-3">Download Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                         <ul class="topbar-menu d-flex align-items-center">
@@ -400,34 +254,38 @@
                                     </form>
                                 </div>
                             </li>
-
+                            {{-- {{dd(session()->get('locale')== 'es')}} --}}
                             <!-- Language flag dropdown  -->
                             <li class="dropdown d-none d-md-inline-block">
                                 <a class="nav-link dropdown-toggle waves-effect waves-light arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                    <img src="{{asset('build/admin/images/flags/us.jpg')}}" alt="user-image" class="me-0 me-sm-1" height="18">
+                                    @php
+                                        $locales = [
+                                            'pt' => 'br.jpg',
+                                            'en' => 'us.jpg',
+                                            'es' => 'spain.jpg'
+                                        ];
+                                        $locale = session()->get('locale');
+                                    @endphp
+
+                                    @if (array_key_exists($locale, $locales))
+                                        <img src="{{ asset('build/admin/images/flags/' . $locales[$locale]) }}" alt="user-image" class="me-0 me-sm-1" height="18">
+                                    @endif
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated">
-
                                     <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <img src="{{asset('build/admin/images/flags/germany.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-midle">German</span>
+                                    <a href="{{ route('change.language', 'pt') }}" class="dropdown-item">
+                                        <img src="{{asset('build/admin/images/flags/br.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-midle">BR</span>
                                     </a>
 
                                     <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <img src="{{asset('build/admin/images/flags/italy.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-midle">Italian</span>
+                                    <a href="{{ route('change.language', 'en') }}" class="dropdown-item">
+                                        <img src="{{asset('build/admin/images/flags/us.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-midle">EN</span>
                                     </a>
 
                                     <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <img src="{{asset('build/admin/images/flags/spain.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-midle">Spanish</span>
+                                    <a href="{{ route('change.language', 'es') }}" class="dropdown-item">
+                                        <img src="{{asset('build/admin/images/flags/spain.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-midle">ES</span>
                                     </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <img src="{{asset('build/admin/images/flags/russia.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-midle">Russian</span>
-                                    </a>
-
                                 </div>
                             </li>
                             @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can('notificacao.visualizar'))
@@ -445,11 +303,11 @@
                                         <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
                                             <div class="row align-items-center">
                                                 <div class="col">
-                                                    <h6 class="m-0 font-16 fw-semibold"> Notificações</h6>
+                                                    <h6 class="m-0 font-16 fw-semibold"> {{__('dashboard.notification')}}</h6>
                                                 </div>
                                                 <div class="col-auto">
                                                     <a href="javascript: void(0);" class="text-dark text-decoration-underline" id="clear-all-notifications">
-                                                        <small>Limpar todas</small>
+                                                        <small>{{__('dashboard.all_clear')}}</small>
                                                     </a>
                                                 </div>                                                                                       
                                             </div>
@@ -458,7 +316,7 @@
                                         <div class="px-1" style="max-height: 300px;" data-simplebar>
                                             @if (Auth::user()->hasRole('Super') || Auth::user()->can('notificacao.notificacao de auditoria'))
                                                 @if (isset($auditorias) && $auditorias->count() > 0)
-                                                    <h5 class="text-muted font-13 fw-normal mt-2">Hoje</h5>
+                                                    <h5 class="text-muted font-13 fw-normal mt-2">{{__('dashboard.day_notification')}}</h5>
                                                     <!-- item-->
                                                     @foreach ($auditorias as $auditoria)
                                                         <div id="notificacao-{{ $auditoria->id }}" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-1">
@@ -526,21 +384,21 @@
                                 <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
                                     <!-- item-->
                                     <div class="dropdown-header noti-title">
-                                        <h6 class="text-overflow m-0">Bem vindo!</h6>
+                                        <h6 class="text-overflow m-0">{{__('dashboard.welcome')}}!</h6>
                                     </div>                            
                                     
                                     @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['usuario.visualizar', 'usuario.editar']))
                                         <!-- item-->
                                         <a href="{{route('admin.dashboard.user.edit', ['user' => $user->id])}}" class="dropdown-item notify-item">
                                             <i class="fe-user"></i>
-                                            <span>Meu perfil</span>
+                                            <span>{{__('dashboard.profile')}}</span>
                                         </a>                                    
                                     @endif
 
                                     <!-- item-->
                                     <a href="#theme-settings-offcanvas" class="dropdown-item notify-item"  data-bs-toggle="offcanvas" >
                                         <i class="fe-settings"></i>
-                                        <span>Configuração</span>
+                                        <span>{{__('dashboard.setting')}}</span>
                                     </a>
 
                                     <div class="dropdown-divider"></div>
@@ -548,7 +406,7 @@
                                     <!-- item-->
                                     <a href="{{route('admin.dashboard.user.logout')}}" class="dropdown-item notify-item">
                                         <i class="fe-log-out"></i>
-                                        <span>Sair</span>
+                                        <span>{{__('dashboard.logout')}}</span>
                                     </a>
 
                                 </div>
@@ -630,15 +488,15 @@
 
                             <div class="mt-n3">
                                 <h6 class="fw-medium py-2 px-3 font-13 text-uppercase bg-light mx-n3 mt-n3 mb-3">
-                                    <span class="d-block py-1">configuração do Tema</span>
+                                    <span class="d-block py-1">{{__('dashboard.setting_theme')}}</span>
                                 </h6>
                             </div>
 
                             <div class="alert alert-warning" role="alert">
-                                <strong>Personalize </strong> o esquema geral de cores, o menu da barra lateral, etc.
+                               <strong>{{__('dashboard.text_title_description_theme')}}</strong> {{__('dashboard.text_description_theme')}}
                             </div>
 
-                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Esquema de cores</h5>
+                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">{{__('dashboard.color_scheme')}}</h5>
 
                             <div class="colorscheme-cardradio">
                                 <div class="d-flex flex-column gap-2">
@@ -646,89 +504,89 @@
                                         <input class="form-check-input" type="radio" name="data-bs-theme" 
                                             {{ isset($settingTheme) && $settingTheme->data_bs_theme == 'light' ? 'checked' : '' }}
                                             id="layout-color-light" value="light">
-                                        <label class="form-check-label" for="layout-color-light">Claro</label>
+                                        <label class="form-check-label" for="layout-color-light">{{__('dashboard.color_light')}}</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-bs-theme" 
                                             {{ isset($settingTheme) && $settingTheme->data_bs_theme == 'dark' ? 'checked' : '' }}
                                             id="layout-color-dark" value="dark">
-                                        <label class="form-check-label" for="layout-color-dark">Escuro</label>
+                                        <label class="form-check-label" for="layout-color-dark">{{__('dashboard.color_dark')}}</label>
                                     </div>
                                 </div>
                             </div>
 
-                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Largura do conteúdo</h5>
+                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">{{__('dashboard.content_width')}}</h5>
                             <div class="d-flex flex-column gap-2">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="radio" name="data-layout-width" {{isset($settingTheme) && $settingTheme->data_layout_width=='default'?'checked':''}} id="layout-width-default" value="default">
-                                    <label class="form-check-label" for="layout-width-default">Fluido (Padrão)</label>
+                                    <label class="form-check-label" for="layout-width-default">{{__('dashboard.content_width_default')}}</label>
                                 </div>
 
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="radio" name="data-layout-width" {{isset($settingTheme) && $settingTheme->data_layout_width=='boxed'?'checked':''}} id="layout-width-boxed" value="boxed">
-                                    <label class="form-check-label" for="layout-width-boxed">Encaixotado</label>
+                                    <label class="form-check-label" for="layout-width-boxed">{{__('dashboard.content_width_boxed')}}</label>
                                 </div>
                             </div>
 
                             <div id="layout-mode">
-                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Modo de layout</h5>
+                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">{{__('dashboard.layout_mode')}}</h5>
 
                                 <div class="d-flex flex-column gap-2">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-layout-mode" {{isset($settingTheme) && $settingTheme->data_layout_mode=='default'?'checked':''}} id="layout-mode-default" value="default">
-                                        <label class="form-check-label" for="layout-mode-default">Padrão</label>
+                                        <label class="form-check-label" for="layout-mode-default">{{__('dashboard.layout_mode_default')}}</label>
                                     </div>
 
 
                                     <div id="layout-detached">
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="radio" name="data-layout-mode" {{isset($settingTheme) && $settingTheme->data_layout_mode=='detached'?'checked':''}} id="layout-mode-detached" value="detached">
-                                            <label class="form-check-label" for="layout-mode-detached">Desanexado</label>
+                                            <label class="form-check-label" for="layout-mode-detached">{{__('dashboard.layout_mode_detached')}}</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Cor da barra superior</h5>
+                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">{{__('dashboard.topbar_color')}}</h5>
 
                             <div class="d-flex flex-column gap-2">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="radio" name="data-topbar-color" {{isset($settingTheme) && $settingTheme->data_topbar_color=='light'?'checked':''}} id="topbar-color-light" value="light">
-                                    <label class="form-check-label" for="topbar-color-light">Claro</label>
+                                    <label class="form-check-label" for="topbar-color-light">{{__('dashboard.topbar_color_light')}}</label>
                                 </div>
 
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="radio" name="data-topbar-color" {{isset($settingTheme) && $settingTheme->data_topbar_color=='dark'?'checked':''}} id="topbar-color-dark" value="dark">
-                                    <label class="form-check-label" for="topbar-color-dark">Escuro</label>
+                                    <label class="form-check-label" for="topbar-color-dark">{{__('dashboard.topbar_color_dark')}}</label>
                                 </div>
 
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="radio" name="data-topbar-color" {{isset($settingTheme) && $settingTheme->data_topbar_color=='brand'?'checked':''}} id="topbar-color-brand" value="brand">
-                                    <label class="form-check-label" for="topbar-color-brand">Brand</label>
+                                    <label class="form-check-label" for="topbar-color-brand">{{__('dashboard.topbar_color_brand')}}</label>
                                 </div>
                             </div>
 
                             <div>
-                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Cor do Menu</h5>
+                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">{{__('dashboard.menu_color')}}</h5>
 
                                 <div class="d-flex flex-column gap-2">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='light'?'checked':''}} id="leftbar-color-light" value="light">
-                                        <label class="form-check-label" for="leftbar-color-light">Claro</label>
+                                        <label class="form-check-label" for="leftbar-color-light">{{__('dashboard.menu_color_light')}}</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='dark'?'checked':''}} id="leftbar-color-dark" value="dark">
-                                        <label class="form-check-label" for="leftbar-color-dark">Escuro</label>
+                                        <label class="form-check-label" for="leftbar-color-dark">{{__('dashboard.menu_color_dark')}}</label>
                                     </div>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='brand'?'checked':''}} id="leftbar-color-brand" value="brand">
-                                        <label class="form-check-label" for="leftbar-color-brand">Brand</label>
+                                        <label class="form-check-label" for="leftbar-color-brand">{{__('dashboard.menu_color_brand')}}</label>
                                     </div>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-menu-color" {{isset($settingTheme) && $settingTheme->data_menu_color=='gradient'?'checked':''}} id="leftbar-color-gradient" value="gradient">
-                                        <label class="form-check-label" for="leftbar-color-gradient">Gradiente</label>
+                                        <label class="form-check-label" for="leftbar-color-gradient">{{__('dashboard.menu_color_gradient')}}</label>
                                     </div>
                                 </div>
                             </div>
@@ -758,48 +616,48 @@
                             </div>
 
                             <div>
-                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Tom do ícone do menu</h5>
+                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">{{__('dashboard.menu_icon_tone')}}</h5>
 
                                 <div class="d-flex flex-column gap-2">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-menu-icon" {{isset($settingTheme) && $settingTheme->data_menu_icon=='default'?'checked':''}} id="menu-icon-default" value="default">
-                                        <label class="form-check-label" for="menu-icon-default">Padrão</label>
+                                        <label class="form-check-label" for="menu-icon-default">{{__('dashboard.menu_icon_default')}}</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-menu-icon" {{isset($settingTheme) && $settingTheme->data_menu_icon=='twotones'?'checked':''}} id="menu-icon-twotone" value="twotones">
-                                        <label class="form-check-label" for="menu-icon-twotone">Dois tons</label>
+                                        <label class="form-check-label" for="menu-icon-twotone">{{__('dashboard.menu_icon_twotone')}}</label>
                                     </div>
                                 </div>
                             </div>
 
                             <div id="sidebar-size">
-                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Tamanho da barra lateral</h5>
+                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">{{__('dashboard.sidebar_size')}}</h5>
 
                                 <div class="d-flex flex-column gap-2">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='default'?'checked':''}} id="leftbar-size-default" value="default">
-                                        <label class="form-check-label" for="leftbar-size-default">Padrão</label>
+                                        <label class="form-check-label" for="leftbar-size-default">{{__('dashboard.sidebar_size_default')}}</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='compact'?'checked':''}} id="leftbar-size-compact" value="compact">
-                                        <label class="form-check-label" for="leftbar-size-compact">Compacto (largura média)</label>
+                                        <label class="form-check-label" for="leftbar-size-compact">{{__('dashboard.sidebar_size_compact')}}</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='condensed'?'checked':''}} id="leftbar-size-small" value="condensed">
-                                        <label class="form-check-label" for="leftbar-size-small">Condensado (Visualização de Ícone)</label>
+                                        <label class="form-check-label" for="leftbar-size-small">{{__('dashboard.sidebar_size_condensed')}}</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='full'?'checked':''}} id="leftbar-size-full" value="full">
-                                        <label class="form-check-label" for="leftbar-size-full">Layout completo</label>
+                                        <label class="form-check-label" for="leftbar-size-full">{{__('dashboard.sidebar_size_full_layout')}}</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="radio" name="data-sidenav-size" {{isset($settingTheme) && $settingTheme->data_sidenav_size=='fullscreen'?'checked':''}} id="leftbar-size-fullscreen" value="fullscreen">
-                                        <label class="form-check-label" for="leftbar-size-fullscreen">Layout de tela cheia</label>
+                                        <label class="form-check-label" for="leftbar-size-fullscreen">{{__('dashboard.sidebar_size_full_screen')}}</label>
                                     </div>
                                 </div>
                             </div>

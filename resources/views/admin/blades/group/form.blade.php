@@ -1,10 +1,10 @@
 <div class="mb-3">
-    <label for="name" class="form-label">Nome</label>
+    <label for="name" class="form-label">{{__('blades/group.name_of_group')}}</label>
     <input type="text" name="name" required class="form-control" id="name{{isset($group->id)?$group->id:''}}" value="{{isset($group)?$group->name:''}}" placeholder="Digite o nome do grupo">
 </div>
 <div class="text-end">
-    <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cancelar</button>
-    <button type="submit" class="btn btn-success waves-effect waves-light">Salvar</button>
+    <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
+    <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_save')}}</button>
 </div>
 @if ($permissions->count())
     <div class="row mt-3">

@@ -15,17 +15,17 @@ class AuditActivity extends Model
 
     public static function getModelName($subjectType)
     {
-        switch ($subjectType) {
-            
+        switch ($subjectType) { 
+           
             case User::class:
-                return self::USERS;           
-            case Role::class:
-                return self::ROLES;
+                return __('blades/audit.users');
+                case Role::class:
+                    return self::ROLES;
             case SettingEmail::class:
-                return self::SETTINGEMAIL;
-            
+                return __('blades/audit.setting_email');
             default:
-                return 'Desconhecido';
+                return __('blades/audit.system');
+
         }
     }
 }

@@ -14,14 +14,14 @@
                         <div class="page-title-box">
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('dashboard.title_dashboard')}}</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard.audit.index')}}">Auditoria</a>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard.audit.index')}}">{{__('blades/audit.title_audit')}}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Visualizar Evento Auditoria</li>
+                                    <li class="breadcrumb-item active">{{__('blades/audit.view_audit')}}</li>
                                 </ol>
                             </div>
-                            <h4 class="page-title">Visualizar Evento Auditoria</h4>
+                            <h4 class="page-title">{{__('blades/audit.view_audit')}}</h4>
                         </div>
                     </div>
                 </div>
@@ -30,56 +30,93 @@
                 <div class="card card-body">
                     <div class="mb-2 col-lg-6">
                         <div>
-                            <h5>Usuário manipulador</h5>
+                            <h5>{{__('blades/audit.manipulative_user')}}</h5>
                         </div>
                         @if($activitie->causer)
                             <!-- Verifica se há um usuário associado (causer) -->
                             <td>{{ $activitie->causer->name }}</td>
                         @else
-                            <td>Não encontrado</td>
+                            @php
+                                $locales = [
+                                    'pt' => 'Sistema',
+                                    'en' => 'System',          
+                                    'es' => 'Sistema',          
+
+                                ];
+                                $locale = session()->get('locale');
+                            @endphp
+                            <td>{{$locales[$locale]}}</td>
                         @endif
                     </div>
                     <div class="mb-2 col-lg-6">
                         <div>
-                            <h5>Recurso manipulado</h5>
+                            <h5>{{__('blades/audit.manipulated_resource')}}</h5>
                         </div>
                         {{$modelName = AuditActivity::getModelName($activitie->subject_type)}}
                     </div>
                     <div class="mb-2">
                         <div>
-                            <h5>Ação realizada</h5>
+                            <h5>{{__('blades/audit.action_taken')}}</h5>
                         </div>
                         @switch($activitie->description)
-                            @case('created') <span>Criação</span> @break
-                            @case('updated') <span>Atualização</span> @break
-                            @case('deleted') <span>Deleção</span> @break
-                            @case('order_updated') <span>Mudança na ordenação do item</span> @break
-                            @case('multiple_deleted') <span>Deleção multipla de itens</span> @break
-                            @case('test_conection_smtp') <span>Teste de conexão SMTP</span> @break
+                            @case('created') <span>{{__('blades/audit.action_audit_create')}}</span> @break
+                            @case('updated') <span>{{__('blades/audit.action_audit_update')}}</span> @break
+                            @case('deleted') <span>{{__('blades/audit.action_audit_delete')}}</span> @break
+                            @case('order_updated') <span>{{__('blades/audit.action_audit_order_updated')}}</span> @break
+                            @case('multiple_deleted') <span>{{__('blades/audit.action_audit_multiple_deleted')}}</span> @break
+                            @case('test_conection_smtp') <span>{{__('blades/audit.action_audit_test_conection_smtp')}}</span> @break
                         @endswitch
                     </div>
                     <div class="mb-2">
                         <div>
-                            <h5>Data do evento</h5>
+                            <h5>{{__('blades/audit.date_event')}}</h5>
                         </div>
+                        @php
+                            $locales = [
+                                'pt' => 'd/m/Y H:i:s',
+                                'en' => 'Y-m-d H:i A',          
+                                'es' => 'Y-m-d H:i A',          
+
+                            ];
+                            $locale = session()->get('locale');
+                        @endphp
+                        
                         @switch($activitie->description)
                             @case('created')
-                                <span>{{$activitie->created_at->format('d/m/Y H:i:s')}}</span> @break
+                                @if (array_key_exists($locale, $locales))
+                                    <span>{{$activitie->created_at->format($locales[$locale])}}</span>
+                                @endif 
+                            @break
                             @case('updated')
-                                <span>{{$activitie->updated_at->format('d/m/Y H:i:s')}}</span> @break
+                                @if (array_key_exists($locale, $locales))
+                                    <span>{{$activitie->created_at->format($locales[$locale])}}</span>
+                                @endif 
+                            @break
                             @case('deleted')
-                                <span>{{$activitie->created_at->format('d/m/Y H:i:s')}}</span> @break
+                                @if (array_key_exists($locale, $locales))
+                                    <span>{{$activitie->created_at->format($locales[$locale])}}</span>
+                                @endif 
+                            @break
                             @case('order_updated')
-                                <span>{{$activitie->updated_at->format('d/m/Y H:i:s')}}</span> @break
+                                @if (array_key_exists($locale, $locales))
+                                    <span>{{$activitie->created_at->format($locales[$locale])}}</span>
+                                @endif 
+                            @break
                             @case('multiple_deleted')
-                                <span>{{$activitie->updated_at->format('d/m/Y H:i:s')}}</span> @break
+                                @if (array_key_exists($locale, $locales))
+                                    <span>{{$activitie->created_at->format($locales[$locale])}}</span>
+                                @endif 
+                            @break
                             @case('test_conection_smtp')
-                            <span>{{$activitie->created_at->format('d/m/Y H:i:s')}}</span> @break
+                                @if (array_key_exists($locale, $locales))
+                                    <span>{{$activitie->created_at->format($locales[$locale])}}</span>
+                                @endif 
+                            @break
                         @endswitch
                     </div>
                     <div class="mb-2">
                         <div>
-                            <h5>Valores Antigos</h5>
+                            <h5>{{__('blades/audit.old_value')}}</h5>
                         </div>
                         <code>
                             {{ print_r($activitie->properties['old'] ?? [], true) }}
@@ -87,7 +124,7 @@
                     </div>
                     <div class="mb-2">
                         <div>
-                            <h5>Valores Novos</h5>
+                            <h5>{{__('blades/audit.new_value')}}</h5>
                         </div>
                         <code>
                             {{ print_r($activitie->properties['attributes'] ?? [], true) }}

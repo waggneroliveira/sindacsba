@@ -10,10 +10,10 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">Dashboard</li>
+                        <li class="breadcrumb-item active">{{__('dashboard.title_dashboard')}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Dashboard</h4>
+                <h4 class="page-title">{{__('dashboard.title_dashboard')}}</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
         Auth::user()->can('email.visualizar'))
             <div class="col-12">
                 <div class="page-title-box">
-                    <h4 class="page-title "><i class="mdi mdi-email-edit"></i> Configuração SMTP</h4>
+                    <h4 class="page-title "><i class="mdi mdi-email-edit"></i> {{__('dashboard.setting_smtp')}}</h4>
                 </div>
             </div>
             <div class="col-md-5 col-xl-3">
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                             <div class="mt-3 col-12 text-center">
-                                <h5 class="text-uppercase text-muted">Configuração de e-mail</h5>
+                                <h5 class="text-uppercase text-muted">{{__('dashboard.setting_email')}}</h5>
                             </div>
                         </a>
                     </div>
@@ -55,7 +55,7 @@
         Auth::user()->can('grupo.visualizar'))
             <div class="col-12">
                 <div class="page-title-box">
-                    <h4 class="page-title "><i class="mdi mdi-security"></i> Segurança e Controle de Acesso</h4>
+                    <h4 class="page-title "><i class="mdi mdi-security"></i> {{__('dashboard.security_and_access_control')}}</h4>
                 </div>
             </div>
             @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can('auditoria.visualizar'))
@@ -71,7 +71,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-3 col-12 text-center">
-                                    <h5 class="text-uppercase text-muted">Auditoria</h5>
+                                    <h5 class="text-uppercase text-muted">{{__('dashboard.audit')}}</h5>
                                 </div>
                             </a>
                         </div>
@@ -92,7 +92,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-3 col-12 text-center">
-                                    <h5 class="text-uppercase text-muted">Grupos de permissões</h5>
+                                    <h5 class="text-uppercase text-muted">{{__('dashboard.group_and_permission')}}</h5>
                                 </div>
                             </a>
                         </div>
@@ -113,7 +113,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-3 col-12 text-center">
-                                    <h5 class="text-uppercase text-muted">Usuário</h5>
+                                    <h5 class="text-uppercase text-muted">{{__('dashboard.users')}}</h5>
                                 </div>
                             </a>
                         </div>

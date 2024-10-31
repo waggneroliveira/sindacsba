@@ -51,7 +51,7 @@
 
 @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can('usuario.atribuir grupos'))
     <div class="d-flex justify-content-end gap-2 mt-3">
-        <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-success waves-effect waves-light">Cadastrar</button>
+        <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
+        <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
     </div>
 @endif

@@ -3,6 +3,7 @@
 use App\Models\User;
 use App\Models\SettingTheme;
 use App\Models\AuditActivity;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Http\Middleware\Authenticate;
@@ -103,6 +104,16 @@ Route::prefix('painel/')->group(function () {
         Route::post('setting/update', [SettingThemeController::class, 'settingUpdate'])->name('admin.dashboard.settingThemeUpdate'); 
     });
 
+    // LANGUAGES
+    Route::get('/lang/{locale}', function (string $locale) {
+        if (! in_array($locale, ['en', 'es', 'pt'])) {
+            abort(400);
+        }
+        session(['locale' => $locale]);
+        App::setLocale($locale);
+
+        return redirect()->back();
+    })->name('change.language');
     // LOGOUT
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.dashboard.user.logout');
 });
@@ -114,7 +125,6 @@ View::composer('admin.core.admin', function ($view) {
     $notifications = (new AuditCountRepository());
     $auditorias = $notifications->allAudit();
     $auditCount = $notifications->auditCount();
-    // dd($auditCount, $auditorias);
     $settingTheme = (new SettingThemeRepository())->settingTheme();
 
     return $view->with('settingTheme', $settingTheme)->with('user', $user)->with('auditorias', $auditorias)->with('auditCount', $auditCount);
