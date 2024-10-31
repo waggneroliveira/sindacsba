@@ -59,4 +59,5 @@ return [
     "status" => "Status", 
     "active" => "Ativo", 
     "inactive" => "inativo", 
+    'text_img_size' => "Adicione uma imagem com tamanho máximo de", 
 ];
