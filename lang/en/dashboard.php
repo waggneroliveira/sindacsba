@@ -8,6 +8,9 @@ return [
     "setting" => "Setting",
     "setting_theme" => "Theme Settings",
     "notification" => "Notifications",
+    "notification_message_one" => "Modifications have been made to",
+    "notification_message_two" => "by the user",
+    "notification_message_three" => "Not found",
     "day_notification" => "Today",
     "all_clear" => "Clear All",
     //=============================// Start Setting Theme //=============================//

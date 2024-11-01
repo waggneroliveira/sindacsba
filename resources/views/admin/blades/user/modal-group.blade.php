@@ -1,11 +1,11 @@
 <div class="row">
     @if (!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can('usuario.atribuir grupos'))
-        <span class="text-danger mt-0 mb-3"><i class="mdi mdi-alert-circle"></i> Você não tem permissão para atribuir grupos</span>
+        <span class="text-danger mt-0 mb-3"><i class="mdi mdi-alert-circle"></i> {{__('blades/group.not_permission')}}</span>
     @endif
     <input type="hidden" name="active" value="{{ isset($user->active) && $user->active == 1 ? 'on' : 'off' }}">
 
     @if ($user->currentRoles->isNotEmpty())
-        <h5 class="page-title">Grupos Pertencentes</h5>
+        <h5 class="page-title">{{__('blades/group.current_group')}}</h5>
         <div>
             <ul class="list-group w-100 h-25" style="column-count: 2">
                 @foreach($user->currentRoles as $role)
@@ -28,7 +28,7 @@
         <div>
             <ul class="list-group w-100 h-25" style="column-count: 2">
                 <div class="mt-2">
-                    <h5 class="page-title">Adicionar ao(s) Grupo(s)</h5>
+                    <h5 class="page-title">{{__('blades/group.add_group')}}</h5>
 
                     @foreach($user->otherRoles as $role)
                         <li class="list-group-item">

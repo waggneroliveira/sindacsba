@@ -8,6 +8,9 @@ return [
     "setting" => "Ajustes",
     "setting_theme" => "Configuración del tema",
     "notification" => "Notificaciones",
+    "notification_message_one" => "Se han realizado modificaciones en",
+    "notification_message_two" => "por el usuario",
+    "notification_message_three" => "No encontrado",
     "day_notification" => "Hoy",
     "all_clear" => "Limpiar todo",
     //=============================// Start Setting Theme //=============================//

@@ -99,11 +99,24 @@
                                                    {{$user->email}}
                                                 </td>
                                                 <td>
-                                                    @if ($user && $user->created_at)
-                                                        {{$user->created_at->format('d/m/Y')}}
-                                                        @else
-                                                        -
-                                                    @endif
+                                                    @php
+                                                        $locales = [
+                                                            'pt' => 'd/m/Y H:i:s',
+                                                            'en' => 'Y-m-d H:i A',          
+                                                            'es' => 'Y-m-d H:i A',          
+
+                                                        ];
+                                                        $locale = session()->get('locale');
+                                                    @endphp
+                                                        @if ($user && $user->created_at)
+                                                            @if (array_key_exists($locale, $locales))
+                                                                {{$user->created_at->format($locales[$locale])}}
+                                                                @else
+                                                                {{$user->created_at->format('d/m/Y H:i:s')}}
+                                                            @endif
+                                                            @else
+                                                            -
+                                                        @endif
                                                 </td>
                                                 <td>
                                                     @switch($user->active)

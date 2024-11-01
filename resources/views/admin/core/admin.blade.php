@@ -254,7 +254,6 @@
                                     </form>
                                 </div>
                             </li>
-                            {{-- {{dd(session()->get('locale')== 'es')}} --}}
                             <!-- Language flag dropdown  -->
                             <li class="dropdown d-none d-md-inline-block">
                                 <a class="nav-link dropdown-toggle waves-effect waves-light arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -269,6 +268,8 @@
 
                                     @if (array_key_exists($locale, $locales))
                                         <img src="{{ asset('build/admin/images/flags/' . $locales[$locale]) }}" alt="user-image" class="me-0 me-sm-1" height="18">
+                                        @else
+                                        <img src="{{ asset('build/admin/images/flags/br.jpg') }}" alt="user-image" class="me-0 me-sm-1" height="18">
                                     @endif
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated">
@@ -320,7 +321,7 @@
                                                     <!-- item-->
                                                     @foreach ($auditorias as $auditoria)
                                                         <div id="notificacao-{{ $auditoria->id }}" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-1">
-                                                            <div class="card-body" title="{{ 'Modificações foram feitas em ' . ($modelName = \App\Models\AuditActivity::getModelName($auditoria->subject_type)) . ' pelo usuário ' . ($auditoria->causer->name ?? 'Não encontrado') }}">
+                                                            <div class="card-body" title="{{ __('dashboard.notification_message_one') . ' ' . ($modelName = \App\Models\AuditActivity::getModelName($auditoria->subject_type)). ' ' . __('dashboard.notification_message_thwo') . ' ' . ($auditoria->causer->name ?? __('dashboard.notification_message_three')) }}">
                                                                 <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close" onclick="marcarComoLida({{ $auditoria->id }})"></i></span>
                                                                 <a href="{{route('admin.dashboard.audit.index')}}">
                                                                     <div class="d-flex align-items-center">
@@ -371,7 +372,6 @@
                             <!-- User Dropdown -->
                             <li class="dropdown">
                                 <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                    {{-- <img src="{{asset('build/admin/images/users/user-1.jpg')}}" alt="user-image" class="rounded-circle"> --}}
                                     @if (Auth::user()->path_image)
                                         <img src="{{asset('storage/'.Auth::user()->path_image)}}" alt="user-image" class="rounded-circle">
                                         @else

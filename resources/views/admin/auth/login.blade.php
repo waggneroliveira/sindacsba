@@ -12,7 +12,7 @@
                                 <div class="auth-brand">
                                     <a href="index.html" class="logo logo-dark text-center">
                                         <span class="logo-lg">
-                                            <img src="{{asset('build/admin/images/whipng')}}" alt="" height="22">
+                                            <img src="{{asset('build/admin/images/whi.png')}}" alt="" height="22">
                                         </span>
                                     </a>
                 

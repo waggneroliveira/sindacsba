@@ -93,7 +93,11 @@
                                                         $locale = session()->get('locale');
                                                     @endphp
                                                     @if ($group && $group->created_at)
-                                                        {{$group->created_at->format($locales[$locale])}}
+                                                        @if (array_key_exists($locale, $locales))
+                                                            {{$group->created_at->format($locales[$locale])}}
+                                                            @else
+                                                            {{$group->created_at->format('d/m/Y H:i:s')}}
+                                                        @endif
                                                         @else
                                                         -
                                                     @endif
