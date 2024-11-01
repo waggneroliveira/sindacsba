@@ -766,20 +766,5 @@
                 data_sidenav_size: "{{ isset($settingTheme)?$settingTheme->data_sidenav_size: 'condensed' }}"
             };
         </script>
-
-        
-        <style>
-            .locked-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: rgba(0, 0, 0, 0.6);
-                z-index: 1050; /* Acima da interface normal */
-                display: none;
-            }
-
-        </style>
     </body>
 </html>
