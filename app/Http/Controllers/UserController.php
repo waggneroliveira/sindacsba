@@ -100,13 +100,13 @@ class UserController extends Controller
                     $request->file('path_image')->storeAs($this->pathUpload, $path_image);
                 }
                 DB::commit();
-                session()->flash('success', 'Usuário cadastrado com sucesso!');
+                session()->flash('success', __('dashboard.response_item_create'));
                 return redirect()->route('admin.dashboard.user.index');
             }
 
         } catch (\Exception $e) {
             DB::rollBack();
-            Alert::success('error', 'Erro ao cadastrar o Usuário!');
+            Alert::success('error', __('dashboard.response_item_error_create'));
             return redirect()->back();
         }
     }
@@ -179,11 +179,11 @@ class UserController extends Controller
 
             DB::commit();
 
-            session()->flash('success', 'Usuário atualizado com sucesso!');
+            session()->flash('success', __('dashboard.response_item_update'));
             return redirect()->route('admin.dashboard.user.index');
         } catch (\Exception $exception) {
             DB::rollBack();
-            Alert::error('Erro', 'Erro ao atualizar o Usuário!');
+            Alert::error('Erro', __('dashboard.response_item_error_update'));
             return redirect()->back();
         }
     }
@@ -200,7 +200,7 @@ class UserController extends Controller
             $settingTheme = SettingTheme::find($user->id);
             $settingTheme->delete();
         }
-        
+        Session::flash('success',__('dashboard.response_item_delete'));
         return redirect()->back();
     }
 
@@ -241,14 +241,14 @@ class UserController extends Controller
                     ])
                     ->log('multiple_deleted');
             } else {
-                \Log::warning("Usuário com ID $userId não encontrado.");
+                \Log::warning("Item com ID $userId não encontrado.");
             }
         }
     
         $deleted = User::whereIn('id', $request->deleteAll)->delete();
     
         if ($deleted) {
-            return Response::json(['status' => 'success', 'message' => $deleted . ' itens deletados com sucesso!']);
+            return Response::json(['status' => 'success', 'message' => $deleted . ' '.__('dashboard.response_item_delete')]);
         }
     
         return Response::json(['status' => 'error', 'message' => 'Nenhum item foi deletado.'], 500);
@@ -282,7 +282,7 @@ class UserController extends Controller
                     ])
                     ->log('order_updated');
             } else {
-                \Log::warning("Usuário com ID $id não encontrado.");
+                \Log::warning("Item com ID $id não encontrado.");
             }
         }
     

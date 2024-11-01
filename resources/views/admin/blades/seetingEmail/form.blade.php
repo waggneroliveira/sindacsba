@@ -170,4 +170,8 @@
         </div>
     </div>
 </div>
+<script>
+    // Passa a tradução para uma variável JavaScript
+    const connectionReasonMessage = @json(__('blades/configEmail.message_conection_smtp_reason'));
+</script>
 @endsection

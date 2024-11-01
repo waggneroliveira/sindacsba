@@ -18,4 +18,10 @@ return [
     "email_identifier" => "Identificador do e-mail",
     "text_password" => "Sua senha não ficará visível por questões de segurança.", 
     "btn_conection_test" => "Testar conexão", 
+    "message_conection_smtp_success" => "Conexão estabelecida com sucesso!",
+    "message_conection_smtp_error" => "Erro ao estabelecer conexão!",
+    "message_conection_smtp_reason" => "Confira detalhes do erro abaixo.",
+    "message_for_email_one" => "Olá, Este e-mail é um teste automático para validar a conexão do seu site",
+    "message_for_email_thwo" => "com o servidor SMTP. Caso tenha recebido esta mensagem, a conexão foi estabelecida com sucesso. Se não foi você quem solicitou este teste, ignore este e-mail.",
+    "subject_test_conection_smtp" => "Teste de conexão SMTP",
 ];

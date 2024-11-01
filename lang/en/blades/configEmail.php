@@ -17,5 +17,11 @@ return [
     "sender_email" => "Sender Email",                  
     "email_identifier" => "Email Identifier",
     "text_password" => "Your password will not be visible for security reasons.", 
-    "btn_conection_test" => "Test Connection",         
+    "btn_conection_test" => "Test Connection",    
+    "message_conection_smtp_success" => "Connection established successfully!",     
+    "message_conection_smtp_error" => "Error establishing connection!",
+    "message_conection_smtp_reason" => "Check the details of the error below.",
+    "message_for_email_one" => "Hello, this email is an automatic test to validate the connection of your website.",
+    "message_for_email_thwo" => "with the SMTP server. If you received this message, the connection was successfully established. If you did not request this test, please ignore this email.",
+    "subject_test_conection_smtp" => "SMTP Connection Test",
 ];

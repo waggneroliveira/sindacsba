@@ -673,6 +673,24 @@
         <!-- App js -->
         <script src="{{ asset('build/admin/js/app.min.js') }}"></script>
 
+        <script>
+            // Passa a tradução para uma variável JavaScript
+            const responseDeleted = @json(__('dashboard.deleted'));
+            const responseAreYouSure = @json(__('dashboard.are_you_sure'));
+            const responseTextSweetAlert = @json(__('dashboard.text_sweet_alert'));
+            const responseConfirmAction = @json(__('dashboard.confirm_action'));
+            const responseCancelAction = @json(__('dashboard.cancel_action'));
+            const responseSuccessName = @json(__('dashboard.success_name'));
+            const responseItemErrorName = @json(__('dashboard.error_name'));
+            const responseItemThemeSuccess = @json(__('dashboard.theme_success'));
+            const responseItemThemeError = @json(__('dashboard.theme_erro'));
+            const responseItemCreate = @json(__('dashboard.response_item_create'));
+            const responseItemUpdate = @json(__('dashboard.response_item_update'));
+            const responseItemDelete = @json(__('dashboard.response_item_delete'));
+            const responseItemOrderSuccess = @json(__('dashboard.response_order_item'));
+            const responseItemOrderError = @json(__('dashboard.response_item_error'));
+        </script>
+
         <!-- Plugins js-->
         <script src="{{ asset('build/admin/js/libs/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
         <script src="{{ asset('build/admin/js/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
@@ -695,7 +713,7 @@
                     setTimeout(function() {
                         if (typeof Swal !== 'undefined') {
                             Swal.fire({
-                                title: 'Sucesso',
+                                title: responseSuccessName,
                                 text: successMessage,
                                 icon: 'success',
                                 confirmButtonText: 'OK',
@@ -726,7 +744,7 @@
             
                     setTimeout(function() {
                         Swal.fire({
-                            title: 'Erros de Validação',
+                            title: responseItemErrorName,
                             text: errors,
                             icon: 'error',
                             confirmButtonText: 'OK'
@@ -749,6 +767,7 @@
             };
         </script>
 
+        
         <style>
             .locked-overlay {
                 position: fixed;

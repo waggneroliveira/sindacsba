@@ -146,4 +146,7 @@
         </div>
     </div>
 </div>
+{{-- <script>
+    const responseItemDelete = @json(__('dashboard.response_item_delete'));
+</script> --}}
 @endsection

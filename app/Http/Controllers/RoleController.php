@@ -36,12 +36,12 @@ class RoleController extends Controller
             DB::beginTransaction();
                 $role = Role::create($data);
                 $role->syncPermissions($request->permissions);
-                Session::flash('success','Grupo cadastrado com sucesso!');
+                Session::flash('success',__('dashboard.response_item_create'));
             DB::commit();
             return redirect()->back();
         } catch (\Throwable $th) {
             DB::rollBack();
-            Session::flash('error','Erro ao criar grupo!');
+            Session::flash('error',__('dashboard.response_item_error_create'));
             return redirect()->back();
         }
 
@@ -57,11 +57,11 @@ class RoleController extends Controller
             $role->syncPermissions($request->permissions);
 
             DB::commit();
-            Session::flash('success','Grupo atualizado com sucesso!');
+            Session::flash('success',__('dashboard.response_item_update'));
             return redirect()->back();
         }catch (\Exception $exception){
             DB::rollBack();
-            Session::flash('success','Erro ao atualizar!');
+            Session::flash('success',__('dashboard.response_item_error_update'));
             return redirect()->back();
         }
     }
@@ -73,7 +73,7 @@ class RoleController extends Controller
         } 
 
         $role->delete();
-        Session::flash('success','Grupo deletado com sucesso!');
+        Session::flash('success',__('dashboard.response_item_delete'));
         return redirect()->back();
     }
     public function destroySelected(Request $request)
@@ -108,16 +108,16 @@ class RoleController extends Controller
                     ])
                     ->log('multiple_deleted');
             } else {
-                \Log::warning("Grupo com ID $userId não encontrado.");
+                \Log::warning("Item com ID $userId não encontrado.");
             }
         }
     
         $deleted = Role::whereIn('id', $request->deleteAll)->delete();
     
         if ($deleted) {
-            return Response::json(['status' => 'success', 'message' => $deleted . ' itens deletados com sucesso!']);
+            return Response::json(['status' => 'success', 'message' => $deleted . __('dashboard.response_item_delete')]);
         }
     
-        return Response::json(['status' => 'error', 'message' => 'Nenhum item foi deletado.'], 500);
+        return Response::json(['status' => 'error', 'message' => __('dashboard.response_item_error_delete')], 500);
     }
 }

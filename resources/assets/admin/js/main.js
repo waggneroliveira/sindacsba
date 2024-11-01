@@ -3,52 +3,27 @@ $('.btSubmitDeleteItem').on('click', function (e) {
     e.preventDefault()
     var $this = $(this)
     Swal.fire({
-        title: "Tem certeza?",
-        text: "Os itens serão deletados permanentemente. Esta ação não poderá ser revertida.",
+        title: `${responseAreYouSure}`,
+        text: `${responseTextSweetAlert}`,
         icon: "warning",
         showCancelButton: !0,
-        confirmButtonText: "Sim, exclua!",
-        cancelButtonText: "Não, cancele!",
+        confirmButtonText: `${responseConfirmAction}`,
+        cancelButtonText: `${responseCancelAction}`,
         confirmButtonClass: "btn btn-success mt-2",
         cancelButtonClass: "btn btn-danger ms-2 mt-2",
         buttonsStyling: !1,
     }).then(function (e) {
         if (e.value) {
-            Swal.fire({
-                title: "Deletado!",
-                text: "Item deletado com sucesso!",
-                icon: "success",
-                showConfirmButton: false
-            })
-            setTimeout(() => {
-                $this.parents('form').submit()
-            }, 1000);
-        }
-    });
-})
 
-//gerar codigo de acesso
-$('.geraCodigo').on('click', function (e) {
-    e.preventDefault()
-    var $this = $(this)
-    Swal.fire({
-        title: "Tem certeza?",
-        text: "Ao gerar um novo código, o mesmo será enviado para o e-mail informado. Deseja continuar?",
-        icon: "warning",
-        showCancelButton: !0,
-        confirmButtonText: "Sim, gerar código!",
-        cancelButtonText: "Não, cancele!",
-        confirmButtonClass: "btn btn-success mt-2",
-        cancelButtonClass: "btn btn-danger ms-2 mt-2",
-        buttonsStyling: !1,
-    }).then(function (e) {
-        if (e.value) {
-            Swal.fire({
-                title: "Sucesso!",
-                text: "Aguarde a verificação do e-mail informado.",
-                icon: "success",
-                showConfirmButton: false
-            })
+            window.onload = function() {
+                Swal.fire({
+                    title: `${responseDeleted}`,
+                    text: `${responseItemDelete}`,
+                    icon: "success",
+                    showConfirmButton: false
+                });
+            };
+            
             setTimeout(() => {
                 $this.parents('form').submit()
             }, 1000);
@@ -104,7 +79,7 @@ function deleteChannelHandler(event) {
 }
 
 const userSelect = document.querySelectorAll('.user-select');
-console.log(userSelect);
+
 if (userSelect) {
 
     userSelect.forEach((el) => {
@@ -125,7 +100,6 @@ if (userSelect) {
 function deleteUserHandler(event) {
     event.target.parentNode.parentNode.removeChild(event.target.parentNode);
 }
-
 
 //Ckeditor em multiplos modais
 document.addEventListener('DOMContentLoaded', function() {
@@ -189,15 +163,15 @@ $('.table-sortable tbody').sortable({
         success: function(data) {
             if (data.status) {
                 Swal.fire({
-                    title: 'Sucesso!',
-                    text: 'Registro ordenado com sucesso!',
+                    title: `${responseSuccessName}`,
+                    text: `${responseItemOrderSuccess}`,
                     icon: 'success',
                     confirmButtonText: 'OK'
                 });
             } else {
                 Swal.fire({
-                    title: 'Erro!',
-                    text: 'Ocorreu um erro ao ordenar o registro.',
+                    title: `${responseItemErrorName}`,
+                    text: `${responseItemOrderError}`,
                     icon: 'error',
                     confirmButtonText: 'OK'
                 });
@@ -205,8 +179,8 @@ $('.table-sortable tbody').sortable({
         },
         error: function() {
             Swal.fire({
-                title: 'Erro!',
-                text: 'Ocorreu um erro ao ordenar o registro.',
+                title: `${responseItemErrorName}`,
+                text: `${responseItemOrderError}`,
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
@@ -262,12 +236,12 @@ $('.btConfirmDelete, #btSubmitDelete').on('click', function() {
     });
 
     Swal.fire({
-        title: "Tem certeza?",
-        text: "Os itens serão deletados permanentemente. Esta ação não poderá ser revertida.",
+        title: `${responseAreYouSure}`,
+        text: `${responseTextSweetAlert}`,
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Sim, exclua!",
-        cancelButtonText: "Não, cancele!",
+        confirmButtonText: `${responseConfirmAction}`,
+        cancelButtonText: `${responseCancelAction}`,
         confirmButtonClass: "btn btn-success mt-2",
         cancelButtonClass: "btn btn-danger ms-2 mt-2",
         buttonsStyling: false,
@@ -284,7 +258,7 @@ $('.btConfirmDelete, #btSubmitDelete').on('click', function() {
                 success: function(response) {
                     switch (response.status) {
                         case 'success':
-                            Swal.fire({ title: "Deletado!", text: response.message, icon: "success", showConfirmButton: false });
+                            Swal.fire({ title: `${responseDeleted}`, text: response.message, icon: "success", showConfirmButton: false });
                             setTimeout(() => {
                                 window.location.href = window.location.href; // Atualiza a página
                             }, 1000);
@@ -364,12 +338,8 @@ $("#light-dark-mode").on("click", function() {
 
     form.find('input[name="data-bs-theme"]').val(newTheme); // Atualiza o valor do input
 
-    console.log("Novo tema definido:", newTheme);
-
     // Pega o ID do usuário autenticado
     var userId = form.find('input[name="user_id"]').val();
-    console.log("ID do usuário:", userId);
-
     var formData = new FormData(form[0]);
 
     formData.set('user_id', userId);
@@ -385,14 +355,14 @@ $("#light-dark-mode").on("click", function() {
         contentType: false,
         success: function(data) {
             if (data.status) {
-                console.log("Tema atualizado com sucesso!");
+                console.log(`${responseItemThemeSuccess}`);
                 // location.reload();
             } else {
-                console.log("Erro ao atualizar o tema.");
+                console.log(`${responseItemThemeError}`);
             }
         },
         error: function(xhr, status, error) {
-            console.error("Erro ao atualizar o tema:", error);
+            console.error(`${responseItemThemeError}`+":", error);
         }
     });
 });
@@ -526,7 +496,7 @@ $("#testSmtp").on("click", function (event) {
                 case "error":
                     $(".detailsTestSmtp").append(`
                         <span class="badge bg-danger my-2">${response.message}</span>
-                        <p><b>Confira detalhes do erro abaixo.</b></p>
+                        <p><b>${connectionReasonMessage}</b></p>
                         <p>${response.details}</p>
                     `);
                     break;
