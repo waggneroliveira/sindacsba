@@ -66,6 +66,10 @@ Route::prefix('painel/')->group(function () {
     /*=====================FINAL REDEFINICAO DE SENHA=========================*/
 
     Route::middleware([Authenticate::class])->group(function(){ 
+        Route::get('documentation', function () {
+            return view('admin.documentation.introduction');
+        })->name('admin.dashboard.documentation.introduction');
+
         Route::get('/loading', function () {
             return view('admin.loadPage.loading');
         })->name('loading');
