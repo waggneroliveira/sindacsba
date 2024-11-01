@@ -80,5 +80,6 @@ return [
     "text_sweet_alert" => "Los elementos se eliminarán permanentemente. Esta acción no se podrá deshacer.",
     "are_you_sure" => "¿Estás seguro?",
     "deleted" => "¡Eliminado!",
+    "message_sinc_load" => "Sincronizando tus preferencias...",
 
 ];

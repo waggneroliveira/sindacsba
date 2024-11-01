@@ -80,4 +80,5 @@ return [
     "text_sweet_alert" => "Os itens serão deletados permanentemente. Esta ação não poderá ser revertida.",
     "are_you_sure" => "Tem Certeza?",
     "deleted" => "Deletado!",
+    "message_sinc_load" => "Sincronizando suas preferências...",
 ];

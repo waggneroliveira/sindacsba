@@ -1,30 +1,4 @@
 <style>
-/* KEY FRAMES PARA FAZER OS GIROS */
-/* @-webkit-keyframes rodaroda {
-    0% { -webkit-transform:rotate(0deg); -moz-transform:rotate(0deg); -ms-transform:rotate(0deg); -o-transform:rotate(0deg); transform:rotate(0deg); }
-    50% { -webkit-transform:rotate(180deg); -moz-transform:rotate(180deg); -ms-transform:rotate(180deg); -o-transform:rotate(180deg); transform:rotate(180deg); }
-    100% { -webkit-transform:rotate(360deg); -moz-transform:rotate(360deg); -ms-transform:rotate(360deg); -o-transform:rotate(360deg); transform:rotate(360deg); }
-}
-@-moz-keyframes rodaroda {
-    0% { -webkit-transform:rotate(0deg); -moz-transform:rotate(0deg); -ms-transform:rotate(0deg); -o-transform:rotate(0deg); transform:rotate(0deg); }
-    50% { -webkit-transform:rotate(180deg); -moz-transform:rotate(180deg); -ms-transform:rotate(180deg); -o-transform:rotate(180deg); transform:rotate(180deg); }
-    100% { -webkit-transform:rotate(360deg); -moz-transform:rotate(360deg); -ms-transform:rotate(360deg); -o-transform:rotate(360deg); transform:rotate(360deg); }
-}
-@-ms-keyframes rodaroda {
-    0% { -webkit-transform:rotate(0deg); -moz-transform:rotate(0deg); -ms-transform:rotate(0deg); -o-transform:rotate(0deg); transform:rotate(0deg); }
-    50% { -webkit-transform:rotate(180deg); -moz-transform:rotate(180deg); -ms-transform:rotate(180deg); -o-transform:rotate(180deg); transform:rotate(180deg); }
-    100% { -webkit-transform:rotate(360deg); -moz-transform:rotate(360deg); -ms-transform:rotate(360deg); -o-transform:rotate(360deg); transform:rotate(360deg); }
-}
-@-o-keyframes rodaroda {
-    0% { -webkit-transform:rotate(0deg); -moz-transform:rotate(0deg); -ms-transform:rotate(0deg); -o-transform:rotate(0deg); transform:rotate(0deg); }
-    50% { -webkit-transform:rotate(180deg); -moz-transform:rotate(180deg); -ms-transform:rotate(180deg); -o-transform:rotate(180deg); transform:rotate(180deg); }
-    100% { -webkit-transform:rotate(360deg); -moz-transform:rotate(360deg); -ms-transform:rotate(360deg); -o-transform:rotate(360deg); transform:rotate(360deg); }
-}
-@keyframes rodaroda {
-    0% { -webkit-transform:rotate(0deg); -moz-transform:rotate(0deg); -ms-transform:rotate(0deg); -o-transform:rotate(0deg); transform:rotate(0deg); }
-    50% { -webkit-transform:rotate(180deg); -moz-transform:rotate(180deg); -ms-transform:rotate(180deg); -o-transform:rotate(180deg); transform:rotate(180deg); }
-    100% { -webkit-transform:rotate(360deg); -moz-transform:rotate(360deg); -ms-transform:rotate(360deg); -o-transform:rotate(360deg); transform:rotate(360deg); }
-} */
     .loading-indicator {
         display: none;
         position: fixed;
@@ -76,7 +50,19 @@
     align-items: center;" class="loading-indicator">
     <div class="row">
         <img id="load" src="{{asset('build/admin/images/whi.png')}}" alt="Sincronizando suas preferências..." />
-        
-        <h4 >Sincronizando suas preferências...</h4>
+        @php
+            $locales = [
+                'pt' => __('dashboard.message_sinc_load'), // Português
+                'en' => __('dashboard.message_sinc_load'), // Inglês
+                'es' => __('dashboard.message_sinc_load'), // Espanhol
+            ];
+            $locale = session()->get('locale');
+        @endphp
+
+        @if (array_key_exists($locale, $locales))
+            <h4>{{$locales[$locale]}}</h4>    
+        @else      
+            <h4>{{ __('dashboard.message_sinc_load') }}</h4>
+        @endif
     </div>
 </div>

@@ -80,5 +80,6 @@ return [
     "text_sweet_alert" => "The items will be permanently deleted. This action cannot be undone.",
     "are_you_sure" => "Are you sure?",
     "deleted" => "Deleted!",
+    "message_sinc_load" => "Synchronizing your preferences...",
 
 ];
