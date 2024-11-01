@@ -61,7 +61,7 @@
                         @switch($activitie->description)
                             @case('created') <span>{{__('blades/audit.action_audit_create')}}</span> @break
                             @case('updated') <span>{{__('blades/audit.action_audit_update')}}</span> @break
-                            @case('deleted') <span>{{__('blades/audit.action_audit_delete')}}</span> @break
+                            @case('deleted') <span>{{__('blades/audit.action_audit_deleted')}}</span> @break
                             @case('order_updated') <span>{{__('blades/audit.action_audit_order_updated')}}</span> @break
                             @case('multiple_deleted') <span>{{__('blades/audit.action_audit_multiple_deleted')}}</span> @break
                             @case('test_conection_smtp') <span>{{__('blades/audit.action_audit_test_conection_smtp')}}</span> @break
