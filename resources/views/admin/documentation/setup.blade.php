@@ -62,7 +62,7 @@
         </ul>
         <h4 class="mt-4">Instalação local</h4>
         <p>
-            Abra seu terminal, vá até sua pasta e digite o comando <code>ynpm install</code>. Isso instalaria todas as dependências necessárias na pasta <code>node_modules</code>.
+            Abra seu terminal, vá até sua pasta e digite o comando <code>npm install</code>. Isso instalaria todas as dependências necessárias na pasta <code>node_modules</code>.
         </p>
         <p class="mt-1">Você pode executar os seguintes comandos para executar o projeto localmente ou compilar para uso em produção:</p>
         <table class="table table-bordered m-0">
@@ -145,22 +145,5 @@
         <p class="mt-1">
             Caso o servidor não tenha o composer, você pode baixa-lo via <code>SSH</code> em <a href="https://imasters.com.br/back-end/instalando-o-composer-php-via-ssh-para-gerenciar-dependencias-do-seu-app-em-nuvem" target="_balnk">Composer via ssh</a> e rodar o comando <code>curl -sS https://getcomposer.org/installer | php</code>.
         </p>
-        <div class="mt-3">
-            <h5 class="mt-0 mb-2 font-weight-bold">Solução de problemas</h5>
-            <ul>
-                <li>I am getting error "<code>Error: ENOENT: no such file or directory,
-                        scandir '/root/website/node_modules/node-sass/vendor'</code>"
-                    while running npm install, what should I do?<p>If you are getting
-                        this error, there could be multiple root causes, please try
-                        following workarounds:</p>
-                    <ul>
-                        <li>1. Run <code>npm rebuild node-sass</code> to re-install
-                            node-sass</li>
-                        <li>2. Delete node_modules folder and re run <code>npm
-                                install</code></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
     </div>
 </div>

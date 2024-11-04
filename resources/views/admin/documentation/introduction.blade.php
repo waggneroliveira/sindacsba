@@ -173,6 +173,12 @@
         <div id="setup" class="page-content col-10">
             @include('admin.documentation.setup')
         </div>
+        <div id="audit" class="page-content col-10">
+            @include('admin.documentation.audit')
+        </div>
+        <div id="group-permission" class="page-content col-10">
+            @include('admin.documentation.groupAndPermission')
+        </div>
     </div>
     <!-- end page-wrapper-->
 </div>
