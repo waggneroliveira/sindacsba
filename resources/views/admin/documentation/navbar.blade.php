@@ -35,13 +35,13 @@
 
 
             <span class="list-group-item disabled">
-                Other
+                Customização
             </span>
 
-            <a href="plugins-uses.html" class="list-group-item list-group-item-action ">
+            <a href="#customization" class="list-group-item list-group-item-action ">
                 <span class="mr-2">
                     <i class="mdi mdi-widgets"></i>
-                </span>How to use plugins
+                </span>Configuração do Tema
             </a>
 
             <a href="changelog.html" class="list-group-item list-group-item-action ">

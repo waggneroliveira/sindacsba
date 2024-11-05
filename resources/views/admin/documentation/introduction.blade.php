@@ -179,6 +179,9 @@
         <div id="group-permission" class="page-content col-10">
             @include('admin.documentation.groupAndPermission')
         </div>
+        <div id="customization" class="page-content col-10">
+            @include('admin.documentation.customization')
+        </div>
     </div>
     <!-- end page-wrapper-->
 </div>

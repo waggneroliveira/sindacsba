@@ -23,7 +23,7 @@
 <div class="card">
     <div class="card-body">
     
-        <h3 class="mt-0 mb-3 font-weight-semibold">Model - <span class="font-12">( <code>SuperAdminScope</code> )</span></h3>
+        <h3 class="mt-0 mb-3 font-weight-semibold">Scopes - <span class="font-12">( <code>SuperAdminScope</code> )</span></h3>
         <h4 class="mt-0 mb-2 font-weight-semibold">Estrutura</h4>
         <pre>
     
@@ -66,5 +66,79 @@ class SuperAdminScope implements Scope
         <p>
             A classe Permission estende a classe original \Spatie\Permission\Models\Permission, que faz parte do pacote Spatie Laravel Permission. Essa classe personalizada foi criada para adicionar algumas funcionalidades específicas e customizadas, como o uso de traits adicionais e métodos para manipular o nome das permissões. 
         </p>
+
+        <pre>
+class Permission extends \Spatie\Permission\Models\Permission
+{
+    use HasFactory, HasRoles, LogsActivity;
+
+    public function name()
+    {
+        return substr($this->name,strpos($this->name,'.')+1);
+    }
+
+    public function index()
+    {
+        $value = explode('.',$this->name);
+        return $value[0];
+    }
+}
+        </pre>
+        <h3 class="mt-0 mb-3 font-weight-semibold">Uso - <span class="font-12">( <code>form.blade.php</code> )</span></h3>
+        <h4 class="mt-0 mb-2 font-weight-semibold">Estrutura</h4>
+
+        <pre>
+├── resource
+│   └── views
+│   │   └── admin
+│   │   │   └── blades
+│   │   │   │   └── group
+│   │   │   │   │   └── form.blade.php
+│   │   │   │   │   │
+        </pre>
+        
+        <ul>
+            <li>
+                <p>Na blade <code>form.blade.php</code> renderiza uma lista de permissões com checkboxes, organizadas por categorias (indicadas pelo método index() da permissão).</p>
+            </li>
+                <h5 class="mt-0 mb-2 font-weight-bold">Resumo do que o código faz:</h5>
+                <ul>
+                    <li><strong>Variáveis Iniciais:</strong> Define uma variável <code>$last_index</code> para rastrear a última categoria (índice) de permissões.</li>
+                    <li><strong>Loop nas Permissões:</strong> Percorre a coleção de permissões (<code>$permissions</code>).
+                        <ul>
+                            <li>Se a permissão atual tiver um índice (<code>$permission->index()</code>) diferente do último renderizado, ele:
+                                <ul>
+                                    <li>Fecha a lista anterior (<code>&lt;/ul&gt;</code>) se necessário.</li>
+                                    <li>Inicia uma nova categoria com o índice da permissão como título (em negrito) e cria uma nova lista não ordenada.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong>Verificação de Permissões:</strong> Dentro de cada categoria, ele verifica se o usuário autenticado tem certos papéis ou permissões.
+                        <ul>
+                            <li>Se o usuário for "Super" ou tiver permissões especiais (<code>usuario.tornar usuario master</code>, <code>grupo.visualizar</code>, <code>grupo.criar</code>), ele renderiza um checkbox associado à permissão atual.</li>
+                            <li>Alternativamente, se o usuário apenas tiver as permissões <code>grupo.visualizar</code> ou <code>grupo.editar</code>, renderiza um checkbox da mesma maneira.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Checkboxes:</strong> Cada permissão é exibida como um checkbox, marcado (<code>checked</code>) se o grupo atual tiver essa permissão. O valor do checkbox é o nome da permissão.</li>
+                    <li><strong>Atualização do Índice:</strong> Ao final de cada iteração, o valor de <code>$last_index</code> é atualizado para o índice da permissão atual.</li>
+                </ul>
+                
+            </li>
+        </ul>
+
+        <div class="image-code" style="background-image: url('{{ asset('build/admin/images/code.png') }}')">
+            {{-- <img src="{{asset('build/admin/images/code.png')}}" alt=""> --}}
+        </div>
     </div>
 </div>
+
+<style>
+    .image-code{
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 555px;
+        width: 100%;
+    }
+</style>
