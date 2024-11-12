@@ -1,5 +1,5 @@
 @extends('welcome')
 
-@section('content')
-    <App/>
+@section('content') 
+   <App/>
 @endsection
