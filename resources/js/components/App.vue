@@ -14,7 +14,6 @@ function togglePasswordVisibility() {
 }
 
 function submitForm() {
-  // Aqui você pode manipular os dados do formulário como desejar
   console.log("Nome:", name.value);
   console.log("Email:", email.value);
   console.log("Gênero:", gender.value);
