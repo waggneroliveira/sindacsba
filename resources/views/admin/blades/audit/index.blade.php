@@ -68,34 +68,58 @@
                                                 
                                                 @switch($activitie->description)
                                                     @case('created')
-                                                        @if (array_key_exists($locale, $locales))
-                                                            <span>{{$activitie->created_at->format($locales[$locale])}}</span>
-                                                        @endif 
+                                                        @if (isset($locale) && isset($locales))                                                            
+                                                            @if (array_key_exists($locale, $locales))
+                                                                <span>{{$activitie->created_at->format($locales[$locale])}}</span>
+                                                                @else
+                                                                {{$activitie->created_at->format('d/m/Y H:i:s')}}
+                                                            @endif 
+                                                        @endif
                                                     @break
                                                     @case('updated')
-                                                        @if (array_key_exists($locale, $locales))
-                                                            <span>{{$activitie->created_at->format($locales[$locale])}}</span>
-                                                        @endif 
+                                                        @if (isset($locale) && isset($locales))                                                            
+                                                            @if (array_key_exists($locale, $locales))
+                                                                <span>{{$activitie->created_at->format($locales[$locale])}}</span>
+                                                                @else
+                                                                {{$activitie->created_at->format('d/m/Y H:i:s')}}
+                                                            @endif 
+                                                        @endif
                                                     @break
                                                     @case('deleted')
-                                                        @if (array_key_exists($locale, $locales))
-                                                            <span>{{$activitie->created_at->format($locales[$locale])}}</span>
-                                                        @endif 
+                                                        @if (isset($locale) && isset($locales))                                                            
+                                                            @if (array_key_exists($locale, $locales))
+                                                                <span>{{$activitie->created_at->format($locales[$locale])}}</span>
+                                                                @else
+                                                                {{$activitie->created_at->format('d/m/Y H:i:s')}}
+                                                            @endif 
+                                                        @endif
                                                     @break
                                                     @case('order_updated')
-                                                        @if (array_key_exists($locale, $locales))
-                                                            <span>{{$activitie->created_at->format($locales[$locale])}}</span>
-                                                        @endif 
+                                                        @if (isset($locale) && isset($locales))                                                            
+                                                            @if (array_key_exists($locale, $locales))
+                                                                <span>{{$activitie->created_at->format($locales[$locale])}}</span>
+                                                                @else
+                                                                {{$activitie->created_at->format('d/m/Y H:i:s')}}
+                                                            @endif 
+                                                        @endif
                                                     @break
                                                     @case('multiple_deleted')
-                                                        @if (array_key_exists($locale, $locales))
-                                                            <span>{{$activitie->created_at->format($locales[$locale])}}</span>
-                                                        @endif 
+                                                        @if (isset($locale) && isset($locales))                                                            
+                                                            @if (array_key_exists($locale, $locales))
+                                                                <span>{{$activitie->created_at->format($locales[$locale])}}</span>
+                                                                @else
+                                                                {{$activitie->created_at->format('d/m/Y H:i:s')}}
+                                                            @endif 
+                                                        @endif
                                                     @break
                                                     @case('test_conection_smtp')
-                                                        @if (array_key_exists($locale, $locales))
-                                                            <span>{{$activitie->created_at->format($locales[$locale])}}</span>
-                                                        @endif 
+                                                        @if (isset($locale) && isset($locales))                                                            
+                                                            @if (array_key_exists($locale, $locales))
+                                                                <span>{{$activitie->created_at->format($locales[$locale])}}</span>
+                                                                @else
+                                                                {{$activitie->created_at->format('d/m/Y H:i:s')}}
+                                                            @endif 
+                                                        @endif
                                                     @break
                                                 @endswitch
                                             </td>
@@ -115,7 +139,7 @@
                                                     ];
                                                     $locale = session()->get('locale');
                                                 @endphp
-                                                <td>{{$locales[$locale]}}</td>
+                                                <td>{{isset($locale) && isset($locales)?$locales[$locale]:'Sistema'}}</td>
                                             @endif
                                             @if(Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can('auditoria.visualizar'))
                                                 <td>
