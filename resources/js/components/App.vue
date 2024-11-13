@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
+import { router } from '@inertiajs/vue3'
 
 const title = ref('Preencha os campos abaixo:');
 const name = ref('');
@@ -9,16 +10,38 @@ const description = ref('');
 const password = ref('');
 const showPassword = ref(false);
 
+
+const form = reactive({
+  name: null,
+  email: null,
+  gender: null,
+  description: null,
+  password: null,
+})
+
 function togglePasswordVisibility() {
   showPassword.value = !showPassword.value;
 }
 
 function submitForm() {
-  console.log("Nome:", name.value);
-  console.log("Email:", email.value);
-  console.log("Gênero:", gender.value);
-  console.log("Descrição:", description.value);
-  console.log("Senha:", password.value);
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+  router.post('/enviar-formulario', form, {
+    headers: {
+      'X-CSRF-TOKEN': csrfToken
+    },
+    onSuccess: (response) => {
+      console.log('Formulário enviado com sucesso:', response);
+      form.name = '';
+      form.email = '';
+      form.gender = '';
+      form.description = '';
+      form.password = '';
+    },
+    onError: (errors) => {
+      console.error('Erros ao enviar o formulário:', errors);
+    },
+  });
 }
 </script>
 
@@ -26,13 +49,18 @@ function submitForm() {
   <form @submit.prevent="submitForm" class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md space-y-4">
     <h2 class="text-2xl font-semibold text-gray-800">{{ title }}</h2>
 
+    <div v-if="sessionMessage" class="alert alert-warning">
+      {{ sessionMessage }}
+    </div>
+
     <!-- Campo de Nome -->
     <div class="flex flex-col">
       <label for="name" class="mb-1 font-medium text-gray-700">Nome</label>
       <input 
         type="text" 
         id="name" 
-        v-model="name" 
+        name="name"
+        v-model="form.name" 
         class="border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500" 
         placeholder="Digite seu nome">
     </div>
@@ -43,7 +71,8 @@ function submitForm() {
       <input 
         type="email" 
         id="email" 
-        v-model="email" 
+        name="email"
+        v-model="form.email" 
         class="border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500" 
         placeholder="Digite seu e-mail">
     </div>
@@ -55,7 +84,8 @@ function submitForm() {
         <input 
           :type="showPassword ? 'text' : 'password'" 
           id="password" 
-          v-model="password" 
+          name="password"
+          v-model="form.password" 
           class="border border-gray-300 rounded-md p-2 pr-10 focus:outline-none focus:border-blue-500 w-full" 
           placeholder="Digite sua senha">
         <button 
@@ -79,7 +109,8 @@ function submitForm() {
       <label for="gender" class="mb-1 font-medium text-gray-700">Gênero</label>
       <select 
         id="gender" 
-        v-model="gender" 
+        name="gender"
+        v-model="form.gender" 
         class="border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500">
         <option value="">Selecione</option>
         <option value="male">Masculino</option>
@@ -93,7 +124,8 @@ function submitForm() {
       <label for="description" class="mb-1 font-medium text-gray-700">Descrição</label>
       <textarea 
         id="description" 
-        v-model="description" 
+        name="description"
+        v-model="form.description" 
         class="border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500" 
         placeholder="Descreva algo sobre você"></textarea>
     </div>
@@ -102,14 +134,16 @@ function submitForm() {
     <button type="submit" class="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 transition-colors">
       Enviar
     </button>
-
-    <!-- Exibir dados do formulário -->
-    <div class="mt-4">
-      <h3 class="text-lg font-medium text-gray-800">Dados do formulário:</h3>
-      <p><strong>Nome:</strong> {{ name }}</p>
-      <p><strong>Email:</strong> {{ email }}</p>
-      <p><strong>Gênero:</strong> {{ gender }}</p>
-      <p><strong>Descrição:</strong> {{ description }}</p>
-    </div>
   </form>
 </template>
+
+<script>
+  export default {
+    props: {
+      sessionMessage: {
+        type: String,
+        default: ''
+      }
+    }
+  }
+</script>

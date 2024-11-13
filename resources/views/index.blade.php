@@ -1,5 +1,6 @@
-@extends('welcome')
+@extends('app')
 
 @section('content') 
-   <App/>
+   <h1>Bem-vindo ao Meu Projeto Vue!</h1>
+   <p>Esta é a página inicial.</p>
 @endsection
