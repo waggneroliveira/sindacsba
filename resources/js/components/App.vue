@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const title = ref('Preencha os campos abaixo.');
+const title = ref('Preencha os campos abaixo:');
 const name = ref('');
 const email = ref('');
 const gender = ref('');
