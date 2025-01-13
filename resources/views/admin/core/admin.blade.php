@@ -323,7 +323,7 @@
                                                         <div id="notificacao-{{ $auditoria->id }}" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-1">
                                                             <div class="card-body" title="{{ __('dashboard.notification_message_one') . ' ' . ($modelName = \App\Models\AuditActivity::getModelName($auditoria->subject_type)). ' ' . __('dashboard.notification_message_thwo') . ' ' . ($auditoria->causer->name ?? __('dashboard.notification_message_three')) }}">
                                                                 <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close" onclick="marcarComoLida({{ $auditoria->id }})"></i></span>
-                                                                <a href="{{route('admin.dashboard.audit.index')}}">
+                                                                <a href="{{route('admin.dashboard.audit.show', $auditoria->id)}}">
                                                                     <div class="d-flex align-items-center">
                                                                         <div class="flex-shrink-0">
                                                                             <div class="notify-icon bg-primary">

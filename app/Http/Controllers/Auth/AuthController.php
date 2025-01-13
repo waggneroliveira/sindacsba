@@ -31,6 +31,28 @@ class AuthController extends Controller
                 ]);
             }
         }
+
+        $userAuthenticate = Auth::user();
+        $user = User::find($userAuthenticate->id);
+
+        activity()
+            ->causedBy(Auth::user())
+            ->performedOn($user)
+            ->event('login')
+            ->withProperties([
+                'attributes' => [
+                    'id' => $userAuthenticate->id,
+                    'name' => $userAuthenticate->name,
+                    'email' => $userAuthenticate->email,
+                    'active' => $userAuthenticate->active,
+                    'path_image' => $userAuthenticate->path_image,
+                    'remember_token' => $userAuthenticate->remember_token,
+                    'email_verified_at' => $userAuthenticate->email_verified_at,
+                    'event' => 'login',
+                ]
+            ])
+            ->log('login');
+          
         session()->flash('success', 'Login realizado com sucesso!');
 
         return redirect()->intended('painel/dashboard');
@@ -39,11 +61,29 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        $userAuthenticate = Auth::user(); 
+        $user = User::select('id','name','email')->find($userAuthenticate->id);
+        
+        activity()
+            ->causedBy($userAuthenticate)
+            ->performedOn($user)
+            ->event('logout')
+            ->withProperties([
+                'attributes' => [
+                    'id' => $userAuthenticate->id,
+                    'name' => $userAuthenticate->name,
+                    'email' => $userAuthenticate->email,
+                    'event' => 'logout',
+                ]
+            ])
+            ->log('logout');
+            
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
+        session()->flash('success', 'Logout realizado com sucesso!');
         return redirect('/painel/success-logout');
     }
 
