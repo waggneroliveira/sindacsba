@@ -12,9 +12,9 @@ class FormIndexController extends Controller
 
     public function index()
     {
-        return Inertia::render('App', [
-            'sessionMessage' => session('message')
-        ]);
+        // return Inertia::render('App', [
+        //     'sessionMessage' => session('message')
+        // ]);
     }
 
     /**
