@@ -29,11 +29,19 @@
 </noscript>
     <link rel=preload as=image href=assets/images/banner.webp>
     <link rel="preload" as="image" href="assets/images/banner-mob.webp">
+
+    @vite([
+            'resources/assets/client/css/style.css',
+            'resources/assets/client/js/main.js',
+        ])
+
+
     <link href=assets/vendor/bootstrap/css/bootstrap.min.css rel=stylesheet>
     <link href=assets/vendor/bootstrap-icons/bootstrap-icons.css rel=stylesheet>
     <link href=assets/vendor/aos/aos.css rel=stylesheet>
     <link href=assets/vendor/swiper/swiper-bundle.min.css rel=stylesheet>
-    <link href=assets/css/style.css rel=stylesheet>
+    {{-- <link href=assets/css/style.css rel=stylesheet> --}}
+
     <script defer src=https://cdn.userway.org/widget.js data-account=qSpdtrySSt></script>
     <link rel=preconnect href=https://vlibras.gov.br crossorigin>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6RXZ6TZT0V"></script>
