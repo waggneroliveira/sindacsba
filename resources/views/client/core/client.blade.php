@@ -31,10 +31,13 @@
     <link rel="preload" as="image" href="assets/images/banner-mob.webp">
 
     @vite([
-            'resources/assets/client/css/style.css',
-            'resources/assets/client/js/main.js',
-        ])
-
+        'resources/assets/client/css/bootstrap/css/bootstrap.min.css',
+        'resources/assets/client/css/bootstrap-icons/bootstrap-icons.css',
+        'resources/assets/client/css/aos/aos.css',
+        'resources/assets/client/css/swiper/swiper-bundle.min.css',
+        'resources/assets/client/css/style.css',
+        'resources/assets/client/js/main.js',
+    ])
 
     <link href=assets/vendor/bootstrap/css/bootstrap.min.css rel=stylesheet>
     <link href=assets/vendor/bootstrap-icons/bootstrap-icons.css rel=stylesheet>
