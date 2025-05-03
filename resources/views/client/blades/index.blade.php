@@ -6,8 +6,7 @@
         <div class="max-width container">
             <h1 class="text-white mb-5 rethink-sans-bold">A <span class=emphasis><b>agência</b></span> que fará a sua presença digital trazer <span class=emphasis><b>resultado</b></span></h1>
             <p class="text-white mb-5 rethink-sans-regular">Faça já <span class=typed data-typed-items="sua  <b>Consultoria Digital</b>, seu <b>Site dinâmico</b>, sua <b>Logomarca</b>, seu <b>Marketing Digital</b>"></span><span class="typed-cursor typed-cursor--blink" aria-hidden=true></span>
-                <span
-                    class="typed-cursor typed-cursor--blink" aria-hidden=true></span>
+                <span class="typed-cursor typed-cursor--blink" aria-hidden=true></span>
             </p>
             <a href=https://wa.me/5571996483853 target=_blank rel="noopener noreferrer" class="rethink-sans-regular ps-5 text-white call-to-action d-flex justify-content-between align-items-center">
 Fale com a gente!

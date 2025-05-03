@@ -20,6 +20,7 @@ use App\Http\Controllers\SettingThemeController;
 use App\Http\Controllers\AuditActivityController;
 use App\Http\Controllers\Auth\PasswordEmailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\SlideController;
 
 Route::get('painel/', function () {
     return redirect()->route('admin.dashboard.painel');
@@ -82,6 +83,15 @@ Route::prefix('painel/')->group(function () {
         ->parameters(['auditorias'=>'activitie']);
         Route::post('auditorias/{id}/mark-as-read', [AuditActivityController::class, 'markAsRead']);
         Route::post('/auditorias/mark-all-as-read', [AuditActivityController::class, 'markAllAsRead']);
+
+        //SLIDES
+        Route::resource('slides', SlideController::class)
+        ->names('admin.dashboard.slide')
+        ->parameters(['slides'=>'slide']);
+        Route::post('slides/delete', [SlideController::class, 'destroySelected'])
+        ->name('admin.dashboard.slide.destroySelected');
+        Route::post('slides/sorting', [SlideController::class, 'sorting'])
+        ->name('admin.dashboard.slide.sorting');
 
         //E-MAIL CONFIG
         Route::resource('configuracao-de-email', SettingEmailController::class)
