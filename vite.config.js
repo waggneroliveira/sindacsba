@@ -16,19 +16,11 @@ export default defineConfig({
                     dest: 'client'
                 },
                 {
-                    src: 'resources/assets/client/css/aos',
-                    dest: 'client'
-                },
-                {
                     src: 'resources/assets/client/css/bootstrap',
                     dest: 'client'
                 },
                 {
                     src: 'resources/assets/client/css/bootstrap-icons',
-                    dest: 'client'
-                },
-                {
-                    src: 'resources/assets/client/css/swiper',
                     dest: 'client'
                 },
                 {
