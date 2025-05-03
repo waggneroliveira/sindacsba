@@ -1,7 +1,7 @@
 @extends('client.core.client')
 @section('content')
 <section id=hero class="hero position-relative d-flex flex-column section dark-background overflow-hidden">
-    <img id=profileImage src=assets/images/banner.webp alt="Banner Hero" title="Banner Hero" class=image-hero>
+    <img id=profileImage src="{{asset('build/client/images/banner.webp')}}" alt="Banner Hero" title="Banner Hero" class=image-hero>
     <div class="w-100 d-flex justify-content-center flex-column align-items-center position-absolute description">
         <div class="max-width container">
             <h1 class="text-white mb-5 rethink-sans-bold">A <span class=emphasis><b>agência</b></span> que fará a sua presença digital trazer <span class=emphasis><b>resultado</b></span></h1>
@@ -62,64 +62,64 @@ Fale com a gente!
                     </script>
                     <div class="carousel-project swiper-wrapper align-items-center">
                         <div class=swiper-slide>
-                            <img src=assets/images/html.svg alt=Html title=Html loading=lazy>
+                            <img src="{{asset('build/client/images/html.svg')}}" alt=Html title=Html loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/css.svg alt=Css title=Css loading=lazy>
+                            <img src="{{asset('build/client/images/css.svg')}}" alt=Css title=Css loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/sass.webp alt=Sass title=Sass loading=lazy>
+                            <img src="{{asset('build/client/images/sass.webp')}}" alt=Sass title=Sass loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/js.svg alt=JavaScript title=JavaScript loading=lazy>
+                            <img src="{{asset('build/client/images/js.svg')}}" alt=JavaScript title=JavaScript loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/jquery.svg alt=Jquery title=Jquery loading=lazy>
+                            <img src="{{asset('build/client/images/jquery.svg')}}" alt=Jquery title=Jquery loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/php.png alt=Php title=Php loading=lazy>
+                            <img src="{{asset('build/client/images/php.png')}}" alt=Php title=Php loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/laravel.svg alt=Laravel title=Laravel loading=lazy>
+                            <img src="{{asset('build/client/images/laravel.svg')}}" alt=Laravel title=Laravel loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/bs.svg alt=Booststrap title=Booststrap loading=lazy>
+                            <img src="{{asset('build/client/images/bs.svg')}}" alt=Booststrap title=Booststrap loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/tailwind.svg alt=Tailwind title=Tailwind loading=lazy>
+                            <img src="{{asset('build/client/images/tailwind.svg')}}" alt=Tailwind title=Tailwind loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/vue.svg alt=Vue title=Vue loading=lazy>
+                            <img src="{{asset('build/client/images/vue.svg')}}" title=Vue loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/wp.svg alt=WordPress title=WordPress loading=lazy>
+                            <img src="{{asset('build/client/images/wp.svg')}}" alt=WordPress title=WordPress loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/git.svg alt=Git title=Git loading=lazy>
+                            <img src="{{asset('build/client/images/git.svg')}}" alt=Git title=Git loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/github.svg alt=GitHub title=GitHub loading=lazy>
+                            <img src="{{asset('build/client/images/github.svg')}}" alt=GitHub title=GitHub loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/mysql.svg alt=MySQL title=MySQL loading=lazy>
+                            <img src="{{asset('build/client/images/mysql.svg')}}" alt=MySQL title=MySQL loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/figma.svg alt=Figma title=Figma loading=lazy>
+                            <img src="{{asset('build/client/images/figma.svg')}}" alt=Figma title=Figma loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/nuvemshop.svg alt=Nuvemshop title=Nuvemshop loading=lazy>
+                            <img src="{{asset('build/client/images/nuvemshop.svg')}}" alt=Nuvemshop title=Nuvemshop loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/adobe.svg alt=Adobe title=Adobe loading=lazy>
+                            <img src="{{asset('build/client/images/adobe.svg')}}" alt=Adobe title=Adobe loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/instagram.svg alt=Instagram title=Instagram loading=lazy>
+                            <img src="{{asset('build/client/images/instagram.svg')}}" alt=Instagram title=Instagram loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/meta.svg alt=Meta title=Meta loading=lazy>
+                            <img src="{{asset('build/client/images/meta.svg')}}" alt=Meta title=Meta loading=lazy>
                         </div>
                         <div class=swiper-slide>
-                            <img src=assets/images/photoshop.svg alt=photoshop title=photoshop loading=lazy>
+                            <img src="{{asset('build/client/images/photoshop.svg')}}" alt=photoshop title=photoshop loading=lazy>
                         </div>
                     </div>
                     <div class=swiper-pagination></div>
@@ -139,7 +139,7 @@ Fale com a gente!
                     Nunca foi tão fácil ser disponível online e impulssionar sua marca com eficiência e economia.
                 </p>
                 <div data-aos=zoom-in-up data-aos-delay=300>
-                    <img src=assets/images/laptop.webp alt="Imagem computador" title="Imagem computador" class="w-100 laptop-parallax" loading=lazy>
+                    <img src="{{asset('build/client/images/laptop.webp')}}" alt="Imagem computador" title="Imagem computador" class="w-100 laptop-parallax" loading=lazy>
                 </div>
             </div>
         </div>
@@ -191,7 +191,7 @@ Fale com a gente!
                 <div class="swiper-wrapper align-items-center">
                     <div class=swiper-slide>
                         <div class="project-list-item dark-background-medium p-3">
-                            <img src=assets/images/ideia.svg alt=Icon title="Icon ideia" loading=lazy>
+                            <img src="{{asset('build/client/images/ideia.svg')}}" alt=Icon title="Icon ideia" loading=lazy>
                             <h3 class="emphasis mt-3 rethink-sans-bold">Identidade Visual</h3>
                             <ul class=ps-3>
                                 <li class="ps-1 rethink-sans-semiBold">Branding</li>
@@ -203,7 +203,7 @@ Fale com a gente!
                     </div>
                     <div class=swiper-slide>
                         <div class="project-list-item dark-background-medium p-3">
-                            <img src=assets/images/interativo.svg alt=Icon title="Icon interativo" loading=lazy>
+                            <img src="{{asset('build/client/images/interativo.svg')}}" alt=Icon title="Icon interativo" loading=lazy>
                             <h3 class="emphasis mt-3 rethink-sans-bold">Site Interativo</h3>
                             <ul class=ps-3>
                                 <li class="ps-1 rethink-sans-semiBold">Sites Dinâmicos</li>
@@ -214,7 +214,7 @@ Fale com a gente!
                     </div>
                     <div class=swiper-slide>
                         <div class="project-list-item dark-background-medium p-3">
-                            <img src=assets/images/sitema.svg alt=Icon title="Icon sistema" loading=lazy>
+                            <img src="{{asset('build/client/images/sitema.svg')}}" alt=Icon title="Icon sistema" loading=lazy>
                             <h3 class="emphasis mt-3 rethink-sans-bold">Sistemas</h3>
                             <ul class=ps-3>
                                 <li class="ps-1 rethink-sans-semiBold">Consultoria estratégica de processos</li>
@@ -224,7 +224,7 @@ Fale com a gente!
                     </div>
                     <div class=swiper-slide>
                         <div class="project-list-item dark-background-medium p-3">
-                            <img src=assets/images/eccomerce.svg alt=Icon title="Icon eccomerce" loading=lazy>
+                            <img src="{{asset('build/client/images/eccomerce.svg')}}" alt=Icon title="Icon eccomerce" loading=lazy>
                             <h3 class="emphasis mt-3 rethink-sans-bold">E-commerce</h3>
                             <ul class=ps-3>
                                 <li class="ps-1 rethink-sans-semiBold">Loja virtual completa</li>
@@ -236,7 +236,7 @@ Fale com a gente!
                     </div>
                     <div class=swiper-slide>
                         <div class="project-list-item dark-background-medium p-3">
-                            <img src=assets/images/marketing.svg alt=Icon title="Icon marketing" loading=lazy>
+                            <img src="{{asset('build/client/images/marketing.svg')}}" alt=Icon title="Icon marketing" loading=lazy>
                             <h3 class="emphasis mt-3 rethink-sans-bold">Marketing Digital</h3>
                             <ul class=ps-3>
                                 <li class="ps-1 rethink-sans-semiBold">Gestão de redes sociais</li>
@@ -248,7 +248,7 @@ Fale com a gente!
                     </div>
                     <div class=swiper-slide>
                         <div class="project-list-item dark-background-medium p-3">
-                            <img src=assets/images/hospedagem.svg alt=Icon title="Icon hospedagem" loading=lazy>
+                            <img src="{{asset('build/client/images/hospedagem.svg')}}" alt=Icon title="Icon hospedagem" loading=lazy>
                             <h3 class="emphasis mt-3 rethink-sans-bold">Hospedagem</h3>
                             <ul class=ps-3>
                                 <li class="ps-1 rethink-sans-semiBold">Servidores otimizados</li>
@@ -319,44 +319,44 @@ Fale com a gente!
                 <div class="portfolio-top swiper-wrapper align-items-center">
                     <div class=swiper-slide>
                         <picture>
-                            <source srcset=assets/images/mckup/telenordeste-mobile.webp media="(max-width: 600px)" type=image/webp>
-                            <source srcset=assets/images/mckup/telenordeste.webp type=image/webp>
-                            <img src=assets/images/mckup/telenordeste.webp alt=Telenordeste title=Telenordeste loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
+                            <source srcset="{{asset('build/client/images/mckup/telenordeste-mobile.webp ')}}" media="(max-width: 600px)" type=image/webp>
+                            <source srcset="{{asset('build/client/images/mckup/telenordeste.webp')}}" type=image/webp>
+                            <img src="{{asset('build/client/images/mckup/telenordeste.webp')}}" alt=Telenordeste title=Telenordeste loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
                         </picture>
                     </div>
                     <div class=swiper-slide>
                         <picture>
-                            <source srcset=assets/images/mckup/sushitan-mobile.webp media="(max-width: 600px)" type=image/webp>
-                            <source srcset=assets/images/mckup/sushitan.webp type=image/webp>
-                            <img src=assets/images/mckup/sushitan.webp alt=Sushitan title=Sushitan loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
+                            <source srcset="{{asset('build/client/images/mckup/sushitan-mobile.webp')}}" media="(max-width: 600px)" type=image/webp>
+                            <source srcset="{{asset('build/client/images/mckup/sushitan.webp')}}" type=image/webp>
+                            <img src="{{asset('build/client/images/mckup/sushitan.webp')}}" alt=Sushitan title=Sushitan loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
                         </picture>
                     </div>
                     <div class=swiper-slide>
                         <picture>
-                            <source srcset=assets/images/mckup/pindalar-mobile.webp media="(max-width: 600px)" type=image/webp>
-                            <source srcset=assets/images/mckup/pindalar.webp type=image/webp>
-                            <img src=assets/images/mckup/pindalar.webp alt=Pindalar title=Pindalar loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
+                            <source srcset="{{asset('build/client/images/mckup/pindalar-mobile.webp')}}" media="(max-width: 600px)" type=image/webp>
+                            <source srcset="{{asset('build/client/images/mckup/pindalar.webp')}}" type=image/webp>
+                            <img src="{{asset('build/client/images/mckup/pindalar.webp')}}" alt=Pindalar title=Pindalar loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
                         </picture>
                     </div>
                     <div class=swiper-slide>
                         <picture>
-                            <source srcset=assets/images/mckup/depyl-mobile.webp media="(max-width: 600px)" type=image/webp>
-                            <source srcset=assets/images/mckup/depyl.webp type=image/webp>
-                            <img src=assets/images/mckup/depyl.webp alt=DepylCare title=DepylCare loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
+                            <source srcset="{{asset('build/client/images/mckup/depyl-mobile.webp')}}" media="(max-width: 600px)" type=image/webp>
+                            <source srcset="{{asset('build/client/images/mckup/depyl.webp')}}" type=image/webp>
+                            <img src="{{asset('build/client/images/mckup/depyl.webp')}}" alt=DepylCare title=DepylCare loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
                         </picture>
                     </div>
                     <div class=swiper-slide>
                         <picture>
-                            <source srcset=assets/images/mckup/viva-ervas-mobile.webp media="(max-width: 600px)" type=image/webp>
-                            <source srcset=assets/images/mckup/viva-ervas.webp type=image/webp>
-                            <img src=assets/images/mckup/viva-ervas.webp alt="Viva ervas" title="Viva ervas" loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
+                            <source srcset="{{asset('build/client/images/mckup/viva-ervas-mobile.webp')}}" media="(max-width: 600px)" type=image/webp>
+                            <source srcset="{{asset('build/client/images/mckup/viva-ervas.webp')}}" type=image/webp>
+                            <img src="{{asset('build/client/images//mckup/viva-ervas.webp')}}" alt="Viva ervas" title="Viva ervas" loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
                         </picture>
                     </div>
                     <div class=swiper-slide>
                         <picture>
-                            <source srcset=assets/images/mckup/portfolio-mobile.webp media="(max-width: 600px)" type=image/webp>
-                            <source srcset=assets/images/mckup/portfolio.webp type=image/webp>
-                            <img src=assets/images/mckup/portfolio.webp alt=Protfolio title=Protfolio loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
+                            <source srcset="{{asset('build/client/images/mckup/portfolio-mobile.webp')}}" media="(max-width: 600px)" type=image/webp>
+                            <source srcset="{{asset('build/client/images/mckup/portfolio.webp')}}" type=image/webp>
+                            <img src="{{asset('build/client/images/mckup/portfolio.webp')}}" alt=Protfolio title=Protfolio loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
                         </picture>
                     </div>
                 </div>
@@ -365,12 +365,12 @@ Fale com a gente!
         </div>
         <div class="rating w-100-md">
             <div class="col-7 width-md m-auto d-flex justify-content-center align-items-baseline flex-column h-100 gap-2" data-aos=fade-down data-aos-delay=450>
-                <span class="fa fa-star rethink-sans-medium"><img src=assets/images/somar.png alt="Icone mais" class="me-2 w-100" loading=lazy> Criatividade</span>
-                <span class="fa fa-star rethink-sans-medium"><img src=assets/images/somar.png alt="Icone mais" class="me-2 w-100" loading=lazy> Modernidade</span>
-                <span class="fa fa-star rethink-sans-medium"><img src=assets/images/somar.png alt="Icone mais" class="me-2 w-100" loading=lazy> Satisfação</span>
+                <span class="fa fa-star rethink-sans-medium"><img src="{{asset('build/client/images/somar.png')}}" alt="Icone mais" class="me-2 w-100" loading=lazy> Criatividade</span>
+                <span class="fa fa-star rethink-sans-medium"><img src="{{asset('build/client/images/somar.png')}}" alt="Icone mais" class="me-2 w-100" loading=lazy> Modernidade</span>
+                <span class="fa fa-star rethink-sans-medium"><img src="{{asset('build/client/images/somar.png')}}" alt="Icone mais" class="me-2 w-100" loading=lazy> Satisfação</span>
                 <div class="clients d-flex flex-wrap mt-3">
                     <div class=client-img>
-                        <img src=assets/images/client-group.png alt="Logo de clientes" title="Logo de clientes" class=w-100 loading=lazy>
+                        <img src="{{asset('build/client/images/client-group.png')}}" alt="Logo de clientes" title="Logo de clientes" class=w-100 loading=lazy>
                     </div>
                 </div>
                 <div class="count-star d-flex flex-column justify-content-center align-items-start col-12 gap-3">
@@ -420,44 +420,44 @@ Fale com a gente!
         <div class="portfolio-bottom swiper-wrapper align-items-center">
             <div class=swiper-slide>
                 <picture>
-                    <source srcset=assets/images/mckup/hey-arte-mobile.webp media="(max-width: 600px)" type=image/webp>
-                    <source srcset=assets/images/mckup/hey-arte.webp type=image/webp>
-                    <img src=assets/images/mckup/hey-arte.webp alt="Hey Arte" title="Hey Arte" loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
+                    <source srcset="{{asset('build/client/images/mckup/hey-arte-mobile.webp')}}" media="(max-width: 600px)" type=image/webp>
+                    <source srcset="{{asset('build/client/images/mckup/hey-arte.webp')}}" type=image/webp>
+                    <img src="{{asset('build/client/images/mckup/hey-arte.webp')}}" alt="Hey Arte" title="Hey Arte" loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
                 </picture>
             </div>
             <div class=swiper-slide>
                 <picture>
-                    <source srcset=assets/images/mckup/flygo-mobile.webp media="(max-width: 600px)" type=image/webp>
-                    <source srcset=assets/images/mckup/flygo.webp type=image/webp>
-                    <img src=assets/images/mckup/flygo.webp alt="Flygo Turismo" title="Flygo Turismo" loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
+                    <source srcset="{{asset('build/client/images/mckup/flygo-mobile.webp')}}" media="(max-width: 600px)" type=image/webp>
+                    <source srcset="{{asset('build/client/images/mckup/flygo.webp')}}" type=image/webp>
+                    <img src="{{asset('build/client/images/mckup/flygo.webp')}}" alt="Flygo Turismo" title="Flygo Turismo" loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
                 </picture>
             </div>
             <div class=swiper-slide>
                 <picture>
-                    <source srcset=assets/images/mckup/anilda-mobile.webp media="(max-width: 600px)" type=image/webp>
-                    <source srcset=assets/images/mckup/anilda.webp type=image/webp>
-                    <img src=assets/images/mckup/anilda.webp alt="Anilda Advogado" title="Anilda Advogado" loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
+                    <source srcset="{{asset('build/client/images/mckup/anilda-mobile.webp')}}" media="(max-width: 600px)" type=image/webp>
+                    <source srcset="{{asset('build/client/images/mckup/anilda.webp')}}" type=image/webp>
+                    <img src="{{asset('build/client/images/mckup/anilda.webp')}}" alt="Anilda Advogado" title="Anilda Advogado" loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
                 </picture>
             </div>
             <div class=swiper-slide>
                 <picture>
-                    <source srcset=assets/images/mckup/hive-mobile.webp media="(max-width: 600px)" type=image/webp>
-                    <source srcset=assets/images/mckup/hive.webp type=image/webp>
-                    <img src=assets/images/mckup/hive.webp alt=Hive title=Hive loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
+                    <source srcset="{{asset('build/client/images/mckup/hive-mobile.webp')}}" media="(max-width: 600px)" type=image/webp>
+                    <source srcset="{{asset('build/client/images/mckup/hive.webp')}}" type=image/webp>
+                    <img src="{{asset('build/client/images/mckup/hive.webp')}}" alt=Hive title=Hive loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
                 </picture>
             </div>
             <div class=swiper-slide>
                 <picture>
-                    <source srcset=assets/images/mckup/eau-sports-mobile.webp media="(max-width: 600px)" type=image/webp>
-                    <source srcset=assets/images/mckup/eau-sports.webp type=image/webp>
-                    <img src=assets/images/mckup/eau-sports.webp alt="EAU Sports" title="EAU Sports" loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
+                    <source srcset="{{asset('build/client/images/mckup/eau-sports-mobile.webp')}}" media="(max-width: 600px)" type=image/webp>
+                    <source srcset="{{asset('build/client/images/mckup/eau-sports.webp')}}" type=image/webp>
+                    <img src="{{asset('build/client/images/mckup/eau-sports.webp')}}" alt="EAU Sports" title="EAU Sports" loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
                 </picture>
             </div>
             <div class=swiper-slide>
                 <picture>
-                    <source srcset=assets/images/mckup/painel-gerenciador-mobile.webp media="(max-width: 600px)" type=image/webp>
-                    <source srcset=assets/images/mckup/painel-gerenciador.webp type=image/webp>
-                    <img src=assets/images/mckup/painel-gerenciador.webp alt="Painel gerenciador de conteúdo" title="Painel gerenciador de conteúdo" loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
+                    <source srcset="{{asset('build/client/images/mckup/painel-gerenciador-mobile.webp')}}" media="(max-width: 600px)" type=image/webp>
+                    <source srcset="{{asset('build/client/images/mckup/painel-gerenciador.webp')}}" type=image/webp>
+                    <img src="{{asset('build/client/images/mckup/painel-gerenciador.webp')}}" alt="Painel gerenciador de conteúdo" title="Painel gerenciador de conteúdo" loading=lazy style=width:100%;max-width:300px;height:auto;object-fit:cover;border-radius:35px>
                 </picture>
             </div>
         </div>
@@ -528,14 +528,14 @@ Fale com a gente!
 </a>
         </div>
     </div>
-    <img src=assets/images/firula-transformed.webp alt=firula-transformed title=firula-transformed class="position-absolute bottom-0 w-auto img-fluid d-none d-md-block" data-aos=fade-up data-aos-delay=200 loading=lazy>
+    <img src="{{asset('build/client/images/firula-transformed.webp')}}" alt=firula-transformed title=firula-transformed class="position-absolute bottom-0 w-auto img-fluid d-none d-md-block" data-aos=fade-up data-aos-delay=200 loading=lazy>
 </section>
 <section id=perfect-choice class="perfect-choice py-5 grey-medium-background" data-aos=fade data-aos-delay=350>
     <div class="max-width m-auto d-flex flex-column flex-md-row justify-content-between align-items-center py-4">
         <div class="content-lef col-12 col-md-4 text-center text-md-end">
             <h2 class=rethink-sans-semiBold> <span>WHI</span>, a escolha perfeita para empresas que precisam:</h2>
             <div class="position-relative d-flex justify-content-center flex-column align-items-center">
-                <img src=assets/images/robot-hand.png alt="Mão de robô com lâmpada" title="Mão de robô com lâmpada" class="w-100 robot-lamp m-auto me-md-5 d-none d-md-block" loading=lazy>
+                <img src="{{asset('build/client/images/robot-hand.png')}}" alt="Mão de robô com lâmpada" title="Mão de robô com lâmpada" class="w-100 robot-lamp m-auto me-md-5 d-none d-md-block" loading=lazy>
                 <a href=https://wa.me/5571996483853 target=_blank rel="noopener noreferrer" class="mt-0 rethink-sans-regular ps-5 text-white call-to-action d-flex justify-content-between align-items-center">
 Fale com a gente!
 <i class="bi bi-whatsapp rounded-circle d-flex justify-content-center align-items-center"></i>
@@ -573,7 +573,7 @@ Fale com a gente!
     </div>
 </section>
 <section id=trust-whi class="trust-whi position-relative py-5 trust-whi-background">
-    <img src=assets/images/hand.png alt="image of hand" title="image of hand" class="position-absolute top-0 hand" data-aos=fade-left data-aos-delay=950 loading=lazy>
+    <img src="{{asset('build/client/images/hand.png')}}" alt="image of hand" title="image of hand" class="position-absolute top-0 hand" data-aos=fade-left data-aos-delay=950 loading=lazy>
     <div class="max-width m-auto d-flex flex-column flex-md-row justify-content-end align-items-center text-center text-md-start py-5" data-aos=zoom-in data-aos-delay=150>
         <h2 class="rethink-sans-semiBold col-12 col-md-8 mt-4 ps-md-4">
             <span>AS PESSOAS</span> <br> que confiam na WHI como parceira de crescimento
@@ -632,42 +632,42 @@ Fale com a gente!
                 <div class="carousel-trust-whi swiper-wrapper align-items-center py-2 px-2">
                     <div class=swiper-slide>
                         <div class="trust-whi-list-item bg-white p-4 rounded-4 border border-dark">
-                            <img src=assets/images/aspas-left.svg alt="Aspas Left" title="Aspas Left" class=apas-left loading=lazy>
+                            <img src="{{asset('build/client/images/aspas-left.svg')}}" alt="Aspas Left" title="Aspas Left" class=apas-left loading=lazy>
                             <p class="text mt-3">Recomendo o trabalho da WHI, especialistas em desenvolvimento de sites, integrações e atividades correlatas. Foram os responsáveis por criar, integrar e configurar o site de vendas da minha fábrica, entregando um design
                                 funcional, intuitivo e alinhado às nossas necessidades. Além de oferecerem suporte técnico confiável e rápido. Parceiros essenciais para minha presença online.</p>
                             <h3 class="rethink-sans-bold text-primary mb-0">Pedro Manot</h3>
                             <h4 class="text-secondary small">CEO da EAU Sports</h4>
-                            <img src=assets/images/aspas-right.svg alt="Aspas Right" title="Aspas Right" class=apas-right loading=lazy>
+                            <img src="{{asset('build/client/images/aspas-right.svg')}}" alt="Aspas Right" title="Aspas Right" class=apas-right loading=lazy>
                         </div>
                     </div>
                     <div class=swiper-slide>
                         <div class="trust-whi-list-item bg-white p-4 rounded-4 border border-dark">
-                            <img src=assets/images/aspas-left.svg alt="Aspas Left" title="Aspas Left" class=apas-left loading=lazy>
+                            <img src="{{asset('build/client/images/aspas-left.svg')}}" alt="Aspas Left" title="Aspas Left" class=apas-left loading=lazy>
                             <p class="text mt-3">Tivemos uma experiência muito bacana com a WHI durante o desenvolvimento de nossos sites. A equipe demonstrou grande comprometimento com os prazos e esteve sempre disponível para ajudar na resolução de problemas, garantindo
                                 um processo ágil e eficiente. Sem dúvida, continuaremos cultivando essa parceria de sucesso.</p>
                             <h3 class="rethink-sans-bold text-primary mb-0">Laura Camilo</h3>
                             <h4 class="text-secondary small">Diretora executiva L7Design</h4>
-                            <img src=assets/images/aspas-right.svg alt="Aspas Right" title="Aspas Right" class=apas-right loading=lazy>
+                            <img src="{{asset('build/client/images/aspas-right.svg')}}" alt="Aspas Right" title="Aspas Right" class=apas-right loading=lazy>
                         </div>
                     </div>
                     <div class=swiper-slide>
                         <div class="trust-whi-list-item bg-white p-4 rounded-4 border border-dark">
-                            <img src=assets/images/aspas-left.svg alt="Aspas Left" title="Aspas Left" class=apas-left loading=lazy>
+                            <img src="{{asset('build/client/images/aspas-left.svg')}}" alt="Aspas Left" title="Aspas Left" class=apas-left loading=lazy>
                             <p class="text mt-3">Trabalhar com a WHI foi uma experiência incrível! Desde o início, se mostraram extremamente profissionais e talentosos. Entenderam perfeitamente a visão que eu tinha para o meu site e trouxe ideias criativas que superaram
                                 minhas expectativas. O processo de desenvolvimento foi fluido. Estou muito satisfeito com o resultado final; meu site não apenas tem uma aparência incrível, mas também é funcional e fácil de navegar.</p>
                             <h3 class="rethink-sans-bold text-primary mb-0">Manuel Santos</h3>
                             <h4 class="text-secondary small">Diretor Executivo da Pindalar</h4>
-                            <img src=assets/images/aspas-right.svg alt="Aspas Right" title="Aspas Right" class=apas-right loading=lazy>
+                            <img src="{{asset('build/client/images/aspas-right.svg')}}" alt="Aspas Right" title="Aspas Right" class=apas-right loading=lazy>
                         </div>
                     </div>
                     <div class=swiper-slide>
                         <div class="trust-whi-list-item bg-white p-3 rounded-4 border border-dark">
-                            <img src=assets/images/aspas-left.svg alt="Aspas Left" title="Aspas Left" class=apas-left loading=lazy>
+                            <img src="{{asset('build/client/images/aspas-left.svg ')}}" alt="Aspas Left" title="Aspas Left" class=apas-left loading=lazy>
                             <p class="text mt-3">Na WHI tivemos o melhor custo-benefício que encontramos no mercado, além de rápidos e criativos, fazem uma reunião de apresentação da empresa e do projeto final, confirmando se está a contento. Gostei bastante e agora
                                 darei seguimento aos demais projetos da empresa.</p>
                             <h3 class="rethink-sans-bold text-primary mb-0">Wesley de Morais</h3>
                             <h4 class="text-secondary small">Diretor Executivo da Flygo Turismo</h4>
-                            <img src=assets/images/aspas-right.svg alt="Aspas Right" title="Aspas Right" class=apas-right loading=lazy>
+                            <img src="{{asset('build/client/images/aspas-right.svg')}}" alt="Aspas Right" title="Aspas Right" class=apas-right loading=lazy>
                         </div>
                     </div>
                 </div>
@@ -688,7 +688,7 @@ Fale com a gente!
                     <h3 class="ex emphasis rethink-sans-semiBold">a gente explica!</h3>
                 </div>
                 <div class=img>
-                    <img src=assets/images/hand-faq.png alt=hand-faq title=hand-faq class="img-fluid mt-3 hand-faq" loading=lazy>
+                    <img src="{{asset('build/client/images/hand-faq.png')}}" alt=hand-faq title=hand-faq class="img-fluid mt-3 hand-faq" loading=lazy>
                 </div>
             </div>
             <div class=col-md-6>

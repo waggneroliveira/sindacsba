@@ -27,24 +27,18 @@
     <noscript>
 <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap">
 </noscript>
-    <link rel=preload as=image href=assets/images/banner.webp>
-    <link rel="preload" as="image" href="assets/images/banner-mob.webp">
+    <link rel=preload as=image href="{{asset('build/client/images/banner.webp')}}">
+    <link rel="preload" as="image" href="{{asset('build/client/images/banner-mob.webp')}}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
 
     @vite([
         'resources/assets/client/css/bootstrap/css/bootstrap.min.css',
         'resources/assets/client/css/bootstrap-icons/bootstrap-icons.css',
-        'resources/assets/client/css/aos/aos.css',
-        'resources/assets/client/css/swiper/swiper-bundle.min.css',
         'resources/assets/client/css/style.css',
-        'resources/assets/client/js/main.js',
     ])
-
-    <link href=assets/vendor/bootstrap/css/bootstrap.min.css rel=stylesheet>
-    <link href=assets/vendor/bootstrap-icons/bootstrap-icons.css rel=stylesheet>
-    <link href=assets/vendor/aos/aos.css rel=stylesheet>
-    <link href=assets/vendor/swiper/swiper-bundle.min.css rel=stylesheet>
-    {{-- <link href=assets/css/style.css rel=stylesheet> --}}
-
+    
     <script defer src=https://cdn.userway.org/widget.js data-account=qSpdtrySSt></script>
     <link rel=preconnect href=https://vlibras.gov.br crossorigin>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6RXZ6TZT0V"></script>
@@ -121,7 +115,7 @@
 <body>
     <header id=header class="py-4 py-sm-5 position w-100 d-flex align-items-center justify-content-between flex-row max-width m-auto">
         <div class=logo-img>
-            <img src=assets/images/logo.png alt="WHI -Web de Alta Inovação" title="WHI -Web de Alta Inovação" class=img-fluid loading=lazy>
+            <img src="{{asset('build/client/images/logo.png')}}" alt="WHI -Web de Alta Inovação" title="WHI -Web de Alta Inovação" class=img-fluid loading=lazy>
         </div>
         <div class="social-links superior d-flex justify-content-center gap-4 text-center">
             <a href=https://www.linkedin.com/company/106948313/admin/dashboard/ aria-label="Visite nosso LinkedIn" target=_blank class="linkedin rounded-circle d-flex justify-content-center align-items-center"><i class="bi bi-linkedin"></i></a>
@@ -138,7 +132,7 @@
         <div class="container py-5">
             <div class="sitemap mt-2 mb-5 row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-3 justify-content-between align-items-center">
                 <div class=logo>
-                    <img src=assets/images/logo-footer.svg alt="WHI - Web de Alta Inovação" title="WHI - Web de Alta Inovação" loading=lazy>
+                    <img src="{{asset('build/client/images/logo-footer.svg')}}" alt="WHI - Web de Alta Inovação" title="WHI - Web de Alta Inovação" loading=lazy>
                 </div>
                 <ul class="list-unstyled text-center">
                     <li class="rethink-sans-semiBold mb-2"><a href=#transformed>Quem Somos</a></li>
@@ -172,18 +166,23 @@ Fale com a gente!
                 </div>
                 <div class=credits>
                     <a href=https://whi.dev.br/>
-                    <img src=assets/images/developed.svg alt="WHI - Web de Alta Inovação" title="WHI - Web de Alta Inovação" loading=lazy>
+                    <img src="{{asset('build/client/images/developed.svg')}}"  alt="WHI - Web de Alta Inovação" title="WHI - Web de Alta Inovação" loading=lazy>
                     </a>
                 </div>
             </div>
         </div>
     </footer>
     <a href=# id=scroll-top class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-    <script src=assets/vendor/bootstrap/js/bootstrap.bundle.min.js defer></script>
-    <script src=assets/vendor/aos/aos.js defer></script>
-    <script src=assets/vendor/typed.js/typed.umd.js defer></script>
-    <script src=assets/vendor/swiper/swiper-bundle.min.js defer></script>
-    <script src=assets/js/default.js defer></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    @vite([
+        'resources/assets/client/css/bootstrap/js/bootstrap.bundle.js',
+        'resources/assets/client/css/typed.js/typed.umd.js',
+        'resources/assets/client/js/default.js',
+    ])
+
     <div vw class=enabled>
         <div vw-access-button class=active></div>
         <div vw-plugin-wrapper>
@@ -194,7 +193,7 @@ Fale com a gente!
         document.addEventListener("DOMContentLoaded", (function() {
             const o = document.createElement("script");
             o.src = "https://vlibras.gov.br/app/vlibras-plugin.js", o.onload = function() {
-                window.VLibras && window.VLibras.Widget ? (new window.VLibras.Widget("https://vlibras.gov.br/app"), console.log("VLibras iniciado com sucesso")) : console.warn("VLibras não foi carregado corretamente.")
+                window.VLibras && window.VLibras.Widget ? (new window.VLibras.Widget("https://vlibras.gov.br/app")) : console.warn("VLibras não foi carregado corretamente.")
             }, document.body.appendChild(o)
         }))
     </script>

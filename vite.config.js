@@ -12,6 +12,38 @@ export default defineConfig({
         viteStaticCopy({
             targets: [
                 {
+                    src: 'resources/assets/client/css/',
+                    dest: 'client'
+                },
+                {
+                    src: 'resources/assets/client/css/aos',
+                    dest: 'client'
+                },
+                {
+                    src: 'resources/assets/client/css/bootstrap',
+                    dest: 'client'
+                },
+                {
+                    src: 'resources/assets/client/css/bootstrap-icons',
+                    dest: 'client'
+                },
+                {
+                    src: 'resources/assets/client/css/swiper',
+                    dest: 'client'
+                },
+                {
+                    src: 'resources/assets/client/css/typed.js',
+                    dest: 'client'
+                },
+                {
+                    src: 'resources/assets/client/images',
+                    dest: 'client'
+                },                
+                {
+                    src: 'resources/assets/client/js/',
+                    dest: 'client'
+                },                
+                {
                     src: 'resources/assets/admin/css',
                     dest: 'admin'
                 },
