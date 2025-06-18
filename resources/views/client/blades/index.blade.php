@@ -1,19 +1,23 @@
 @extends('client.core.client')
 @section('content')
 <section id=hero class="hero position-relative d-flex flex-column section dark-background overflow-hidden">
-    <img id=profileImage src="{{asset('build/client/images/banner.webp')}}" alt="Banner Hero" title="Banner Hero" class=image-hero>
-    <div class="w-100 d-flex justify-content-center flex-column align-items-center position-absolute description">
-        <div class="max-width container">
-            <h1 class="text-white mb-5 rethink-sans-bold">A <span class=emphasis><b>agência</b></span> que fará a sua presença digital trazer <span class=emphasis><b>resultado</b></span></h1>
-            <p class="text-white mb-5 rethink-sans-regular">Faça já <span class=typed data-typed-items="sua  <b>Consultoria Digital</b>, seu <b>Site dinâmico</b>, sua <b>Logomarca</b>, seu <b>Marketing Digital</b>"></span><span class="typed-cursor typed-cursor--blink" aria-hidden=true></span>
-                <span class="typed-cursor typed-cursor--blink" aria-hidden=true></span>
-            </p>
-            <a href=https://wa.me/5571996483853 target=_blank rel="noopener noreferrer" class="rethink-sans-regular ps-5 text-white call-to-action d-flex justify-content-between align-items-center">
-Fale com a gente!
-<i class="bi bi-whatsapp rounded-circle d-flex justify-content-center align-items-center"></i>
-</a>
+    @foreach ($slides as $slide)
+        <img id=profileImage src="{{asset('storage/'. $slide->path_image)}}" alt="Banner Hero" title="Banner Hero" class=image-hero>
+        <div class="w-100 d-flex justify-content-center flex-column align-items-center position-absolute description">
+            <div class="max-width container">
+                <h1 class="text-white mb-5 rethink-sans-bold">{!!$slide->title!!}</h1>
+                <p class="text-white mb-5 rethink-sans-regular">
+                    <span class=typed data-typed-items="{!!$slide->description!!}"></span>
+                    <span class="typed-cursor typed-cursor--blink" aria-hidden=true></span>
+                    <span class="typed-cursor typed-cursor--blink" aria-hidden=true></span>
+                </p>
+                <a href="{{$slide->link}}" target=_blank rel="noopener noreferrer" class="rethink-sans-regular ps-5 text-white call-to-action d-flex justify-content-between align-items-center">
+                Fale com a gente!
+                <i class="bi bi-whatsapp rounded-circle d-flex justify-content-center align-items-center"></i>
+                </a>
+            </div>
         </div>
-    </div>
+    @endforeach
 </section>
 <section id=project class="project grey-background pb-5" data-aos=fade-up data-aos-delay=100>
     <div class="max-width-project m-auto me-0 d-flex flex-column flex-md-row align-items-center justify-content-between py-5">

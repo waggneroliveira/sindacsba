@@ -26,6 +26,10 @@ class Slide extends Model
         'sorting'
     ];
 
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
+    }
     public function scopeSorting($query)
     {
         return $query->orderBy('sorting', 'asc');
