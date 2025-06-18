@@ -12,5 +12,5 @@ body.loaded {
     display: none !important;
 }
 .slide.modal-dialog.modal-dialog-centered{
-    max-width: 980px;
+    max-width: 1200px;
 }

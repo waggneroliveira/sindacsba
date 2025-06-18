@@ -89,7 +89,7 @@
                                                     <label><input data-index="{{$key}}" name="btnSelectItem" class="btnSelectItem" type="checkbox" value="{{$slide->id}}"></label>
                                                 </td>
                                                 <td>
-                                                   {{isset($slide->title)?$slide->title:'-'}}
+                                                   {!!isset($slide->title)?$slide->title:'-'!!}
                                                 </td>
                                                 <td class="table-slide text-center">
                                                     @if ($slide->path_image)

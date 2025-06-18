@@ -114,12 +114,7 @@
         }
     }
     document.addEventListener("DOMContentLoaded", l), window.addEventListener("resize", l),
-        function() {
-            let e = document.getElementById("profileImage");
-            if (!e) return;
-            let t = window.innerWidth <= 885;
-            e.src = t ? "build/client/images/banner-mob.webp" : "build/client/images/banner.webp"
-        }(), document.addEventListener("DOMContentLoaded", (function() {
+        document.addEventListener("DOMContentLoaded", (function() {
             document.querySelectorAll('a[href^="#"]').forEach((function(e) {
                 e.addEventListener("click", (function(e) {
                     e.preventDefault();
