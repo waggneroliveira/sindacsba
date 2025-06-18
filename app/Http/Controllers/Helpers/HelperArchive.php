@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class HelperArchive extends Controller
 {
-    public function renameArchiveUpload(Request $request, $column, $path='')
+    public function renameArchiveUpload(Request $request, $column, $path='', $forceWebp=false)
     {
         !Session::has('timestampArchive')?Session::put('timestampArchive', 1):Session::put('timestampArchive', Session::get('timestampArchive')+1);
         $timestampArchive = Session::get('timestampArchive');
@@ -22,8 +22,7 @@ class HelperArchive extends Controller
             // Rename file
             $nameFile = $request->$column->getClientOriginalName();
             $originalName = Str::of(pathinfo($nameFile, PATHINFO_FILENAME))->slug().'-'.(time()+$timestampArchive);
-            $arrayName = explode('.', $nameFile);
-            $extension = end($arrayName);
+            $extension = $forceWebp ? 'webp' : end(explode('.', $nameFile));
             $nameFile = "{$originalName}.{$extension}";
 
             return [$fileBase64, $nameFile];
@@ -35,8 +34,7 @@ class HelperArchive extends Controller
                 foreach ($request->$column as $key => $value) {
                     $nameFile = $request->$column[$key]->getClientOriginalName();
                     $originalName = Str::of(pathinfo($nameFile, PATHINFO_FILENAME))->slug().'-'.(time()+$timestampArchive);
-                    $arrayName = explode('.', $nameFile);
-                    $extension = end($arrayName);
+                    $extension = $forceWebp ? 'webp' : end(explode('.', $nameFile));
                     $nameFile = "{$originalName}.{$extension}";
                     $request->$column[$key]->storeAs($path, "{$originalName}.{$extension}");
                     array_push($arrNameFile, "{$originalName}.{$extension}");
@@ -45,8 +43,7 @@ class HelperArchive extends Controller
             }else{
                 $nameFile = $request->$column->getClientOriginalName();
                 $originalName = Str::of(pathinfo($nameFile, PATHINFO_FILENAME))->slug().'-'.(time()+$timestampArchive);
-                $arrayName = explode('.', $nameFile);
-                $extension = end($arrayName);
+                $extension = $forceWebp ? 'webp' : end(explode('.', $nameFile));
                 $nameFile = "{$originalName}.{$extension}";
             }
 

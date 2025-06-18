@@ -1,3 +1,7 @@
+@php
+    $textareaId = $textareaId ?? 'description' . (isset($slide->id) ? $slide->id : '');
+@endphp
+
 <div class="d-flex justify-content-between">
     <div class="row col-lg-6">
         <div class="mb-3">
@@ -33,12 +37,14 @@
     <div class="row col-lg-6">
         <div class="col-lg-12">
             <div class="mt-3">
+                <label for="title" class="form-label">Imagem desktop </label>
                 <input type="file" name="path_image" data-plugins="dropify" data-default-file="{{isset($slide)?$slide->path_image<>''?url('storage/'.$slide->path_image):'':''}}"  />
                 <p class="text-muted text-center mt-2 mb-0">{{__('dashboard.text_img_size')}} <b class="text-danger">2 MB</b>.</p>
             </div>
         </div>
         <div class="col-lg-12">
             <div class="mt-3">
+                <label for="title" class="form-label">Imagem mobile </label>
                 <input type="file" name="path_image_mobile" data-plugins="dropify" data-default-file="{{isset($slide)?$slide->path_image_mobile<>''?url('storage/'.$slide->path_image_mobile):'':''}}"  />
                 <p class="text-muted text-center mt-2 mb-0">{{__('dashboard.text_img_size')}} <b class="text-danger">2 MB</b>.</p>
             </div>

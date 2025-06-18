@@ -15,6 +15,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 use App\Repositories\SettingThemeRepository;
 use App\Repositories\UserPermissionRepository;
 use App\Http\Controllers\Helpers\HelperArchive;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 
 class SlideController extends Controller
 {
@@ -38,6 +40,7 @@ class SlideController extends Controller
     {
         $data = $request->except(['path_image', 'path_image_mobile']);
         $helper = new HelperArchive();
+        $manager = new ImageManager(GdDriver::class);
 
         $request->validate([
             'path_image' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
@@ -45,23 +48,21 @@ class SlideController extends Controller
         ]);
     
         //Slide desktop
-        $path_image = $helper->renameArchiveUpload($request, 'path_image');
+        $path_image = $helper->renameArchiveUpload($request, 'path_image', $this->pathUpload, true);
         if ($path_image) {
             $data['path_image'] = $this->pathUpload . $path_image;
-        }
-        if ($path_image) {
-            $request->file('path_image')->storeAs($this->pathUpload, $path_image);
+            $image = $manager->read($request->file('path_image'))->toWebp()->toString();
+            Storage::put($this->pathUpload . $path_image, $image);
         }
 
         $data['active'] = $request->active ? 1 : 0;
 
         //Slide mobile
-        $path_image_mobile = $helper->renameArchiveUpload($request, 'path_image_mobile');
+        $path_image_mobile = $helper->renameArchiveUpload($request, 'path_image_mobile', $this->pathUpload, true);
         if ($path_image_mobile) {
             $data['path_image_mobile'] = $this->pathUpload . $path_image_mobile;
-        }
-        if ($path_image_mobile) {
-            $request->file('path_image_mobile')->storeAs($this->pathUpload, $path_image_mobile);
+            $imageMobile = $manager->read($request->file('path_image_mobile'))->toWebp()->toString();
+            Storage::put($this->pathUpload . $path_image_mobile, $imageMobile);
         }
 
         try {
@@ -81,15 +82,15 @@ class SlideController extends Controller
     {
         $data = $request->all();
         $helper = new HelperArchive();
+        $manager = new ImageManager(GdDriver::class);
 
         //slide desktop
-        $path_image = $helper->renameArchiveUpload($request, 'path_image');
+        $path_image = $helper->renameArchiveUpload($request, 'path_image', $this->pathUpload, true);
         if ($path_image) {
             $data['path_image'] = $this->pathUpload . $path_image;
-        }
-        if ($path_image) {
-            $request->file('path_image')->storeAs($this->pathUpload, $path_image);
-            Storage::delete(isset($slide->path_image));
+            $image = $manager->read($request->file('path_image'))->toWebp()->toString();
+            Storage::put($this->pathUpload . $path_image, $image);
+            Storage::delete(isset($slide->path_image)?$slide->path_image:'');
         }
         if(isset($request->delete_path_image) && !$path_image){
             $inputFile = $request->delete_path_image;
@@ -98,13 +99,12 @@ class SlideController extends Controller
         }
 
         //slide mobile
-        $path_image_mobile = $helper->renameArchiveUpload($request, 'path_image_mobile');
+        $path_image_mobile = $helper->renameArchiveUpload($request, 'path_image_mobile', $this->pathUpload, true);
         if ($path_image_mobile) {
             $data['path_image_mobile'] = $this->pathUpload . $path_image_mobile;
-        }
-        if ($path_image_mobile) {
-            $request->file('path_image_mobile')->storeAs($this->pathUpload, $path_image_mobile);
-            Storage::delete(isset($slide->path_image_mobile));
+            $imageMobile = $manager->read($request->file('path_image_mobile'))->toWebp()->toString();
+            Storage::put($this->pathUpload . $path_image_mobile, $imageMobile);
+            Storage::delete(isset($slide->path_image_mobile)?$slide->path_image_mobile:'');
         }
         if(isset($request->delete_path_image_mobile) && !$path_image_mobile){
             $inputFile = $request->delete_path_image_mobile;

@@ -73,8 +73,9 @@
                                             <th class="bs-checkbox">
                                                 <label><input name="btnSelectAll" type="checkbox"></label>
                                             </th>
-                                            <th>{{__('dashboard.slides')}}</th>
-                                            <th>{{__('blades/configEmail.email')}}</th>
+                                            <th>Título</th>
+                                            <th>Imagem Desktop</th>
+                                            <th>Imagem Mobile</th>
                                             <th>{{__('dashboard.created_at')}}</th>
                                             <th>{{__('dashboard.status')}}</th>
                                             <th style="width: 85px;">{{__('dashboard.action')}}</th>
@@ -87,17 +88,23 @@
                                                 <td class="bs-checkbox">
                                                     <label><input data-index="{{$key}}" name="btnSelectItem" class="btnSelectItem" type="checkbox" value="{{$slide->id}}"></label>
                                                 </td>
-                                                <td class="table-slide">
+                                                <td>
+                                                   {{isset($slide->title)?$slide->title:'-'}}
+                                                </td>
+                                                <td class="table-slide text-center">
                                                     @if ($slide->path_image)
-                                                        <img src="{{ asset('storage/'.$slide->path_image) }}" alt="table-slide" class="me-2 rounded-circle">
+                                                        <img src="{{ asset('storage/'.$slide->path_image) }}" alt="table-slide" class="me-2 rounded-circle" style="width: 40px; height: 40px;">
                                                         @else      
                                                         <img src="{{Vite::asset('resources/assets/admin/images/slides/slide-3.jpg')}}" alt="table-slide" class="me-2 rounded-circle">
                                                     @endif
-                                                    <a href="javascript:void(0);" class="text-body fw-semibold">{{$slide->name}}</a>
-                                                </td>
-                                                <td>
-                                                   {{$slide->email}}
-                                                </td>
+                                                </td>                                                
+                                                <td class="table-slide text-center">
+                                                    @if ($slide->path_image_mobile)
+                                                        <img src="{{ asset('storage/'.$slide->path_image_mobile) }}" alt="table-slide" class="me-2 rounded-circle" style="width: 40px; height: 40px;">
+                                                        @else      
+                                                        <img src="{{Vite::asset('resources/assets/admin/images/slides/slide-3.jpg')}}" alt="table-slide" class="me-2 rounded-circle">
+                                                    @endif
+                                                </td>                                                
                                                 <td>
                                                     @php
                                                         $locales = [
@@ -129,7 +136,7 @@
                                                     @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['slide.visualizar', 'slide.editar'])) 
                                                         <button data-bs-toggle="modal" data-bs-target="#slide-edit-{{$slide->id}}" class="tabledit-edit-button btn btn-success" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
                                                         <div class="modal fade" id="slide-edit-{{$slide->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="slide modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header bg-light">
                                                                         <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.btn_edit')}}</h4>
