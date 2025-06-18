@@ -6,3 +6,11 @@ body {
 body.loaded {
     opacity: 1;
 }
+.cke_notifications_area{
+    z-index: -1 !important;
+    top: 0 !important;
+    display: none !important;
+}
+.slide.modal-dialog.modal-dialog-centered{
+    max-width: 980px;
+}
