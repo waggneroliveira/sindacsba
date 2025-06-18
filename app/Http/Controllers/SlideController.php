@@ -2,90 +2,161 @@
 
 namespace App\Http\Controllers;
 
+use Log;
+use App\Models\User;
 use App\Models\Slide;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Repositories\SettingThemeRepository;
+use App\Repositories\UserPermissionRepository;
+use App\Http\Controllers\Helpers\HelperArchive;
 
 class SlideController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $pathUpload = 'admin/uploads/images/slide/';
+    public function index(UserPermissionRepository $userPermissionRepository)
     {
-        $slides = Slide::get();
+        $slides = Slide::sorting()->get();
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
+        $users = User::excludeSuper()->with('roles');
+        $filteredUsers = $userPermissionRepository->filterUsersByPermissions($users);
+
+        if ($filteredUsers === 'forbidden') {
+            return view('admin.error.403', compact('settingTheme'));
+        }
+        
         return view('admin.blades.slide.index', compact('slides'));
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->except(['path_image', 'path_image_mobile']);
+        $helper = new HelperArchive();
+
+        $request->validate([
+            'path_image' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
+            'path_image_mobile' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
+        ]);
+    
+        //Slide desktop
+        $path_image = $helper->renameArchiveUpload($request, 'path_image');
+        if ($path_image) {
+            $data['path_image'] = $this->pathUpload . $path_image;
+        }
+        if ($path_image) {
+            $request->file('path_image')->storeAs($this->pathUpload, $path_image);
+        }
+
+        $data['active'] = $request->active ? 1 : 0;
+
+        //Slide mobile
+        $path_image_mobile = $helper->renameArchiveUpload($request, 'path_image_mobile');
+        if ($path_image_mobile) {
+            $data['path_image_mobile'] = $this->pathUpload . $path_image_mobile;
+        }
+        if ($path_image_mobile) {
+            $request->file('path_image_mobile')->storeAs($this->pathUpload, $path_image_mobile);
+        }
+
+        try {
+            DB::beginTransaction();
+                Slide::create($data);
+            DB::commit();
+            session()->flash('success', __('dashboard.response_item_create'));
+            return redirect()->back();
+        } catch (\Exception $e) {
+            DB::rollback();
+            Alert::success('error', __('dashboard.response_item_error_create'));
+            return redirect()->back();
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Slide $slide)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Slide $slide)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Slide $slide)
     {
-        //
+        $data = $request->all();
+        $helper = new HelperArchive();
+
+        //slide desktop
+        $path_image = $helper->renameArchiveUpload($request, 'path_image');
+        if ($path_image) {
+            $data['path_image'] = $this->pathUpload . $path_image;
+        }
+        if ($path_image) {
+            $request->file('path_image')->storeAs($this->pathUpload, $path_image);
+            Storage::delete(isset($slide->path_image));
+        }
+        if(isset($request->delete_path_image) && !$path_image){
+            $inputFile = $request->delete_path_image;
+            Storage::delete($slide->$inputFile);
+            $data['path_image'] = null;
+        }
+
+        //slide mobile
+        $path_image_mobile = $helper->renameArchiveUpload($request, 'path_image_mobile');
+        if ($path_image_mobile) {
+            $data['path_image_mobile'] = $this->pathUpload . $path_image_mobile;
+        }
+        if ($path_image_mobile) {
+            $request->file('path_image_mobile')->storeAs($this->pathUpload, $path_image_mobile);
+            Storage::delete(isset($slide->path_image_mobile));
+        }
+        if(isset($request->delete_path_image_mobile) && !$path_image_mobile){
+            $inputFile = $request->delete_path_image_mobile;
+            Storage::delete($slide->$inputFile);
+            $data['path_image_mobile'] = null;
+        }
+
+        try {
+            DB::beginTransaction();
+                $data['active'] = $request->active ? 1 : 0;
+                
+                $slide->fill($data)->save();
+
+                //slide desktop 
+                if ($path_image) {
+                    Storage::delete($this->pathUpload . $path_image);
+                }
+                if ($path_image) {
+                    $request->file('path_image')->storeAs($this->pathUpload, $path_image);
+                }
+                //slide mobile
+                if ($path_image_mobile) {
+                    Storage::delete($this->pathUpload . $path_image_mobile);
+                }
+                if ($path_image_mobile) {
+                    $request->file('path_image_mobile')->storeAs($this->pathUpload, $path_image_mobile);
+                }
+            DB::commit();
+            session()->flash('success', __('dashboard.response_item_update'));
+            return redirect()->back();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Alert::error('Erro', __('dashboard.response_item_error_update'));
+            return redirect()->back();
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Slide $slide)
     {
-        //
+        Storage::delete(isset($slide->path_image)??$slide->path_image);
+        Storage::delete(isset($slide->path_image_mobile)??$slide->path_image_mobile);
+        $slide->delete();
+        Session::flash('success',__('dashboard.response_item_delete'));
+        return redirect()->back();
     }
 
     public function destroySelected(Request $request)
-    {
-        if (!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can(['usuario.visualizar', 'usuario.remover'])) {
-            return view('admin.error.403');
-        }
-    
+    {    
         foreach ($request->deleteAll as $slideId) {
             $slide = Slide::find($slideId);
     
             if ($slide) {
-                // Log para verificar os dados do usuário
-                \Log::info('Dados do usuário antes da exclusão:', [
-                    'id' => $slide->id,
-                    'name' => $slide->name,
-                    'email' => $slide->email,
-                    'active' => $slide->active,
-                    'sorting' => $slide->sorting,
-                    'path_image' => $slide->path_image,
-                ]);
-    
                 activity()
                     ->causedBy(Auth::user())
                     ->performedOn($slide)
@@ -93,11 +164,12 @@ class SlideController extends Controller
                     ->withProperties([
                         'attributes' => [
                             'id' => $slideId,
-                            'name' => $slide->name,
-                            'email' => $slide->email,
-                            'active' => $slide->active,
                             'path_image' => $slide->path_image,
+                            'path_image_mobile' => $slide->path_image_mobile,
+                            'title' => $slide->title,
+                            'description' => $slide->description,
                             'sorting' => $slide->sorting,
+                            'active' => $slide->active,
                             'event' => 'multiple_deleted',
                         ]
                     ])
@@ -115,21 +187,20 @@ class SlideController extends Controller
     
         return Response::json(['status' => 'error', 'message' => 'Nenhum item foi deletado.'], 500);
     }
-    
+
     public function sorting(Request $request)
     {
         foreach($request->arrId as $sorting => $id) {
             $slide = Slide::find($id);
     
-            if($slide) {
-                
-                // Log para verificar os dados do usuário
-                \Log::info('Dados do usuário antes da exclusão:', [
-                    'id' => $slide->id,
-                    'name' => $slide->name,
-                    'sorting' => $slide->sorting,
-                ]);
+            if ($slide) {
+                $slide->sorting = $sorting;
+                $slide->save();
+            } else {
+                Log::warning("Item com ID $id não encontrado.");
+            }
 
+            if($slide) {
                 activity()
                     ->causedBy(Auth::user())
                     ->performedOn($slide)
@@ -137,8 +208,12 @@ class SlideController extends Controller
                     ->withProperties([
                         'attributes' => [
                             'id' => $id,
-                            'name' => $slide->name,
-                            'sorting' => $sorting,
+                            'path_image' => $slide->path_image,
+                            'path_image_mobile' => $slide->path_image_mobile,
+                            'title' => $slide->title,
+                            'description' => $slide->description,
+                            'sorting' => $slide->sorting,
+                            'active' => $slide->active,
                             'event' => 'order_updated',
                         ]
                     ])

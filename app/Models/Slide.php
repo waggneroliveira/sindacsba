@@ -23,8 +23,13 @@ class Slide extends Model
         'sorting',
         'path_image_mobile',
         'path_image',
+        'sorting'
     ];
 
+    public function scopeSorting($query)
+    {
+        return $query->orderBy('sorting', 'asc');
+    }
     public function getActivitylogOptions(): LogOptions
     {
         $activityLogService = new ActivityLogService($this);
