@@ -13,6 +13,8 @@ class AuditActivity extends Model
     {
         switch ($subjectType) { 
            
+            case Project::class:
+                return 'Projetos';
             case StackSessionTitle::class:
                 return 'Título Sessão Tecnologias';
             case Stack::class:

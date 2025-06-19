@@ -2,28 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Stack;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Response;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\Helpers\HelperArchive;
-use App\Models\StackSessionTitle;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
-use Illuminate\Support\Facades\Log;
 
-class StackController extends Controller
+class ProjectController extends Controller
 {
-    protected $pathUpload = 'admin/uploads/image/thumb/';
+    protected $pathUpload = 'admin/uploads/project/image/';
     public function index()
     {
-        $stacks = Stack::sorting()->get();
-        $stackSessionTitle = StackSessionTitle::first();
-        return view('admin.blades.stack.index', compact('stacks', 'stackSessionTitle'));
+        //
     }
 
     public function store(Request $request)
@@ -54,7 +48,7 @@ class StackController extends Controller
 
         try {
             DB::beginTransaction();
-                Stack::create($data);
+                Project::create($data);
             DB::commit();
             session()->flash('success', __('dashboard.response_item_create'));
             return redirect()->back();
@@ -65,7 +59,7 @@ class StackController extends Controller
         }
     }
 
-    public function update(Request $request, Stack $stack)
+    public function update(Request $request, Project $project)
     {
         $data = $request->all();
         $helper = new HelperArchive();
@@ -83,11 +77,11 @@ class StackController extends Controller
                 $image = $manager->read($file)->toWebp(quality: 75)->toString();
                 Storage::put($this->pathUpload . $path_image, $image);
             }
-            Storage::delete(isset($stack->path_image)?$stack->path_image:'');
+            Storage::delete(isset($project->path_image)?$project->path_image:'');
         }
         if(isset($request->delete_path_image) && !$path_image){
             $inputFile = $request->delete_path_image;
-            Storage::delete($stack->$inputFile);
+            Storage::delete($project->$inputFile);
             $data['path_image'] = null;
         }
 
@@ -95,9 +89,9 @@ class StackController extends Controller
             DB::beginTransaction();
                 $data['active'] = $request->active ? 1 : 0;
                 
-                $stack->fill($data)->save();
+                $project->fill($data)->save();
 
-                //stack desktop 
+                //project desktop 
                 if ($path_image) {
                     Storage::delete($this->pathUpload . $path_image);
                 }
@@ -115,82 +109,11 @@ class StackController extends Controller
         }
     }
 
-    public function destroy(Stack $stack)
+    public function destroy(Project $project)
     {
-        Storage::delete(isset($stack->path_image)??$stack->path_image);
-        $stack->delete();
+        Storage::delete(isset($project->path_image)??$project->path_image);
+        $project->delete();
         Session::flash('success',__('dashboard.response_item_delete'));
         return redirect()->back();
-    }
-
-    public function destroySelected(Request $request)
-    {    
-        foreach ($request->deleteAll as $stackId) {
-            $stack = Stack::find($stackId);
-    
-            if ($stack) {
-                activity()
-                    ->causedBy(Auth::user())
-                    ->performedOn($stack)
-                    ->event('multiple_deleted')
-                    ->withProperties([
-                        'attributes' => [
-                            'id' => $stackId,
-                            'path_image' => $stack->path_image,
-                            'title' => $stack->title,
-                            'sorting' => $stack->sorting,
-                            'active' => $stack->active,
-                            'event' => 'multiple_deleted',
-                        ]
-                    ])
-                    ->log('multiple_deleted');
-            } else {
-                \Log::warning("Item com ID $stackId não encontrado.");
-            }
-        }
-    
-        $deleted = Stack::whereIn('id', $request->deleteAll)->delete();
-    
-        if ($deleted) {
-            return Response::json(['status' => 'success', 'message' => $deleted . ' '.__('dashboard.response_item_delete')]);
-        }
-    
-        return Response::json(['status' => 'error', 'message' => 'Nenhum item foi deletado.'], 500);
-    }
-
-    public function sorting(Request $request)
-    {
-        foreach($request->arrId as $sorting => $id) {
-            $stack = Stack::find($id);
-    
-            if ($stack) {
-                $stack->sorting = $sorting;
-                $stack->save();
-            } else {
-                Log::warning("Item com ID $id não encontrado.");
-            }
-
-            if($stack) {
-                activity()
-                    ->causedBy(Auth::user())
-                    ->performedOn($stack)
-                    ->event('order_updated')
-                    ->withProperties([
-                        'attributes' => [
-                            'id' => $id,
-                            'path_image' => $stack->path_image,
-                            'title' => $stack->title,
-                            'sorting' => $stack->sorting,
-                            'active' => $stack->active,
-                            'event' => 'order_updated',
-                        ]
-                    ])
-                    ->log('order_updated');
-            } else {
-                \Log::warning("Item com ID $id não encontrado.");
-            }
-        }
-    
-        return Response::json(['status' => 'success']);
     }
 }
