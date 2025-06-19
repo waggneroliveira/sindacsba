@@ -36,123 +36,158 @@ class SlideController extends Controller
         
     }
 
-    public function store(Request $request)
-    {
-        $data = $request->except(['path_image', 'path_image_mobile']);
-        $helper = new HelperArchive();
-        $manager = new ImageManager(GdDriver::class);
+public function store(Request $request)
+{
+    $data = $request->except(['path_image', 'path_image_mobile']);
+    $helper = new HelperArchive();
+    $manager = new ImageManager(GdDriver::class);
 
-        $request->validate([
-            'path_image' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
-            'path_image_mobile' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
-        ]);
-    
-        //Slide desktop
-        $path_image = $helper->renameArchiveUpload($request, 'path_image', $this->pathUpload, true);
-        if ($path_image) {
-            $data['path_image'] = $this->pathUpload . $path_image;
-            $file = $request->file('path_image');
-            $mime = $file->getMimeType();
-            if ($mime === 'image/svg+xml') {
-                Storage::putFileAs($this->pathUpload, $file, $path_image);
-            } else {
-                $image = $manager->read($file)->toWebp(quality: 75)->toString();
-                Storage::put($this->pathUpload . $path_image, $image);
-            }
+    $request->validate([
+        'path_image' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
+        'path_image_mobile' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
+    ]);
+
+    // Slide desktop
+    if ($request->hasFile('path_image')) {
+        $file = $request->file('path_image');
+        $mime = $file->getMimeType();
+        $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.webp';
+
+        if ($mime === 'image/svg+xml') {
+            Storage::putFileAs($this->pathUpload, $file, $filename);
+        } else {
+            $image = $manager->read($file)
+                ->resize(1200, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->toWebp(quality: 70)
+                ->toString();
+
+            Storage::put($this->pathUpload . $filename, $image);
         }
 
-        $data['active'] = $request->active ? 1 : 0;
-
-        //Slide mobile
-        $path_image_mobile = $helper->renameArchiveUpload($request, 'path_image_mobile', $this->pathUpload, true);
-        if ($path_image_mobile) {
-            $data['path_image_mobile'] = $this->pathUpload . $path_image_mobile;
-            $fileMobile = $request->file('path_image_mobile');
-            $mimeMobile = $fileMobile->getMimeType();
-            if ($mimeMobile === 'image/svg+xml') {
-                Storage::putFileAs($this->pathUpload, $fileMobile, $path_image_mobile);
-            } else {
-                $imageMobile = $manager->read($fileMobile)->toWebp(quality: 75)->toString();
-                Storage::put($this->pathUpload . $path_image_mobile, $imageMobile);
-            }
-        }
-
-        try {
-            DB::beginTransaction();
-                Slide::create($data);
-            DB::commit();
-            session()->flash('success', __('dashboard.response_item_create'));
-            return redirect()->back();
-        } catch (\Exception $e) {
-            DB::rollback();
-            Alert::success('error', __('dashboard.response_item_error_create'));
-            return redirect()->back();
-        }
+        $data['path_image'] = $this->pathUpload . $filename;
     }
 
-    public function update(Request $request, Slide $slide)
-    {
-        $data = $request->all();
-        $helper = new HelperArchive();
-        $manager = new ImageManager(GdDriver::class);
+    // Slide mobile
+    if ($request->hasFile('path_image_mobile')) {
+        $fileMobile = $request->file('path_image_mobile');
+        $mimeMobile = $fileMobile->getMimeType();
+        $filenameMobile = pathinfo($fileMobile->getClientOriginalName(), PATHINFO_FILENAME) . '_mobile.webp';
 
-        //slide desktop
-        $path_image = $helper->renameArchiveUpload($request, 'path_image', $this->pathUpload, true);
-        if ($path_image) {
-            $data['path_image'] = $this->pathUpload . $path_image;
-            $image = $manager->read($request->file('path_image'))->toWebp()->toString();
-            Storage::put($this->pathUpload . $path_image, $image);
-            Storage::delete(isset($slide->path_image)?$slide->path_image:'');
-        }
-        if(isset($request->delete_path_image) && !$path_image){
-            $inputFile = $request->delete_path_image;
-            Storage::delete($slide->$inputFile);
-            $data['path_image'] = null;
-        }
+        if ($mimeMobile === 'image/svg+xml') {
+            Storage::putFileAs($this->pathUpload, $fileMobile, $filenameMobile);
+        } else {
+            $imageMobile = $manager->read($fileMobile)
+                ->resize(768, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->toWebp(quality: 70)
+                ->toString();
 
-        //slide mobile
-        $path_image_mobile = $helper->renameArchiveUpload($request, 'path_image_mobile', $this->pathUpload, true);
-        if ($path_image_mobile) {
-            $data['path_image_mobile'] = $this->pathUpload . $path_image_mobile;
-            $imageMobile = $manager->read($request->file('path_image_mobile'))->toWebp()->toString();
-            Storage::put($this->pathUpload . $path_image_mobile, $imageMobile);
-            Storage::delete(isset($slide->path_image_mobile)?$slide->path_image_mobile:'');
-        }
-        if(isset($request->delete_path_image_mobile) && !$path_image_mobile){
-            $inputFile = $request->delete_path_image_mobile;
-            Storage::delete($slide->$inputFile);
-            $data['path_image_mobile'] = null;
+            Storage::put($this->pathUpload . $filenameMobile, $imageMobile);
         }
 
-        try {
-            DB::beginTransaction();
-                $data['active'] = $request->active ? 1 : 0;
-                
-                $slide->fill($data)->save();
-
-                //slide desktop 
-                if ($path_image) {
-                    Storage::delete($this->pathUpload . $path_image);
-                }
-                if ($path_image) {
-                    $request->file('path_image')->storeAs($this->pathUpload, $path_image);
-                }
-                //slide mobile
-                if ($path_image_mobile) {
-                    Storage::delete($this->pathUpload . $path_image_mobile);
-                }
-                if ($path_image_mobile) {
-                    $request->file('path_image_mobile')->storeAs($this->pathUpload, $path_image_mobile);
-                }
-            DB::commit();
-            session()->flash('success', __('dashboard.response_item_update'));
-            return redirect()->back();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Alert::error('Erro', __('dashboard.response_item_error_update'));
-            return redirect()->back();
-        }
+        $data['path_image_mobile'] = $this->pathUpload . $filenameMobile;
     }
+
+    $data['active'] = $request->active ? 1 : 0;
+
+    try {
+        DB::beginTransaction();
+        Slide::create($data);
+        DB::commit();
+        session()->flash('success', __('dashboard.response_item_create'));
+    } catch (\Exception $e) {
+        DB::rollback();
+        Alert::error('Erro', __('dashboard.response_item_error_create'));
+    }
+
+    return redirect()->back();
+}
+
+
+public function update(Request $request, Slide $slide)
+{
+    $data = $request->all();
+    $helper = new HelperArchive();
+    $manager = new ImageManager(GdDriver::class);
+
+    // Slide desktop
+    if ($request->hasFile('path_image')) {
+        $file = $request->file('path_image');
+        $mime = $file->getMimeType();
+        $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.webp';
+
+        if ($mime === 'image/svg+xml') {
+            Storage::putFileAs($this->pathUpload, $file, $filename);
+        } else {
+            $image = $manager->read($file)
+                ->resize(1200, 780, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->toWebp(quality: 95)
+                ->toString();
+
+            Storage::put($this->pathUpload . $filename, $image);
+        }
+
+        Storage::delete(isset($slide->path_image)??$slide->path_image);
+        $data['path_image'] = $this->pathUpload . $filename;
+    }
+
+    if (isset($request->delete_path_image)) {
+        Storage::delete(isset($slide->path_image)??$slide->path_image);
+        $data['path_image'] = null;
+    }
+
+    // Slide mobile
+    if ($request->hasFile('path_image_mobile')) {
+        $fileMobile = $request->file('path_image_mobile');
+        $mimeMobile = $fileMobile->getMimeType();
+        $filenameMobile = pathinfo($fileMobile->getClientOriginalName(), PATHINFO_FILENAME) . '_mobile.webp';
+
+        if ($mimeMobile === 'image/svg+xml') {
+            Storage::putFileAs($this->pathUpload, $fileMobile, $filenameMobile);
+        } else {
+            $imageMobile = $manager->read($fileMobile)
+                ->resize(480, 768, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->toWebp(quality: 70)
+                ->toString();
+
+            Storage::put($this->pathUpload . $filenameMobile, $imageMobile);
+        }
+
+        Storage::delete($slide->path_image_mobile);
+        $data['path_image_mobile'] = $this->pathUpload . $filenameMobile;
+    }
+
+    if (isset($request->delete_path_image_mobile)) {
+        Storage::delete($slide->path_image_mobile);
+        $data['path_image_mobile'] = null;
+    }
+
+    $data['active'] = $request->active ? 1 : 0;
+
+    try {
+        DB::beginTransaction();
+        $slide->fill($data)->save();
+        DB::commit();
+        session()->flash('success', __('dashboard.response_item_update'));
+    } catch (\Exception $e) {
+        DB::rollBack();
+        Alert::error('Erro', __('dashboard.response_item_error_update'));
+    }
+
+    return redirect()->back();
+}
+
 
     public function destroy(Slide $slide)
     {

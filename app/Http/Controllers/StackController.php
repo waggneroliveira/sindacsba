@@ -14,6 +14,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\Helpers\HelperArchive;
 use App\Models\StackSessionTitle;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
+use Illuminate\Support\Facades\Log;
 
 class StackController extends Controller
 {

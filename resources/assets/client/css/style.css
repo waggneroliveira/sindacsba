@@ -236,7 +236,7 @@ h1, h2, h3, h4, h5, h6  {
 .image-hero  {
     width: 100%;
     height: auto;
-    aspect-ratio: 1521 / 730;
+    aspect-ratio: 1200 / 780;
     object-fit: cover;
     display: block;
 }
