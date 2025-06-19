@@ -21,6 +21,9 @@ use App\Http\Controllers\AuditActivityController;
 use App\Http\Controllers\Auth\PasswordEmailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\SlideController;
+use App\Http\Controllers\StackController;
+use App\Http\Controllers\StackSessionTitleController;
+use App\Models\StackSessionTitle;
 
 Route::get('painel/', function () {
     return redirect()->route('admin.dashboard.painel');
@@ -92,7 +95,19 @@ Route::prefix('painel/')->group(function () {
         ->name('admin.dashboard.slide.destroySelected');
         Route::post('slides/sorting', [SlideController::class, 'sorting'])
         ->name('admin.dashboard.slide.sorting');
-
+        
+        //STACKS
+        Route::resource('stacks', StackController::class)
+        ->names('admin.dashboard.stack')
+        ->parameters(['stacks'=>'stack']);
+        Route::post('stacks/delete', [StackController::class, 'destroySelected'])
+        ->name('admin.dashboard.stack.destroySelected');
+        Route::post('stacks/sorting', [StackController::class, 'sorting'])
+        ->name('admin.dashboard.stack.sorting');
+        //STACKSESSIONTITLE
+        Route::resource('titulo-da-sessao', StackSessionTitleController::class)
+        ->names('admin.dashboard.stackSessionTitle')
+        ->parameters(['titulo-da-sessao'=>'stackSessionTitle']);
         //E-MAIL CONFIG
         Route::resource('configuracao-de-email', SettingEmailController::class)
         ->names('admin.dashboard.settingEmail')

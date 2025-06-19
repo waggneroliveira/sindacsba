@@ -22,6 +22,18 @@ class PermissionsSeeder extends Seeder
                 'configurar smtp',
                 'testar conexao smtp'
             ],
+            'slide'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
+            'stack'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
             'grupo'=>[
                 'Criar',
                 'Editar',                

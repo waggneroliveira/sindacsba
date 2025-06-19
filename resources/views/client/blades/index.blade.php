@@ -26,11 +26,13 @@
 </section>
 <section id=project class="project grey-background pb-5" data-aos=fade-up data-aos-delay=100>
     <div class="max-width-project m-auto me-0 d-flex flex-column flex-md-row align-items-center justify-content-between py-5">
-        <div class=col-2 data-aos=fade-right data-aos-delay=120>
-            <p class="mb-0 text-left-project rethink-sans-regular">
-                +20 de tecnologias fazem rotina diária com a WHI
-            </p>
-        </div>
+        @if ($stackSessionTitle)
+            <div class=col-2 data-aos=fade-right data-aos-delay=120>
+                <p class="mb-0 text-left-project rethink-sans-regular">
+                    {{$stackSessionTitle->title}}
+                </p>
+            </div>
+        @endif
         <div class=col-lg-9 data-aos=fade-left data-aos-delay=150>
             <div class=max-width>
                 <div class="stack-details-slider swiper init-swiper">
@@ -69,66 +71,11 @@
                         }
                     </script>
                     <div class="carousel-project swiper-wrapper align-items-center">
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/html.svg')}}" alt=Html title=Html loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/css.svg')}}" alt=Css title=Css loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/sass.webp')}}" alt=Sass title=Sass loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/js.svg')}}" alt=JavaScript title=JavaScript loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/jquery.svg')}}" alt=Jquery title=Jquery loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/php.png')}}" alt=Php title=Php loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/laravel.svg')}}" alt=Laravel title=Laravel loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/bs.svg')}}" alt=Booststrap title=Booststrap loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/tailwind.svg')}}" alt=Tailwind title=Tailwind loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/vue.svg')}}" title=Vue loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/wp.svg')}}" alt=WordPress title=WordPress loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/git.svg')}}" alt=Git title=Git loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/github.svg')}}" alt=GitHub title=GitHub loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/mysql.svg')}}" alt=MySQL title=MySQL loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/figma.svg')}}" alt=Figma title=Figma loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/nuvemshop.svg')}}" alt=Nuvemshop title=Nuvemshop loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/adobe.svg')}}" alt=Adobe title=Adobe loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/instagram.svg')}}" alt=Instagram title=Instagram loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/meta.svg')}}" alt=Meta title=Meta loading=lazy>
-                        </div>
-                        <div class=swiper-slide>
-                            <img src="{{asset('build/client/images/photoshop.svg')}}" alt=photoshop title=photoshop loading=lazy>
-                        </div>
+                        @foreach ($stacks as $stack)                            
+                            <div class=swiper-slide>
+                                <img src="{{asset('storage/' . $stack->path_image)}}" alt="{{isset($stack->title)?$stack->title:'Logo satck'}}" title="{{isset($stack->title)?$stack->title:'Logo satck'}}" loading=lazy>
+                            </div>
+                        @endforeach
                     </div>
                     <div class=swiper-pagination></div>
                 </div>

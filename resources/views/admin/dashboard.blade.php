@@ -19,24 +19,50 @@
     </div>
     <!-- end page title -->
     <div class="row">
-        <div class="col-md-5 col-xl-3">
-            <div class="card borda-cx ratio ratio-4x3">
-                <div class="d-flex align-items-center justify-content-center">
-                    <a href="{{route('admin.dashboard.slide.index')}}">
-                        <div class="row">
-                            <div class="col-12 d-flex align-items-center justify-content-center">
-                                <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                    <i class="avatar-md mdi mdi-email font-48 text-muted"></i>
+        @if (Auth::user()->hasRole('Super') || 
+        Auth::user()->can('usuario.tornar usuario master') || 
+        Auth::user()->can('slide.visualizar'))
+            <div class="col-md-5 col-xl-3">
+                <div class="card borda-cx ratio ratio-4x3">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <a href="{{route('admin.dashboard.slide.index')}}">
+                            <div class="row">
+                                <div class="col-12 d-flex align-items-center justify-content-center">
+                                    <div class="avatar-xl bg-hoom rounded-circle text-center">
+                                        <i class="avatar-md mdi mdi-email font-48 text-muted"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mt-3 col-12 text-center">
-                            <h5 class="text-uppercase text-muted">Slides</h5>
-                        </div>
-                    </a>
-                </div>
-            </div> <!-- end card-->
-        </div> <!-- end col -->
+                            <div class="mt-3 col-12 text-center">
+                                <h5 class="text-uppercase text-muted">Slides</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div> <!-- end card-->
+            </div> <!-- end col -->
+        @endif
+        @if (Auth::user()->hasRole('Super') || 
+        Auth::user()->can('usuario.tornar usuario master') || 
+        Auth::user()->can('stack.visualizar'))
+            <div class="col-md-5 col-xl-3">
+                <div class="card borda-cx ratio ratio-4x3">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <a href="{{route('admin.dashboard.stack.index')}}">
+                            <div class="row">
+                                <div class="col-12 d-flex align-items-center justify-content-center">
+                                    <div class="avatar-xl bg-hoom rounded-circle text-center">
+                                        <i class="avatar-md mdi mdi-email font-48 text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3 col-12 text-center">
+                                <h5 class="text-uppercase text-muted">Tecnologias</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div> <!-- end card-->
+            </div> <!-- end col -->
+        @endif
         @if (Auth::user()->hasRole('Super') || 
         Auth::user()->can('usuario.tornar usuario master') || 
         Auth::user()->can('email.visualizar'))
@@ -148,6 +174,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <div><a href="" target="_blank" style="color:#94a0ad;"><script>document.write(new Date().getFullYear())</script> © WHI - Web de Alta Inspiração</a></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-none d-md-flex gap-4 align-item-center justify-content-md-end footer-links">
+                        <a href="https://www.whi.dev.br/" target="_blank" rel="noopener noreferrer">Sobre a WHI</a>
+                        <a href="https://wa.me/5571996483853" target="_blank" rel="noopener noreferrer">Fale conosco</a>
+                    </div>
                 </div>
             </div>
         </div>

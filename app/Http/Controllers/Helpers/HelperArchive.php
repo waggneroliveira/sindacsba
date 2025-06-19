@@ -22,7 +22,12 @@ class HelperArchive extends Controller
             // Rename file
             $nameFile = $request->$column->getClientOriginalName();
             $originalName = Str::of(pathinfo($nameFile, PATHINFO_FILENAME))->slug().'-'.(time()+$timestampArchive);
-            $extension = $forceWebp ? 'webp' : end(explode('.', $nameFile));
+            if ($forceWebp) {
+                $extension = 'webp';
+            } else {
+                $parts = explode('.', $nameFile);
+                $extension = end($parts);
+            }
             $nameFile = "{$originalName}.{$extension}";
 
             return [$fileBase64, $nameFile];
@@ -34,7 +39,14 @@ class HelperArchive extends Controller
                 foreach ($request->$column as $key => $value) {
                     $nameFile = $request->$column[$key]->getClientOriginalName();
                     $originalName = Str::of(pathinfo($nameFile, PATHINFO_FILENAME))->slug().'-'.(time()+$timestampArchive);
-                    $extension = $forceWebp ? 'webp' : end(explode('.', $nameFile));
+                    $mime = $request->$column[$key]->getMimeType();
+                    // Só força webp se não for SVG
+                    if ($forceWebp && $mime !== 'image/svg+xml') {
+                        $extension = 'webp';
+                    } else {
+                        $parts = explode('.', $nameFile);
+                        $extension = end($parts);
+                    }
                     $nameFile = "{$originalName}.{$extension}";
                     $request->$column[$key]->storeAs($path, "{$originalName}.{$extension}");
                     array_push($arrNameFile, "{$originalName}.{$extension}");
@@ -43,7 +55,14 @@ class HelperArchive extends Controller
             }else{
                 $nameFile = $request->$column->getClientOriginalName();
                 $originalName = Str::of(pathinfo($nameFile, PATHINFO_FILENAME))->slug().'-'.(time()+$timestampArchive);
-                $extension = $forceWebp ? 'webp' : end(explode('.', $nameFile));
+                $mime = $request->$column->getMimeType();
+                // Só força webp se não for SVG
+                if ($forceWebp && $mime !== 'image/svg+xml') {
+                    $extension = 'webp';
+                } else {
+                    $parts = explode('.', $nameFile);
+                    $extension = end($parts);
+                }
                 $nameFile = "{$originalName}.{$extension}";
             }
 

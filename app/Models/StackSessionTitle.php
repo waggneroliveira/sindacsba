@@ -9,30 +9,17 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Slide extends Model
+class StackSessionTitle extends Model
 {
-
     use Notifiable, HasFactory, LogsActivity;
-    
-    protected $fillable = [
-        'title',
-        'btn_title',
-        'link',
-        'description',
-        'active',
-        'sorting',
-        'path_image_mobile',
-        'path_image',
-    ];
 
-    public function scopeActive($query)
+    protected $fillable = ['title', 'active'];
+
+        public function scopeActive($query)
     {
         return $query->where('active', 1);
     }
-    public function scopeSorting($query)
-    {
-        return $query->orderBy('sorting', 'asc');
-    }
+    
     public function getActivitylogOptions(): LogOptions
     {
         $activityLogService = new ActivityLogService($this);
@@ -40,5 +27,4 @@ class Slide extends Model
         return LogOptions::defaults()
             ->logOnly($activityLogService->getLoggableAttributes());
     }
-
 }
