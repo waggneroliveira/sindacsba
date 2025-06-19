@@ -51,8 +51,14 @@ class SlideController extends Controller
         $path_image = $helper->renameArchiveUpload($request, 'path_image', $this->pathUpload, true);
         if ($path_image) {
             $data['path_image'] = $this->pathUpload . $path_image;
-            $image = $manager->read($request->file('path_image'))->toWebp()->toString();
-            Storage::put($this->pathUpload . $path_image, $image);
+            $file = $request->file('path_image');
+            $mime = $file->getMimeType();
+            if ($mime === 'image/svg+xml') {
+                Storage::putFileAs($this->pathUpload, $file, $path_image);
+            } else {
+                $image = $manager->read($file)->toWebp(quality: 75)->toString();
+                Storage::put($this->pathUpload . $path_image, $image);
+            }
         }
 
         $data['active'] = $request->active ? 1 : 0;
@@ -61,8 +67,14 @@ class SlideController extends Controller
         $path_image_mobile = $helper->renameArchiveUpload($request, 'path_image_mobile', $this->pathUpload, true);
         if ($path_image_mobile) {
             $data['path_image_mobile'] = $this->pathUpload . $path_image_mobile;
-            $imageMobile = $manager->read($request->file('path_image_mobile'))->toWebp()->toString();
-            Storage::put($this->pathUpload . $path_image_mobile, $imageMobile);
+            $fileMobile = $request->file('path_image_mobile');
+            $mimeMobile = $fileMobile->getMimeType();
+            if ($mimeMobile === 'image/svg+xml') {
+                Storage::putFileAs($this->pathUpload, $fileMobile, $path_image_mobile);
+            } else {
+                $imageMobile = $manager->read($fileMobile)->toWebp(quality: 75)->toString();
+                Storage::put($this->pathUpload . $path_image_mobile, $imageMobile);
+            }
         }
 
         try {

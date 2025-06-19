@@ -43,7 +43,8 @@ class StackController extends Controller
             if ($mime === 'image/svg+xml') {
                 Storage::putFileAs($this->pathUpload, $file, $path_image);
             } else {
-                $image = $manager->read($file)->toWebp()->toString();
+                // Compressão webp com qualidade 75 para reduzir o peso
+                $image = $manager->read($file)->toWebp(quality: 75)->toString();
                 Storage::put($this->pathUpload . $path_image, $image);
             }
         }
@@ -78,7 +79,8 @@ class StackController extends Controller
             if ($mime === 'image/svg+xml') {
                 Storage::putFileAs($this->pathUpload, $file, $path_image);
             } else {
-                $image = $manager->read($file)->toWebp()->toString();
+                // Compressão webp com qualidade 75 para reduzir o peso
+                $image = $manager->read($file)->toWebp(quality: 75)->toString();
                 Storage::put($this->pathUpload . $path_image, $image);
             }
             Storage::delete(isset($stack->path_image)?$stack->path_image:'');

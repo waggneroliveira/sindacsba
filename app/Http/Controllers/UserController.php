@@ -61,6 +61,8 @@ class UserController extends Controller
     
         $path_image = null;
         if ($request->hasFile('path_image')) {
+            $file = $request->file('path_image');
+            $mime = $file->getMimeType();
             $path_image = $helper->renameArchiveUpload($request, 'path_image');
         }
 
@@ -141,6 +143,8 @@ class UserController extends Controller
     
         $path_image = null;
         if ($request->hasFile('path_image')) {
+            $file = $request->file('path_image');
+            $mime = $file->getMimeType();
             $path_image = $helper->renameArchiveUpload($request, 'path_image');
         }
     
@@ -156,7 +160,13 @@ class UserController extends Controller
                 if ($user->path_image) { 
                     Storage::delete($user->path_image);
                 }
-                $request->file('path_image')->storeAs($this->pathUpload, $path_image);
+                if ($mime === 'image/svg+xml') {
+                    $file->storeAs($this->pathUpload, $path_image);
+                } else {
+                    $manager = app(\Intervention\Image\ImageManager::class);
+                    $image = $manager->read($file)->toWebp(quality: 75)->toString();
+                    Storage::put($this->pathUpload . $path_image, $image);
+                }
             }
 
             if (isset($request->delete_path_image) && !$path_image) {
