@@ -20,6 +20,7 @@ use App\Http\Controllers\SettingThemeController;
 use App\Http\Controllers\AuditActivityController;
 use App\Http\Controllers\Auth\PasswordEmailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\StackController;
 use App\Http\Controllers\StackSessionTitleController;
@@ -95,7 +96,10 @@ Route::prefix('painel/')->group(function () {
         ->name('admin.dashboard.slide.destroySelected');
         Route::post('slides/sorting', [SlideController::class, 'sorting'])
         ->name('admin.dashboard.slide.sorting');
-        
+        //PROJECTS
+        Route::resource('projeto', ProjectController::class)
+        ->names('admin.dashboard.project')
+        ->parameters(['projeto'=>'project']);
         //STACKS
         Route::resource('stacks', StackController::class)
         ->names('admin.dashboard.stack')
