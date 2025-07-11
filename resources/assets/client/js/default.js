@@ -140,8 +140,8 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         const swiper = new Swiper('.main-swiper', {
-            loop: false,
-            speed: 800,
+            loop: true,
+            speed: 1200,
             autoplay: {
                 delay: 8000,
                 disableOnInteraction: false,

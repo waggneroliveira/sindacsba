@@ -121,6 +121,7 @@ body .uwy.userway_p1 .userway_buttons_wrapper  {
 body  {
     overflow-x: hidden;
     font-family: var(--default-font)
+    var(--background-color)
 }
 .header, body  {
     color: var(--default-color);
@@ -136,9 +137,12 @@ body  {
     --default-font: "Rethink Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --heading-font: "Rethink Sans", sans-serif;
     --nav-font: "Rethink Sans", sans-serif;
-    --background-color: #000;
+    --background-color: #F9F9F9;
+    --background-red: #E5282A;
+    --background-blue: #2F368B;
     --default-color: #FFF;
-    --text-color: #333333;
+    --text-color: #9A9DA2;
+    --title-color-blue: #31404B;
     --cta-background-color: #091DFF;
     --nav-hover-color: #ffffff;
     --social-links-color: #000;
@@ -154,12 +158,31 @@ body  {
     --emphasis-color: #1FAD90;
     scroll-behavior: smooth
 }
+.title-blue{
+    color: var(--title-color-blue);
+}
+.text-color{
+    color: var(--text-color);
+}
+.rounded-top-left{
+    border-radius: 10px 0 0 0;
+}
 #stars-container img  {
     width: 100%;
     height: auto;
     aspect-ratio: 15 / 15;
     object-fit: cover;
     display: block;
+}
+.background-red{
+    background-color: var(--background-red) !important;
+}
+.d-flex.flex-wrap.m-n1 a:hover{
+    background-color: var(--background-red) !important;
+    border-color: transparent;
+}
+.d-flex.flex-wrap.m-n1 .active{
+    border-color: transparent;
 }
 .rethink-sans-regular  {
     font-weight: 400
@@ -215,9 +238,7 @@ a  {
     color: var(--accent-color);
     transition: .3s
 }
-a:hover  {
-    color: color-mix(in srgb, var(--accent-color), transparent 25%)
-}
+
 .carousel-trust-whi .swiper-slide .text, .content-lef h2, .social-links a i, .text-left-project  {
     color: var(--social-links-color)
 }
@@ -243,12 +264,35 @@ h1, h2, h3, h4, h5, h6  {
     transform: scale(1.1) !important;
     transition: transform .3s ease-in-out
 }
+.col-md-6.h-100.px-0 img,
+.d-flex.align-items-center.bg-white.mb-3 img,
+.main-swiper img,
+.box-small img{
+    transition: all 0.3s ease;
+}
+.col-md-6.h-100.px-0:hover img,
+.d-flex.align-items-center.bg-white.mb-3:hover img,
+.main-swiper:hover img,
+.box-small:hover img{
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
 .logo-img .img-fluid  {
     width: 100%;
     aspect-ratio: 203/58;
     height: auto;
     object-fit: cover;
     display: block;
+}
+.section-title {
+    margin-bottom: 15px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--background-color-white);
+    border: 1px solid #dee2e6;
+    border-left: 5px solid var(--background-blue);
 }
 .hero  {
     width: 100%;
