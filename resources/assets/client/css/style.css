@@ -1,3 +1,39 @@
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    top: 0;
+    left: 0;
+    display: flex
+;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #1e2024);
+    z-index: 1;
+}
+.swiper-pagination{
+    top: 30px !important;
+    left: inherit !important;
+    right: 20px !important;
+    width: auto !important;
+    height: 30px !important; 
+}
+.swiper-pagination-bullet {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px !important;
+    transition: all 0.3s ease; 
+    background: #FFFFFF !important;
+    opacity: inherit !important;
+}
+.swiper-pagination-bullet-active {
+    width: 40px !important;
+    border-radius: 5px !important;
+    background: #E5282A !important;
+}
+
 body .uwy.userway_p1 .userway_buttons_wrapper  {
     top: 40% !important;
     right: -34px !important;

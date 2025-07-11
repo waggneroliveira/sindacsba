@@ -15,6 +15,9 @@ Route::get('/', function () {
 //     return view('client.blades.index');  
 // })->name('index');  
 
+Route::get('/blog', function () {
+    return view('client.blades.blog');  
+})->name('index'); 
 Route::get('home', [HomePageController::class, 'index'])->name('index');
 
 // Route::get('/home', [FormIndexController::class, 'index'])->name('index.form');

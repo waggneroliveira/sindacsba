@@ -99,9 +99,14 @@
         }))
     }));
     let a = document.getElementById("stars-container");
-    for (let e = 0; e < 5; e++) {
-        let e = document.createElement("img");
-        e.src = "build/client/images/star.svg", e.alt = "Estrela Rating", e.title = "Estrela Rating", a.appendChild(e)
+    if (a) {
+        for (let i = 0; i < 5; i++) {
+            let star = document.createElement("img");
+            star.src = "build/client/images/star.svg";
+            star.alt = "Estrela Rating";
+            star.title = "Estrela Rating";
+            a.appendChild(star);
+        }
     }
 
     function l() {
@@ -132,4 +137,19 @@
                 }))
             }))
         }))
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const swiper = new Swiper('.main-swiper', {
+            loop: false,
+            speed: 800,
+            autoplay: {
+                delay: 8000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            }
+        });
+    });
 }();
