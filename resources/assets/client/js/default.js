@@ -151,5 +151,23 @@
                 clickable: true,
             }
         });
+
+        const swiperAnuncio = new Swiper('.announcement', {
+            loop: true,
+            speed: 1200,
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true,
+                },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+        });
+    });
+
+    document.getElementById('shareBtn').addEventListener('click', function() {
+        const links = document.getElementById('socialLinks');
+        links.classList.toggle('opacity-0');
     });
 }();

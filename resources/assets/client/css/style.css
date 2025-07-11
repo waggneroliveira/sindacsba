@@ -5,22 +5,21 @@
     padding: 30px;
     top: 0;
     left: 0;
-    display: flex
-;
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #1e2024);
     z-index: 1;
 }
-.swiper-pagination{
+.swiper-pagination.news{
     top: 30px !important;
     left: inherit !important;
     right: 20px !important;
     width: auto !important;
     height: 30px !important; 
 }
-.swiper-pagination-bullet {
+.swiper-pagination.news .swiper-pagination-bullet{
     width: 20px;
     height: 20px;
     border-radius: 5px !important;
@@ -28,7 +27,7 @@
     background: #FFFFFF !important;
     opacity: inherit !important;
 }
-.swiper-pagination-bullet-active {
+.swiper-pagination.news .swiper-pagination-bullet-active{
     width: 40px !important;
     border-radius: 5px !important;
     background: #E5282A !important;
@@ -122,6 +121,9 @@ body  {
     overflow-x: hidden;
     font-family: var(--default-font)
     var(--background-color)
+}
+p{
+    color: var(--text-color);
 }
 .header, body  {
     color: var(--default-color);
@@ -221,7 +223,7 @@ body  {
     background-color: var(--emphasis-color)
 }
 .dark-background  {
-    background-color: var(--background-color);
+    background-color: var(--background-blue);
     color: var(--default-color)
 }
 .max-width  {
@@ -276,6 +278,77 @@ h1, h2, h3, h4, h5, h6  {
 .box-small:hover img{
     transform: scale(1.05);
     transition: all 0.3s ease;
+}
+.box-notices{
+    transition: all 0.3s ease;  
+}
+.box-notices:hover{
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+.announcement .image img{
+    height: 171px;
+    object-fit: cover;
+    aspect-ratio: 1137/171;
+    object-position: center;
+}
+.comments img{
+    width: 45px;
+    height: 45px;
+}
+#shareBtn{
+    width: 171px;
+}
+.socialLinks {
+    max-height: 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+}
+.btn-insta {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  transition: all 0.3s ease;
+}
+.btn-tiktok {
+  background: #000000;
+  transition: all 0.3s ease;
+}
+.bg-whatsapp, .bg-whatsapp.btn:hover{
+    background: #25d366;
+    transition: all 0.3s ease;
+}
+.btn-twiter, .btn-tiktok.btn:hover {
+  background: #000000;
+  transition: all 0.3s ease;
+}
+.btn-twiter, .btn-twiter.btn:hover {
+  background: #1DA1F2;
+  transition: all 0.3s ease;
+}
+.btn-youtube, .btn-youtube.btn:hover {
+  background: #ff0000;
+  transition: all 0.3s ease;
+}
+.btn-facebook, .btn-facebook.btn:hover {
+  background: #3b5998;
+  transition: all 0.3s ease;
+}
+.bg-whatsapp.btn:hover, 
+.btn-facebook.btn:hover,
+.btn-youtube.btn:hover,
+.btn-twiter.btn:hover,
+.btn-tiktok.btn:hover,
+.btn-insta.btn:hover,
+.bg-whatsapp.btn:hover{
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+.firula-contact{
+    width: 111px;
+    height: 12px;
+    background: var(--background-blue);
+    border-radius: 0 15px 15px 0;
+}
+.socials-network{
+    height: 260px;
 }
 .logo-img .img-fluid  {
     width: 100%;

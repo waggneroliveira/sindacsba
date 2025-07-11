@@ -25,13 +25,14 @@
     <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
     <link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" onload='this.onload=null,this.rel="stylesheet"'>
     <noscript>
-<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap">
+    <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap">
 </noscript>
     <link rel=preload as=image href="{{asset('build/client/images/banner.webp')}}">
     <link rel="preload" as="image" href="{{asset('build/client/images/banner-mob.webp')}}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
     @vite([
         'resources/assets/client/css/bootstrap/css/bootstrap.min.css',
