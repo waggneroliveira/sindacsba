@@ -1,4 +1,4 @@
-<div class="col-12">
+<div class="col-12" data-aos=fade-down data-aos-delay=150>
     <div class="swiper announcement w-75">
         <div class="swiper-wrapper">
             <div class="swiper-slide py-5">

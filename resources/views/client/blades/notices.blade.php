@@ -4,24 +4,24 @@
         @include('client.includes.announcement')
     </div>
 
-    <section class="notices mb-5">
+    <section class="notices mb-5" data-aos=fade-up data-aos-delay=150>
         <div class="container py-4">
-            <h3 class="fw-bold mb-2 title-blue">EDITAIS PUBLICADOS</h3>
+            <h1 class="montserrat-bold font-30 mb-2 title-blue">EDITAIS PUBLICADOS</h1>
 
             @for ($f = 0; $f < 2; $f++)
                 @php
                     $ano = 2025 - $f; 
                 @endphp
 
-                <h5 class="fw-semibold mt-5 title-blue">{{ $ano }}</h5>
+                <h5 class="montserrat-bold font-28 mt-5 title-blue">{{ $ano }}</h5>
 
                 <div class="row g-4 mt-3">
                     @for ($e = 0; $e < 8; $e++)                    
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 box-notices">                        
                             <div class="section-title rounded-top-left rounded-3 d-flex justify-content-between align-items-center h-100">
                                 <div>
-                                    <h6 class="mb-1 fw-semibold title-blue text-uppercase">EDITAL DE CONVOCAÇÃO</h6>
-                                    <small class="text-muted text-color title-blue">11 de Julho de {{ $ano }}</small>
+                                    <h6 class="mb-1 montserrat-bold font-18 title-blue text-uppercase">EDITAL DE CONVOCAÇÃO</h6>
+                                    <small class="text-muted text-color montserrat-regular font-16 title-blue">11 de Julho de {{ $ano }}</small>
                                 </div>
 
                                 <a href="#" class="text-decoration-none" download="">

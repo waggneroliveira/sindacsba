@@ -5,7 +5,7 @@
    @include('client.includes.announcement')
 </div>
 
-<section class="blog mb-5">
+<section class="blog mb-5" data-aos=fade-up data-aos-delay=150>
     <div class="container-fluid">
        <div class="row">
           <div class="col-lg-7 p-0">
@@ -18,12 +18,12 @@
                            <div class="position-relative overflow-hidden" style="height: 500px;">
                               <img class="img-fluid h-100 w-100" src="{{asset('build/client/images/news-800x500-1.jpg')}}" style="object-fit: cover;aspect-ratio: 2 / 1">
                               <div class="overlay">
-                                 <div class="mb-0">
-                                    <span class="badge bg-primary text-uppercase fw-semibold py-2 px-2 me-2">Business</span>
-                                    <p class="text-white">11 de Janeiro de 2025</p>
+                                 <div class="mb-2 d-flex justify-content-center align-items-center">
+                                    <span class="badge background-red montserrat-semiBold font-12 text-uppercase py-2 px-2 me-2">Business</span>
+                                    <p class="text-white mb-0 montserrat-regular font-12">11 de Janeiro de 2025</p>
                                  </div>
                                  <a href="{{route('blog-inner')}}">
-                                    <h1 class="h2 m-0 text-white text-uppercase fw-bold d-block">Lorem ipsum dolor sit amet elit. Proin vitae porta diam...</h1>
+                                    <h1 class="h2 m-0 text-white text-uppercase montserrat-bold font-32 d-block">Lorem ipsum dolor sit amet elit. Proin vitae porta diam...</h1>
                                  </a>
                               </div>
                            </div>
@@ -44,12 +44,12 @@
                         <div class="position-relative overflow-hidden" style="height: 250px;">
                            <img class="img-fluid w-100 h-100" src="{{asset('build/client/images/news-700x435-1.jpg')}}" style="object-fit: cover;">
                            <div class="overlay">
-                              <div class="mb-2">
-                                 <span class="badge bg-primary text-uppercase fw-semibold py-2 px-2 me-2">Business</span>
-                                 <p class="text-white"><small>11 de Janeiro de 2025</small></p>
+                              <div class="mb-2 d-flex justify-content-center align-items-center">
+                                 <span class="badge background-red text-uppercase montserrat-semiBold font-12 py-2 px-2 me-2">Business</span>
+                                 <p class="text-white mb-0 montserrat-regular font-12">11 de Janeiro de 2025</p>
                               </div>
                               <a href="{{route('blog-inner')}}">                              
-                                 <h3 class="h6 m-0 text-white text-uppercase fw-semibold d-block">Lorem ipsum dolor sit amet elit...</h3>
+                                 <h3 class="h6 m-0 text-white text-uppercase montserrat-bold font-16 d-block">Lorem ipsum dolor sit amet elit...</h3>
                               </a>
                            </div>
                         </div>
@@ -61,12 +61,12 @@
        </div>
     </div>
 </section>
-<section class="blog-content mt-5">
+<section class="blog-content my-5">
    <!-- News With Sidebar Start -->
    <div class="container-fluid">
        <div class="container">
            <div class="row">
-               <div class="col-lg-8 mb-4">
+               <div class="col-lg-8 mb-4" data-aos=fade-right data-aos-delay=150>
                    <div class="row">
                        <div class="col-12">
                           <form action="">
@@ -82,20 +82,20 @@
                                     </div>
                                     <div class="col-md-6 d-flex flex-column bg-white h-100 px-0">
                                           <div class="mt-auto p-4">
-                                             <div class="mb-0">
-                                                <span class="badge badge-primary background-red text-uppercase font-weight-semi-bold p-2 mr-2">
+                                             <div class="mb-2 d-flex justify-content-start align-items-center gap-3">
+                                                <span class="badge badge-primary montserrat-semiBold font-12 background-red text-uppercase font-weight-semi-bold p-2 mr-2">
                                                       Business
                                                 </span>
-                                                <p class="text-body mb-0">
-                                                   <small>11 de Janeiro de 2025</small>
+                                                <p class="text-color mb-0 montserrat-regular font-12">
+                                                   11 de Janeiro de 2025
                                                 </p>
                                              </div>
                                              <a href="{{route('blog-inner')}}" class="underline">
-                                                <h2 class="h4 d-block mb-3 text-uppercase font-weight-bold title-blue">
-                                                   Lorem ipsum dolor sit amet elit...
+                                                <h2 class="h4 d-block mb-3 text-uppercase montserrat-semiBold font-20 title-blue">
+                                                   PARTICIPE DA REELEIÇÃO DA SINCADS BA! AS ELEIÇÕES CONTecem NO DIA....
                                                 </h2>
                                              </a>
-                                             <p class="m-0 text-color">
+                                             <p class="m-0 text-color montserrat-regular font-16">
                                                 Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna
                                                 rebum clita rebum dolor stet amet justo
                                              </p>
@@ -109,25 +109,25 @@
                    </div>
                </div>
                
-               <div class="col-lg-4">
+               <div class="col-lg-4" data-aos=fade-left data-aos-delay=150>
                   <aside>
                      <!-- Tags Start -->
                       <div class="mb-3">
                           <div class="section-title mb-0 rounded-top-left">
-                              <h4 class="m-0 text-uppercase font-weight-bold title-blue">CATEGORIAS</h4>
+                              <h4 class="m-0 text-uppercase montserrat-bold font-28 title-blue">CATEGORIAS</h4>
                           </div>
                           <div class="bg-white border border-top-0 p-3">
                               <div class="d-flex flex-wrap m-n1">
-                                  <a href="" class="btn btn-sm btn-outline-secondary m-1 active background-red">Politics</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary m-1">Business</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary m-1">Corporate</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary m-1">Business</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary m-1">Health</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary m-1">Education</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary m-1">Science</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary m-1">Business</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary m-1">Foods</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary m-1">Travel</a>
+                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1 active background-red">Politics</a>
+                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Business</a>
+                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Corporate</a>
+                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Business</a>
+                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Health</a>
+                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Education</a>
+                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Science</a>
+                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Business</a>
+                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Foods</a>
+                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Travel</a>
                               </div>
                           </div>
                       </div>
@@ -136,7 +136,7 @@
                       <!-- Popular News Start -->
                       <div class="mb-3">
                           <div class="section-title mb-0 rounded-top-left">
-                              <h4 class="m-0 text-uppercase font-weight-bold title-blue">VEJA TAMBÉM</h4>
+                              <h4 class="m-0 text-uppercase montserrat-bold font-28 title-blue">VEJA TAMBÉM</h4>
                           </div>
                           <div class="bg-white border border-top-0 p-3">
                               @for ($k = 0; $k < 5; $k++) 
@@ -144,12 +144,12 @@
                                     <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
                                        <img class="img-fluid" src="{{asset('build/client/images/news-110x110-1.jpg')}}" alt="">
                                        <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                          <div class="mb-0">
-                                                <span class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2 background-red" href="">Business</span>
-                                                <p class="text-body mb-0"><small>11 de Janeiro de 2025</small></p>
+                                          <div class="mb-2 d-flex justify-content-start align-items-center gap-3">
+                                             <span class="badge badge-primary montserrat-semiBold font-10 text-uppercase py-1 px-2 mr-2 background-red">Business</span>
+                                             <p class="text-color mb-0 montserrat-regular font-12">11 de Janeiro de 2025</p>
                                           </div>
                                           <a href="{{route('blog-inner')}}" class="underline">
-                                             <h3 class="h6 m-0 text-uppercase font-weight-bold title-blue">Lorem ipsum dolor sit amet elit...</h3>
+                                             <h3 class="h6 m-0 text-uppercase montserrat-bold font-15 title-blue">Lorem ipsum dolor sit amet elit...</h3>
                                           </a>
                                        </div>
                                     </div>
@@ -162,19 +162,19 @@
                       <!-- Newsletter Start -->
                       <div class="mb-3">
                           <div class="section-title mb-0 rounded-top-left">
-                              <h4 class="m-0 text-uppercase font-weight-bold title-blue">Newsletter</h4>
+                              <h4 class="m-0 text-uppercase montserrat-bold font-28 title-blue">Newsletter</h4>
                           </div>
                           <div class="bg-white text-center border border-top-0 p-3">
-                              <p class="text-color text-start">Cadastre-se abaixo e receba as principais novidades via e-mail!</p>
+                              <p class="text-color montserrat-regular font-16 text-start">Cadastre-se abaixo e receba as principais novidades via e-mail!</p>
                               <div class="input-group mb-2" style="width: 100%;">
-                                  <input type="text" class="form-control form-control-lg" placeholder="Seu e-mail">
+                                  <input type="text" class="form-control form-control-lg montserrat-regular text-color font-14" placeholder="Seu e-mail">
                                   <div class="input-group-append">
-                                      <button class="btn background-red text-white font-weight-bold px-3 h-100 rounded-3">Enviar</button>
+                                      <button class="btn background-red text-white montserrat-semiBold font-16 px-3 h-100 rounded-3">Enviar</button>
                                   </div>
                               </div>
                               <div class="d-flex justify-content-start align-items-center gap-2">
                                  <input type="checkbox" id="check">
-                                 <label for="check" class="text-color">Aceito os termos descritos na Política de Privacidade</label>
+                                 <label for="check" class="montserrat-regular text-color font-12">Aceito os termos descritos na Política de Privacidade</label>
                               </div>
                           </div>
                       </div>
