@@ -1,3 +1,50 @@
+.menu-mobile {
+    left: 0;
+    right: 0;
+    width: 100vw;
+    max-width: 100vw;
+}
+.menu-mobile {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(75, 124, 135, 1);
+    z-index: 10 !important;
+    padding: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.menu-mobile.active {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.menu-mobile nav ul li {
+    margin: 1rem 0;
+}
+
+.menu-mobile nav ul li a {
+    font-size: 1.5rem;
+    color: #2F4C78;
+    text-decoration: none;
+}
+.overlay a:hover{
+    text-decoration: underline;
+}
+.underline:hover{
+    text-decoration: underline;
+    color: var(--color-blue);
+}
 .overlay {
     position: absolute;
     width: 100%;
@@ -38,9 +85,27 @@ body .uwy.userway_p1 .userway_buttons_wrapper  {
     right: -34px !important;
     left: inherit !important
 }
-.call-to-action i, .call-to-action:hover, .social-links a  {
-    transition: transform .3s ease-in-out
+.site-navigation.ul li a {
+  position: relative;
 }
+
+.site-navigation.ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 3px; 
+  background-color: var(--background-red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+.site-navigation.ul li a:hover::after {
+  transform: scaleX(1);
+}
+
 .project-list-item img, .rating span img  {
     aspect-ratio: 1/1;
     object-position: center
@@ -48,16 +113,60 @@ body .uwy.userway_p1 .userway_buttons_wrapper  {
 .image-hero, .img-fluid, .project-list-item img, .rating span img  {
     object-position: center
 }
-.rethink-sans-ExtraBold, .rethink-sans-bold, .rethink-sans-medium, .rethink-sans-regular, .rethink-sans-semiBold  {
-    font-family: "Rethink Sans", sans-serif;
+.montserrat-ExtraBold, .montserrat-bold, .montserrat-medium, .montserrat-regular, .montserrat-semiBold  {
+    font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-style: normal
 }
-.sitemap ul li a, a, a:hover  {
-    text-decoration: none
+.font-12 {
+    font-size: 0.75rem;
 }
-.sitemap ul li a::after, .social-links a  {
-    background-color: var(--social-links-background-color)
+
+.font-14 {
+    font-size: 0.875rem;
+}
+
+.font-15 {
+    font-size: 0.938rem;
+}
+
+.font-16 {
+    font-size: 1rem;
+}
+
+.font-18 {
+    font-size: 1.125rem;
+}
+
+.font-20 {
+    font-size: 1.25rem;
+}
+
+.font-24 {
+    font-size: 1.5rem;
+}
+
+.font-25 {
+    font-size: 1.563rem;
+}
+
+.font-30 {
+    font-size: 1.875rem;
+}
+
+.font-40 {
+    font-size: 2.5rem;
+    line-height: 60px;
+}
+.header--category ul li a{
+    transition: all 0.3s ease;
+}
+.header--category ul li a:hover{
+    color: var(--background-red);
+    transition: all 0.3s ease;
+}
+.sitemap ul li a, a  {
+    text-decoration: none
 }
 .swiper-wrapper  {
     overflow: visible !important
@@ -79,7 +188,7 @@ body .uwy.userway_p1 .userway_buttons_wrapper  {
     right: 15px;
     bottom: -15px;
     z-index: 99999;
-    background-color: var(--cta-background-color);
+    background-color: var(--background-red);
     width: 44px;
     height: 44px;
     border-radius: 50px;
@@ -90,14 +199,12 @@ body .uwy.userway_p1 .userway_buttons_wrapper  {
     color: var(--contrast-color);
     line-height: 0
 }
-.call-to-action, .social-links a, .transformed p, p  {
-    font-size: 1.25rem
-}
+
 .project-list-item  {
     width: 264.2px
 }
 .scroll-top:hover  {
-    background-color: color-mix(in srgb, var(--cta-background-color), transparent 20%);
+    background-color: color-mix(in srgb, var(--background-red), transparent 20%);
     color: var(--contrast-color)
 }
 .scroll-top.active  {
@@ -105,10 +212,10 @@ body .uwy.userway_p1 .userway_buttons_wrapper  {
     opacity: 1;
     bottom: 15px
 }
-.project-list-item .rethink-sans-semiBold  {
+.project-list-item .montserrat-semiBold  {
     font-size: .875rem
 }
-.project-list-item ul .rethink-sans-semiBold span  {
+.project-list-item ul .montserrat-semiBold span  {
     font-size: .5rem
 }
 .light-background, :root  {
@@ -121,6 +228,9 @@ body  {
     overflow-x: hidden;
     font-family: var(--default-font)
     var(--background-color)
+}
+aside .img-fluid{
+    max-width: 300px;
 }
 p{
     color: var(--text-color);
@@ -136,9 +246,9 @@ p{
     overflow: hidden
 }
 :root  {
-    --default-font: "Rethink Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --heading-font: "Rethink Sans", sans-serif;
-    --nav-font: "Rethink Sans", sans-serif;
+    --default-font: "Montserrat", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --heading-font: "Montserrat", sans-serif;
+    --nav-font: "Montserrat", sans-serif;
     --background-color: #F9F9F9;
     --background-red: #E5282A;
     --background-blue: #2F368B;
@@ -153,12 +263,17 @@ p{
     --background-color-grey: #F8F9FC;
     --background-color-dark: #101820;
     --background-color-grey-medium: #D9D9D9;
-    --background-color-client: #F5F5F5;
+    --background-color-client: #F1F0F0;
     --background-color-trust-whi: #F4F4F4;
     --color-white: #ffffff;
     --color-blue: #1D164E;
     --emphasis-color: #1FAD90;
     scroll-behavior: smooth
+}
+.bg-webmail{
+    background: var(--background-color-client);
+    width: 170px;
+    height: 39px;
 }
 .title-blue{
     color: var(--title-color-blue);
@@ -186,19 +301,19 @@ p{
 .d-flex.flex-wrap.m-n1 .active{
     border-color: transparent;
 }
-.rethink-sans-regular  {
+.montserrat-regular  {
     font-weight: 400
 }
-.rethink-sans-medium  {
+.montserrat-medium  {
     font-weight: 500
 }
-.rethink-sans-semiBold  {
+.montserrat-semiBold  {
     font-weight: 600
 }
-.rethink-sans-bold  {
+.montserrat-bold  {
     font-weight: 700
 }
-.rethink-sans-ExtraBold  {
+.montserrat-ExtraBold  {
     font-weight: 800
 }
 .light-background  {
@@ -240,7 +355,9 @@ a  {
     color: var(--accent-color);
     transition: .3s
 }
-
+main{
+    margin-top: 140px;
+}
 .carousel-trust-whi .swiper-slide .text, .content-lef h2, .social-links a i, .text-left-project  {
     color: var(--social-links-color)
 }
@@ -252,17 +369,15 @@ h1, h2, h3, h4, h5, h6  {
     height: auto;
     gap: 10px
 }
-.social-links  {
-    margin-top: -90px
-}
+
 .social-links.superior  {
     margin-top: 0
 }
-.social-links a  {
-    height: 45px;
-    width: 45px
+.redes-sociais ul li img{
+    width: 25px;
+    height: 25px;
 }
-.carousel-trust-whi .swiper-slide-active, .social-links a:hover  {
+.carousel-trust-whi .swiper-slide-active {
     transform: scale(1.1) !important;
     transition: transform .3s ease-in-out
 }
@@ -351,8 +466,7 @@ h1, h2, h3, h4, h5, h6  {
     height: 260px;
 }
 .logo-img .img-fluid  {
-    width: 100%;
-    aspect-ratio: 203/58;
+    width: 180px;
     height: auto;
     object-fit: cover;
     display: block;
@@ -369,7 +483,7 @@ h1, h2, h3, h4, h5, h6  {
 }
 .hero  {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     justify-content: center
 }
 .hero h1  {
@@ -397,11 +511,14 @@ h1, h2, h3, h4, h5, h6  {
     overflow: clip
 }
 .position  {
-    position: absolute;
+    position: fixed;
     top: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
-    z-index: 2
+    left: 0;
+    z-index: 10;
+}
+.header-color{
+    background: var(--background-blue);
+    border-bottom: 5px solid var(--background-red);
 }
 .call-to-action  {
     background-color: var(--cta-background-color);
@@ -409,13 +526,6 @@ h1, h2, h3, h4, h5, h6  {
     width: 283px;
     border-radius: 30px;
     transition: background-color .3s ease-in-out, transform .2s ease-in-out
-}
-.call-to-action i  {
-    border: 3px solid var(--color-white);
-    height: 59px;
-    width: 59px;
-    background-color: var(--social-links-color);
-    font-size: 1.5rem
 }
 .call-to-action:hover  {
     transform: scale(1.03);
@@ -715,20 +825,20 @@ h1, h2, h3, h4, h5, h6  {
 .accordion-button::after  {
     display: none
 }
-.accordion-button.rethink-sans-semiBold.collapsed::before, .accordion-button.rethink-sans-semiBold::before  {
+.accordion-button.montserrat-semiBold.collapsed::before, .accordion-button.montserrat-semiBold::before  {
     margin-right: 15px;
     color: #1fad90;
-    font-family: "Rethink Sans", sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-weight: 600;
     font-style: normal;
     font-size: 33px;
     line-height: 0
 }
-.accordion-button.rethink-sans-semiBold.collapsed::before  {
+.accordion-button.montserrat-semiBold.collapsed::before  {
     content: '+'
 }
-.accordion-button.rethink-sans-semiBold::before  {
+.accordion-button.montserrat-semiBold::before  {
     content: '-'
 }
 .accordion-item h2  {
@@ -803,6 +913,11 @@ h1, h2, h3, h4, h5, h6  {
         width: 75%
     }
 }
+@media (max-width: 991.98px) {
+    .social-links {
+        display: none !important;
+    }
+}
 @media (max-width:885px)  {
     .hero  {
         height: 100%;
@@ -840,7 +955,7 @@ h1, h2, h3, h4, h5, h6  {
         margin-top: 0;
         justify-content: left !important
     }
-    #header, .hero .description, .max-width.m-auto.d-flex.flex-column.flex-md-row.justify-content-end.align-items-center.text-center.text-md-start.py-5.aos-init.aos-animate, .proccess-top .d-flex.flex-column.flex-md-row, .row.row-cols-1.row-cols-sm-2.row-cols-md-3.row-cols-lg-4.row-cols-xl-4.g-3.mt-5  {
+    .hero .description, .max-width.m-auto.d-flex.flex-column.flex-md-row.justify-content-end.align-items-center.text-center.text-md-start.py-5.aos-init.aos-animate, .proccess-top .d-flex.flex-column.flex-md-row, .row.row-cols-1.row-cols-sm-2.row-cols-md-3.row-cols-lg-4.row-cols-xl-4.g-3.mt-5  {
         padding: 0 50px
     }
     .rating span  {
@@ -920,13 +1035,13 @@ h1, h2, h3, h4, h5, h6  {
     .position-relative.d-flex.justify-content-center.flex-column.align-items-center a  {
         margin-top: 0 !important
     }
-    #project .col-2, #project .col-lg-9, #project .content-lef.col-6, #project .content-right.col-4, .content-lef .rethink-sans-semiBold, .content-lef.col-12.col-md-4.text-center.text-md-end, .content-right.col-12.col-md-7.mt-4.mt-md-0, .proccess-top p, .proccess-top__title, .trust-whi h2  {
+    #project .col-2, #project .col-lg-9, #project .content-lef.col-6, #project .content-right.col-4, .content-lef .montserrat-semiBold, .content-lef.col-12.col-md-4.text-center.text-md-end, .content-right.col-12.col-md-7.mt-4.mt-md-0, .proccess-top p, .proccess-top__title, .trust-whi h2  {
         width: 100% !important
     }
     .faq .title, .perfect-choice h2 span, .proccess-top__title h2, .transformed h2, .trust-whi h2 span  {
         font-size: 3.375rem
     }
-    .content-lef h2, .emphasis.rethink-sans-semiBold, .trust-whi h2  {
+    .content-lef h2, .emphasis.montserrat-semiBold, .trust-whi h2  {
         font-size: 2.75rem
     }
     .faq .me-5  {
@@ -982,7 +1097,7 @@ h1, h2, h3, h4, h5, h6  {
     .sitemap, .social-links.d-flex.justify-content-end.gap-4.text-center  {
         justify-content: center !important
     }
-    .emphasis.rethink-sans-semiBold, .faq .title  {
+    .emphasis.montserrat-semiBold, .faq .title  {
         margin: 0;
         padding: 0 20px
     }
@@ -1039,7 +1154,7 @@ h1, h2, h3, h4, h5, h6  {
     .faq .title, .perfect-choice h2 span, .proccess-top__title h2, .transformed h2, .trust-whi h2 span  {
         font-size: 2.5rem
     }
-    .content-lef .rethink-sans-semiBold, .emphasis.rethink-sans-semiBold, .trust-whi h2  {
+    .content-lef .montserrat-semiBold, .emphasis.montserrat-semiBold, .trust-whi h2  {
         font-size: 2.25rem;
         line-height: 40px;
         margin-bottom: 30px;
@@ -1055,7 +1170,7 @@ h1, h2, h3, h4, h5, h6  {
         width: auto;
         padding: 0 35px
     }
-    .emphasis.rethink-sans-semiBold, .project .content-lef h2  {
+    .emphasis.montserrat-semiBold, .project .content-lef h2  {
         font-size: 2rem;
         line-height: 37px;
         margin-bottom: 30px
@@ -1190,10 +1305,6 @@ h1, h2, h3, h4, h5, h6  {
         margin: 0 auto 0 20px;
         margin-top: 0 !important
     }
-    .call-to-action i  {
-        height: 44px;
-        width: 44px
-    }
     .count-star, .count-star h5  {
         gap: .5rem !important
     }
@@ -1221,18 +1332,18 @@ h1, h2, h3, h4, h5, h6  {
         font-size: 1.25rem;
         line-height: 30px
     }
-    .content-lef .rethink-sans-semiBold, .content-lef .rethink-sans-semiBold span, .emphasis.rethink-sans-semiBold, .faq .title, .hero h1, .perfect-choice h2 span, .proccess-top__title h2, .project .content-lef h2, .transformed h2, .transformed h3, .trust-whi h2 span  {
+    .content-lef .montserrat-semiBold, .content-lef .montserrat-semiBold span, .emphasis.montserrat-semiBold, .faq .title, .hero h1, .perfect-choice h2 span, .proccess-top__title h2, .project .content-lef h2, .transformed h2, .transformed h3, .trust-whi h2 span  {
         font-size: 1.5rem
     }
-    .content-lef .rethink-sans-semiBold  {
+    .content-lef .montserrat-semiBold  {
         line-height: 33px !important
     }
-    .emphasis.rethink-sans-semiBold  {
+    .emphasis.montserrat-semiBold  {
         padding: 0;
         margin-top: 10px !important;
         line-height: 26px
     }
-    .ex.emphasis.rethink-sans-semiBold  {
+    .ex.emphasis.montserrat-semiBold  {
         padding: 0;
         margin-bottom: 0
     }
@@ -1251,7 +1362,7 @@ h1, h2, h3, h4, h5, h6  {
     }
 }
 @media (max-width:320px)  {
-    .project-list-item .rethink-sans-semiBold  {
+    .project-list-item .montserrat-semiBold  {
         font-size: .625rem
     }
 }

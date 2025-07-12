@@ -1,10 +1,10 @@
 @extends('client.core.client')
 @section('content')
-    <div style="margin-top: 200px">
+    <div  class="mt-5">
         @include('client.includes.announcement')
     </div>
 
-    <section class="contact">
+    <section class="contact mb-5">
         <div class="d-flex justify-content-start gap-2 align-items-start flex-nowrap">
             <span class="firula-contact mt-2"></span>
             <div class="description">
@@ -145,11 +145,35 @@
             <div class="col-6">
                 <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 flex-column">
                     <div class="dark-background rounded-3 px-5 py-4">
-                        <a href="#" class="btn"><i class="text-white bi bi-instagram"></i></a>
-                        <a href="#" class="btn"><i class="text-white bi bi-twitter-x"></i></a>
-                        <a href="#" class="btn"><i class="text-white bi bi-facebook"></i></a>
-                        <a href="#" class="btn"><i class="text-white bi bi-youtube"></i></a>
-                        <a href="#" class="btn"><i class="text-white bi bi-tiktok"></i></a>
+                        <nav class="site-navigation position-relative text-end w-25 redes-sociais">
+                            <ul class="p-0 d-flex justify-content-start gap-4 flex-row mb-0">
+                                <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                                    <a href="https://www.instagram.com/sindacsbahia/" rel="nofollow noopener noreferrer" target="_blank">
+                                        <img src="{{asset('build/client/images/insta.svg')}}" alt="Instagram">
+                                    </a>
+                                </li>
+                                <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                                    <a href="https://x.com/SindacsBahia" rel="nofollow noopener noreferrer" target="_blank">
+                                        <img src="{{asset('build/client/images/x.svg')}}" alt="X">
+                                    </a>
+                                </li>
+                                <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                                    <a href="https://www.youtube.com/channel/UCG0q-E25LZ2Lx73N50tCD8Q" rel="nofollow noopener noreferrer" target="_blank">
+                                        <img src="{{asset('build/client/images/youtube.svg')}}" alt="Youtube">
+                                    </a>
+                                </li>
+                                <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                                    <a href="https://www.facebook.com/sindacsbahia.org.br/" rel="nofollow noopener noreferrer" target="_blank">
+                                        <img src="{{asset('build/client/images/face.svg')}}" alt="Facebook">
+                                    </a>
+                                </li>
+                                <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                                    <a href="https://www.tiktok.com/@sindacsbahia" rel="nofollow noopener noreferrer" target="_blank">
+                                        <img src="{{asset('build/client/images/tiktok.svg')}}" alt="Tiktok">
+                                    </a>
+                                </li>
+                            </ul> 
+                        </nav>
                     </div>
                     <span class="fw-semibold ms-2 title-blue">@SINDACSBAHIA</span>
                 </div>

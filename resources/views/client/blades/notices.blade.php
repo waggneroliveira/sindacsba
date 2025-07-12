@@ -1,6 +1,6 @@
 @extends('client.core.client')
 @section('content')
-    <div style="margin-top: 200px">
+    <div class="mt-5">
         @include('client.includes.announcement')
     </div>
 

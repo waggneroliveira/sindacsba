@@ -1,11 +1,11 @@
 @extends('client.core.client')
 @section('content')
 
-<div style="margin-top: 200px">
+<div  class="mt-5">
    @include('client.includes.announcement')
 </div>
 
-<section class="blog mt-5">
+<section class="blog mb-5">
     <div class="container-fluid">
        <div class="row">
           <div class="col-lg-7 p-0">
@@ -18,11 +18,13 @@
                            <div class="position-relative overflow-hidden" style="height: 500px;">
                               <img class="img-fluid h-100 w-100" src="{{asset('build/client/images/news-800x500-1.jpg')}}" style="object-fit: cover;aspect-ratio: 2 / 1">
                               <div class="overlay">
-                                 <div class="mb-2">
-                                    <a class="badge bg-primary text-uppercase fw-semibold py-2 px-2 me-2" href="">Business</a>
-                                    <a class="text-white" href="">11 de Janeiro de 2025</a>
+                                 <div class="mb-0">
+                                    <span class="badge bg-primary text-uppercase fw-semibold py-2 px-2 me-2">Business</span>
+                                    <p class="text-white">11 de Janeiro de 2025</p>
                                  </div>
-                                 <a class="h2 m-0 text-white text-uppercase fw-bold d-block" href="">Lorem ipsum dolor sit amet elit. Proin vitae porta diam...</a>
+                                 <a href="{{route('blog-inner')}}">
+                                    <h1 class="h2 m-0 text-white text-uppercase fw-bold d-block">Lorem ipsum dolor sit amet elit. Proin vitae porta diam...</h1>
+                                 </a>
                               </div>
                            </div>
                         </article>
@@ -43,10 +45,12 @@
                            <img class="img-fluid w-100 h-100" src="{{asset('build/client/images/news-700x435-1.jpg')}}" style="object-fit: cover;">
                            <div class="overlay">
                               <div class="mb-2">
-                                 <a class="badge bg-primary text-uppercase fw-semibold py-2 px-2 me-2" href="">Business</a>
-                                 <a class="text-white" href=""><small>11 de Janeiro de 2025</small></a>
+                                 <span class="badge bg-primary text-uppercase fw-semibold py-2 px-2 me-2">Business</span>
+                                 <p class="text-white"><small>11 de Janeiro de 2025</small></p>
                               </div>
-                              <a class="h6 m-0 text-white text-uppercase fw-semibold d-block" href="">Lorem ipsum dolor sit amet elit...</a>
+                              <a href="{{route('blog-inner')}}">                              
+                                 <h3 class="h6 m-0 text-white text-uppercase fw-semibold d-block">Lorem ipsum dolor sit amet elit...</h3>
+                              </a>
                            </div>
                         </div>
                      </article>
@@ -62,7 +66,7 @@
    <div class="container-fluid">
        <div class="container">
            <div class="row">
-               <div class="col-lg-8">
+               <div class="col-lg-8 mb-4">
                    <div class="row">
                        <div class="col-12">
                           <form action="">
@@ -78,16 +82,18 @@
                                     </div>
                                     <div class="col-md-6 d-flex flex-column bg-white h-100 px-0">
                                           <div class="mt-auto p-4">
-                                             <div class="mb-2">
-                                                <a class="badge badge-primary background-red text-uppercase font-weight-semi-bold p-2 mr-2" href="">
+                                             <div class="mb-0">
+                                                <span class="badge badge-primary background-red text-uppercase font-weight-semi-bold p-2 mr-2">
                                                       Business
-                                                </a>
-                                                <a class="text-body" href="">
-                                                      <small>11 de Janeiro de 2025</small>
-                                                </a>
+                                                </span>
+                                                <p class="text-body mb-0">
+                                                   <small>11 de Janeiro de 2025</small>
+                                                </p>
                                              </div>
-                                             <a class="h4 d-block mb-3 text-uppercase font-weight-bold title-blue" href="">
-                                                Lorem ipsum dolor sit amet elit...
+                                             <a href="{{route('blog-inner')}}" class="underline">
+                                                <h2 class="h4 d-block mb-3 text-uppercase font-weight-bold title-blue">
+                                                   Lorem ipsum dolor sit amet elit...
+                                                </h2>
                                              </a>
                                              <p class="m-0 text-color">
                                                 Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna
@@ -138,11 +144,13 @@
                                     <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
                                        <img class="img-fluid" src="{{asset('build/client/images/news-110x110-1.jpg')}}" alt="">
                                        <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                          <div class="mb-2">
-                                                <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2 background-red" href="">Business</a>
-                                                <a class="text-body" href=""><small>11 de Janeiro de 2025</small></a>
+                                          <div class="mb-0">
+                                                <span class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2 background-red" href="">Business</span>
+                                                <p class="text-body mb-0"><small>11 de Janeiro de 2025</small></p>
                                           </div>
-                                          <a class="h6 m-0 text-uppercase font-weight-bold title-blue" href="">Lorem ipsum dolor sit amet elit...</a>
+                                          <a href="{{route('blog-inner')}}" class="underline">
+                                             <h3 class="h6 m-0 text-uppercase font-weight-bold title-blue">Lorem ipsum dolor sit amet elit...</h3>
+                                          </a>
                                        </div>
                                     </div>
                                  </article>

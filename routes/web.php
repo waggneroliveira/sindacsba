@@ -25,13 +25,13 @@ Route::get('/editais', function () {
 
 Route::get('/blog', function () {
     return view('client.blades.blog');  
-})->name('blog'); 
+})->name('index'); 
 
 Route::get('/blog/interna', function () {
     return view('client.blades.blog-inner');  
 })->name('blog-inner'); 
 
-Route::get('home', [HomePageController::class, 'index'])->name('index');
+// Route::get('home', [HomePageController::class, 'index'])->name('index');
 
 // Route::get('/home', [FormIndexController::class, 'index'])->name('index.form');
 // Route::post('/enviar-formulario', [FormIndexController::class, 'store']);
