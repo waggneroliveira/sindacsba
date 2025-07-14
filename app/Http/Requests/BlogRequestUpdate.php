@@ -25,7 +25,7 @@ class BlogRequestUpdate extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'text' => ['nullable', 'string', 'max:255'],
+            'text' => ['nullable', 'string'],
             'path_image' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
             'active' => 'boolean',
             'sorting' => ['nullable', 'integer'],

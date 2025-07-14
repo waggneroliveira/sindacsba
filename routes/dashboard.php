@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SlideController;
@@ -84,6 +85,14 @@ Route::prefix('painel/')->group(function () {
         ->parameters(['auditorias'=>'activitie']);
         Route::post('auditorias/{id}/mark-as-read', [AuditActivityController::class, 'markAsRead']);
         Route::post('/auditorias/mark-all-as-read', [AuditActivityController::class, 'markAllAsRead']);
+        //BLOG
+        Route::resource('blog', BlogController::class)
+        ->parameters(['blog' => 'blog'])
+        ->names('admin.dashboard.blog');
+        Route::post('blog/delete', [BlogController::class, 'destroySelected'])
+        ->name('admin.dashboard.blog.destroySelected');
+        Route::post('blog/sorting', [BlogController::class, 'sorting'])
+        ->name('admin.dashboard.blog.sorting');
         //CATEGORIA BLOG
         Route::resource('categoria-do-blog', BlogCategoryController::class)
         ->parameters(['categoria-do-blog' => 'blogCategory'])

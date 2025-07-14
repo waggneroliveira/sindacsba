@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->date('date');
-            $table->text('text')->nullable();
+            $table->longText('text')->nullable();
             $table->string('path_image')->nullable();
             $table->boolean('active')->default(0);
             $table->integer('sorting')->default(0);

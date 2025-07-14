@@ -28,6 +28,12 @@ class PermissionsSeeder extends Seeder
                 'Visualizar',
                 'Remover'
             ],
+            'blog'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
             'slide'=>[
                 'Criar',
                 'Editar',                

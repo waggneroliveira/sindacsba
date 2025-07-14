@@ -20,24 +20,43 @@
     <!-- end page title -->
     <div class="row">
 
-            <div class="col-md-5 col-xl-3">
-                <div class="card borda-cx ratio ratio-4x3">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <a href="{{route('admin.dashboard.blogCategory.index')}}">
-                            <div class="row">
-                                <div class="col-12 d-flex align-items-center justify-content-center">
-                                    <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                        <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
-                                    </div>
+        <div class="col-md-5 col-xl-3">
+            <div class="card borda-cx ratio ratio-4x3">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="{{route('admin.dashboard.blogCategory.index')}}">
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <div class="avatar-xl bg-hoom rounded-circle text-center">
+                                    <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
                                 </div>
                             </div>
-                            <div class="mt-3 col-12 text-center">
-                                <h5 class="text-uppercase text-muted">Categorias dos produtos</h5>
+                        </div>
+                        <div class="mt-3 col-12 text-center">
+                            <h5 class="text-uppercase text-muted">Categorias do Blog</h5>
+                        </div>
+                    </a>
+                </div>
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+
+        <div class="col-md-5 col-xl-3">
+            <div class="card borda-cx ratio ratio-4x3">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="{{route('admin.dashboard.blog.index')}}">
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <div class="avatar-xl bg-hoom rounded-circle text-center">
+                                    <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                </div>
                             </div>
-                        </a>
-                    </div>
-                </div> <!-- end card-->
-            </div> <!-- end col -->
+                        </div>
+                        <div class="mt-3 col-12 text-center">
+                            <h5 class="text-uppercase text-muted">Blog</h5>
+                        </div>
+                    </a>
+                </div>
+            </div> <!-- end card-->
+        </div> <!-- end col -->
 
         <div class="col-md-5 col-xl-3">
                 <div class="card borda-cx ratio ratio-4x3">

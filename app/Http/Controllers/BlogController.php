@@ -30,7 +30,7 @@ class BlogController extends Controller
             $blogCategory[$category->id] = $category->title;
         }
 
-        return view('admin.blades.blog.index', compact('blogs', 'blogCategory'));
+        return view('admin.blades.blog.index', compact('blogs', 'categories', 'blogCategory'));
     }
 
     public function store(BlogRequestStore $request)
@@ -50,7 +50,7 @@ class BlogController extends Controller
                 Storage::putFileAs($this->pathUpload, $file, $filename);
             } else {
                 $image = $manager->read($file)
-                    ->resize(1200, null, function ($constraint) {
+                    ->resize(857, 546, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
@@ -70,6 +70,7 @@ class BlogController extends Controller
             session()->flash('success', __('dashboard.response_item_create'));
             return redirect()->back();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollback();
             Alert::error('error', __('dashboard.response_item_error_create'));
             return redirect()->back();
@@ -93,7 +94,7 @@ class BlogController extends Controller
                 Storage::putFileAs($this->pathUpload, $file, $filename);
             } else {
                 $image = $manager->read($file)
-                    ->resize(1200, 780, function ($constraint) {
+                    ->resize(857, 546, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
