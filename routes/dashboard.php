@@ -23,6 +23,7 @@ use App\Http\Controllers\AuditActivityController;
 use App\Http\Controllers\StackSessionTitleController;
 use App\Http\Controllers\Auth\PasswordEmailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\NoticiesController;
 
 Route::get('painel/', function () {
     return redirect()->route('admin.dashboard.painel');
@@ -85,6 +86,14 @@ Route::prefix('painel/')->group(function () {
         ->parameters(['auditorias'=>'activitie']);
         Route::post('auditorias/{id}/mark-as-read', [AuditActivityController::class, 'markAsRead']);
         Route::post('/auditorias/mark-all-as-read', [AuditActivityController::class, 'markAllAsRead']);
+        //NOTICIES
+        Route::resource('editais', NoticiesController::class)
+        ->parameters(['editais' => 'noticies'])
+        ->names('admin.dashboard.noticies');
+        Route::post('editais/delete', [NoticiesController::class, 'destroySelected'])
+        ->name('admin.dashboard.noticies.destroySelected');
+        Route::post('editais/sorting', [NoticiesController::class, 'sorting'])
+        ->name('admin.dashboard.noticies.sorting');
         //BLOG
         Route::resource('blog', BlogController::class)
         ->parameters(['blog' => 'blog'])
