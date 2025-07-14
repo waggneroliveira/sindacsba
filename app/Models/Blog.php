@@ -22,15 +22,27 @@ class Blog extends Model
         'text',
         'path_image',
         'active',
+        'super_highlight',
+        'highlight',
         'sorting',
     ];
 
-    public function categories(){
-        return $this->belongsTo(BlogCategory::class);
+    public function category(){
+        return $this->belongsTo(BlogCategory::class, 'blog_category_id');
     }
 
     public function scopeActive($query){
         return $query->where('active', 1);
+    }
+
+    public function scopeSuperHighlightOnly($query)
+    {
+        return $query->where('super_highlight', 1)->where('highlight', 0);
+    }
+
+    public function scopeHighlightOnly($query)
+    {
+        return $query->where('highlight', 1)->where('super_highlight', 0);
     }
 
     public function scopeSorting($query){

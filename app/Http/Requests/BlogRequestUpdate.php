@@ -18,9 +18,9 @@ class BlogRequestUpdate extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'active' => $this->input('active') === 'off' ? 0 : 1,
-            'highlight' => $this->input('highlight') === 'off' ? 0 : 1,
-            'super_highlight' => $this->input('super_highlight') === 'off' ? 0 : 1,
+            'active' => $this->has('active') ? 1 : 0,
+            'super_highlight' => $this->has('super_highlight') ? 1 : 0,
+            'highlight' => $this->has('highlight') ? 1 : 0,
         ]);
     }
 
@@ -31,6 +31,8 @@ class BlogRequestUpdate extends FormRequest
             'text' => ['nullable', 'string'],
             'path_image' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
             'active' => 'boolean',
+            'super_highlight' => 'boolean',
+            'highlight' => 'boolean',
             'sorting' => ['nullable', 'integer'],
         ];
     }

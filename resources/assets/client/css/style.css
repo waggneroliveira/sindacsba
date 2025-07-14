@@ -247,8 +247,13 @@ body  {
     font-family: var(--default-font)
     var(--background-color)
 }
+.d-flex.align-items-center.bg-white.mb-3.overflow-hidden{
+    border-radius: 8px 0 0 8px;
+}
 aside .img-fluid{
-    max-width: 300px;
+    max-width: 110px;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
 }
 p{
     color: var(--text-color);

@@ -12,52 +12,62 @@
              <!-- Swiper Main Carousel -->
              <div class="swiper main-swiper">
                 <div class="swiper-wrapper">
-                  @for ($i = 0; $i < 3; $i++)                     
+                  @foreach($blogSuperHighlights as $blogSuperHighlight)
+                     @php
+                        \Carbon\Carbon::setLocale('pt_BR');
+                        $dataFormatada = \Carbon\Carbon::parse($blogSuperHighlight->date)->translatedFormat('d \d\e F \d\e Y');
+                     @endphp
                      <div class="swiper-slide">
                         <article>
                            <div class="position-relative overflow-hidden" style="height: 500px;">
-                              <img class="img-fluid h-100 w-100" src="{{asset('build/client/images/news-800x500-1.jpg')}}" style="object-fit: cover;aspect-ratio: 2 / 1">
+                              <img class="img-fluid h-100 w-100" src="{{asset('storage/'.$blogSuperHighlight->path_image)}}" alt="{{$blogSuperHighlight->title}}" style="object-fit: cover;aspect-ratio: 2 / 1">
                               <div class="overlay">
                                  <div class="mb-2 d-flex justify-content-center align-items-center">
-                                    <span class="badge background-red montserrat-semiBold font-12 text-uppercase py-2 px-2 me-2">Business</span>
-                                    <p class="text-white mb-0 montserrat-regular font-12">11 de Janeiro de 2025</p>
+                                    <span class="badge background-red montserrat-semiBold font-12 text-uppercase py-2 px-2 me-2">{{$blogSuperHighlight->category->title}}</span>
+                                    <p class="text-white mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
                                  </div>
                                  <a href="{{route('blog-inner')}}">
-                                    <h1 class="h2 m-0 text-white text-uppercase montserrat-bold font-32 d-block">Lorem ipsum dolor sit amet elit. Proin vitae porta diam...</h1>
+                                    <h1 class="h2 m-0 text-white text-uppercase montserrat-bold font-32 d-block">{{$blogSuperHighlight->title}}</h1>
                                  </a>
                               </div>
                            </div>
                         </article>
                      </div>
-                  @endfor
+                  @endforeach                    
                 </div>
                 <!-- Swiper pagination & navigation (optional) -->
                 <div class="swiper-pagination news"></div>
              </div>
           </div>
-          <div class="col-lg-5 p-0">
-             <div class="row g-0">
-                <!-- Static small boxes as before -->
-                @for ($j = 0; $j < 4; $j++)
-                  <div class="col-md-6 box-small">
-                     <article>
-                        <div class="position-relative overflow-hidden" style="height: 250px;">
-                           <img class="img-fluid w-100 h-100" src="{{asset('build/client/images/news-700x435-1.jpg')}}" style="object-fit: cover;">
-                           <div class="overlay">
-                              <div class="mb-2 d-flex justify-content-center align-items-center">
-                                 <span class="badge background-red text-uppercase montserrat-semiBold font-12 py-2 px-2 me-2">Business</span>
-                                 <p class="text-white mb-0 montserrat-regular font-12">11 de Janeiro de 2025</p>
+          @if ($blogHighlights->count())            
+            <div class="col-lg-5 p-0">
+               <div class="row g-0">
+                  <!-- Static small boxes as before -->
+                  @foreach($blogHighlights as $blogHighlight)
+                     @php
+                        \Carbon\Carbon::setLocale('pt_BR');
+                        $dataFormatada = \Carbon\Carbon::parse($blogHighlight->date)->translatedFormat('d \d\e F \d\e Y');
+                     @endphp
+                     <div class="col-md-6 box-small">
+                        <article>
+                           <div class="position-relative overflow-hidden" style="height: 250px;">
+                              <img class="img-fluid w-100 h-100" src="{{asset('storage/'.$blogHighlight->path_image)}}" alt="{{$blogHighlight->title}}" style="object-fit: cover;">
+                              <div class="overlay">
+                                 <div class="mb-2 d-flex justify-content-center align-items-center">
+                                    <span class="badge background-red text-uppercase montserrat-semiBold font-12 py-2 px-2 me-2">{{$blogHighlight->category->title}}</span>
+                                    <p class="text-white mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
+                                 </div>
+                                 <a href="{{route('blog-inner')}}">                              
+                                    <h3 class="h6 m-0 text-white text-uppercase montserrat-bold font-16 d-block">{{$blogHighlight->title}}</h3>
+                                 </a>
                               </div>
-                              <a href="{{route('blog-inner')}}">                              
-                                 <h3 class="h6 m-0 text-white text-uppercase montserrat-bold font-16 d-block">Lorem ipsum dolor sit amet elit...</h3>
-                              </a>
                            </div>
-                        </div>
-                     </article>
-                  </div>
-                @endfor
-             </div>
-          </div>
+                        </article>
+                     </div>
+                  @endforeach
+               </div>
+            </div>
+          @endif
        </div>
     </div>
 </section>
@@ -73,40 +83,46 @@
                               <input type="search" name="search" class="form-control form-control-lg" placeholder="Pesquise aqui">
                           </form>
                        </div>
-                       @for ($e = 0; $e < 5; $e++)
+
+                       @foreach($blogAll as $blog)   
+                           @php
+                              \Carbon\Carbon::setLocale('pt_BR');
+                              $dataFormatada = \Carbon\Carbon::parse($blog->date)->translatedFormat('d \d\e F \d\e Y');
+                           @endphp                     
                            <article>
                               <div class="col-lg-12 mt-4">
                                  <div class="row news-lg mx-0 mb-3 border rounded-2 overflow-hidden">
                                     <div class="col-md-6 h-100 px-0 overflow-hidden">
-                                          <img class="img-fluid h-100" src="{{ asset('build/client/images/news-700x435-5.jpg') }}" style="object-fit: cover;">
+                                          <img class="img-fluid h-100" src="{{ asset('storage/'.$blog->path_image) }}" alt="{{$blog->title}}" style="object-fit: cover;">
                                     </div>
                                     <div class="col-md-6 d-flex flex-column bg-white h-100 px-0">
                                           <div class="mt-auto p-4">
                                              <div class="mb-2 d-flex justify-content-start align-items-center gap-3">
                                                 <span class="badge badge-primary montserrat-semiBold font-12 background-red text-uppercase font-weight-semi-bold p-2 mr-2">
-                                                      Business
+                                                      {{$blog->category->title}}
                                                 </span>
                                                 <p class="text-color mb-0 montserrat-regular font-12">
-                                                   11 de Janeiro de 2025
+                                                   {{$dataFormatada}}
                                                 </p>
                                              </div>
                                              <a href="{{route('blog-inner')}}" class="underline">
                                                 <h2 class="h4 d-block mb-3 text-uppercase montserrat-semiBold font-20 title-blue">
-                                                   PARTICIPE DA REELEIÇÃO DA SINCADS BA! AS ELEIÇÕES CONTecem NO DIA....
+                                                   {{$blog->title}}
                                                 </h2>
                                              </a>
                                              <p class="m-0 text-color montserrat-regular font-16">
-                                                Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna
-                                                rebum clita rebum dolor stet amet justo
+                                                {!!substr(strip_tags($blog->text), 0, 150)!!}
                                              </p>
                                           </div>
                                     </div>
                                  </div>
                               </div>
                            </article>
-                       @endfor
-
+                       @endforeach
                    </div>
+                   <div class="mt-3 float-end">
+                     {{$blogAll->links()}}
+                   </div> 
                </div>
                
                <div class="col-lg-4" data-aos=fade-left data-aos-delay=150>
@@ -118,46 +134,47 @@
                           </div>
                           <div class="bg-white border border-top-0 p-3">
                               <div class="d-flex flex-wrap m-n1">
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1 active background-red">Politics</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Business</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Corporate</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Business</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Health</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Education</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Science</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Business</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Foods</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Travel</a>
+                                  {{-- <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1 active background-red">Politics</a> --}}
+                                  @foreach ($blogCategories as $blogCategory)                                    
+                                    <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">{{$blogCategory->title}}</a>
+                                  @endforeach
+                                  
                               </div>
                           </div>
                       </div>
                       <!-- Tags End -->
    
-                      <!-- Popular News Start -->
-                      <div class="mb-3">
-                          <div class="section-title mb-0 rounded-top-left">
-                              <h4 class="m-0 text-uppercase montserrat-bold font-28 title-blue">VEJA TAMBÉM</h4>
-                          </div>
-                          <div class="bg-white border border-top-0 p-3">
-                              @for ($k = 0; $k < 5; $k++) 
-                                 <article>
-                                    <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
-                                       <img class="img-fluid" src="{{asset('build/client/images/news-110x110-1.jpg')}}" alt="">
-                                       <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                          <div class="mb-2 d-flex justify-content-start align-items-center gap-3">
-                                             <span class="badge badge-primary montserrat-semiBold font-10 text-uppercase py-1 px-2 mr-2 background-red">Business</span>
-                                             <p class="text-color mb-0 montserrat-regular font-12">11 de Janeiro de 2025</p>
+                      @if ($blogSeeAlso->count())                        
+                        <!-- Popular News Start -->
+                        <div class="mb-3">
+                           <div class="section-title mb-0 rounded-top-left">
+                                 <h4 class="m-0 text-uppercase montserrat-bold font-28 title-blue">VEJA TAMBÉM</h4>
+                           </div>
+                           <div class="bg-white border border-top-0 p-3">
+                                 @foreach ($blogSeeAlso as $seeAlso)  
+                                    @php
+                                       \Carbon\Carbon::setLocale('pt_BR');
+                                       $dataFormatada = \Carbon\Carbon::parse($seeAlso->date)->translatedFormat('d \d\e F \d\e Y');
+                                    @endphp                                
+                                    <article>
+                                       <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
+                                          <img class="img-fluid" src="{{asset('storage/'.$seeAlso->path_image)}}" alt="{{$seeAlso->title}}">
+                                          <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                                             <div class="mb-2 d-flex justify-content-start align-items-center gap-3">
+                                                <span class="badge badge-primary montserrat-semiBold font-10 text-uppercase py-1 px-2 mr-2 background-red">{{$seeAlso->category->title}}</span>
+                                                <p class="text-color mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
+                                             </div>
+                                             <a href="{{route('blog-inner')}}" class="underline">
+                                                <h3 class="h6 m-0 text-uppercase montserrat-bold font-15 title-blue">{{$seeAlso->title}}</h3>
+                                             </a>
                                           </div>
-                                          <a href="{{route('blog-inner')}}" class="underline">
-                                             <h3 class="h6 m-0 text-uppercase montserrat-bold font-15 title-blue">Lorem ipsum dolor sit amet elit...</h3>
-                                          </a>
                                        </div>
-                                    </div>
-                                 </article>
-                              @endfor
-                          </div>
-                      </div>
-                      <!-- Popular News End -->
+                                    </article>
+                                 @endforeach
+                           </div>
+                        </div>
+                        <!-- Popular News End -->
+                      @endif
    
                       <!-- Newsletter Start -->
                       <div class="mb-3">

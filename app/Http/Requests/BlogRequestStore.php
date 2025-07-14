@@ -32,6 +32,8 @@ class BlogRequestStore extends FormRequest
             'text' => ['nullable', 'string'],
             'path_image' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
             'active' => 'boolean',
+            'super_highlight' => 'boolean',
+            'highlight' => 'boolean',
             'sorting' => ['nullable', 'integer'],
         ];
     }

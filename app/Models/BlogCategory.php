@@ -20,7 +20,7 @@ class BlogCategory extends Model
         'sorting',
     ];
 
-    public function products(){
+    public function blogs(){
         return $this->hasMany(Blog::class, 'blog_category_id');
     }
 

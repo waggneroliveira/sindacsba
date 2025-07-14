@@ -183,16 +183,9 @@
         <div class="header--category w-100 grey-medium-background social-links">
             <nav>
                 <ul class="d-flex justify-content-center align-items-center mb-0 py-2 gap-4">
-                    <li class="nav-link"><a href="" class="title-blue montserrat-semiBold font-14 {{ request()->routeIs('blog-inner') ? 'active' : '' }}">Business</a></li>
-                    <li class="nav-link"><a href="" class="title-blue montserrat-semiBold font-14">Jurídico</a></li>
-                    <li class="nav-link"><a href="" class="title-blue montserrat-semiBold font-14">Política</a></li>
-                    <li class="nav-link"><a href="" class="title-blue montserrat-semiBold font-14">Coorporativo</a></li>
-                    <li class="nav-link"><a href="" class="title-blue montserrat-semiBold font-14">Jurídico</a></li>
-                    <li class="nav-link"><a href="" class="title-blue montserrat-semiBold font-14">Política</a></li>
-                    <li class="nav-link"><a href="" class="title-blue montserrat-semiBold font-14">Coorporativo</a></li>
-                    <li class="nav-link"><a href="" class="title-blue montserrat-semiBold font-14">Jurídico</a></li>
-                    <li class="nav-link"><a href="" class="title-blue montserrat-semiBold font-14">Política</a></li>
-                    <li class="nav-link"><a href="" class="title-blue montserrat-semiBold font-14">Coorporativo</a></li>                    
+                    @foreach ($blogCategories as $category)
+                        <li class="nav-link"><a href="" class="title-blue montserrat-semiBold font-14 {{ request()->routeIs('blog-inner') ? 'active' : '' }}">{{$category->title}}</a></li>
+                    @endforeach                
                 </ul>
             </nav>
         </div>
