@@ -705,7 +705,6 @@
                 }
             });
         </script>
-        
 
         @if(Session::has('error'))
             <div id="errorMessage" class="alert alert-warning notification-message" >
@@ -721,7 +720,7 @@
                     @foreach ($errors->all() as $error)
                         errors += '{{ $error }}\n'; 
                     @endforeach
-            
+                    
                     setTimeout(function() {
                         Swal.fire({
                             title: responseItemErrorName,

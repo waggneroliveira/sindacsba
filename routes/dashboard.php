@@ -1,30 +1,27 @@
 <?php
 
 use App\Models\User;
-use App\Models\SettingTheme;
-use App\Models\AuditActivity;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
-use Spatie\Activitylog\Models\Activity;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SlideController;
+use App\Http\Controllers\StackController;
 use App\Repositories\AuditCountRepository;
+use App\Http\Controllers\ProjectController;
 use App\Repositories\SettingThemeRepository;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\SettingEmailController;
 use App\Http\Controllers\SettingThemeController;
 use App\Http\Controllers\AuditActivityController;
+use App\Http\Controllers\StackSessionTitleController;
 use App\Http\Controllers\Auth\PasswordEmailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\SlideController;
-use App\Http\Controllers\StackController;
-use App\Http\Controllers\StackSessionTitleController;
-use App\Models\StackSessionTitle;
 
 Route::get('painel/', function () {
     return redirect()->route('admin.dashboard.painel');
@@ -87,7 +84,14 @@ Route::prefix('painel/')->group(function () {
         ->parameters(['auditorias'=>'activitie']);
         Route::post('auditorias/{id}/mark-as-read', [AuditActivityController::class, 'markAsRead']);
         Route::post('/auditorias/mark-all-as-read', [AuditActivityController::class, 'markAllAsRead']);
-
+        //CATEGORIA BLOG
+        Route::resource('categoria-do-blog', BlogCategoryController::class)
+        ->parameters(['categoria-do-blog' => 'blogCategory'])
+        ->names('admin.dashboard.blogCategory');
+        Route::post('categoria-do-blog/delete', [BlogCategoryController::class, 'destroySelected'])
+        ->name('admin.dashboard.blogCategory.destroySelected');
+        Route::post('categoria-do-blog/sorting', [BlogCategoryController::class, 'sorting'])
+        ->name('admin.dashboard.blogCategory.sorting');
         //SLIDES
         Route::resource('slides', SlideController::class)
         ->names('admin.dashboard.slide')
