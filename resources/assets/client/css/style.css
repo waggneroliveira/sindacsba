@@ -1,3 +1,32 @@
+.hidden div span span[aria-current="page"] span {
+    background: #2F368B !important;
+    margin: 0 5px !important;
+    padding: 5.8px 9px 5.8px 9px !important;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 0.87rem !important;
+    color: #FFF !important;
+}
+.hidden div {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    margin-top: 20px !important;
+    align-items: center !important;
+    justify-content: end !important;
+}
+.hidden div a {
+    background: #f4f4f4 !important;
+    margin: 0 5px !important;
+    padding: 5px 5px 5px 8px !important;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 0.87rem !important;
+    color: #262626 !important;
+}
+.relative.inline-flex.items-center.px-2.py-2,
+.flex.justify-between.flex-1{
+    display: none;
+}
 .menu-mobile {
     left: 0;
     right: 0;
