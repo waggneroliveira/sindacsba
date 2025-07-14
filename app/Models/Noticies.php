@@ -9,25 +9,17 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Blog extends Model
+class Noticies extends Model
 {
-    
     use Notifiable, HasFactory, LogsActivity;
     
     protected $fillable = [
-        'blog_category_id',
         'title',
-        'slug',
         'date',
-        'text',
-        'path_image',
         'active',
         'sorting',
+        'path_file'
     ];
-
-    public function categories(){
-        return $this->belongsTo(BlogCategory::class);
-    }
 
     public function scopeActive($query){
         return $query->where('active', 1);
