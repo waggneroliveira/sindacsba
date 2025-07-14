@@ -20,6 +20,8 @@ return new class extends Migration
             $table->longText('text')->nullable();
             $table->string('path_image')->nullable();
             $table->boolean('active')->default(0);
+            $table->boolean('super_highlight')->default(0);
+            $table->boolean('highlight')->default(0);
             $table->integer('sorting')->default(0);
             $table->timestamps();
         });

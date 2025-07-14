@@ -19,6 +19,8 @@ class BlogRequestUpdate extends FormRequest
     {
         $this->merge([
             'active' => $this->input('active') === 'off' ? 0 : 1,
+            'highlight' => $this->input('highlight') === 'off' ? 0 : 1,
+            'super_highlight' => $this->input('super_highlight') === 'off' ? 0 : 1,
         ]);
     }
 

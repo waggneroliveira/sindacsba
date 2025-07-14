@@ -37,6 +37,8 @@ class BlogController extends Controller
     {
         $data = $request->all();
         $data['active'] = $request->active?1:0;
+        $data['super_highlight'] = $request->super_highlight?1:0;
+        $data['highlight'] = $request->highlight?1:0;
         $data['slug'] = $request->title;
 
         $manager = new ImageManager(GdDriver::class);
@@ -124,6 +126,8 @@ class BlogController extends Controller
     {
         $data = $request->all();
         $data['active'] = $request->active?1:0;
+        $data['super_highlight'] = $request->super_highlight?1:0;
+        $data['highlight'] = $request->highlight?1:0;
         $data['slug'] = $request->title;
 
         $manager = new ImageManager(GdDriver::class);

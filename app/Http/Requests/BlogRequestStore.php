@@ -20,6 +20,8 @@ class BlogRequestStore extends FormRequest
     {
         $this->merge([
             'active' => $this->input('active') === 'on' ? 1 : 0,
+            'highlight' => $this->input('highlight') === 'on' ? 1 : 0,
+            'super_highlight' => $this->input('super_highlight') === 'on' ? 1 : 0,
         ]);
     }
 
