@@ -22,7 +22,8 @@ class Noticies extends Model
     ];
 
     public function scopeActive($query){
-        return $query->orderByRaw('YEAR(`date`) DESC');
+        return $query->orderByRaw('YEAR(`date`) DESC')
+        ->orderBy('sorting', 'DESC');
     }
 
     public function scopeSorting($query){
