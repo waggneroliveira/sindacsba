@@ -42,7 +42,7 @@
                                                 <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#blog-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="blog-create" tabindex="-1" role="dialog" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-dialog modal-dialog-centered" style="max-width: 980px;">
                                                         <div class="modal-content">
                                                             <div class="modal-header bg-light">
                                                                 <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.btn_create')}}</h4>
@@ -51,22 +51,28 @@
                                                             <div class="modal-body p-4">
                                                                 <form action="{{route('admin.dashboard.blog.store')}}" method="POST" enctype="multipart/form-data">
                                                                     @csrf
-                                                                    <div class="mb-3 col-12 d-flex align-items-start flex-column">
-                                                                        <label for="category-select" class="form-label">Categoria(s) <span class="text-danger">*</span></label>
-                                                                        @php
-                                                                            $currentCategory = isset($blog) ? $blog->produtc_category : null;
-                                                                        @endphp
-                                                                    
-                                                                        <select name="blog_category_id" class="form-select" id="category-select" required>
-                                                                            <option value="" disabled selected>Selecione o Cliente</option>
-                                                                            @foreach ($blogCategory as $categoryValue => $categoryLabel)
-                                                                                <option value="{{ $categoryValue }}" {{ $categoryValue == $currentCategory ? 'selected' : '' }}>
-                                                                                    {{ $categoryLabel }}
-                                                                                </option>
-                                                                            @endforeach
-                                                                        </select>
+                                                                    <div class="row">
+                                                                        <div class="mb-3 col-6 d-flex align-items-start flex-column">
+                                                                            <label for="category-select" class="form-label">Categoria(s) <span class="text-danger">*</span></label>
+                                                                            @php
+                                                                                $currentCategory = isset($blog) ? $blog->blog_category : null;
+                                                                            @endphp
+                                                                        
+                                                                            <select name="blog_category_id" class="form-select" id="category-select" required>
+                                                                                <option value="" disabled selected>Selecione o Cliente</option>
+                                                                                @foreach ($blogCategory as $categoryValue => $categoryLabel)
+                                                                                    <option value="{{ $categoryValue }}" {{ $categoryValue == $currentCategory ? 'selected' : '' }}>
+                                                                                        {{ $categoryLabel }}
+                                                                                    </option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="mb-3 col-6">
+                                                                            <label for="date" class="form-label">Data de publicação</label>
+                                                                            <input type="date" name="date" class="form-control">
+                                                                        </div>
                                                                     </div>
-                                                                    
+
                                                                     <div class="mb-3">
                                                                         <label for="title" class="form-label">Título</label>
                                                                         <input type="text" name="title" class="form-control" id="title" placeholder="Digite seu nome">
@@ -127,8 +133,8 @@
                                         <tbody data-route="{{route('admin.dashboard.blog.sorting')}}">
                                             @foreach ($blogs as $key => $blog)
                                                 @php
-                                                    if ($blog->produtc_category) {
-                                                        $categoria = $categories[$blog->produtc_category] ?? 'Nenhuma categoria';
+                                                    if ($blog->blog_category_id) {
+                                                        $categoria = $blogCategory[$blog->blog_category_id] ?? 'Nenhuma categoria';
                                                     } 
                                                 @endphp
 
@@ -157,7 +163,7 @@
                                                         Auth::user()->hasRole('Super'))
                                                             <button class="table-edit-button btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-group-edit-{{$blog->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
                                                             <div class="modal fade" id="modal-group-edit-{{$blog->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-dialog modal-dialog-centered" style="max-width: 980px;">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header bg-light">
                                                                             <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.group_and_permission')}}</h4>
@@ -217,4 +223,20 @@
             width: 100%;
         }
     </style>
+
+    <script>
+        // Inicializa o CKEditor para o textarea de criação
+        CKEDITOR.replace('textarea-create', {
+            filebrowserUploadUrl: "{{ route('admin.dashboard.blog.uploadImageCkeditor', ['_token' => csrf_token() ]) }}",
+            filebrowserUploadMethod: 'form'
+        });
+
+        // Inicializa o CKEditor para todos os textareas de edição
+        @foreach ($blogs as $blog)
+            CKEDITOR.replace('textarea-edit-{{ $blog->id }}', {
+                filebrowserUploadUrl: "{{ route('admin.dashboard.blog.uploadImageCkeditor', ['_token' => csrf_token() ]) }}",
+                filebrowserUploadMethod: 'form'
+            });
+        @endforeach
+    </script>
 @endsection

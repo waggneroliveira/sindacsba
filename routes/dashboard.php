@@ -93,6 +93,8 @@ Route::prefix('painel/')->group(function () {
         ->name('admin.dashboard.blog.destroySelected');
         Route::post('blog/sorting', [BlogController::class, 'sorting'])
         ->name('admin.dashboard.blog.sorting');
+        Route::post('blog/uploadImageCkeditor', [BlogController::class, 'uploadImageCkeditor'])
+        ->name('admin.dashboard.blog.uploadImageCkeditor');
         //CATEGORIA BLOG
         Route::resource('categoria-do-blog', BlogCategoryController::class)
         ->parameters(['categoria-do-blog' => 'blogCategory'])

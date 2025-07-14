@@ -76,7 +76,50 @@ class BlogController extends Controller
             return redirect()->back();
         }
     }
+    public function uploadImageCkeditor(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $file = $request->file('upload');
+            $mime = $file->getMimeType();
 
+            // Nome do arquivo sem extensão + .webp
+            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.webp';
+
+            // Caminho de armazenamento
+            $pathUpload = 'uploads/blog_images/';
+
+            $manager = ImageManager::gd(); // ou ->imagick() se preferir
+
+            if ($mime === 'image/svg+xml') {
+                // Apenas copiar o SVG sem conversão
+                Storage::disk('public')->putFileAs($pathUpload, $file, $filename);
+            } else {
+                // Converter em WEBP
+                $image = $manager->read($file)
+                    ->resize(857, 546, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })
+                    ->toWebp(quality: 70)
+                    ->toString();
+
+                Storage::disk('public')->put($pathUpload . $filename, $image);
+            }
+
+            $url = asset('storage/' . $pathUpload . $filename);
+
+            return response()->json([
+                'uploaded' => 1,
+                'fileName' => $filename,
+                'url' => $url
+            ]);
+        }
+
+        return response()->json([
+            'uploaded' => 0,
+            'error' => ['message' => 'Upload falhou.']
+        ]);
+    }
     public function update(BlogRequestUpdate $request, Blog $blog)
     {
         $data = $request->all();

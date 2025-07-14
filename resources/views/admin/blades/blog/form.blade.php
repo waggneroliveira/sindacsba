@@ -1,20 +1,27 @@
-<div class="mb-3 col-12 d-flex align-items-start flex-column">
-    <label for="category-select" class="form-label">Categoria(s) <span class="text-danger">*</span></label>
-    @php
-        $currentCategory = isset($blog) ? $blog->blog_category_id : null;
-    @endphp
-
-    <select name="blog_category_id" class="form-select" id="category-select" required>
-        <option value="" disabled selected>Selecione o Cliente</option>
-        @foreach ($blogCategory as $categoryValue => $categoryLabel)
-            <option value="{{ $categoryValue }}" {{ $categoryValue == $currentCategory ? 'selected' : '' }}>
-                {{ $categoryLabel }}
-            </option>
-        @endforeach
-    </select>
+<div class="row">
+    <div class="mb-3 col-6 d-flex align-items-start flex-column">
+        <label for="category-select" class="form-label">Categoria(s) <span class="text-danger">*</span></label>
+        @php
+            $currentCategory = isset($blog) ? $blog->blog_category_id : null;
+        @endphp
+    
+        <select name="blog_category_id" class="form-select" id="category-select" required>
+            <option value="" disabled selected>Selecione o Cliente</option>
+            @foreach ($blogCategory as $categoryValue => $categoryLabel)
+                <option value="{{ $categoryValue }}" {{ $categoryValue == $currentCategory ? 'selected' : '' }}>
+                    {{ $categoryLabel }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+    
+    <div class="mb-3 col-6">
+        <label for="date" class="form-label">Data de publicação</label>
+        <input type="date" name="date" class="form-control" id="date{{isset($blog->id)?$blog->id:''}}" value="{{isset($blog)?$blog->date:''}}">
+    </div>
 </div>
 
-<div class="mb-3">
+<div class="mb-3 col-12">
     <label for="title" class="form-label">Título</label>
     <input type="text" name="title" class="form-control" id="title{{isset($blog->id)?$blog->id:''}}" value="{{isset($blog)?$blog->title:''}}" placeholder="Digite seu nome">
 </div>
