@@ -9,9 +9,9 @@ use App\Http\Controllers\Controller;
 
 class BlogPageController extends Controller
 {
-    public function index($category = null)
+    public function index(Request $request, $category = null)
     {
-
+        $search = $request->input('search');
         $blogCategories = BlogCategory::whereHas('blogs')->active()->sorting()->get();
         $blogSuperHighlights = Blog::whereHas('category', function($active){
             $active->where('active', 1);
@@ -35,6 +35,10 @@ class BlogPageController extends Controller
             $blogAll = $blogAll->whereHas('category', function($query) use ($category) {
                 $query->where('slug', $category);
             });
+        }
+
+        if ($search) {
+            $blogAll = $blogAll->whereHas('category')->where('title', 'like', '%' . $search . '%');
         }
 
         $blogAll = $blogAll->active()->sorting()->paginate(3);

@@ -22,7 +22,7 @@
                            <div class="position-relative overflow-hidden" style="height: 500px;">
                               <img class="img-fluid h-100 w-100" src="{{asset('storage/'.$blogSuperHighlight->path_image)}}" alt="{{$blogSuperHighlight->title}}" style="object-fit: cover;aspect-ratio: 2 / 1">
                               <div class="overlay">
-                                 <div class="mb-2 d-flex justify-content-center align-items-center">
+                                 <div class="mb-2 d-flex justify-content-center align-items-center gap-1 flex-wrap">
                                     <span class="badge background-red montserrat-semiBold font-12 text-uppercase py-2 px-2 me-2">{{$blogSuperHighlight->category->title}}</span>
                                     <p class="text-white mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
                                  </div>
@@ -53,7 +53,7 @@
                            <div class="position-relative overflow-hidden" style="height: 250px;">
                               <img class="img-fluid w-100 h-100" src="{{asset('storage/'.$blogHighlight->path_image)}}" alt="{{$blogHighlight->title}}" style="object-fit: cover;">
                               <div class="overlay">
-                                 <div class="mb-2 d-flex justify-content-center align-items-center">
+                                 <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
                                     <span class="badge background-red text-uppercase montserrat-semiBold font-12 py-2 px-2 me-2">{{$blogHighlight->category->title}}</span>
                                     <p class="text-white mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
                                  </div>
@@ -72,7 +72,7 @@
       </div>
 </section>
 
-<section id="blogs" class="blog-content pt-3 my-5">
+<section id="news" class="blog-content pt-3 my-5">
    <!-- News With Sidebar Start -->
    <div class="container-fluid">
        <div class="container">
@@ -83,8 +83,9 @@
                         <h4 class="m-0 text-uppercase montserrat-bold font-22 title-blue">Notícias</h4>
                      </div>
                      <div class="row">
-                        <div class="col-12 col-lg-7 mb-4">
-                           <form action="" class="search">
+                        <div class="col-12 col-lg-7 mb-4 d-flex justify-content-between gap-3 align-items-center">
+                           <form action="{{route('blog-search')}}#news" class="search col-10" method="post">
+                              @csrf
                               <div class="input-group input-group-lg">
                                  <input type="search" name="search" class="form-control border-start-0 text-color montserrat-regular bg-white" placeholder="Pesquise aqui">
                                  <span class="input-group-text bg-white border-end-0">
@@ -94,6 +95,10 @@
                                  </span>
                               </div>
                            </form>
+                           {{-- {{dd(Route::currentRouteName())}} --}}
+                           @if (Route::currentRouteName() == 'blog-search')
+                              <a href="{{ route('blog') }}#news" class="btn background-red text-white montserrat-medium font-15">Limpar</a>
+                           @endif
                         </div>
 
                         @foreach($blogAll as $blog)   
@@ -102,14 +107,14 @@
                                  $dataFormatada = \Carbon\Carbon::parse($blog->date)->translatedFormat('d \d\e F \d\e Y');
                               @endphp                     
                               <article>
-                                 <div class="col-lg-12 mt-4">
+                                 <div class="col-lg-12 mt-2">
                                     <div class="row news-lg mx-0 mb-3 border rounded-2 overflow-hidden bg-white">
                                        <div class="col-md-6 h-100 px-0 overflow-hidden">
                                              <img class="img-fluid h-100" src="{{ asset('storage/'.$blog->path_image) }}" alt="{{$blog->title}}" style="object-fit: cover;">
                                        </div>
                                        <div class="col-md-6 d-flex flex-column bg-white h-100 px-0">
                                              <div class="mt-auto p-4">
-                                                <div class="mb-2 d-flex justify-content-start align-items-center gap-3">
+                                                <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
                                                    <span class="badge badge-primary montserrat-semiBold font-12 background-red text-uppercase font-weight-semi-bold p-2 mr-2">
                                                          {{$blog->category->title}}
                                                    </span>
@@ -154,7 +159,7 @@
                            <div class="bg-white border border-top-0 p-3">
                                  <div class="d-flex flex-wrap m-n1">
                                     @foreach ($blogCategories as $blogCategory)
-                                       <a href="{{ route('blog', ['category' => $blogCategory->slug]) }}#blogs"
+                                       <a href="{{ route('blog', ['category' => $blogCategory->slug]) }}#news"
                                           class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1
                                           {{ (request()->routeIs('blog') && request()->route('category') === $blogCategory->slug) ? 'active background-red' : '' }}">
                                           {{$blogCategory->title}}
@@ -182,12 +187,12 @@
                                        <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
                                           <img class="img-fluid" src="{{asset('storage/'.$seeAlso->path_image)}}" alt="{{$seeAlso->title}}">
                                           <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                             <div class="mb-2 d-flex justify-content-start align-items-center gap-3">
+                                             <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
                                                 <span class="badge badge-primary montserrat-semiBold font-10 text-uppercase py-1 px-2 mr-2 background-red">{{$seeAlso->category->title}}</span>
                                                 <p class="text-color mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
                                              </div>
                                              <a href="{{route('blog-inner', ['slug' => $seeAlso->slug])}}" class="underline">
-                                                <h3 class="h6 m-0 text-uppercase montserrat-bold font-15 title-blue">{{$seeAlso->title}}</h3>
+                                                <h3 class="h6 m-0 text-uppercase montserrat-bold font-14 title-blue">{{$seeAlso->title}}</h3>
                                              </a>
                                           </div>
                                        </div>

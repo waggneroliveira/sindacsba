@@ -186,7 +186,7 @@
                     <ul class="d-flex justify-content-center align-items-center mb-0 py-2 gap-4 px-0">
                         @foreach ($blogCategories as $category)
                             <li class="nav-link">
-                                <a href="{{ route('blog', ['category' => $category->slug]) }}#blogs"
+                                <a href="{{ route('blog', ['category' => $category->slug]) }}#news"
                                 class="title-blue montserrat-semiBold font-14
                                 {{ (request()->routeIs('blog-inner') && isset($blogInner) && $blogInner->category->id === $category->id) ||
                                 (request()->routeIs('blog') && request()->route('category') === $category->slug)

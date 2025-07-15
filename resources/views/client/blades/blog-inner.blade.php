@@ -16,7 +16,7 @@
                     <div class="position-relative mb-3">
                         <article>
                             <h1 class="mb-3 title-blue montserrat-bold font-32">{{$blogInner->title}}</h1>
-                            <div class="mb-3 d-flex justify-content-start align-items-center">
+                            <div class="mb-3 d-flex justify-content-start align-items-center gap-1 flex-wrap">
                                 <span class="badge background-red montserrat-semiBold font-12 text-uppercase py-2 px-2 me-2">{{$blogInner->category->title}}</span>
                                 <p class="text-color mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
                             </div>
@@ -116,7 +116,7 @@
                               <div class="d-flex flex-wrap m-n1">
                                   @foreach ($blogCategories as $category)
                                     <li class="nav-link">
-                                        <a href="{{ route('blog', ['category' => $category->slug]) }}#blogs"
+                                        <a href="{{ route('blog', ['category' => $category->slug]) }}#news"
                                         class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1
                                         {{ (request()->routeIs('blog-inner') && isset($blogInner) && $blogInner->category->id === $category->id) ? 'active background-red' : '' }}">
                                             {{ $category->title }}
@@ -144,12 +144,12 @@
                                         <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
                                             <img class="img-fluid" src="{{asset('storage/'.$relacionado->path_image)}}" alt="{{$relacionado->title}}">
                                             <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                            <div class="mb-2 d-flex justify-content-start align-items-center gap-3">
+                                            <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
                                                 <span class="badge badge-primary montserrat-semiBold font-10 text-uppercase py-1 px-2 mr-2 background-red">{{$relacionado->category->title}}</span>
                                                 <p class="text-color mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
                                             </div>
                                             <a href="" class="underline">
-                                                <h3 class="h6 m-0 text-uppercase montserrat-bold font-15 title-blue">{{$relacionado->title}}</h3>
+                                                <h3 class="h6 m-0 text-uppercase montserrat-bold font-14 title-blue">{{$relacionado->title}}</h3>
                                             </a>
                                             </div>
                                         </div>

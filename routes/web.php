@@ -12,7 +12,7 @@ use App\Http\Controllers\Client\HomePageController;
 require __DIR__ . '/dashboard.php';
 
 Route::get('/', function () {
-    return redirect()->route('index');
+    return redirect()->route('blog');
 });
 
 // Route::get('/home', function () {
@@ -35,10 +35,11 @@ Route::get('/editais', function () {
 //     return view('client.blades.blog-inner');  
 // })->name('blog-inner'); 
 
-Route::get('blog/interna/{slug}', [BlogPageController::class, 'blogInner'])
+Route::get('noticias/interna/{slug}', [BlogPageController::class, 'blogInner'])
 ->name('blog-inner');
 
-Route::get('blog/{category?}', [BlogPageController::class, 'index'])->name('blog');
+Route::get('noticias/{category?}', [BlogPageController::class, 'index'])->name('blog');
+Route::post('noticias/search', [BlogPageController::class, 'index'])->name('blog-search');
 
 // Route::get('home', [HomePageController::class, 'index'])->name('index');
 
