@@ -9,11 +9,16 @@ use App\Http\Controllers\Controller;
 
 class BlogPageController extends Controller
 {
-    public function index()
+    public function index($category = null)
     {
+
         $blogCategories = BlogCategory::whereHas('blogs')->active()->sorting()->get();
-        $blogSuperHighlights = Blog::with('category')->superHighlightOnly()->active()->sorting()->limit(6)->get();
-        $blogHighlights = Blog::with('category')->highlightOnly()->active()->sorting()->limit(4)->get();
+        $blogSuperHighlights = Blog::whereHas('category', function($active){
+            $active->where('active', 1);
+        })->superHighlightOnly()->active()->sorting()->limit(6)->get();
+        $blogHighlights = Blog::whereHas('category', function($active){
+            $active->where('active', 1);
+        })->highlightOnly()->active()->sorting()->limit(4)->get();
 
         $superHighlightIds = $blogSuperHighlights->pluck('id');
         $highlightIds = $blogHighlights->pluck('id');        
@@ -21,14 +26,23 @@ class BlogPageController extends Controller
         $excludedIds = $superHighlightIds->merge($highlightIds);
 
         $blogAll = Blog::with('category')
-        ->whereHas('category')
-        ->whereNotIn('id', $excludedIds)
-        ->active()
-        ->sorting()
-        ->paginate(3);
+        ->whereHas('category', function($active){
+            $active->where('active', 1);
+        })
+        ->whereNotIn('id', $excludedIds);
+
+        if ($category) {
+            $blogAll = $blogAll->whereHas('category', function($query) use ($category) {
+                $query->where('slug', $category);
+            });
+        }
+
+        $blogAll = $blogAll->active()->sorting()->paginate(3);
         
         $blogSeeAlso = Blog::with('category')
-        ->whereHas('category')
+        ->whereHas('category', function($active){
+            $active->where('active', 1);
+        })
         ->whereNotIn('id', $excludedIds->merge($blogAll->pluck('id')))
         ->active()
         ->inRandomOrder()
@@ -42,6 +56,41 @@ class BlogPageController extends Controller
             'blogAll',
             'blogSeeAlso',
         ));
+    }
+
+    public function blogInner($slug = null)
+    {
+        if (!$slug) {
+            abort(404);
+        }
+
+        $blogInner = Blog::with('category')
+        ->whereHas('category')
+        ->where('slug', $slug)
+        ->active()
+        ->sorting()
+        ->first();
+
+        if (!$blogInner) {
+            abort(404);
+        }
+
+        // Buscar relacionados da mesma categoria
+        $blogRelacionados = Blog::whereHas('category', function ($query) use ($blogInner) {
+            $query->where('id', $blogInner->category->id);
+        })
+        ->where('id', '!=', $blogInner->id)
+        ->active()
+        ->sorting()
+        ->take(4)
+        ->get();
+
+        $blogCategories = BlogCategory::whereHas('blogs')->active()->sorting()->get();
+
+        // Compartilha a variável globalmente (para menu/header)
+        view()->share('blogInner', $blogInner);
+
+        return view('client.blades.blog-inner', compact('blogInner', 'slug', 'blogCategories', 'blogRelacionados'));
     }
 
 }

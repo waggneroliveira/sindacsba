@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +35,7 @@ class BlogCategoryController extends Controller
     public function store(BlogCategoryRequest $request){
         $data = $request->all();
         $data['active'] = $request->active?1:0;
-        $data['slug'] = $request->title;
+        $data['slug'] = Str::slug($request->title);
 
         try {
             DB::beginTransaction();
@@ -53,7 +54,7 @@ class BlogCategoryController extends Controller
     {
         $data = $request->all();
         $data['active'] = $request->active?1:0;
-        $data['slug'] = $request->title;
+        $data['slug'] = Str::slug($request->title);
         try {
             DB::beginTransaction();
                 $blogCategory->fill($data)->save();

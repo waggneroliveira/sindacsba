@@ -27,6 +27,26 @@
 .flex.justify-between.flex-1{
     display: none;
 }
+.annun{
+    width: 300px !important;
+    max-width: 300px !important;
+    border-radius: 10px;
+}
+.text-color.montserrat-regular.font-16 p{
+    font-size: 16px;
+    color: #9A9DA2;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 300;
+}
+.text-color.montserrat-regular.font-16 p img{
+    margin-right: 15px;
+}
+.search input{
+    font-size: 14px !important;
+    background: #FFF !important;
+}
 .menu-mobile {
     left: 0;
     right: 0;
@@ -304,7 +324,7 @@ p{
     --background-color: #F9F9F9;
     --background-red: #E5282A;
     --background-blue: #2F368B;
-    --default-color: #FFF;
+    --default-color: #F9F9F9;
     --text-color: #9A9DA2;
     --title-color-blue: #31404B;
     --cta-background-color: #091DFF;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use Illuminate\Support\Str;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +40,7 @@ class BlogController extends Controller
         $data['active'] = $request->active?1:0;
         $data['super_highlight'] = $request->super_highlight?1:0;
         $data['highlight'] = $request->highlight?1:0;
-        $data['slug'] = $request->title;
+        $data['slug'] = Str::slug($request->title);
 
         $manager = new ImageManager(GdDriver::class);
 
@@ -128,7 +129,7 @@ class BlogController extends Controller
         $data['active'] = $request->active?1:0;
         $data['super_highlight'] = $request->super_highlight?1:0;
         $data['highlight'] = $request->highlight?1:0;
-        $data['slug'] = $request->title;
+        $data['slug'] = Str::slug($request->title);
 
         $manager = new ImageManager(GdDriver::class);
 

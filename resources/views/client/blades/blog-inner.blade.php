@@ -8,41 +8,28 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8" data-aos=fade-right data-aos-delay=150>
+                    @php
+                        \Carbon\Carbon::setLocale('pt_BR');
+                        $dataFormatada = \Carbon\Carbon::parse($blogInner->date)->translatedFormat('d \d\e F \d\e Y');
+                    @endphp
                     <!-- News Detail Start -->
                     <div class="position-relative mb-3">
                         <article>
-                            <h1 class="mb-3 title-blue montserrat-bold font-32">Lorem ipsum dolor sit amet elit vitae porta diam...</h1>
+                            <h1 class="mb-3 title-blue montserrat-bold font-32">{{$blogInner->title}}</h1>
                             <div class="mb-3 d-flex justify-content-start align-items-center">
-                                <span class="badge background-red montserrat-semiBold font-12 text-uppercase py-2 px-2 me-2">Business</span>
-                                <p class="text-color mb-0 montserrat-regular font-12">11 de Janeiro de 2025</p>
+                                <span class="badge background-red montserrat-semiBold font-12 text-uppercase py-2 px-2 me-2">{{$blogInner->category->title}}</span>
+                                <p class="text-color mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
                             </div>
-                            <img class="img-fluid w-100" src="{{ asset('build/client/images/news-700x435-1.jpg') }}" style="object-fit: cover;">
+                            <img class="img-fluid w-100 rounded-3" src="{{ asset('storage/'.$blogInner->path_image) }}" alt="{{$blogInner->title}}" style="object-fit: cover;">
                             <div class="py-4"> 
-                                <p class="text-color montserrat-regular font-16">
-                                    Sadipscing labore amet rebum est et justo gubergren. Et eirmod ipsum sit diam ut magna lorem. Nonumy vero labore lorem sanctus rebum et lorem magna kasd, stet amet magna accusam consetetur eirmod. Kasd accusam sit ipsum sadipscing et at at sanctus et. Ipsum sit gubergren dolores et, consetetur justo invidunt at et aliquyam ut et vero clita. Diam sea sea no sed dolores diam nonumy, gubergren sit stet no diam kasd vero.
-                                    <br>
-                                    <br>
-                                    Voluptua est takimata stet invidunt sed rebum nonumy stet, clita aliquyam dolores vero stet consetetur elitr takimata rebum sanctus. Sit sed accusam stet sit nonumy kasd diam dolores, sanctus lorem kasd duo dolor dolor vero sit et. Labore ipsum duo sanctus amet eos et. Consetetur no sed et aliquyam ipsum justo et, clita lorem sit vero amet amet est dolor elitr, stet et no diam sit. Dolor erat justo dolore sit invidunt.
-                                </p>
-                                <img class="img-fluid w-100 float-start mr-4 mb-2" src="{{ asset('build/client/images/news-800x500-1.jpg') }}">
-                                <p class="text-color montserrat-regular font-16">
-                                    Sadipscing labore amet rebum est et justo gubergren. Et eirmod ipsum sit diam ut magna lorem. Nonumy vero labore lorem sanctus rebum et lorem magna kasd, stet amet magna accusam consetetur eirmod. Kasd accusam sit ipsum sadipscing et at at sanctus et. Ipsum sit gubergren dolores et, consetetur justo invidunt at et aliquyam ut et vero clita. Diam sea sea no sed dolores diam nonumy, gubergren sit stet no diam kasd vero.
-                                    <br>
-                                    <br>
-                                    Voluptua est takimata stet invidunt sed rebum nonumy stet, clita aliquyam dolores vero stet consetetur elitr takimata rebum sanctus. Sit sed accusam stet sit nonumy kasd diam dolores, sanctus lorem kasd duo dolor dolor vero sit et. Labore ipsum duo sanctus amet eos et. Consetetur no sed et aliquyam ipsum justo et, clita lorem sit vero amet amet est dolor elitr, stet et no diam sit. Dolor erat justo dolore sit invidunt.
-                                </p>
-                                <img class="img-fluid w-100 float-end ml-4 mb-2" src="{{ asset('build/client/images/news-800x500-2.jpg') }}">
-                                <p class="text-color montserrat-regular font-16">
-                                    Sadipscing labore amet rebum est et justo gubergren. Et eirmod ipsum sit diam ut magna lorem. Nonumy vero labore lorem sanctus rebum et lorem magna kasd, stet amet magna accusam consetetur eirmod. Kasd accusam sit ipsum sadipscing et at at sanctus et. Ipsum sit gubergren dolores et, consetetur justo invidunt at et aliquyam ut et vero clita. Diam sea sea no sed dolores diam nonumy, gubergren sit stet no diam kasd vero.
-                                    <br>
-                                    <br>
-                                    Voluptua est takimata stet invidunt sed rebum nonumy stet, clita aliquyam dolores vero stet consetetur elitr takimata rebum sanctus. Sit sed accusam stet sit nonumy kasd diam dolores, sanctus lorem kasd duo dolor dolor vero sit et. Labore ipsum duo sanctus amet eos et. Consetetur no sed et aliquyam ipsum justo et, clita lorem sit vero amet amet est dolor elitr, stet et no diam sit. Dolor erat justo dolore sit invidunt.
-                                </p>
+                                <div class="text-color montserrat-regular font-16">
+                                    {!! $blogInner->text !!}
+                                </div>
                             </div>                        
                         </article>
 
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="{{route('index')}}" class="montserrat-semiBold font-16 d-flex justify-content-between align-items-center gap-2 background-red py-2 px-3 text-white rounded-3">
+                            <a href="{{route('blog')}}" class="montserrat-semiBold font-16 d-flex justify-content-between align-items-center gap-2 background-red py-2 px-3 text-white rounded-3">
                                 <svg width="15" height="15" viewBox="0 0 17 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M14.1926 2.20441L2.32113 10.6069C2.05923 10.7927 2.05923 11.2059 2.32113 11.3917L14.1926 19.7941C14.4739 19.9924 14.8716 19.8011 14.8716 19.4017V2.59536C14.8716 2.19742 14.4725 2.00613 14.1926 2.20441ZM1.09904 8.87649L12.9705 0.474006C14.6832 -0.737844 17 0.519764 17 2.59681V19.4032C17 21.4803 14.6831 22.7378 12.9705 21.526L1.09904 13.1221C-0.365655 12.085 -0.367038 9.91502 1.09904 8.87649Z" fill="white"/>
                                 </svg>
@@ -108,6 +95,7 @@
                                     <label for="message">Message *</label>
                                     <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
                                 </div>
+                                
                                 <div class="mb-0">
                                     <input type="submit" value="Comentar" class="btn btn-primary montserrat-semiBold font-16 py-2 px-3">
                                 </div>
@@ -122,55 +110,60 @@
                      <!-- Tags Start -->
                       <div class="mb-3">
                           <div class="section-title mb-0 rounded-top-left">
-                              <h4 class="m-0 text-uppercase montserrat-bold font-28 title-blue">CATEGORIAS</h4>
+                              <h4 class="m-0 text-uppercase montserrat-bold font-22 title-blue">CATEGORIAS</h4>
                           </div>
                           <div class="bg-white border border-top-0 p-3">
                               <div class="d-flex flex-wrap m-n1">
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Politics</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1 active background-red">Business</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Corporate</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Business</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Health</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Education</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Science</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Business</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Foods</a>
-                                  <a href="" class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1">Travel</a>
+                                  @foreach ($blogCategories as $category)
+                                    <li class="nav-link">
+                                        <a href="{{ route('blog', ['category' => $category->slug]) }}#blogs"
+                                        class="btn btn-sm btn-outline-secondary montserrat-semiBold font-14 m-1
+                                        {{ (request()->routeIs('blog-inner') && isset($blogInner) && $blogInner->category->id === $category->id) ? 'active background-red' : '' }}">
+                                            {{ $category->title }}
+                                        </a>
+                                    </li>
+                                @endforeach
                               </div>
                           </div>
                       </div>
                       <!-- Tags End -->
    
-                      <!-- Popular News Start -->
-                      <div class="mb-3">
-                          <div class="section-title mb-0 rounded-top-left">
-                              <h4 class="m-0 text-uppercase montserrat-bold font-28 title-blue">VEJA TAMBÉM</h4>
-                          </div>
-                          <div class="bg-white border border-top-0 p-3">
-                              @for ($k = 0; $k < 5; $k++) 
-                                 <article>
-                                    <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
-                                       <img class="img-fluid" src="{{asset('build/client/images/news-110x110-1.jpg')}}" alt="">
-                                       <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                          <div class="mb-2 d-flex justify-content-start align-items-center gap-3">
-                                             <span class="badge badge-primary montserrat-semiBold font-10 text-uppercase py-1 px-2 mr-2 background-red">Business</span>
-                                             <p class="text-color mb-0 montserrat-regular font-12">11 de Janeiro de 2025</p>
-                                          </div>
-                                          <a href="{{route('blog-inner')}}" class="underline">
-                                             <h3 class="h6 m-0 text-uppercase montserrat-bold font-15 title-blue">Lorem ipsum dolor sit amet elit...</h3>
-                                          </a>
-                                       </div>
-                                    </div>
-                                 </article>
-                              @endfor
-                          </div>
-                      </div>
-                      <!-- Popular News End -->
+                      @if ($blogRelacionados)                        
+                        <!-- Popular News Start -->
+                        <div class="mb-3">
+                            <div class="section-title mb-0 rounded-top-left">
+                                <h4 class="m-0 text-uppercase montserrat-bold font-22 title-blue">Relacionados</h4>
+                            </div>
+                            <div class="bg-white border border-top-0 p-3">
+                                @foreach($blogRelacionados as $relacionado)    
+                                    @php
+                                        \Carbon\Carbon::setLocale('pt_BR');
+                                        $dataFormatada = \Carbon\Carbon::parse($relacionado->date)->translatedFormat('d \d\e F \d\e Y');
+                                    @endphp                               
+                                    <article>
+                                        <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
+                                            <img class="img-fluid" src="{{asset('storage/'.$relacionado->path_image)}}" alt="{{$relacionado->title}}">
+                                            <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                                            <div class="mb-2 d-flex justify-content-start align-items-center gap-3">
+                                                <span class="badge badge-primary montserrat-semiBold font-10 text-uppercase py-1 px-2 mr-2 background-red">{{$relacionado->category->title}}</span>
+                                                <p class="text-color mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
+                                            </div>
+                                            <a href="" class="underline">
+                                                <h3 class="h6 m-0 text-uppercase montserrat-bold font-15 title-blue">{{$relacionado->title}}</h3>
+                                            </a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                @endforeach
+                            </div>
+                        </div>
+                        <!-- Popular News End -->
+                      @endif
    
                       <!-- Newsletter Start -->
                       <div class="mb-3">
                           <div class="section-title mb-0 rounded-top-left">
-                              <h4 class="m-0 text-uppercase montserrat-bold font-28 title-blue">Newsletter</h4>
+                              <h4 class="m-0 text-uppercase montserrat-bold font-22 title-blue">Newsletter</h4>
                           </div>
                           <div class="bg-white text-center border border-top-0 p-3">
                               <p class="text-color montserrat-regular font-16 text-start">Cadastre-se abaixo e receba as principais novidades via e-mail!</p>
@@ -191,7 +184,7 @@
                       <!-- Ads Start -->
                       <div class="mb-3">
                           <div class="bg-white text-center px-0 overflow-hidden">
-                              <a href=""><img class="img-fluid w-100" src="{{asset('build/client/images/anuncio.png')}}" alt=""></a>
+                              <a href=""><img class="img-fluid w-100 annun" src="{{asset('build/client/images/anuncio.png')}}" alt=""></a>
                           </div>
                       </div>
                       <!-- Ads End -->

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use Inertia\Inertia;
 use App\Models\BlogCategory;
 use Illuminate\Support\Facades\View;
@@ -30,11 +31,14 @@ Route::get('/editais', function () {
 //     return view('client.blades.blog');  
 // })->name('index'); 
 
-Route::get('/blog/interna', function () {
-    return view('client.blades.blog-inner');  
-})->name('blog-inner'); 
+// Route::get('/blog/interna', function () {
+//     return view('client.blades.blog-inner');  
+// })->name('blog-inner'); 
 
-Route::get('blog', [BlogPageController::class, 'index'])->name('index');
+Route::get('blog/interna/{slug}', [BlogPageController::class, 'blogInner'])
+->name('blog-inner');
+
+Route::get('blog/{category?}', [BlogPageController::class, 'index'])->name('blog');
 
 // Route::get('home', [HomePageController::class, 'index'])->name('index');
 

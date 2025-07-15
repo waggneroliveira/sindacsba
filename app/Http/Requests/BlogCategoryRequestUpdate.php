@@ -18,7 +18,7 @@ class BlogCategoryRequestUpdate extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'active' => $this->input('active') === 'off' ? 0 : 1,
+            'active' => $this->has('active') ? 1 : 0,
         ]);
     }
 
