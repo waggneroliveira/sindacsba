@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
-            $table->text('link');
-            $table->string('path_image');
-            $table->string('path_image_vertical');
+            $table->text('link')->nullable();
+            $table->string('path_image')->nullable();
+            $table->string('path_image_vertical')->nullable();
             $table->boolean('active')->default(0);
             $table->integer('sorting')->default(0);
             $table->timestamps();

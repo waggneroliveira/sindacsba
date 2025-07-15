@@ -1,9 +1,5 @@
 @extends('client.core.client')
 @section('content')
-    <div  class="mt-5">
-        @include('client.includes.announcement')
-    </div>
-
     <section class="contact mb-0">
         <div class="d-flex justify-content-start gap-2 align-items-start flex-nowrap" data-aos=fade-up data-aos-delay=150>
             <span class="firula-contact mt-2"></span>

@@ -1,34 +1,19 @@
 <div class="col-12" data-aos=fade-down data-aos-delay=150>
     <div class="swiper announcement w-75">
         <div class="swiper-wrapper">
-            <div class="swiper-slide py-5">
-                <div class="image rounded-3 overflow-hidden">
-                    <a href="">
-                        <img src="{{ asset('build/client/images/anuncio-horizontal.png') }}" alt="Anuncio" class="w-100">
-                    </a>
+            @foreach ($announcements as $announcement)                
+                <div class="swiper-slide py-5">
+                    <div class="image rounded-3 overflow-hidden">
+                        @if(isset($announcement) && !empty($announcement->link))
+                            <a href="{{ $announcement->link }}" target="_blank" rel="nofollow noopener noreferrer">
+                                <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100">
+                            </a>
+                        @else
+                            <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100">
+                        @endif
+                    </div>
                 </div>
-            </div>
-            <div class="swiper-slide py-5">
-                <div class="image rounded-3 overflow-hidden">
-                    <a href="">
-                        <img src="{{ asset('build/client/images/anun-1.jpg') }}" alt="Anuncio" class="w-100">
-                    </a>
-                </div>
-            </div>
-            <div class="swiper-slide py-5">
-                <div class="image rounded-3 overflow-hidden">
-                    <a href="">
-                        <img src="{{ asset('build/client/images/anun-2.jpg') }}" alt="Anuncio" class="w-100">
-                    </a>
-                </div>
-            </div>
-            <div class="swiper-slide py-5">
-                <div class="image rounded-3 overflow-hidden">
-                    <a href="">
-                        <img src="{{ asset('build/client/images/anun-3.jpg') }}" alt="Anuncio" class="w-100">
-                    </a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnnouncementController;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -86,6 +87,14 @@ Route::prefix('painel/')->group(function () {
         ->parameters(['auditorias'=>'activitie']);
         Route::post('auditorias/{id}/mark-as-read', [AuditActivityController::class, 'markAsRead']);
         Route::post('/auditorias/mark-all-as-read', [AuditActivityController::class, 'markAllAsRead']);
+        //ANUNCIO
+        Route::resource('anuncio', AnnouncementController::class)
+        ->names('admin.dashboard.announcement')
+        ->parameters(['anuncio'=>'announcement']);
+        Route::post('anuncio/delete', [AnnouncementController::class, 'destroySelected'])
+        ->name('admin.dashboard.announcement.destroySelected');
+        Route::post('anuncio/sorting', [AnnouncementController::class, 'sorting'])
+        ->name('admin.dashboard.announcement.sorting');
         //NOTICIES
         Route::resource('editais', NoticiesController::class)
         ->parameters(['editais' => 'noticies'])

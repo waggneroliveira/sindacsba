@@ -1,8 +1,5 @@
 @extends('client.core.client')
 @section('content')
-    <div class="mt-5">
-        @include('client.includes.announcement')
-    </div>
     <!-- News With Sidebar Start -->
     <div class="container-fluid mb-5">
         <div class="container">
@@ -15,14 +12,14 @@
                     <!-- News Detail Start -->
                     <div class="position-relative mb-3">
                         <article>
-                            <h1 class="mb-3 title-blue montserrat-bold font-32">{{$blogInner->title}}</h1>
+                            <h1 class="mb-3 title-blue montserrat-bold font-32 text-uppercase">{{$blogInner->title}}</h1>
                             <div class="mb-3 d-flex justify-content-start align-items-center gap-1 flex-wrap">
                                 <span class="badge background-red montserrat-semiBold font-12 text-uppercase py-2 px-2 me-2">{{$blogInner->category->title}}</span>
-                                <p class="text-color mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
+                                <p class="text-color mb-0 montserrat-regular font-15">{{$dataFormatada}}</p>
                             </div>
                             <img class="img-fluid w-100 rounded-3" src="{{ asset('storage/'.$blogInner->path_image) }}" alt="{{$blogInner->title}}" style="object-fit: cover;">
                             <div class="py-4"> 
-                                <div class="text-color montserrat-regular font-16">
+                                <div class="text-blog-inner montserrat-regular font-16">
                                     {!! $blogInner->text !!}
                                 </div>
                             </div>                        
@@ -183,7 +180,7 @@
    
                       <!-- Ads Start -->
                       <div class="mb-3">
-                          <div class="bg-white text-center px-0 overflow-hidden">
+                          <div class="text-center px-0 overflow-hidden">
                               <a href=""><img class="img-fluid w-100 annun" src="{{asset('build/client/images/anuncio.png')}}" alt=""></a>
                           </div>
                       </div>

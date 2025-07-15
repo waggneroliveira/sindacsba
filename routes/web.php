@@ -1,6 +1,7 @@
 <?php
 
 use Inertia\Inertia;
+use App\Models\Announcement;
 use App\Models\BlogCategory;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,8 @@ View::composer('client.core.client', function ($view) {
     ->active()
     ->sorting()
     ->get();
+    $announcements = Announcement::sorting()->get();
 
-    return $view->with('blogCategories', $blogCategories);
+    return $view->with('blogCategories', $blogCategories)
+    ->with('announcements', $announcements);
 });

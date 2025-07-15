@@ -1,10 +1,5 @@
 @extends('client.core.client')
 @section('content')
-
-<div  class="mt-5">
-   @include('client.includes.announcement')
-</div>
-
 <section class="blog mb-5" data-aos=fade-up data-aos-delay=150>
     <div class="container-fluid">
        <div class="row">
@@ -24,7 +19,7 @@
                               <div class="overlay">
                                  <div class="mb-2 d-flex justify-content-center align-items-center gap-1 flex-wrap">
                                     <span class="badge background-red montserrat-semiBold font-12 text-uppercase py-2 px-2 me-2">{{$blogSuperHighlight->category->title}}</span>
-                                    <p class="text-white mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
+                                    <p class="text-white mb-0 montserrat-regular font-15">{{$dataFormatada}}</p>
                                  </div>
                                  <a href="{{route('blog-inner', ['slug' => $blogSuperHighlight->slug])}}">
                                     <h1 class="h2 m-0 text-white text-uppercase montserrat-bold font-32 d-block">{{$blogSuperHighlight->title}}</h1>
@@ -83,7 +78,7 @@
                         <h4 class="m-0 text-uppercase montserrat-bold font-22 title-blue">Notícias</h4>
                      </div>
                      <div class="row">
-                        <div class="col-12 col-lg-7 mb-4 d-flex justify-content-between gap-3 align-items-center">
+                        <div class="col-12 col-lg-7 mb-5 pb-4 d-flex justify-content-between gap-3 align-items-center">
                            <form action="{{route('blog-search')}}#news" class="search col-10" method="post">
                               @csrf
                               <div class="input-group input-group-lg">
@@ -107,7 +102,7 @@
                                  $dataFormatada = \Carbon\Carbon::parse($blog->date)->translatedFormat('d \d\e F \d\e Y');
                               @endphp                     
                               <article>
-                                 <div class="col-lg-12 mt-5">
+                                 <div class="col-lg-12">
                                     <div class="row news-lg mx-0 mb-3 border rounded-2 overflow-hidden bg-white">
                                        <div class="col-md-6 h-100 px-0 overflow-hidden">
                                              <img class="img-fluid h-100" src="{{ asset('storage/'.$blog->path_image) }}" alt="{{$blog->title}}" style="object-fit: cover;">
@@ -115,10 +110,10 @@
                                        <div class="col-md-6 d-flex flex-column bg-white h-100 px-0">
                                              <div class="mt-auto p-4">
                                                 <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
-                                                   <span class="badge badge-primary montserrat-semiBold font-12 background-red text-uppercase font-weight-semi-bold p-2 mr-2">
+                                                   <span class="badge badge-primary montserrat-semiBold font-12 me-2 background-red text-uppercase font-weight-semi-bold p-2">
                                                          {{$blog->category->title}}
                                                    </span>
-                                                   <p class="text-color mb-0 montserrat-regular font-12">
+                                                   <p class="text-color mb-0 montserrat-regular font-14">
                                                       {{$dataFormatada}}
                                                    </p>
                                                 </div>
@@ -226,7 +221,7 @@
    
                       <!-- Ads Start -->
                       <div class="mb-3">
-                          <div class="bg-white text-center px-0 overflow-hidden">
+                          <div class="text-center px-0 overflow-hidden">
                               <a href=""><img class="img-fluid w-100 annun" src="{{asset('build/client/images/anuncio.png')}}" alt=""></a>
                           </div>
                       </div>

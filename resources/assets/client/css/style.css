@@ -329,11 +329,10 @@ p{
     --background-blue: #2F368B;
     --default-color: #F9F9F9;
     --text-color: #9A9DA2;
+    --text-color-blog-inner: #727272;
     --title-color-blue: #31404B;
     --cta-background-color: #091DFF;
     --nav-hover-color: #ffffff;
-    --social-links-color: #000;
-    --social-links-background-color: #FF6D00;
     --background-color-white: #ffffff;
     --background-color-grey: #F8F9FC;
     --background-color-dark: #101820;
@@ -344,6 +343,16 @@ p{
     --color-blue: #1D164E;
     --emphasis-color: #1FAD90;
     scroll-behavior: smooth
+}
+.text-blog-inner{
+    color: var(--text-color-blog-inner);
+}
+.text-blog-inner.montserrat-regular.font-16 p{
+    color: var(--text-color-blog-inner);
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 300;
 }
 .bg-webmail{
     background: var(--background-color-client);
@@ -477,9 +486,10 @@ h1, h2, h3, h4, h5, h6  {
     transition: all 0.3s ease;
 }
 .announcement .image img{
-    height: 171px;
-    object-fit: cover;
-    aspect-ratio: 1137/171;
+    height: 100%;
+    max-height: 171px;
+    max-width: 1137px;
+    object-fit: contain;
     object-position: center;
 }
 .comments img{
