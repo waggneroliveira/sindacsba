@@ -22,12 +22,13 @@ class Noticies extends Model
     ];
 
     public function scopeActive($query){
-        return $query->orderByRaw('YEAR(`date`) DESC')
-        ->orderBy('sorting', 'DESC');
+        return $query->where('active', 1);
     }
 
     public function scopeSorting($query){
-        return $query->orderby('sorting', 'ASC');
+        return $query->orderByRaw('YEAR(`date`) DESC')
+        ->orderByRaw('DAY(`date`) DESC')
+        ->orderBy('sorting', 'DESC');
     }
 
     public function getActivitylogOptions(): LogOptions

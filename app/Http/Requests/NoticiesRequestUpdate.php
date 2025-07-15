@@ -18,7 +18,7 @@ class NoticiesRequestUpdate extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'active' => $this->input('active') ? 0 : 1,
+            'active' => $this->has('active') ? 1 : 0,
         ]);
     }
 

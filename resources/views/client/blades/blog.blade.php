@@ -107,7 +107,7 @@
                                  $dataFormatada = \Carbon\Carbon::parse($blog->date)->translatedFormat('d \d\e F \d\e Y');
                               @endphp                     
                               <article>
-                                 <div class="col-lg-12 mt-2">
+                                 <div class="col-lg-12 mt-5">
                                     <div class="row news-lg mx-0 mb-3 border rounded-2 overflow-hidden bg-white">
                                        <div class="col-md-6 h-100 px-0 overflow-hidden">
                                              <img class="img-fluid h-100" src="{{ asset('storage/'.$blog->path_image) }}" alt="{{$blog->title}}" style="object-fit: cover;">
