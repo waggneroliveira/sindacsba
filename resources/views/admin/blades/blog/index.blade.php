@@ -139,7 +139,10 @@
                                                 <th>Título</th>
                                                 <th>Categoria</th>
                                                 <th>Imagem</th>
+                                                <th>Publicado</th>
                                                 <th>Status</th>
+                                                <th>Super destaque</th>
+                                                <th>Destaque</th>
                                                 <th style="width: 85px;">Ações</th>
                                             </tr>
                                         </thead>
@@ -150,6 +153,8 @@
                                                     if ($blog->blog_category_id) {
                                                         $categoria = $blogCategory[$blog->blog_category_id] ?? 'Nenhuma categoria';
                                                     } 
+                                                    \Carbon\Carbon::setLocale('pt_BR');
+                                                    $dataFormatada = \Carbon\Carbon::parse($blog->date)->translatedFormat('d \d\e F \d\e Y');
                                                 @endphp
 
                                                 <tr data-code="{{$blog->id}}">
@@ -157,15 +162,28 @@
                                                     <td class="bs-checkbox">
                                                         <label><input data-index="{{$key}}" name="btnSelectItem" class="btnSelectItem" type="checkbox" value="{{$blog->id}}"></label>
                                                     </td>
-                                                    <td>{{$blog->title}}</td>
+                                                    <td>{{substr(strip_tags($blog->title), 0, 40)}}...</td>
                                                     <td>{{$categoria}}</td>
-                                                    <td class="table-user">
+                                                    <td class="table-user text-center">
                                                         @if ($blog->path_image)
                                                             <img src="{{ asset('storage/'.$blog->path_image) }}" name="path_image" alt="table-user" class="me-2 rounded-circle">
                                                         @endif
                                                     </td>
-                                                    <td>
+                                                    <td>{{$dataFormatada}}</td>
+                                                    <td class="text-center">
                                                         @switch($blog->active)
+                                                            @case(0) <span class="badge bg-danger">Inativo</span> @break
+                                                            @case(1) <span class="badge bg-success">Ativo</span> @break
+                                                        @endswitch
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @switch($blog->super_highlight)
+                                                            @case(0) <span class="badge bg-danger">Inativo</span> @break
+                                                            @case(1) <span class="badge bg-success">Ativo</span> @break
+                                                        @endswitch
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @switch($blog->highlight)
                                                             @case(0) <span class="badge bg-danger">Inativo</span> @break
                                                             @case(1) <span class="badge bg-success">Ativo</span> @break
                                                         @endswitch
