@@ -1,15 +1,15 @@
 <?php
 
 use Inertia\Inertia;
+use App\Models\Contact;
 use App\Models\Announcement;
 use App\Models\BlogCategory;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\FormIndexController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\Client\BlogPageController;
 use App\Http\Controllers\Client\HomePageController;
+use App\Http\Controllers\Client\ContactPageController;
 use App\Http\Controllers\Client\NoticiesPageController;
 
 require __DIR__ . '/dashboard.php';
@@ -22,10 +22,9 @@ Route::get('/', function () {
 //     return view('client.blades.index');  
 // })->name('index');  
 
-Route::get('/contato', function () {
-    return view('client.blades.contact');  
-})->name('contact');
 
+Route::get('contato', [ContactPageController::class, 'index'])
+->name('contact');
 Route::get('editais', [NoticiesPageController::class, 'index'])
 ->name('noticies');
 Route::get('noticias/interna/{slug}', [BlogPageController::class, 'blogInner'])
@@ -43,7 +42,9 @@ View::composer('client.core.client', function ($view) {
     ->sorting()
     ->get();
     $announcements = Announcement::active()->sorting()->get();
+    $contact = Contact::first();
 
     return $view->with('blogCategories', $blogCategories)
-    ->with('announcements', $announcements);
+    ->with('announcements', $announcements)
+    ->with('contact', $contact);
 });

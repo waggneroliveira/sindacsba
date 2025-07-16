@@ -497,6 +497,23 @@ h1, h2, h3, h4, h5, h6  {
     object-fit: cover;
     display: block;
 }
+.bg-light {
+    background: #F1F0F0 !important;
+}
+.padding-t-80{
+    padding-top: 80px;
+}
+.text-address p{
+    color: var(--text-color);
+    font-size: 0.938rem;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 300;
+}
+.relative.z-0.inline-flex.shadow-sm.rounded-md{
+    box-shadow: inherit !important;
+}
 .btn-reset {
     all: unset;
     cursor: pointer;

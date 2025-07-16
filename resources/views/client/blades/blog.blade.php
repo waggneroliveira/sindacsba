@@ -78,8 +78,8 @@
                         <h4 class="m-0 text-uppercase montserrat-bold font-22 title-blue">Notícias</h4>
                      </div>
                      <div class="row">
-                        <div class="col-12 col-lg-7 mb-5 pb-4 d-flex justify-content-between gap-3 align-items-center">
-                           <form action="{{route('blog-search')}}#news" class="search col-10" method="post">
+                        <div class="col-12 col-lg-9 mb-5 pb-4 d-flex justify-content-between gap-3 flex-wrap align-items-center">
+                           <form action="{{route('blog-search')}}#news" class="search col-12 col-lg-10" method="post">
                               @csrf
                               <div class="input-group input-group-lg">
                                  <input type="search" name="search" class="form-control border-end-0 text-color montserrat-regular bg-white py-0" placeholder="Pesquise aqui">

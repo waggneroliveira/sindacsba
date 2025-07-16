@@ -24,6 +24,7 @@ use App\Http\Controllers\AuditActivityController;
 use App\Http\Controllers\StackSessionTitleController;
 use App\Http\Controllers\Auth\PasswordEmailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\NoticiesController;
 
@@ -88,6 +89,10 @@ Route::prefix('painel/')->group(function () {
         ->parameters(['auditorias'=>'activitie']);
         Route::post('auditorias/{id}/mark-as-read', [AuditActivityController::class, 'markAsRead']);
         Route::post('/auditorias/mark-all-as-read', [AuditActivityController::class, 'markAllAsRead']);
+        //CONTATO
+        Route::resource('contato', ContactController::class)
+        ->names('admin.dashboard.contact')
+        ->parameters(['contato'=>'contact']);
         //NEWSLTTER
         Route::resource('newsletter', NewsletterController::class)
         ->names('admin.dashboard.newsletter')

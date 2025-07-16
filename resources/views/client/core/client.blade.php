@@ -146,7 +146,43 @@
                     </nav>
                     <nav class="site-navigation position-relative text-end w-auto redes-sociais">
                         <ul class="p-0 d-flex justify-content-start gap-4 flex-row mb-0">
-                            <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                             @if (isset($contact) && $contact->link_insta)
+                                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                                        <a href="{{$contact->link_insta}}" rel="nofollow noopener noreferrer" target="_blank">
+                                            <img src="{{asset('build/client/images/insta.svg')}}" alt="Instagram">
+                                        </a>
+                                    </li>
+                                @endif
+                                @if (isset($contact) && $contact->link_x)
+                                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                                        <a href="{{$contact->link_x}}" rel="nofollow noopener noreferrer" target="_blank">
+                                            <img src="{{asset('build/client/images/x.svg')}}" alt="X">
+                                        </a>
+                                    </li>
+                                @endif
+                                @if (isset($contact) && $contact->link_youtube)
+                                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                                        <a href="{{$contact->link_youtube}}" rel="nofollow noopener noreferrer" target="_blank">
+                                            <img src="{{asset('build/client/images/youtube.svg')}}" alt="Youtube">
+                                        </a>
+                                    </li>
+                                @endif
+                                @if (isset($contact) && $contact->link_face)
+                                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                                        <a href="{{$contact->link_face}}" rel="nofollow noopener noreferrer" target="_blank">
+                                            <img src="{{asset('build/client/images/face.svg')}}" alt="Facebook">
+                                        </a>
+                                    </li>
+                                @endif
+                                @if (isset($contact) && $contact->link_tik_tok)
+                                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                                        <a href="{{$contact->link_tik_tok}}a" rel="nofollow noopener noreferrer" target="_blank">
+                                            <img src="{{asset('build/client/images/tiktok.svg')}}" alt="Tiktok">
+                                        </a>
+                                    </li>
+                                @endif
+
+                            {{-- <li class="li d-flex justify-content-start align-items-center rounded-circle">
                                 <a href="" rel="nofollow noopener noreferrer" target="_blank">
                                     <img src="{{asset('build/client/images/wpp.svg')}}" alt="Whatsapp">
                                 </a>
@@ -175,7 +211,7 @@
                                 <a href="https://www.tiktok.com/@sindacsbahia" rel="nofollow noopener noreferrer" target="_blank">
                                     <img src="{{asset('build/client/images/tiktok.svg')}}" alt="Tiktok">
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul> 
                     </nav>
                 </div>         
@@ -303,44 +339,6 @@
         'resources/assets/client/js/default.js',
     ])
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                let successMessage = '{{ session('success') }}';
-                if (successMessage) {
-                    setTimeout(function() {
-                        if (typeof Swal !== 'undefined') {
-                            Swal.fire({
-                                title: responseSuccessName,
-                                text: successMessage,
-                                icon: 'success',
-                                confirmButtonText: 'OK',
-                                timer: 1800, // O alerta desaparecerá automaticamente após 1,5 segundos
-                                showConfirmButton: false // Oculta o botão para fechar automaticamente
-                            });
-                        }
-                    }, 1300); // Exibe o alert 1,3 segundos após a página carregar
-                }
-            });
-        </script>
-        @if ($errors->any())
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    let errors = '';
-                    @foreach ($errors->all() as $error)
-                        errors += '{{ $error }}\n'; 
-                    @endforeach
-                    
-                    setTimeout(function() {
-                        Swal.fire({
-                            title: responseItemErrorName,
-                            text: errors,
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                        });
-                    }, 1300);
-                });
-            </script>        
-        @endif
     <div vw class=enabled>
         <div vw-access-button class=active></div>
         <div vw-plugin-wrapper>
