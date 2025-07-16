@@ -216,5 +216,16 @@
         });
     });
 
+    //Mascara de telefone
+    const phoneInput = document.getElementById("phone");
+    phoneInput && phoneInput.addEventListener("input", (function(e) {
+        let t = e.target.value.replace(/\D/g, "");
+        t.length > 11 && (t = t.slice(0, 11));
+        t.length > 0 && (t = "(" + t);
+        t.length > 3 && (t = t.slice(0, 3) + ") " + t.slice(3));
+        t.length > 10 && (t = t.slice(0, 10) + "-" + t.slice(10));
+        e.target.value = t;
+    }));
+
 
 }();

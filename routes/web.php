@@ -6,6 +6,7 @@ use App\Models\Announcement;
 use App\Models\BlogCategory;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormIndexController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\Client\BlogPageController;
 use App\Http\Controllers\Client\HomePageController;
@@ -25,6 +26,7 @@ Route::get('/', function () {
 
 Route::get('contato', [ContactPageController::class, 'index'])
 ->name('contact');
+Route::post('send-contact', [FormIndexController::class, 'store'])->name('send-contact');
 Route::get('editais', [NoticiesPageController::class, 'index'])
 ->name('noticies');
 Route::get('noticias/interna/{slug}', [BlogPageController::class, 'blogInner'])
@@ -34,7 +36,6 @@ Route::post('noticias/search', [BlogPageController::class, 'index'])->name('blog
 Route::post('send-newsletter', [NewsletterController::class, 'store'])->name('send-newsletter');
 
 
-// Route::get('home', [HomePageController::class, 'index'])->name('index');
 
 View::composer('client.core.client', function ($view) {
     $blogCategories = BlogCategory::whereHas('blogs')

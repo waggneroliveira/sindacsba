@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->enum('gender', ['male', 'female', 'other'])->nullable();
-            $table->text('description')->nullable();
-            $table->string('password');
+            $table->string('phone');
+            $table->string('subject')->nullable();
+            $table->text('text')->nullable();
+            $table->boolean('term_privacy');
             $table->timestamps();
         });
     }

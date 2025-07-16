@@ -12,70 +12,51 @@ class FormIndexController extends Controller
 
     public function index()
     {
-        // return Inertia::render('App', [
-        //     'sessionMessage' => session('message')
-        // ]);
+        $formIndexs = FormIndex::get();
+
+        return view('admin.blades.lead.index', compact('formIndexs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'string',
+            'subject' => 'string|max:255',
+            'text' => 'string|max:255',
+            'term_privacy' => 'boolean',
+        ]);
 
         try {
-            DB::beginTransaction();            
-                FormIndex::create($request->validate([
-                    'name' => 'required|string|max:255',
-                    'email' => 'required|email|max:255',
-                    'gender' => 'required|string',
-                    'description' => 'nullable|string',
-                    'password' => 'required|string|min:8',
-                ]));
+            DB::beginTransaction();
+
+            FormIndex::create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'phone' => $validated['phone'],
+                'subject' => $validated['subject'],
+                'text' => $validated['text'],
+                'term_privacy' => 1,
+            ]);
+
             DB::commit();
 
-            return to_route('index.form');
-
+            return response()->json([
+                'success' => true,
+                'message' => 'Mensagem enviada com sucesso!',
+            ]);
         } catch (\Exception $e) {
-            DB::rollback();
+            DB::rollBack();
+
+            return response()->json([
+                'error' => true,
+                'message' => 'Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente.',
+                'details' => $e->getMessage()
+            ], 500);
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(FormIndex $formIndex)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(FormIndex $formIndex)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, FormIndex $formIndex)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(FormIndex $formIndex)
     {
         //

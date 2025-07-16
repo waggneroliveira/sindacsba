@@ -131,32 +131,33 @@
             <!-- Formulário e Mapa -->
             <div class="row g-4 mt-4">
                 <div class="col-lg-8">
-                    <form>
+                    <form id="contactForm">
+                        @csrf
                         <div class="row g-3">
-                        <div class="col-md-12">
-                            <input type="text" class="montserrat-regular font-15 text-color form-control" placeholder="Nome Completo">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="email" class="montserrat-regular font-15 text-color form-control" placeholder="E-mail">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="montserrat-regular font-15 text-color form-control" placeholder="Whatsapp para contato">
-                        </div>
-                        <div class="col-md-12">
-                            <input type="text" class="montserrat-regular font-15 text-color form-control" placeholder="Assunto">
-                        </div>
-                        <div class="col-md-12">
-                            <textarea class="form-control montserrat-regular font-15 text-color" rows="4" placeholder="Digite aqui...."></textarea>
-                        </div>
-                        <div class="col-12 d-flex align-items-center">
-                            <div class="form-check me-3">
-                                <input class="form-check-input" type="checkbox" id="privacyCheck">
-                                <label class="form-check-label small montserrat-regular font-14 text-color" for="privacyCheck">
-                                Aceito os termos descritos na Política de Privacidade
-                                </label>
+                            <div class="col-md-12">
+                                <input type="text" required id="name" name="name" class="montserrat-regular font-15 text-color form-control" placeholder="Nome Completo">
                             </div>
-                            <button type="submit" class="montserrat-semiBold font-15 btn btn-danger rounded-3 ms-auto px-4">Enviar</button>
-                        </div>
+                            <div class="col-md-6">
+                                <input type="email" required id="email" name="email" class="montserrat-regular font-15 text-color form-control" placeholder="E-mail">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" required id="phone" name="phone" class="montserrat-regular font-15 text-color form-control" placeholder="Whatsapp para contato">
+                            </div>
+                            <div class="col-md-12">
+                                <input type="text" required id="subject" name="subject" class="montserrat-regular font-15 text-color form-control" placeholder="Assunto">
+                            </div>
+                            <div class="col-md-12">
+                                <textarea id="text" required name="text" class="form-control montserrat-regular font-15 text-color" rows="4" placeholder="Digite aqui...."></textarea>
+                            </div>
+                            <div class="col-12 d-flex align-items-center">
+                                <div class="form-check me-3">
+                                    <input class="form-check-input" required id="term_privacy" name="term_privacy" type="checkbox" id="privacyCheck">
+                                    <label class="form-check-label small montserrat-regular font-14 text-color" for="privacyCheck">
+                                        Aceito os termos descritos na Política de Privacidade
+                                    </label>
+                                </div>
+                                <button type="submit" class="montserrat-semiBold font-15 btn btn-danger rounded-3 ms-auto px-4">Enviar</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -242,4 +243,75 @@
         @endif
 
     </section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#contactForm').on('submit', function(e) {
+            e.preventDefault();
+
+            // Dados do formulário
+            const name = $('#name').val();
+            const email = $('#email').val();
+            const phone = $('#phone').val();
+            const subject = $('#subject').val();
+            const text = $('#text').val();
+            const termPrivacy = $('#term_privacy').is(':checked') ? 1 : 0;
+            const token = $('input[name="_token"]').val();
+
+            $.ajax({
+                url: '{{ route("send-contact") }}',
+                type: 'POST',
+                data: {
+                    _token: token,
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    subject: subject,
+                    text: text,
+                    term_privacy: termPrivacy
+                },
+                success: function(response) {
+                    if (typeof Swal !== 'undefined') {
+                        Swal.fire({
+                            title: 'Sucesso!',
+                            text: response.message,
+                            icon: 'success',
+                            timer: 1800,
+                            showConfirmButton: false
+                        });
+                    }
+                    $('#contactForm')[0].reset();
+                },
+                error: function(xhr) {
+                    if (xhr.status === 422) {
+                        const errors = xhr.responseJSON.errors;
+                        let errorMessages = '';
+                        for (let field in errors) {
+                            errorMessages += errors[field][0] + '\n';
+                        }
+
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                title: 'Erro',
+                                text: errorMessages,
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    } else {
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                title: 'Erro',
+                                text: 'Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente.',
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    }
+                }
+            });
+        });
+    });
+</script>
 @endsection

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AnnouncementController;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -13,10 +12,15 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\StackController;
 use App\Repositories\AuditCountRepository;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\NoticiesController;
 use App\Repositories\SettingThemeRepository;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FormIndexController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\SettingEmailController;
 use App\Http\Controllers\SettingThemeController;
@@ -24,9 +28,6 @@ use App\Http\Controllers\AuditActivityController;
 use App\Http\Controllers\StackSessionTitleController;
 use App\Http\Controllers\Auth\PasswordEmailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\NewsletterController;
-use App\Http\Controllers\NoticiesController;
 
 Route::get('painel/', function () {
     return redirect()->route('admin.dashboard.painel');
@@ -89,6 +90,10 @@ Route::prefix('painel/')->group(function () {
         ->parameters(['auditorias'=>'activitie']);
         Route::post('auditorias/{id}/mark-as-read', [AuditActivityController::class, 'markAsRead']);
         Route::post('/auditorias/mark-all-as-read', [AuditActivityController::class, 'markAllAsRead']);
+        //LEAD
+        Route::resource('lead', FormIndexController::class)
+        ->names('admin.dashboard.formIndex')
+        ->parameters(['lead'=>'formIndex']);
         //CONTATO
         Route::resource('contato', ContactController::class)
         ->names('admin.dashboard.contact')

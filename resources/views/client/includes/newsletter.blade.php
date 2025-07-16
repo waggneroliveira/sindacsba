@@ -22,63 +22,63 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
-    $('#newsletterForm').on('submit', function(e) {
-        e.preventDefault();
+    $(document).ready(function() {
+        $('#newsletterForm').on('submit', function(e) {
+            e.preventDefault();
 
-        // Dados do formulário
-        const email = $('#email').val();
-        const termPrivacy = $('#term_privacy').is(':checked') ? 1 : 0;
-        const token = $('input[name="_token"]').val();
+            // Dados do formulário
+            const email = $('#email').val();
+            const termPrivacy = $('#term_privacy').is(':checked') ? 1 : 0;
+            const token = $('input[name="_token"]').val();
 
-        $.ajax({
-            url: '{{ route("send-newsletter") }}',
-            type: 'POST',
-            data: {
-                _token: token,
-                email: email,
-                term_privacy: termPrivacy
-            },
-            success: function(response) {
-                if (typeof Swal !== 'undefined') {
-                    Swal.fire({
-                        title: 'Sucesso!',
-                        text: response.message,
-                        icon: 'success',
-                        timer: 1800,
-                        showConfirmButton: false
-                    });
-                }
-                $('#newsletterForm')[0].reset();
-            },
-            error: function(xhr) {
-                if (xhr.status === 422) {
-                    const errors = xhr.responseJSON.errors;
-                    let errorMessages = '';
-                    for (let field in errors) {
-                        errorMessages += errors[field][0] + '\n';
-                    }
-
+            $.ajax({
+                url: '{{ route("send-newsletter") }}',
+                type: 'POST',
+                data: {
+                    _token: token,
+                    email: email,
+                    term_privacy: termPrivacy
+                },
+                success: function(response) {
                     if (typeof Swal !== 'undefined') {
                         Swal.fire({
-                            title: 'Erro',
-                            text: errorMessages,
-                            icon: 'error',
-                            confirmButtonText: 'OK'
+                            title: 'Sucesso!',
+                            text: response.message,
+                            icon: 'success',
+                            timer: 1800,
+                            showConfirmButton: false
                         });
                     }
-                } else {
-                    if (typeof Swal !== 'undefined') {
-                        Swal.fire({
-                            title: 'Erro',
-                            text: 'Ocorreu um erro ao enviar seu cadastro. Tente novamente.',
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                        });
+                    $('#newsletterForm')[0].reset();
+                },
+                error: function(xhr) {
+                    if (xhr.status === 422) {
+                        const errors = xhr.responseJSON.errors;
+                        let errorMessages = '';
+                        for (let field in errors) {
+                            errorMessages += errors[field][0] + '\n';
+                        }
+
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                title: 'Erro',
+                                text: errorMessages,
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    } else {
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                title: 'Erro',
+                                text: 'Ocorreu um erro ao enviar seu cadastro. Tente novamente.',
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
+                        }
                     }
                 }
-            }
+            });
         });
     });
-});
 </script>
