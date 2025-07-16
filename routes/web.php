@@ -39,7 +39,7 @@ View::composer('client.core.client', function ($view) {
     ->active()
     ->sorting()
     ->get();
-    $announcements = Announcement::sorting()->get();
+    $announcements = Announcement::active()->sorting()->get();
 
     return $view->with('blogCategories', $blogCategories)
     ->with('announcements', $announcements);

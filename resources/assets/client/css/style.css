@@ -30,10 +30,12 @@
 .flex.justify-between.flex-1{
     display: none;
 }
-.annun{
-    width: 300px !important;
-    max-width: 300px !important;
+aside .img-fluid.annun{
+    width: 355px !important;
+    max-width: 433px !important;
     border-radius: 10px;
+    object-fit: contain;
+    aspect-ratio: inherit;
 }
 .text-color.montserrat-regular.font-16 p{
     font-size: 16px;
@@ -439,9 +441,7 @@ a  {
     color: var(--accent-color);
     transition: .3s
 }
-main{
-    margin-top: 140px;
-}
+
 .carousel-trust-whi .swiper-slide .text, .content-lef h2, .social-links a i, .text-left-project  {
     color: var(--social-links-color)
 }
@@ -485,12 +485,17 @@ h1, h2, h3, h4, h5, h6  {
     transform: scale(1.05);
     transition: all 0.3s ease;
 }
-.announcement .image img{
-    height: 100%;
-    max-height: 171px;
+.announcement .image {
     max-width: 1137px;
-    object-fit: contain;
-    object-position: center;
+    max-height: 205px;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+.announcement .image img {
+    height: auto;
+    object-fit: cover;
+    display: block;
 }
 .comments img{
     width: 45px;
@@ -596,7 +601,7 @@ h1, h2, h3, h4, h5, h6  {
     overflow: clip
 }
 .position  {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     z-index: 10;

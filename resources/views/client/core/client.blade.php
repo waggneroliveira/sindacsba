@@ -218,7 +218,7 @@
     </div>
 
     <main>
-        <div  class="mt-5">
+        <div  class="mt-0">
             @include('client.includes.announcement')
         </div>
         @yield('content') 

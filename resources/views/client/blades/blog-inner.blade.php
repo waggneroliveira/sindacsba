@@ -179,11 +179,11 @@
                       <!-- Newsletter End -->
    
                       <!-- Ads Start -->
-                      <div class="mb-3">
-                          <div class="text-center px-0 overflow-hidden">
-                              <a href=""><img class="img-fluid w-100 annun" src="{{asset('build/client/images/anuncio.png')}}" alt=""></a>
-                          </div>
-                      </div>
+                      @if ($announcements->count())                        
+                        <div class="mb-3">
+                            @include('client.includes.announcementVertical')
+                        </div>
+                      @endif
                       <!-- Ads End -->
                   </aside>
                 </div>

@@ -164,6 +164,18 @@
                 disableOnInteraction: false,
             },
         });
+        const swiperAnuncioVertical = new Swiper('.announcementVertical', {
+            loop: true,
+            speed: 1200,
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true,
+                },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+        });
     });
 
     if (document.getElementById('socialLinks')) {

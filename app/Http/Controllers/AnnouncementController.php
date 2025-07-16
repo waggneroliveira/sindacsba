@@ -47,11 +47,11 @@ class AnnouncementController extends Controller
                 Storage::putFileAs($this->pathUpload, $file, $filename);
             } else {
                 $image = $manager->read($file)
-                    ->resize(1137, 171, function ($constraint) {
+                    ->resize(1137, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
-                    ->toWebp(quality: 70)
+                    ->toWebp(quality: 95)
                     ->toString();
 
                 Storage::put($this->pathUpload . $filename, $image);
@@ -70,11 +70,11 @@ class AnnouncementController extends Controller
                 Storage::putFileAs($this->pathUpload, $fileMobile, $filenameMobile);
             } else {
                 $imageMobile = $manager->read($fileMobile)
-                    ->resize(768, null, function ($constraint) {
+                    ->resize(355, 433, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
-                    ->toWebp(quality: 70)
+                    ->toWebp(quality: 95)
                     ->toString();
 
                 Storage::put($this->pathUpload . $filenameMobile, $imageMobile);
@@ -116,7 +116,7 @@ class AnnouncementController extends Controller
                 Storage::putFileAs($this->pathUpload, $file, $filename);
             } else {
                 $image = $manager->read($file)
-                    ->resize(1137, 171, function ($constraint) {
+                    ->resize(1137, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
@@ -145,22 +145,22 @@ class AnnouncementController extends Controller
                 Storage::putFileAs($this->pathUpload, $fileMobile, $filenameMobile);
             } else {
                 $imageMobile = $manager->read($fileMobile)
-                    ->resize(480, 768, function ($constraint) {
+                    ->resize(355, 433, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
-                    ->toWebp(quality: 70)
+                    ->toWebp(quality: 95)
                     ->toString();
 
                 Storage::put($this->pathUpload . $filenameMobile, $imageMobile);
             }
 
-            Storage::delete($announcement->path_image_vertical);
+            Storage::delete(isset($announcement->path_image_vertical) && $announcement->path_image_vertical != null ?? $announcement->path_image_vertical);
             $data['path_image_vertical'] = $this->pathUpload . $filenameMobile;
         }
 
         if (isset($request->delete_path_image_vertical)) {
-            Storage::delete($announcement->path_image_vertical);
+            Storage::delete(isset($announcement->path_image_vertical) && $announcement->path_image_vertical != null ?? $announcement->path_image_vertical);
             $data['path_image_vertical'] = null;
         }
 

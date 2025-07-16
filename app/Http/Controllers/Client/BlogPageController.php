@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Models\Blog;
+use App\Models\Announcement;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -53,12 +54,15 @@ class BlogPageController extends Controller
         ->limit(4)
         ->get();
 
+        $announcements = Announcement::active()->sorting()->get();
+
         return view('client.blades.blog', compact(
             'blogCategories',
             'blogSuperHighlights',
             'blogHighlights',
             'blogAll',
             'blogSeeAlso',
+            'announcements',
         ));
     }
 
@@ -90,11 +94,12 @@ class BlogPageController extends Controller
         ->get();
 
         $blogCategories = BlogCategory::whereHas('blogs')->active()->sorting()->get();
+        $announcements = Announcement::active()->sorting()->get();
 
         // Compartilha a variável globalmente (para menu/header)
         view()->share('blogInner', $blogInner);
 
-        return view('client.blades.blog-inner', compact('blogInner', 'slug', 'blogCategories', 'blogRelacionados'));
+        return view('client.blades.blog-inner', compact('announcements','blogInner', 'slug', 'blogCategories', 'blogRelacionados'));
     }
 
 }
