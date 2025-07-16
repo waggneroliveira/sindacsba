@@ -162,19 +162,7 @@
                           <div class="section-title mb-0 rounded-top-left">
                               <h4 class="m-0 text-uppercase montserrat-bold font-22 title-blue">Newsletter</h4>
                           </div>
-                          <div class="bg-white text-center border border-top-0 p-3">
-                              <p class="text-color montserrat-regular font-16 text-start">Cadastre-se abaixo e receba as principais novidades via e-mail!</p>
-                              <div class="input-group mb-2" style="width: 100%;">
-                                  <input type="text" class="form-control form-control-lg montserrat-regular text-color font-14" placeholder="Seu e-mail">
-                                  <div class="input-group-append">
-                                      <button class="btn background-red text-white montserrat-semiBold font-16 px-3 h-100 rounded-3">Enviar</button>
-                                  </div>
-                              </div>
-                              <div class="d-flex justify-content-start align-items-center gap-2">
-                                 <input type="checkbox" id="check">
-                                 <label for="check" class="montserrat-regular text-color font-12">Aceito os termos descritos na Política de Privacidade</label>
-                              </div>
-                          </div>
+                          @include('client.includes.newsletter')
                       </div>
                       <!-- Newsletter End -->
    

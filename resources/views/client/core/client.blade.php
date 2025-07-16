@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ asset('build/admin/js/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 
     @vite([
         'resources/assets/client/css/bootstrap/css/bootstrap.min.css',
@@ -294,6 +295,7 @@
     
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="{{ asset('build/admin/js/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 
     @vite([
         'resources/assets/client/css/bootstrap/js/bootstrap.bundle.js',
@@ -301,6 +303,44 @@
         'resources/assets/client/js/default.js',
     ])
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let successMessage = '{{ session('success') }}';
+                if (successMessage) {
+                    setTimeout(function() {
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                title: responseSuccessName,
+                                text: successMessage,
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                                timer: 1800, // O alerta desaparecerá automaticamente após 1,5 segundos
+                                showConfirmButton: false // Oculta o botão para fechar automaticamente
+                            });
+                        }
+                    }, 1300); // Exibe o alert 1,3 segundos após a página carregar
+                }
+            });
+        </script>
+        @if ($errors->any())
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    let errors = '';
+                    @foreach ($errors->all() as $error)
+                        errors += '{{ $error }}\n'; 
+                    @endforeach
+                    
+                    setTimeout(function() {
+                        Swal.fire({
+                            title: responseItemErrorName,
+                            text: errors,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }, 1300);
+                });
+            </script>        
+        @endif
     <div vw class=enabled>
         <div vw-access-button class=active></div>
         <div vw-plugin-wrapper>

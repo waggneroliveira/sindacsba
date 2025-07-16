@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FormIndexController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\Client\BlogPageController;
 use App\Http\Controllers\Client\HomePageController;
 use App\Http\Controllers\Client\NoticiesPageController;
@@ -31,6 +32,8 @@ Route::get('noticias/interna/{slug}', [BlogPageController::class, 'blogInner'])
 ->name('blog-inner');
 Route::get('noticias/{category?}', [BlogPageController::class, 'index'])->name('blog');
 Route::post('noticias/search', [BlogPageController::class, 'index'])->name('blog-search');
+Route::post('send-newsletter', [NewsletterController::class, 'store'])->name('send-newsletter');
+
 
 // Route::get('home', [HomePageController::class, 'index'])->name('index');
 

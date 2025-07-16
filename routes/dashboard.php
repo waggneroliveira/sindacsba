@@ -24,6 +24,7 @@ use App\Http\Controllers\AuditActivityController;
 use App\Http\Controllers\StackSessionTitleController;
 use App\Http\Controllers\Auth\PasswordEmailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\NoticiesController;
 
 Route::get('painel/', function () {
@@ -87,6 +88,12 @@ Route::prefix('painel/')->group(function () {
         ->parameters(['auditorias'=>'activitie']);
         Route::post('auditorias/{id}/mark-as-read', [AuditActivityController::class, 'markAsRead']);
         Route::post('/auditorias/mark-all-as-read', [AuditActivityController::class, 'markAllAsRead']);
+        //NEWSLTTER
+        Route::resource('newsletter', NewsletterController::class)
+        ->names('admin.dashboard.newsletter')
+        ->parameters(['newsletter'=>'newsletter']);
+        Route::post('newsletter/delete', [NewsletterController::class, 'destroySelected'])
+        ->name('admin.dashboard.newsletter.destroySelected');
         //ANUNCIO
         Route::resource('anuncio', AnnouncementController::class)
         ->names('admin.dashboard.announcement')
