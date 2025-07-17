@@ -37,6 +37,7 @@ aside .img-fluid.annun{
     object-fit: contain;
     aspect-ratio: inherit;
 }
+
 .text-color.montserrat-regular.font-16 p{
     font-size: 16px;
     color: #9A9DA2;
@@ -133,7 +134,9 @@ aside .img-fluid.annun{
     border-radius: 5px !important;
     background: #E5282A !important;
 }
-
+.under{
+    color: #E5282A;
+}
 body .uwy.userway_p1 .userway_buttons_wrapper  {
     top: 40% !important;
     right: -34px !important;
@@ -510,6 +513,10 @@ h1, h2, h3, h4, h5, h6  {
     font-optical-sizing: auto;
     font-style: normal;
     font-weight: 300;
+}
+.login{
+    width: 40px;
+    height: 40px;
 }
 .relative.z-0.inline-flex.shadow-sm.rounded-md{
     box-shadow: inherit !important;
