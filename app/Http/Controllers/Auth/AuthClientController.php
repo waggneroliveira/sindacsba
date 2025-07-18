@@ -10,79 +10,76 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthClientController extends Controller
 {
-        public function authenticate(Request $request)
+    public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
         $credentials['active'] = 1;
 
-        if (!Auth::attempt($credentials)) {
-            $client = Client::where('email', $request->email)->active()->first();
+        // Tenta autenticar
+        if (!Auth::guard('client')->attempt($credentials)) {
+            $client = Client::where('email', $request->email)->first();
 
-            if (!$client) {
+            if (!$client || !$client->active) {
                 return back()->withErrors([
                     'email' => 'E-mail inválido ou usuário inativo.',
-                ]);
+                ])->withInput();
             }
 
             if (!Hash::check($request->password, $client->password)) {
                 return back()->withErrors([
                     'password' => 'Senha inválida.',
-                ]);
+                ])->withInput();
             }
         }
 
-        $clientAuthenticate = Auth::user();
-        $client = Client::find($clientAuthenticate->id);
+        $client = Auth::guard('client')->user();
 
+        // Log de atividade
         activity()
-            ->causedBy(Auth::client())
+            ->causedBy($client)
             ->performedOn($client)
             ->event('login')
             ->withProperties([
                 'attributes' => [
-                    'id' => $clientAuthenticate->id,
-                    'name' => $clientAuthenticate->name,
-                    'email' => $clientAuthenticate->email,
-                    'active' => $clientAuthenticate->active,
-                    // 'path_image' => $clientAuthenticate->path_image,
-                    'remember_token' => $clientAuthenticate->remember_token,
-                    'email_verified_at' => $clientAuthenticate->email_verified_at,
+                    'id' => $client->id,
+                    'name' => $client->name,
+                    'email' => $client->email,
+                    'active' => $client->active,
+                    'remember_token' => $client->remember_token,
+                    'email_verified_at' => $client->email_verified_at,
                     'event' => 'login',
                 ]
             ])
             ->log('login');
-          
+
         session()->flash('success', 'Login realizado com sucesso!');
-
-        return redirect()->intended('painel/dashboard');
+        return redirect()->back();
     }
-
 
     public function logout(Request $request)
     {
-        $clientAuthenticate = Auth::client(); 
-        $client = client::select('id','name','email')->find($clientAuthenticate->id);
-        
-        activity()
-            ->causedBy($clientAuthenticate)
-            ->performedOn($client)
-            ->event('logout')
-            ->withProperties([
-                'attributes' => [
-                    'id' => $clientAuthenticate->id,
-                    'name' => $clientAuthenticate->name,
-                    'email' => $clientAuthenticate->email,
-                    'event' => 'logout',
-                ]
-            ])
-            ->log('logout');
-            
-        Auth::guard('web')->logout();
+        $client = Auth::guard('client')->user();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        if ($client) {
+            activity()
+                ->causedBy($client)
+                ->performedOn($client)
+                ->event('logout')
+                ->withProperties([
+                    'attributes' => [
+                        'id' => $client->id,
+                        'name' => $client->name,
+                        'email' => $client->email,
+                        'event' => 'logout',
+                    ]
+                ])
+                ->log('logout');
+
+            Auth::guard('client')->logout();
+        }
 
         session()->flash('success', 'Logout realizado com sucesso!');
-        return redirect('/noticias');
+        return redirect()->back();
     }
+
 }

@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FormIndexController;
+use App\Http\Middleware\AuthClientMiddleware;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\Auth\AuthClientController;
 use App\Http\Controllers\Client\BlogPageController;
 use App\Http\Controllers\Client\HomePageController;
 use App\Http\Controllers\Client\ContactPageController;
@@ -23,7 +25,15 @@ Route::get('/', function () {
 // Route::get('/home', function () {
 //     return view('client.blades.index');  
 // })->name('index');  
+Route::post('login.do', [AuthClientController::class, 'authenticate'])
+->name('client.user.authenticate');
 
+Route::middleware([AuthClientMiddleware::class])->group(function () {
+    Route::put('/client/update', [ClientController::class, 'update'])->name('client.update');
+
+
+    Route::get('logout', [AuthClientController::class, 'logout'])->name('client.user.logout');
+});
 
 Route::get('contato', [ContactPageController::class, 'index'])
 ->name('contact');

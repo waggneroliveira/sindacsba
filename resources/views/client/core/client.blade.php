@@ -38,6 +38,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="{{ asset('build/admin/js/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('build/admin/js/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('build/admin/js/libs/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
 
     @vite([
         'resources/assets/client/css/bootstrap/css/bootstrap.min.css',
@@ -183,24 +185,42 @@
                             @endif
                         </ul> 
                     </nav>
-                    <div class="login d-flex justify-content-start align-items-center gap-2 w-auto">
-                        <div class="d-flex justify-content-start align-items-center gap-2">
-                            <svg width="20" height="20" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M46.793 8.62893C44.5547 8.62893 42.7344 6.81253 42.7344 4.57423C42.7344 2.33593 44.5547 0.519531 46.793 0.519531L80.57 0.503906C88.8044 0.503906 95.5 7.20311 95.5 15.4339V80.5789C95.5 88.8055 88.8008 95.5089 80.57 95.5089H46.793C44.5469 95.5089 42.7266 93.6847 42.7266 91.4386C42.7266 89.1886 44.5469 87.3683 46.793 87.3683H80.57C84.3083 87.3683 87.3591 84.3136 87.3591 80.5831V15.4311C87.3591 11.7006 84.3083 8.63031 80.57 8.63031L46.793 8.62893ZM49.6914 68.2459L66.5504 51.0619C67.398 50.3158 67.9332 49.2181 67.9332 47.9994C67.9332 46.7807 67.398 45.683 66.5504 44.9408L49.6914 27.7568C48.1133 26.1591 45.543 26.1357 43.9492 27.71C42.3515 29.2803 42.3281 31.8545 43.9062 33.4522L54.1792 43.9322L4.5742 43.9283C2.3281 43.9283 0.5 45.7525 0.5 47.9986C0.5 50.2486 2.3281 52.0689 4.5742 52.0689H54.1762L43.9032 62.5459C42.3251 64.1436 42.3524 66.7138 43.9462 68.288C45.5439 69.8583 48.1103 69.8389 49.6884 68.2412L49.6914 68.2459Z" fill="white"/>
-                            </svg>
+                    <div class="login d-flex justify-content-start align-items-center gap-2 w-auto">                        
+                        @if (!Auth::guard('client')->check())                            
+                            <div class="d-flex justify-content-start align-items-center gap-2">
+                                <svg width="20" height="20" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M46.793 8.62893C44.5547 8.62893 42.7344 6.81253 42.7344 4.57423C42.7344 2.33593 44.5547 0.519531 46.793 0.519531L80.57 0.503906C88.8044 0.503906 95.5 7.20311 95.5 15.4339V80.5789C95.5 88.8055 88.8008 95.5089 80.57 95.5089H46.793C44.5469 95.5089 42.7266 93.6847 42.7266 91.4386C42.7266 89.1886 44.5469 87.3683 46.793 87.3683H80.57C84.3083 87.3683 87.3591 84.3136 87.3591 80.5831V15.4311C87.3591 11.7006 84.3083 8.63031 80.57 8.63031L46.793 8.62893ZM49.6914 68.2459L66.5504 51.0619C67.398 50.3158 67.9332 49.2181 67.9332 47.9994C67.9332 46.7807 67.398 45.683 66.5504 44.9408L49.6914 27.7568C48.1133 26.1591 45.543 26.1357 43.9492 27.71C42.3515 29.2803 42.3281 31.8545 43.9062 33.4522L54.1792 43.9322L4.5742 43.9283C2.3281 43.9283 0.5 45.7525 0.5 47.9986C0.5 50.2486 2.3281 52.0689 4.5742 52.0689H54.1762L43.9032 62.5459C42.3251 64.1436 42.3524 66.7138 43.9462 68.288C45.5439 69.8583 48.1103 69.8389 49.6884 68.2412L49.6914 68.2459Z" fill="white"/>
+                                </svg>
 
-                            <h2 class="m-0 montserrat-medium font-14 text-start" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#loginModal">Login</h2>
-                        </div>
-
-                        {{-- <picture>
-                            <source srcset="{{ asset('build/client/images/user-login.svg') }}" type="image/svg+xml">
-                            <img src="{{ asset('build/client/images/user-login.svg') }}"
-                                alt="Imagem de Login"
-                                class="img-fluid rounded-circle"
-                                width="40"
-                                height="40">
-                        </picture>
-                        <h2 class="m-0 montserrat-medium font-14 text-start">Bem-vindo(a), <br> Wagner</h2>                         --}}
+                                <h2 class="m-0 montserrat-medium font-14 text-start" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#loginModal">Login</h2>
+                            </div>
+                        @else
+                            @php
+                                $user = Auth::guard('client')->user();
+                                $defaultImage = $user && $user->path_image ? url($user->path_image) : '';
+                            @endphp
+                            <div class="image-profile">
+                                <picture>
+                                    <source srcset="{{ isset($defaultImage)?$defaultImage:asset('build/client/images/user-login.svg') }}" type="image/svg+xml">
+                                    <img src="{{ isset($defaultImage)?$defaultImage:asset('build/client/images/user-login.svg') }}"
+                                        alt="Imagem de Login"
+                                        class="img-fluid rounded-circle">
+                                </picture>
+                            </div>
+                            <div class="d-flex flex-column align-items-start gap-1">
+                                <div class="d-flex justify-content-start align-items-center gap-2 lh-0">
+                                    <h2 class="m-0 montserrat-medium font-14 text-start">Bem vindo,</h2>   
+                                    <h3 class="m-0 montserrat-medium font-14 text-start">{{$names = collect(explode(' ', Auth::guard('client')->user()->name))->slice(0, 1)->implode(' ')}}!</h3>      
+                                    <a class="nav-link waves-effect waves-light" href="#" data-bs-toggle="modal" data-bs-target="#editClientModal-{{Auth::guard('client')->user()->id}}">
+                                        <i class="bi bi-gear font-18"></i>
+                                    </a>                 
+                                </div>  
+                                <a href="{{route('client.user.logout')}}" class="d-flex justify-content-start align-items-center gap-2 text-decoration-none lh-0">
+                                    <i class="bi bi-box-arrow-right font-18"></i>
+                                    <h4 class="montserrat-medium font-12 m-0">Sair</h4>
+                                </a>                                               
+                            </div>
+                        @endif
                     </div>
                 </div>         
             </div>
@@ -236,7 +256,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/login" method="POST">
+                    <form action="{{route('client.user.authenticate')}}" method="POST">
                         <!-- CSRF token (Laravel) -->
                         @csrf
 
@@ -324,6 +344,66 @@
             </div>
         </div>
     </div>
+
+    @if (Auth::guard('client')->check())
+        @php
+            $user = Auth::guard('client')->user();
+            $defaultImage = $user && $user->path_image ? url('storage/'.$user->path_image) : '';
+        @endphp
+        <!-- Modal de Edição -->
+        <div class="modal fade" id="editClientModal-{{Auth::guard('client')->user()->id}}" tabindex="-1" aria-labelledby="editClientModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content header-color">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title text-uppercase montserrat-bold font-22 text-white" id="editClientModalLabel">Editar Informações</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form action="{{ route('client.update') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="mb-3">
+                                <label for="name" class="form-label montserrat-medium font-15">Nome</label>
+                                <input type="text" class="form-control montserrat-regular font-15" id="name" name="name" value="{{Auth::guard('client')->user()->name}}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="emailRegister" class="form-label montserrat-medium font-15">E-mail</label>
+                                <input type="email" class="form-control montserrat-regular font-15" id="emailRegister" name="email" value="{{Auth::guard('client')->user()->email}}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="passwordRegister" class="form-label montserrat-medium font-15">Senha</label>
+                                <input type="password" class="form-control montserrat-regular font-15" id="passwordRegister" name="password">
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="mt-3">
+                                    <label for="title" class="form-label montserrat-regular font-15">Imagem de perfil </label>
+                                    <input 
+                                        type="file" 
+                                        name="path_image" 
+                                        data-plugins="dropify" 
+                                        data-default-file="{{ $defaultImage }}" 
+                                    />
+                                    <p class="montserrat-regular text-white font-12 mt-2 mb-0">{{__('dashboard.text_img_size')}} <b class="text-danger">2 MB</b>.</p>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn bg-secondary rounded-3 text-white montserrat-medium font-15" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn px-4 background-red rounded-3 text-white montserrat-medium font-15">Salvar alterações</button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>        
+        </div>
+    @endif
 
     <div id="menu-mobile" class="menu-mobile d-flex flex-column justify-content-center align-items-center">
         <div class="logo-img px-3 py-2 mb-4 rounded-2 d-flex justify-content-center align-items-center">
@@ -419,7 +499,9 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="{{ asset('build/admin/js/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-
+    <script src="{{ asset('build/admin/js/libs/dropzone/min/dropzone.min.js') }}"></script>
+    <script src="{{ asset('build/admin/js/libs/dropify/js/dropify.min.js') }}"></script>
+    <script src="{{ asset('build/admin/js/pages/form-fileuploads.init.js') }}"></script>
     @vite([
         'resources/assets/client/css/bootstrap/js/bootstrap.bundle.js',
         'resources/assets/client/css/typed.js/typed.umd.js',
