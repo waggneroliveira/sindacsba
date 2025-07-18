@@ -284,7 +284,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/register" method="POST">
+                    <form action="{{route('register-client')}}" method="POST">
                         @csrf
 
                         <div class="mb-3">
@@ -425,6 +425,48 @@
         'resources/assets/client/css/typed.js/typed.umd.js',
         'resources/assets/client/js/default.js',
     ])
+
+    {{-- Modais alert --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let successMessage = @json(session('success'));
+            let errorMessage = @json(session('error'));
+
+            if (successMessage) {
+                Swal.fire({
+                    title: 'Sucesso!',
+                    text: successMessage,
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            }
+
+            if (errorMessage) {
+                Swal.fire({
+                    title: 'Erro!',
+                    text: errorMessage,
+                    icon: 'error',
+                    timer: 2500,
+                    showConfirmButton: false
+                });
+            }
+        });
+    </script>
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <script>
+                Swal.fire({
+                    title: 'Erro!',
+                    text: @json($error),
+                    icon: 'error',
+                    timer: 2500,
+                    showConfirmButton: false
+                });
+            </script>
+        @endforeach
+    @endif
 
     <div vw class=enabled>
         <div vw-access-button class=active></div>

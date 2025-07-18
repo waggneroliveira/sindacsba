@@ -135,7 +135,7 @@
                         @csrf
                         <div class="row g-3">
                             <div class="col-md-12">
-                                <input type="text" required id="name" name="name" class="montserrat-regular font-15 text-color form-control" placeholder="Nome Completo">
+                                <input type="text" required id="nome" name="name" class="montserrat-regular font-15 text-color form-control" placeholder="Nome Completo">
                             </div>
                             <div class="col-md-6">
                                 <input type="email" required id="email" name="email" class="montserrat-regular font-15 text-color form-control" placeholder="E-mail">
@@ -251,7 +251,7 @@
             e.preventDefault();
 
             // Dados do formulário
-            const name = $('#name').val();
+            const name = $('#nome').val();
             const email = $('#email').val();
             const phone = $('#phone').val();
             const subject = $('#subject').val();
@@ -270,14 +270,14 @@
                     subject: subject,
                     text: text,
                     term_privacy: termPrivacy
-                },
+                },                
                 success: function(response) {
                     if (typeof Swal !== 'undefined') {
                         Swal.fire({
                             title: 'Sucesso!',
                             text: response.message,
                             icon: 'success',
-                            timer: 1800,
+                            timer: 2000,
                             showConfirmButton: false
                         });
                     }

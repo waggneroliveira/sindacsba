@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ClientController extends Controller
 {
@@ -12,44 +16,44 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::all();
+
+        return view('admin.blades.client.index', compact('clients'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:clients,email',
+            'password' => 'required|string|min:8',
+            'active' => 'boolean',
+        ], [
+            'email.unique' => 'O e-mail informado já está sendo utilizado.',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            Client::create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'password' => Hash::make($validated['password']),
+                'active' => 1,
+            ]);
+
+            DB::commit();
+
+            session()->flash('success', 'Cadastro realizado com sucesso!');
+            return redirect()->back();
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            session()->flash('error', 'Erro no cadastro: ' . $e->getMessage());
+            return redirect()->back()->withInput();
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Client $client)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Client $client)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Client $client)
     {
         //
@@ -60,6 +64,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+        return redirect()->back();
     }
 }

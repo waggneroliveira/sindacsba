@@ -6,6 +6,7 @@ use App\Models\Announcement;
 use App\Models\BlogCategory;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FormIndexController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\Client\BlogPageController;
@@ -34,6 +35,8 @@ Route::get('noticias/interna/{slug}', [BlogPageController::class, 'blogInner'])
 Route::get('noticias/{category?}', [BlogPageController::class, 'index'])->name('blog');
 Route::post('noticias/search', [BlogPageController::class, 'index'])->name('blog-search');
 Route::post('send-newsletter', [NewsletterController::class, 'store'])->name('send-newsletter');
+
+Route::post('cliente/cadastro', [ClientController::class, 'store'])->name('register-client');
 
 
 

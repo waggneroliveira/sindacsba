@@ -174,7 +174,7 @@ body .uwy.userway_p1 .userway_buttons_wrapper  {
 .image-hero, .img-fluid, .project-list-item img, .rating span img  {
     object-position: center
 }
-.montserrat-ExtraBold, .montserrat-bold, .montserrat-medium, .montserrat-regular, .montserrat-semiBold  {
+.swal2-html-container, .montserrat-ExtraBold, .montserrat-bold, .montserrat-medium, .montserrat-regular, .montserrat-semiBold  {
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-style: normal
