@@ -270,10 +270,6 @@
                             <input type="password" class="form-control montserrat-regular font-15" id="password" name="password" required>
                         </div>
 
-                        <div class="d-flex">
-                            <a href="" class="montserrat-medium font-14">Esqueceu sua senha?</a>
-                        </div>
-
                         <div class="d-flex justify-content-center mt-3 mb-4">
                             <button type="submit" class="btn px-5 background-red rounded-3 text-white montserrat-medium font-15">Entrar</button>
                         </div>
@@ -286,7 +282,13 @@
                                 data-bs-toggle="modal"
                                 data-bs-target="#registerModal">Registre-se</a>
                                 aqui <br>
-                                <a href="#" class="text-decoration-underline montserrat-bold ms-1 under">Esqueceu sua senha?</a>
+                                <a href="#" 
+                                class="text-decoration-underline montserrat-bold ms-1 under" 
+                                data-bs-dismiss="modal"
+                                data-bs-toggle="modal"
+                                data-bs-target="#forgotPasswordModal">
+                                Esqueceu sua senha?
+                                </a>
                             </p>
 
                         </div>
@@ -407,6 +409,40 @@
             </div>        
         </div>
     @endif
+
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content header-color">
+
+                <div class="modal-header">
+                    <h5 class="modal-title text-uppercase montserrat-bold font-22 text-white" id="forgotPasswordModalLabel">
+                        Recuperar Senha
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+
+                <div class="modal-body">
+                    {{-- {{ route('client.password.email') }} --}}
+                    <form action="" method="POST">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label for="recover_email" class="form-label montserrat-medium font-15">Digite seu e-mail</label>
+                            <input type="email" class="form-control montserrat-regular font-15" id="recover_email" name="email" required>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-3 mb-4">
+                            <button type="submit" class="btn px-5 background-red rounded-3 text-white montserrat-medium font-15">
+                                Enviar link de recuperação
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
     <div id="menu-mobile" class="menu-mobile d-flex flex-column justify-content-center align-items-center">
         <div class="logo-img px-3 py-2 mb-4 rounded-2 d-flex justify-content-center align-items-center">
