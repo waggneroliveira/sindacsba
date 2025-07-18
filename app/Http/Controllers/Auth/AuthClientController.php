@@ -2,52 +2,51 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 
-class AuthController extends Controller
+class AuthClientController extends Controller
 {
-    public function authenticate(Request $request)
+        public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
         $credentials['active'] = 1;
 
         if (!Auth::attempt($credentials)) {
-            $user = User::where('email', $request->email)->active()->first();
+            $client = Client::where('email', $request->email)->active()->first();
 
-            if (!$user) {
+            if (!$client) {
                 return back()->withErrors([
                     'email' => 'E-mail inválido ou usuário inativo.',
                 ]);
             }
 
-            if (!Hash::check($request->password, $user->password)) {
+            if (!Hash::check($request->password, $client->password)) {
                 return back()->withErrors([
                     'password' => 'Senha inválida.',
                 ]);
             }
         }
 
-        $userAuthenticate = Auth::user();
-        $user = User::find($userAuthenticate->id);
+        $clientAuthenticate = Auth::user();
+        $client = Client::find($clientAuthenticate->id);
 
         activity()
-            ->causedBy(Auth::user())
-            ->performedOn($user)
+            ->causedBy(Auth::client())
+            ->performedOn($client)
             ->event('login')
             ->withProperties([
                 'attributes' => [
-                    'id' => $userAuthenticate->id,
-                    'name' => $userAuthenticate->name,
-                    'email' => $userAuthenticate->email,
-                    'active' => $userAuthenticate->active,
-                    'path_image' => $userAuthenticate->path_image,
-                    'remember_token' => $userAuthenticate->remember_token,
-                    'email_verified_at' => $userAuthenticate->email_verified_at,
+                    'id' => $clientAuthenticate->id,
+                    'name' => $clientAuthenticate->name,
+                    'email' => $clientAuthenticate->email,
+                    'active' => $clientAuthenticate->active,
+                    // 'path_image' => $clientAuthenticate->path_image,
+                    'remember_token' => $clientAuthenticate->remember_token,
+                    'email_verified_at' => $clientAuthenticate->email_verified_at,
                     'event' => 'login',
                 ]
             ])
@@ -61,18 +60,18 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $userAuthenticate = Auth::user(); 
-        $user = User::select('id','name','email')->find($userAuthenticate->id);
+        $clientAuthenticate = Auth::client(); 
+        $client = client::select('id','name','email')->find($clientAuthenticate->id);
         
         activity()
-            ->causedBy($userAuthenticate)
-            ->performedOn($user)
+            ->causedBy($clientAuthenticate)
+            ->performedOn($client)
             ->event('logout')
             ->withProperties([
                 'attributes' => [
-                    'id' => $userAuthenticate->id,
-                    'name' => $userAuthenticate->name,
-                    'email' => $userAuthenticate->email,
+                    'id' => $clientAuthenticate->id,
+                    'name' => $clientAuthenticate->name,
+                    'email' => $clientAuthenticate->email,
                     'event' => 'logout',
                 ]
             ])
@@ -84,6 +83,6 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         session()->flash('success', 'Logout realizado com sucesso!');
-        return redirect('/painel/success-logout');
+        return redirect('/noticias');
     }
 }
