@@ -270,8 +270,12 @@
                             <input type="password" class="form-control montserrat-regular font-15" id="password" name="password" required>
                         </div>
 
-                        <div class="d-flex justify-content-center my-2">
-                            <button type="submit" class="btn px-4 background-red rounded-3 text-white montserrat-medium font-15">Entrar</button>
+                        <div class="d-flex">
+                            <a href="" class="montserrat-medium font-14">Esqueceu sua senha?</a>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-3 mb-4">
+                            <button type="submit" class="btn px-5 background-red rounded-3 text-white montserrat-medium font-15">Entrar</button>
                         </div>
 
                         <div class="d-flex flex-column justify-content-center align-items-center">
@@ -378,7 +382,6 @@
                                 <label for="passwordRegister" class="form-label montserrat-medium font-15">Senha</label>
                                 <input type="password" class="form-control montserrat-regular font-15" id="passwordRegister" name="password">
                             </div>
-
                             <div class="col-lg-12">
                                 <div class="mt-3">
                                     <label for="title" class="form-label montserrat-regular font-15">Imagem de perfil </label>
