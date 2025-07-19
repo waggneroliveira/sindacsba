@@ -12,9 +12,9 @@
                 <div class="col-md-8 col-lg-6 col-xl-4">
                     <div class="card bg-pattern header-color">
                         <div class="card-body p-4">                            
-                            <div class="text-center w-75 m-auto">
+                            <div class="text-center w-100 m-auto">
                                 <div class="auth-brand">
-                                    <div class="logo-img px-3 py-2 rounded-2 d-flex justify-content-Center align-items-center">
+                                    <div class="logo-img px-3 py-2 rounded-2 d-flex justify-content-center align-items-center">
                                         <a href="{{route('blog')}}">
                                             <img src="{{asset('build/client/images/logo.svg')}}" alt="Sindacs-BA" title="Sindacs-BA" class="img-fluid">
                                         </a>
@@ -34,15 +34,15 @@
                                 <input type="hidden" name="token" value="{{$token}}">
                                 <div class="mb-3">
                                     <label for="email" class="form-label text-white montserrat-medium font-15">E-mail</label>
-                                    <input class="form-control" name="email" type="email" required="" id="email" placeholder="Digite seu E-mail">
+                                    <input class="form-control montserrat-regular" name="email" type="email" required="" id="email" placeholder="Digite seu E-mail">
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label text-white montserrat-medium font-15">Nova Senha</label>
-                                    <input class="form-control" name="password" type="password" required="" id="password" placeholder="Digite a nova senha">
+                                    <input class="form-control montserrat-regular" name="password" type="password" required="" id="password" placeholder="Digite a nova senha">
                                 </div>
                                 <div class="mb-3">
                                     <label for="password_confirmation" class="form-label text-white montserrat-medium font-15">Confirmar Nova Senha</label>
-                                    <input class="form-control" name="password_confirmation" type="password" required="" id="password_confirmation" placeholder="Digite a nova senha">
+                                    <input class="form-control montserrat-regular" name="password_confirmation" type="password" required="" id="password_confirmation" placeholder="Digite a nova senha">
                                 </div>
         
                                 <div class="text-center d-grid">
