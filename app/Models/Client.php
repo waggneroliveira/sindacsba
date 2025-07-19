@@ -7,6 +7,7 @@ use App\Services\ActivityLogService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
+use App\Notifications\ClientResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -40,5 +41,8 @@ class Client extends Authenticatable
         return LogOptions::defaults()
             ->logOnly($activityLogService->getLoggableAttributes());
     }
-
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ClientResetPasswordNotification($token));
+    }
 }

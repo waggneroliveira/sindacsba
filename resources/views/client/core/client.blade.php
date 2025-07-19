@@ -423,7 +423,7 @@
 
                 <div class="modal-body">
                     {{-- {{ route('client.password.email') }} --}}
-                    <form action="" method="POST">
+                    <form action="{{ route('client.password.email') }}" method="POST">
                         @csrf
 
                         <div class="mb-3">

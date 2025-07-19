@@ -15,6 +15,8 @@ use App\Http\Controllers\Client\BlogPageController;
 use App\Http\Controllers\Client\HomePageController;
 use App\Http\Controllers\Client\ContactPageController;
 use App\Http\Controllers\Client\NoticiesPageController;
+use App\Http\Controllers\Auth\PasswordEmailClientController;
+use App\Http\Controllers\Auth\ResetPasswordClientController;
 
 require __DIR__ . '/dashboard.php';
 
@@ -27,6 +29,27 @@ Route::get('/', function () {
 // })->name('index');  
 Route::post('login.do', [AuthClientController::class, 'authenticate'])
 ->name('client.user.authenticate');
+
+// Rota para processar o formulário "Esqueci a senha"
+Route::post('/password/email', [PasswordEmailClientController::class, 'passwordEmail'])
+->name('client.password.email');
+
+Route::get('/email-enviado-com-sucesso', [PasswordEmailClientController::class, 'showSuccess'])
+->name('send-success-client');
+
+// Rota para processar a redefinição de senha
+Route::post('/password/reset', [ResetPasswordClientController::class, 'processPasswordReset'])
+->name('client-password.update');
+
+// Rota para exibir o formulário de redefinição de senha
+Route::get('password/reset/{token}', [ResetPasswordClientController::class, 'showResetForm'])
+->name('client.password.reset');
+
+
+Route::get('/senha-alterada-com-sucesso', function () {
+    return view('emails.password-success-client-reset');
+})->name('client-success-reset-password');
+
 
 Route::middleware([AuthClientMiddleware::class])->group(function () {
     Route::put('/client/update', [ClientController::class, 'update'])->name('client.update');
