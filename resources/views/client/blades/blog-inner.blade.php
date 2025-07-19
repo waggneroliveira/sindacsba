@@ -57,28 +57,42 @@
                     <!-- News Detail End -->
 
                     <!-- Comment List Start -->
-                    <div class="mb-3 mt-5 comments">
-                        <div class="section-title mb-0 title-blue">
-                            <h4 class="m-0 text-uppercase montserrat-bold font-25 title-blue">3 Comments</h4>
-                        </div>
-                        <div class="bg-white border border-top-0 p-4">
-                            <!-- Comment 1 -->
-                            <div class="d-flex gap-2 flex-column">
-                                <div class="d-flex mb-0 gap-3">
-                                    <img src="{{ asset('build/client/images/user.jpg') }}" alt="Image" class="img-fluid mr-3 mt-1 rounded-circle">
-                                    <div class="d-flex flex-column">
-                                        <h6 class="title-blue montserrat-bold font-15 mb-0">John Doe</h6>
-                                        <small class="title-blue mb-0 montserrat-regular font-12">11 de Janeiro de 2025</small>
-                                    </div>
-                                </div>
-                                <div class="w-100">
-                                    <p class="text-color montserrat-regular font-16 mb-0">
-                                        Voluptua est takimata stet invidunt sed rebum nonumy stet, clita aliquyam dolores vero stet consetetur elitr takimata rebum sanctus.
-                                    </p>
-                                </div>
+                    @if (isset($blogInner->comments) && $blogInner->comments->count() > 0)                        
+                        <div class="mb-3 mt-5 comments">
+                            <div class="section-title mb-0 title-blue">
+                                <h4 class="m-0 text-uppercase montserrat-bold font-25 title-blue">{{$blogInner->comments->count()}} Commentários</h4>
+                            </div>
+                            <div class="bg-white border border-top-0 p-4">
+                                @foreach ($blogInner->comments as $comment)
+                                    @php
+                                        $client = $comment->client;
+                                    @endphp
+
+                                    @if ($client)
+                                        <div class="d-flex gap-2 flex-column mb-4">
+                                            <div class="d-flex mb-0 gap-3">
+                                                <img src="{{ $client->path_image ? url($client->path_image) : asset('build/client/images/user.jpg') }}"
+                                                    alt="Imagem do cliente"
+                                                    class="img-fluid mr-3 mt-1 rounded-circle"
+                                                    style="width: 50px; height: 50px; object-fit: cover;">
+                                                <div class="d-flex flex-column col-10">
+                                                    <h6 class="title-blue montserrat-bold font-15 mb-0">{{ $client->name }}</h6>
+                                                    <small class="title-blue mb-0 montserrat-regular font-12">
+                                                        {{ $comment->created_at->format('d \d\e F \d\e Y') }}
+                                                    </small>
+                                                    <div class="w-100 mt-3">
+                                                        <p class="text-color montserrat-regular font-16 mb-0">
+                                                            {{ $comment->comment }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
-                    </div>
+                    @endif
                     <!-- Comment List End -->
 
                     <!-- Comment Form Start -->
@@ -87,16 +101,20 @@
                             <h4 class="m-0 text-uppercase montserrat-bold font-25 title-blue">Deixe um comentário</h4>
                         </div>
                         <div class="bg-white border border-top-0 p-4">
-                            <form>
+                            <form id="commentForm">
+                                @csrf
+                                <input type="hidden" name="blog_id" value="{{ $blogInner->id }}">
+
                                 <div class="mb-3">
-                                    <label for="message">Message *</label>
-                                    <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                                    <label for="message">Mensagem *</label>
+                                    <textarea id="message" name="comment" cols="30" rows="5" class="form-control montserrat-regular font-15"></textarea>
                                 </div>
                                 
                                 <div class="mb-0">
-                                    <input type="submit" value="Comentar" class="btn btn-primary montserrat-semiBold font-16 py-2 px-3">
+                                    <button type="submit" class="btn background-red rounded-3 montserrat-medium text-white font-15">Comentar</button>
                                 </div>
                             </form>
+                            <div id="commentMessage" class="mt-3 montserrat-regular font-15"></div>
                         </div>
                     </div>
                     <!-- Comment Form End -->
@@ -179,5 +197,56 @@
         </div>
     </div>
     <!-- News With Sidebar End -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#commentForm').on('submit', function (e) {
+                e.preventDefault();
+
+                const formData = $(this).serialize();
+
+                $.ajax({
+                    url: "{{ route('blog.comment') }}",
+                    method: "POST",
+                    data: formData,
+                    success: function (response) {
+                        showMessage(response.message, 'success');
+                        $('#commentForm')[0].reset(); // limpa o form
+                    },
+                    error: function (xhr) {
+                        if (xhr.status === 401) {
+                            showMessage(xhr.responseJSON.message, 'warning');
+
+                            // Abre o modal de login
+                            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                            loginModal.show();
+                        } else if (xhr.status === 422) {
+                            const errors = xhr.responseJSON.errors;
+                            let errorMessages = '';
+                            for (let field in errors) {
+                                errorMessages += `<div>${errors[field][0]}</div>`;
+                            }
+                            showMessage(errorMessages, 'danger');
+                        } else {
+                            showMessage('É necessário estar logado para enviar um comentário.', 'danger');
+                        }
+                    }
+                });
+
+                function showMessage(message, type) {
+                    $('#commentMessage').html(
+                        `<div class="alert alert-${type}">${message}</div>`
+                    );
+
+                    setTimeout(() => {
+                        $('#commentMessage').fadeOut('slow', function () {
+                            $(this).html('').show(); // limpa e reexibe o contêiner vazio
+                        });
+                    }, 3000);
+                }
+            });
+        });
+    </script>
 
 @endsection

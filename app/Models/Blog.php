@@ -27,6 +27,10 @@ class Blog extends Model
         'sorting',
     ];
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
     public function category(){
         return $this->belongsTo(BlogCategory::class, 'blog_category_id');
     }

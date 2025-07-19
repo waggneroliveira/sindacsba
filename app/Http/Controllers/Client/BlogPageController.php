@@ -72,7 +72,12 @@ class BlogPageController extends Controller
             abort(404);
         }
 
-        $blogInner = Blog::with('category')
+        $blogInner = Blog::with([
+            'category',
+            'comments' => function ($query) {
+                $query->where('active', 1)->with('client');
+            }
+        ])
         ->whereHas('category')
         ->where('slug', $slug)
         ->active()

@@ -7,6 +7,7 @@ use App\Models\BlogCategory;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FormIndexController;
 use App\Http\Middleware\AuthClientMiddleware;
 use App\Http\Controllers\NewsletterController;
@@ -54,6 +55,8 @@ Route::get('/senha-alterada-com-sucesso', function () {
 Route::middleware([AuthClientMiddleware::class])->group(function () {
     Route::put('/client/update', [ClientController::class, 'update'])->name('client.update');
 
+    Route::post('/client/comments', [CommentController::class, 'store'])
+    ->name('blog.comment');
 
     Route::get('logout', [AuthClientController::class, 'logout'])->name('client.user.logout');
 });
