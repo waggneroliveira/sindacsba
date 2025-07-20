@@ -19,102 +19,11 @@
     </div>
     <!-- end page title -->
     <div class="row">
-
-        <div class="col-md-5 col-xl-3">
-            <div class="card borda-cx ratio ratio-4x3">
-                <div class="d-flex align-items-center justify-content-center">
-                    <a href="{{route('admin.dashboard.formIndex.index')}}">
-                        <div class="row">
-                            <div class="col-12 d-flex align-items-center justify-content-center">
-                                <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                    <i class="avatar-md mdi mdi-file-document font-48 text-muted"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3 col-12 text-center">
-                            <h5 class="text-uppercase text-muted">Lead</h5>
-                        </div>
-                    </a>
-                </div>
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-
-        <div class="col-md-5 col-xl-3">
-            <div class="card borda-cx ratio ratio-4x3">
-                <div class="d-flex align-items-center justify-content-center">
-                    <a href="{{route('admin.dashboard.contact.index')}}">
-                        <div class="row">
-                            <div class="col-12 d-flex align-items-center justify-content-center">
-                                <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                    <i class="avatar-md mdi mdi-file-document font-48 text-muted"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3 col-12 text-center">
-                            <h5 class="text-uppercase text-muted">Contato</h5>
-                        </div>
-                    </a>
-                </div>
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-        
-        <div class="col-md-5 col-xl-3">
-            <div class="card borda-cx ratio ratio-4x3">
-                <div class="d-flex align-items-center justify-content-center">
-                    <a href="{{route('admin.dashboard.newsletter.index')}}">
-                        <div class="row">
-                            <div class="col-12 d-flex align-items-center justify-content-center">
-                                <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                    <i class="avatar-md mdi mdi-file-document font-48 text-muted"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3 col-12 text-center">
-                            <h5 class="text-uppercase text-muted">Newsletter</h5>
-                        </div>
-                    </a>
-                </div>
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-
-        <div class="col-md-5 col-xl-3">
-            <div class="card borda-cx ratio ratio-4x3">
-                <div class="d-flex align-items-center justify-content-center">
-                    <a href="{{route('admin.dashboard.announcement.index')}}">
-                        <div class="row">
-                            <div class="col-12 d-flex align-items-center justify-content-center">
-                                <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                    <i class="avatar-md mdi mdi-file-document font-48 text-muted"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3 col-12 text-center">
-                            <h5 class="text-uppercase text-muted">Anuncios</h5>
-                        </div>
-                    </a>
-                </div>
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-
-        <div class="col-md-5 col-xl-3">
-            <div class="card borda-cx ratio ratio-4x3">
-                <div class="d-flex align-items-center justify-content-center">
-                    <a href="{{route('admin.dashboard.noticies.index')}}">
-                        <div class="row">
-                            <div class="col-12 d-flex align-items-center justify-content-center">
-                                <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                    <i class="avatar-md mdi mdi-file-document font-48 text-muted"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3 col-12 text-center">
-                            <h5 class="text-uppercase text-muted">Editais</h5>
-                        </div>
-                    </a>
-                </div>
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title "><i class="mdi mdi-newspaper-variant"></i> Notícias</h4>
+            </div>
+        </div>
         <div class="col-md-5 col-xl-3">
             <div class="card borda-cx ratio ratio-4x3">
                 <div class="d-flex align-items-center justify-content-center">
@@ -127,7 +36,7 @@
                             </div>
                         </div>
                         <div class="mt-3 col-12 text-center">
-                            <h5 class="text-uppercase text-muted">Categorias do Blog</h5>
+                            <h5 class="text-uppercase text-muted">Categorias das Notícias</h5>
                         </div>
                     </a>
                 </div>
@@ -146,7 +55,51 @@
                             </div>
                         </div>
                         <div class="mt-3 col-12 text-center">
-                            <h5 class="text-uppercase text-muted">Blog</h5>
+                            <h5 class="text-uppercase text-muted">Notícias</h5>
+                        </div>
+                    </a>
+                </div>
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title "><i class="mdi mdi-card-account-mail-outline"></i> Contato</h4>
+            </div>
+        </div>
+        <div class="col-md-5 col-xl-3">
+            <div class="card borda-cx ratio ratio-4x3">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="{{route('admin.dashboard.contact.index')}}">
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <div class="avatar-xl bg-hoom rounded-circle text-center">
+                                    <i class="avatar-md mdi mdi-card-account-mail-outline font-48 text-muted"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 col-12 text-center">
+                            <h5 class="text-uppercase text-muted">Contato</h5>
+                        </div>
+                    </a>
+                </div>
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+        <div class="col-md-5 col-xl-3">
+            <div class="card borda-cx ratio ratio-4x3">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="{{route('admin.dashboard.formIndex.index')}}">
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <div class="avatar-xl bg-hoom rounded-circle text-center">
+                                    <i class="avatar-md mdi mdi-account-box-outline font-48 text-muted"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 col-12 text-center">
+                            <h5 class="text-uppercase text-muted">Lead Contato</h5>
                         </div>
                     </a>
                 </div>
@@ -154,67 +107,77 @@
         </div> <!-- end col -->
 
         <div class="col-md-5 col-xl-3">
-                <div class="card borda-cx ratio ratio-4x3">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <a href="{{route('admin.dashboard.project.index')}}">
-                            <div class="row">
-                                <div class="col-12 d-flex align-items-center justify-content-center">
-                                    <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                        <i class="avatar-md mdi mdi-email font-48 text-muted"></i>
-                                    </div>
+            <div class="card borda-cx ratio ratio-4x3">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="{{route('admin.dashboard.newsletter.index')}}">
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <div class="avatar-xl bg-hoom rounded-circle text-center">
+                                    <i class="avatar-md mdi mdi-email-outline font-48 text-muted"></i>
                                 </div>
                             </div>
-                            <div class="mt-3 col-12 text-center">
-                                <h5 class="text-uppercase text-muted">Projeto</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div> <!-- end card-->
-            </div> <!-- end col -->
-        @if (Auth::user()->hasRole('Super') || 
-        Auth::user()->can('usuario.tornar usuario master') || 
-        Auth::user()->can('slide.visualizar'))
-            <div class="col-md-5 col-xl-3">
-                <div class="card borda-cx ratio ratio-4x3">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <a href="{{route('admin.dashboard.slide.index')}}">
-                            <div class="row">
-                                <div class="col-12 d-flex align-items-center justify-content-center">
-                                    <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                        <i class="avatar-md mdi mdi-email font-48 text-muted"></i>
-                                    </div>
+                        </div>
+                        <div class="mt-3 col-12 text-center">
+                            <h5 class="text-uppercase text-muted">Newsletter</h5>
+                        </div>
+                    </a>
+                </div>
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title "><i class="mdi mdi-bullhorn-outline"></i> Anuncios</h4>
+            </div>
+        </div>
+        <div class="col-md-5 col-xl-3">
+            <div class="card borda-cx ratio ratio-4x3">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="{{route('admin.dashboard.announcement.index')}}">
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <div class="avatar-xl bg-hoom rounded-circle text-center">
+                                    <i class="avatar-md mdi mdi-bullhorn-outline font-48 text-muted"></i>
                                 </div>
                             </div>
-                            <div class="mt-3 col-12 text-center">
-                                <h5 class="text-uppercase text-muted">Slides</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div> <!-- end card-->
-            </div> <!-- end col -->
-        @endif
-        @if (Auth::user()->hasRole('Super') || 
-        Auth::user()->can('usuario.tornar usuario master') || 
-        Auth::user()->can('stack.visualizar'))
-            <div class="col-md-5 col-xl-3">
-                <div class="card borda-cx ratio ratio-4x3">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <a href="{{route('admin.dashboard.stack.index')}}">
-                            <div class="row">
-                                <div class="col-12 d-flex align-items-center justify-content-center">
-                                    <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                        <i class="avatar-md mdi mdi-email font-48 text-muted"></i>
-                                    </div>
+                        </div>
+                        <div class="mt-3 col-12 text-center">
+                            <h5 class="text-uppercase text-muted">Anuncios</h5>
+                        </div>
+                    </a>
+                </div>
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title "><i class="mdi mdi-file-document"></i> Editais</h4>
+            </div>
+        </div>
+        <div class="col-md-5 col-xl-3">
+            <div class="card borda-cx ratio ratio-4x3">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="{{route('admin.dashboard.noticies.index')}}">
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <div class="avatar-xl bg-hoom rounded-circle text-center">
+                                    <i class="avatar-md mdi mdi-file-document font-48 text-muted"></i>
                                 </div>
                             </div>
-                            <div class="mt-3 col-12 text-center">
-                                <h5 class="text-uppercase text-muted">Tecnologias</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div> <!-- end card-->
-            </div> <!-- end col -->
-        @endif
+                        </div>
+                        <div class="mt-3 col-12 text-center">
+                            <h5 class="text-uppercase text-muted">Editais</h5>
+                        </div>
+                    </a>
+                </div>
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+
+
         @if (Auth::user()->hasRole('Super') || 
         Auth::user()->can('usuario.tornar usuario master') || 
         Auth::user()->can('email.visualizar'))

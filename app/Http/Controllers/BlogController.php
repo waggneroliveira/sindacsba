@@ -23,7 +23,15 @@ class BlogController extends Controller
     public function index()
     {
         $categories = BlogCategory::active()->sorting()->get();
-        $blogs = Blog::get();
+        $blogs = Blog::with([
+            'category',
+            'comments' => function ($query) {
+                $query->orderBy('created_at', 'desc')->with('client');
+            }
+        ])->get();
+        $commentCount = Blog::with(['comments' => function ($query) {
+            $query->where('active', 0);
+        }])->get();
 
         $blogCategory = [];
 

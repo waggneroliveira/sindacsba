@@ -165,7 +165,7 @@
                                                 <span class="badge badge-primary montserrat-semiBold font-10 text-uppercase py-1 px-2 mr-2 background-red">{{$relacionado->category->title}}</span>
                                                 <p class="text-color mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
                                             </div>
-                                            <a href="" class="underline">
+                                            <a href="{{route('blog-inner', ['slug' => $relacionado->slug])}}" class="underline">
                                                 <h3 class="h6 m-0 text-uppercase montserrat-bold font-14 title-blue">{{$relacionado->title}}</h3>
                                             </a>
                                             </div>

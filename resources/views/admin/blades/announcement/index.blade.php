@@ -73,8 +73,8 @@
                                             <th class="bs-checkbox">
                                                 <label><input name="btnSelectAll" type="checkbox"></label>
                                             </th>
-                                            <th>Imagem Desktop</th>
-                                            <th>Imagem Mobile</th>
+                                            <th class="text-center">Imagem Desktop</th>
+                                            <th class="text-center">Imagem Mobile</th>
                                             <th>{{__('dashboard.created_at')}}</th>
                                             <th>{{__('dashboard.status')}}</th>
                                             <th style="width: 85px;">{{__('dashboard.action')}}</th>

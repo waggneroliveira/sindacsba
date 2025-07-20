@@ -11,10 +11,10 @@
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">blog</li>
+                                    <li class="breadcrumb-item active">Notícias</li>
                                 </ol>
                             </div>
-                            <h4 class="page-title">blog</h4>
+                            <h4 class="page-title">Notícias</h4>
                         </div>
                     </div>
                 </div>
@@ -189,6 +189,90 @@
                                                         @endswitch
                                                     </td>
                                                     <td class="d-flex gap-lg-1 justify-center">
+                                                        @php
+                                                            $pendingCount = $blog->comments->where('active', 0)->count();
+                                                        @endphp
+                                                        
+                                                        <button class="table-edit-button btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#modal-blog-{{$blog->id}}" style="padding: 2px 8px;width: 30px">
+                                                            <span class="mdi mdi-message-bulleted"></span> 
+                                                            @if($pendingCount > 0)
+                                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 10px;">
+                                                                {{ $pendingCount }}
+                                                            </span>
+                                                        @endif
+                                                        </button>
+                                                        <div class="modal fade" id="modal-blog-{{$blog->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" style="max-width: 980px;">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header bg-light">
+                                                                        <h4 class="modal-title" id="myCenterModalLabel">Comentários</h4>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                                                                    </div>
+                                                                    <div class="modal-body p-4">  
+                                                                        @if (isset($blog->comments))   
+                                                                            <div class="col-12 col-lg-12 mb-3">
+                                                                                <label for="form-label">Título da notícia</label>
+                                                                                <input type="text" class="form-control" value="{{$blog->title}}" readonly>
+                                                                            </div>
+                                                                            @foreach ($blog->comments as $comment)
+                                                                                @php
+                                                                                    \Carbon\Carbon::setLocale('pt_BR');
+                                                                                    $dataFormatada = \Carbon\Carbon::parse($comment->date)->translatedFormat('d \d\e F \d\e Y');
+                                                                                    $client = $comment->client;
+                                                                                @endphp
+
+                                                                                @if ($client)
+                                                                                    <div class="d-flex gap-2 flex-column mb-4">
+                                                                                        <div class="d-flex mb-0 gap-3">
+                                                                                            <img src="{{ $client->path_image ? url($client->path_image) : asset('build/client/images/user.jpg') }}"
+                                                                                                alt="Imagem do cliente"
+                                                                                                class="img-fluid mr-3 mt-1 rounded-circle"
+                                                                                                style="width: 50px; height: 50px; object-fit: cover;">
+                                                                                            <div class="d-flex flex-column col-10">
+                                                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                                                    <div class="d-flex flex-column">
+                                                                                                        <h6 class="title-blue montserrat-bold font-15 mb-0">{{ $client->name }}</h6>
+                                                                                                        <small class="title-blue mb-0 montserrat-regular font-12">
+                                                                                                            {{ $dataFormatada }}
+                                                                                                        </small>
+                                                                                                    </div>
+                                                                                                    <div class="d-flex justify-content-end align-item-center gap-2">
+                                                                                                        @if ($comment->active == 1)
+                                                                                                            <form action="{{route('comment.desactive.update', $comment->id)}}" method="POST">
+                                                                                                                @csrf
+                                                                                                                @method('put')
+                                                                                                                <button type="submit" class="btn btn-primary waves-effect waves-light">Desativar comentário</button>
+                                                                                                            </form>
+                                                                                                        @else
+                                                                                                            <form action="{{route('comment.active.update', $comment->id)}}" method="POST">
+                                                                                                                @csrf
+                                                                                                                @method('put')
+                                                                                                                <button type="submit" class="btn btn-success waves-effect waves-light">Ativar comentário</button>
+                                                                                                            </form>
+                                                                                                        @endif
+                                                                                                        <form action="{{route('comment.delete', $comment->id)}}" method="POST">
+                                                                                                            @csrf
+                                                                                                            @method('DELETE')
+                                                                                                            <button type="submit" class="btn btn-danger waves-effect waves-light">Excluir comentário</button>
+                                                                                                        </form>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="w-100 mt-2 d-block">
+                                                                                                    <div class="mb-3 col-12 d-flex align-items-start flex-column">
+                                                                                                        <label for="textarea-edit-{{ $comment->id }}" class="form-label">Comentário</label>
+                                                                                                        <textarea name="text" readonly class="form-control col-12 ck-readonly" id="textarea-edit-{{ $comment->id }}" rows="5">{!! $comment->comment !!}</textarea>
+                                                                                                    </div>
+                                                                                                </div>                                                                                                
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                @endif
+                                                                            @endforeach                                                                         
+                                                                        @endif
+                                                                    </div>
+                                                                </div><!-- /.modal-content -->
+                                                            </div><!-- /.modal-dialog -->
+                                                        </div><!-- /.modal -->    
                                                         @if (Auth::user()->hasPermissionTo('blog.visualizar') &&
                                                         Auth::user()->hasPermissionTo('blog.editar') ||
                                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
@@ -198,7 +282,7 @@
                                                                 <div class="modal-dialog modal-dialog-centered" style="max-width: 980px;">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header bg-light">
-                                                                            <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.group_and_permission')}}</h4>
+                                                                            <h4 class="modal-title" id="myCenterModalLabel">Editar notícia</h4>
                                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                                         </div>
                                                                         <div class="modal-body p-4">
@@ -270,5 +354,17 @@
                 filebrowserUploadMethod: 'form'
             });
         @endforeach
+
+        // Inicializa o CKEditor para todos os textareas de comentários
+  
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".ck-readonly").forEach(function(el) {
+                CKEDITOR.replace(el.id, {
+                    filebrowserUploadUrl: "{{ route('admin.dashboard.blog.uploadImageCkeditor', ['_token' => csrf_token() ]) }}",
+                    filebrowserUploadMethod: 'form',
+                    readOnly: true
+                });
+            });
+        });
     </script>
 @endsection

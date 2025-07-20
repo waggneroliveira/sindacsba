@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\StackController;
 use App\Repositories\AuditCountRepository;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\NoticiesController;
@@ -182,6 +183,16 @@ Route::prefix('painel/')->group(function () {
         Route::post('usuario/sorting', [UserController::class, 'sorting'])
         ->name('admin.dashboard.user.sorting');
         
+        //DESATIVAR COMENTARIO
+        Route::put('/desativa-comentario/{comment}', [CommentController::class, 'desactiveComment'])
+        ->name('comment.desactive.update');
+        //ATIVAR COMENTARIO
+        Route::put('/ativar-comentario/{comment}', [CommentController::class, 'activeComment'])
+        ->name('comment.active.update');
+        //DELETAR COMENTARIO
+        Route::delete('/deletar-comentario/{comment}', [CommentController::class, 'destroy'])
+        ->name('comment.delete');
+
         // SETTINGS THEME
         Route::post('setting', [SettingThemeController::class, 'setting'])->name('admin.dashboard.settingTheme'); 
         Route::post('setting/update', [SettingThemeController::class, 'settingUpdate'])->name('admin.dashboard.settingThemeUpdate'); 

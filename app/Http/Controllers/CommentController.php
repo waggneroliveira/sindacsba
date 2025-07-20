@@ -66,25 +66,36 @@ class CommentController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Comment $comment)
-    {
-        //
-    }
+    public function activeComment(Request $request, Comment $comment){
+        $data['active'] = 1;
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Comment $comment)
-    {
-        //
+        try {
+            DB::beginTransaction();
+                $comment->fill($data)->save();
+            DB::commit();
+            session()->flash('success', __('dashboard.response_item_update'));
+            return redirect()->back();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            session()->flash('success', __('dashboard.response_item_error_update'));
+            return redirect()->back();
+        }
     }
+    public function desactiveComment(Request $request, Comment $comment){
+        $data['active'] = 0;
 
-    /**
-     * Update the specified resource in storage.
-     */
+        try {
+            DB::beginTransaction();
+                $comment->fill($data)->save();
+            DB::commit();
+            session()->flash('success', __('dashboard.response_item_update'));
+            return redirect()->back();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            session()->flash('success', __('dashboard.response_item_error_update'));
+            return redirect()->back();
+        }
+    }
     public function update(Request $request, Comment $comment)
     {
         //
@@ -95,6 +106,8 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        session()->flash('success', __('dashboard.response_item_delete'));
+        return redirect()->back();
     }
 }
