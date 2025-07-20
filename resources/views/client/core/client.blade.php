@@ -42,11 +42,9 @@
     <link href="{{ asset('build/admin/js/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('build/admin/js/libs/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
 
-    @vite([
-        'resources/assets/client/css/bootstrap/css/bootstrap.min.css',
-        'resources/assets/client/css/bootstrap-icons/bootstrap-icons.css',
-        'resources/assets/client/css/style.css',
-    ])
+    <link href="{{ asset('build/client/css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('build/client/css/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('build/client/css/style.css') }}" rel="stylesheet" type="text/css" />
     
     <script defer src=https://cdn.userway.org/widget.js data-account=qSpdtrySSt></script>
     <link rel=preconnect href=https://vlibras.gov.br crossorigin>
@@ -543,11 +541,11 @@
     <script src="{{ asset('build/admin/js/libs/dropzone/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('build/admin/js/libs/dropify/js/dropify.min.js') }}"></script>
     <script src="{{ asset('build/admin/js/pages/form-fileuploads.init.js') }}"></script>
-    @vite([
-        'resources/assets/client/css/bootstrap/js/bootstrap.bundle.js',
-        'resources/assets/client/css/typed.js/typed.umd.js',
-        'resources/assets/client/js/default.js',
-    ])
+
+    <script src="{{ asset('build/client/css/bootstrap/js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ asset('build/client/css/typed.js/typed.umd.js') }}"></script>
+    <script src="{{ asset('build/client/js/default.js') }}"></script>
+
 
     {{-- Modais alert --}}
     <script>
