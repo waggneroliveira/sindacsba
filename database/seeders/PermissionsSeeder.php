@@ -17,6 +17,14 @@ class PermissionsSeeder extends Seeder
             'auditoria'=>[
                 'Visualizar',
             ],
+            'newslleter'=>[
+                'Visualizar',
+                'Remover'
+            ],
+            'lead contato'=>[
+                'Visualizar',
+                'Remover'
+            ],
             'email'=>[
                 'Visualizar',
                 'configurar smtp',
@@ -29,6 +37,12 @@ class PermissionsSeeder extends Seeder
                 'Remover'
             ],
             'editais'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
+            'contato'=>[
                 'Criar',
                 'Editar',                
                 'Visualizar',
@@ -47,12 +61,6 @@ class PermissionsSeeder extends Seeder
                 'Remover'
             ],
             'slide'=>[
-                'Criar',
-                'Editar',                
-                'Visualizar',
-                'Remover'
-            ],
-            'stack'=>[
                 'Criar',
                 'Editar',                
                 'Visualizar',
