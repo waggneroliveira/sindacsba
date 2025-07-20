@@ -75,7 +75,7 @@ class BlogPageController extends Controller
         $blogInner = Blog::with([
             'category',
             'comments' => function ($query) {
-                $query->where('active', 1)->with('client');
+                $query->where('active', 1)->orderBy('created_at', 'desc')->with('client');
             }
         ])
         ->whereHas('category')

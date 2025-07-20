@@ -42,7 +42,7 @@ class CommentController extends Controller
         try {
             DB::beginTransaction();
 
-            \App\Models\Comment::create([
+            Comment::create([
                 'comment' => $validated['comment'],
                 'blog_id' => $validated['blog_id'],
                 'client_id' => Auth::guard('client')->id(),

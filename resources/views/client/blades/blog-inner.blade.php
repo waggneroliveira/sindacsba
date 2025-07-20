@@ -65,6 +65,8 @@
                             <div class="bg-white border border-top-0 p-4">
                                 @foreach ($blogInner->comments as $comment)
                                     @php
+                                        \Carbon\Carbon::setLocale('pt_BR');
+                                        $dataFormatada = \Carbon\Carbon::parse($comment->date)->translatedFormat('d \d\e F \d\e Y');
                                         $client = $comment->client;
                                     @endphp
 
@@ -78,7 +80,7 @@
                                                 <div class="d-flex flex-column col-10">
                                                     <h6 class="title-blue montserrat-bold font-15 mb-0">{{ $client->name }}</h6>
                                                     <small class="title-blue mb-0 montserrat-regular font-12">
-                                                        {{ $comment->created_at->format('d \d\e F \d\e Y') }}
+                                                        {{ $dataFormatada }}
                                                     </small>
                                                     <div class="w-100 mt-3">
                                                         <p class="text-color montserrat-regular font-16 mb-0">
@@ -109,7 +111,7 @@
                                     <label for="message">Mensagem *</label>
                                     <textarea id="message" name="comment" cols="30" rows="5" class="form-control montserrat-regular font-15"></textarea>
                                 </div>
-                                
+                                                                
                                 <div class="mb-0">
                                     <button type="submit" class="btn background-red rounded-3 montserrat-medium text-white font-15">Comentar</button>
                                 </div>
@@ -119,6 +121,36 @@
                     </div>
                     <!-- Comment Form End -->
                 </div>
+                <script src="https://cdn.ckeditor.com/4.22.1/basic/ckeditor.js"></script>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const textarea = document.getElementById('message');
+
+                        if (textarea && !CKEDITOR.instances[textarea.id]) {
+                            CKEDITOR.replace(textarea.id, {
+                                toolbar: [
+                                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline'] },
+                                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] }
+                                ],
+                                removePlugins: 'link,image,flash,table,iframe,uploadimage,uploadfile,mediaembed,cloudservices,ckbox,notification,clipboard'
+
+                            });
+
+                            CKEDITOR.instances[textarea.id].on('instanceReady', function () {
+                                const tryRemoveNotification = setInterval(() => {
+                                    const notif = document.querySelector('#cke_notifications_area_message');
+                                    if (notif) {
+                                        notif.remove();
+                                        clearInterval(tryRemoveNotification);
+                                    }
+                                }, 100); // Tenta remover a cada 100ms até encontrar
+                                // Máximo de tentativas: 2 segundos (por segurança)
+                                setTimeout(() => clearInterval(tryRemoveNotification), 2000);
+                            });
+                        }
+                    });
+                </script>
 
                 <div class="col-lg-4" data-aos=fade-left data-aos-delay=150>
                   <aside>
@@ -198,8 +230,8 @@
     </div>
     <!-- News With Sidebar End -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script>
+        //Envio do comentario via ajax
         $(document).ready(function () {
             $('#commentForm').on('submit', function (e) {
                 e.preventDefault();
@@ -247,6 +279,44 @@
                 }
             });
         });
+
+        //Ckeditor
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     ClassicEditor
+        //         .create(document.querySelector('#message'), {
+        //             toolbar: [
+        //                 'bold', 'italic', 'underline', 'strikethrough',
+        //                 'bulletedList', 'numberedList', 'emoji'
+        //             ],
+        //             removePlugins: [
+        //                 'Link',           
+        //                 'ImageUpload',    
+        //                 'MediaEmbed',     
+        //                 'Table',          
+        //                 'CKFinderUploadAdapter',
+        //                 'EasyImage'
+        //             ],
+        //             // Adiciona suporte a emoji (ícones)
+        //             extraPlugins: [Emoji]
+        //         })
+        //         .catch(error => {
+        //             console.error(error);
+        //         });
+        // });
     </script>
 
+    <style>
+        #cke_notifications_area_message {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            z-index: -1 !important;
+            height: 0 !important;
+            overflow: hidden !important;
+        }
+            .cke_notifications_area {
+            display: none !important;
+        }
+
+    </style>
 @endsection
