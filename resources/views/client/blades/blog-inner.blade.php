@@ -56,49 +56,8 @@
                     </div>
                     <!-- News Detail End -->
 
-                    <!-- Comment List Start -->
-                    @if (isset($blogInner->comments) && $blogInner->comments->count() > 0)                        
-                        <div class="mb-3 mt-5 comments">
-                            <div class="section-title mb-0 title-blue">
-                                <h4 class="m-0 text-uppercase montserrat-bold font-25 title-blue">{{$blogInner->comments->count()}} Commentários</h4>
-                            </div>
-                            <div class="bg-white border border-top-0 p-4">
-                                @foreach ($blogInner->comments as $comment)
-                                    @php
-                                        \Carbon\Carbon::setLocale('pt_BR');
-                                        $dataFormatada = \Carbon\Carbon::parse($comment->date)->translatedFormat('d \d\e F \d\e Y');
-                                        $client = $comment->client;
-                                    @endphp
-
-                                    @if ($client)
-                                        <div class="d-flex gap-2 flex-column mb-4">
-                                            <div class="d-flex mb-0 gap-3">
-                                                <img src="{{ $client->path_image ? url($client->path_image) : asset('build/client/images/user.jpg') }}"
-                                                    alt="Imagem do cliente"
-                                                    class="img-fluid mr-3 mt-1 rounded-circle"
-                                                    style="width: 50px; height: 50px; object-fit: cover;">
-                                                <div class="d-flex flex-column col-10">
-                                                    <h6 class="title-blue montserrat-bold font-15 mb-0">{{ $client->name }}</h6>
-                                                    <small class="title-blue mb-0 montserrat-regular font-12">
-                                                        {{ $dataFormatada }}
-                                                    </small>
-                                                    <div class="w-100 mt-3">
-                                                        <p class="text-color montserrat-regular font-16 mb-0">
-                                                            {{ $comment->comment }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-                    <!-- Comment List End -->
-
                     <!-- Comment Form Start -->
-                    <div class="mb-3">
+                    <div class="mb-0 mt-5">
                         <div class="section-title mb-0 rounded-top-left">
                             <h4 class="m-0 text-uppercase montserrat-bold font-25 title-blue">Deixe um comentário</h4>
                         </div>
@@ -120,37 +79,48 @@
                         </div>
                     </div>
                     <!-- Comment Form End -->
-                </div>
-                <script src="https://cdn.ckeditor.com/4.22.1/basic/ckeditor.js"></script>
 
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        const textarea = document.getElementById('message');
+                    <!-- Comment List Start -->
+                    @if (isset($blogInner->comments) && $blogInner->comments->count() > 0)                        
+                        <div class="mb-3 mt-3 comments">
+                            <div class="section-title mb-0 title-blue rounded-top-left">
+                                <h4 class="m-0 text-uppercase montserrat-bold font-25 title-blue">{{$blogInner->comments->count()}} Comentários</h4>
+                            </div>
+                            <div class="bg-white border border-top-0 p-4 comment-scroll">
+                                @foreach ($blogInner->comments as $comment)
+                                    @php
+                                        \Carbon\Carbon::setLocale('pt_BR');
+                                        $dataFormatada = \Carbon\Carbon::parse($comment->date)->translatedFormat('d \d\e F \d\e Y');
+                                        $client = $comment->client;
+                                    @endphp
 
-                        if (textarea && !CKEDITOR.instances[textarea.id]) {
-                            CKEDITOR.replace(textarea.id, {
-                                toolbar: [
-                                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline'] },
-                                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] }
-                                ],
-                                removePlugins: 'link,image,flash,table,iframe,uploadimage,uploadfile,mediaembed,cloudservices,ckbox,notification,clipboard'
-
-                            });
-
-                            CKEDITOR.instances[textarea.id].on('instanceReady', function () {
-                                const tryRemoveNotification = setInterval(() => {
-                                    const notif = document.querySelector('#cke_notifications_area_message');
-                                    if (notif) {
-                                        notif.remove();
-                                        clearInterval(tryRemoveNotification);
-                                    }
-                                }, 100); // Tenta remover a cada 100ms até encontrar
-                                // Máximo de tentativas: 2 segundos (por segurança)
-                                setTimeout(() => clearInterval(tryRemoveNotification), 2000);
-                            });
-                        }
-                    });
-                </script>
+                                    @if ($client)
+                                        <div class="d-flex gap-2 flex-column mb-4">
+                                            <div class="d-flex mb-0 gap-3">
+                                                <img src="{{ $client->path_image ? url($client->path_image) : asset('build/client/images/user.jpg') }}"
+                                                    alt="Imagem do cliente"
+                                                    class="img-fluid mr-3 mt-1 rounded-circle"
+                                                    style="width: 50px; height: 50px; object-fit: cover;">
+                                                <div class="d-flex flex-column col-10">
+                                                    <h6 class="title-blue montserrat-bold font-15 mb-0">{{ $client->name }}</h6>
+                                                    <small class="title-blue mb-0 montserrat-regular font-12">
+                                                        {{ $dataFormatada }}
+                                                    </small>
+                                                    <div class="w-100 mt-3">
+                                                        <div class="comment-text">
+                                                            {!! $comment->comment !!}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                    <!-- Comment List End -->
+                </div>                
 
                 <div class="col-lg-4" data-aos=fade-left data-aos-delay=150>
                   <aside>
@@ -245,6 +215,11 @@
                     success: function (response) {
                         showMessage(response.message, 'success');
                         $('#commentForm')[0].reset(); // limpa o form
+
+                        // Limpa o conteúdo do CKEditor
+                        for (let instance in CKEDITOR.instances) {
+                            CKEDITOR.instances[instance].setData('');
+                        }
                     },
                     error: function (xhr) {
                         if (xhr.status === 401) {
@@ -280,29 +255,6 @@
             });
         });
 
-        //Ckeditor
-        // document.addEventListener("DOMContentLoaded", function () {
-        //     ClassicEditor
-        //         .create(document.querySelector('#message'), {
-        //             toolbar: [
-        //                 'bold', 'italic', 'underline', 'strikethrough',
-        //                 'bulletedList', 'numberedList', 'emoji'
-        //             ],
-        //             removePlugins: [
-        //                 'Link',           
-        //                 'ImageUpload',    
-        //                 'MediaEmbed',     
-        //                 'Table',          
-        //                 'CKFinderUploadAdapter',
-        //                 'EasyImage'
-        //             ],
-        //             // Adiciona suporte a emoji (ícones)
-        //             extraPlugins: [Emoji]
-        //         })
-        //         .catch(error => {
-        //             console.error(error);
-        //         });
-        // });
     </script>
 
     <style>

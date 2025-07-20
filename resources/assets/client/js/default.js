@@ -227,5 +227,38 @@
         e.target.value = t;
     }));
 
+    //Ckeditor do comentario
+    document.addEventListener('DOMContentLoaded', function () {
+        const textarea = document.getElementById('message');
 
+        if (textarea && !CKEDITOR.instances[textarea.id]) {
+            CKEDITOR.replace(textarea.id, {
+                toolbar: [
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] }
+                ],
+                removePlugins: 'link,image,flash,table,iframe,uploadimage,uploadfile,mediaembed,cloudservices,ckbox,notification,clipboard'
+            });
+
+            CKEDITOR.instances[textarea.id].on('instanceReady', function () {
+                const tryRemoveNotification = setInterval(() => {
+                    const notif = document.querySelector('#cke_notifications_area_message');
+                    if (notif) {
+                        notif.remove();
+                        clearInterval(tryRemoveNotification);
+                    }
+                }, 100);
+                setTimeout(() => clearInterval(tryRemoveNotification), 2000);
+            });
+        }
+
+        const form = document.querySelector('#commentForm');
+        if (form) {
+            form.addEventListener('submit', function () {
+                for (let instance in CKEDITOR.instances) {
+                    CKEDITOR.instances[instance].updateElement();
+                }
+            });
+        }
+    });
 }();

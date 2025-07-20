@@ -1,3 +1,16 @@
+.comment-scroll{
+    height: 100%;
+    max-height: 460px;
+    overflow-y: scroll;
+}
+.comment-text{
+    color: var(--text-color);
+    font-size: 1rem;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 300;
+}
 .hidden div span span[aria-current="page"] span {
     background: #2F368B !important;
     margin: 0 5px !important;
@@ -39,7 +52,7 @@ aside .img-fluid.annun{
 }
 
 .text-color.montserrat-regular.font-16 p{
-    font-size: 16px;
+    font-size: 1rem;
     color: #9A9DA2;
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;

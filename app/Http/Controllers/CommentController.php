@@ -6,6 +6,8 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use HTMLPurifier;
+use HTMLPurifier_Config;
 
 class CommentController extends Controller
 {
@@ -25,9 +27,7 @@ class CommentController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         if (!Auth::guard('client')->check()) {
@@ -35,15 +35,22 @@ class CommentController extends Controller
         }
 
         $validated = $request->validate([
-            'comment' => 'required|string|max:1000',
+            'comment' => 'required|string|max:10000',
             'blog_id' => 'required|exists:blogs,id',
         ]);
 
         try {
+            // Configuração padrão do HTMLPurifier
+            $config = HTMLPurifier_Config::createDefault();
+            $purifier = new HTMLPurifier($config);
+
+            // Purifica o comentário
+            $cleanComment = $purifier->purify($validated['comment']);
+
             DB::beginTransaction();
 
             Comment::create([
-                'comment' => $validated['comment'],
+                'comment' => $cleanComment,
                 'blog_id' => $validated['blog_id'],
                 'client_id' => Auth::guard('client')->id(),
                 'active' => 0,
@@ -53,6 +60,7 @@ class CommentController extends Controller
 
             return response()->json(['message' => 'Seu comentário foi enviado com sucesso e está aguardando moderação.']);
         } catch (\Exception $e) {
+            dd($e);
             DB::rollback();
             return response()->json(['message' => 'Erro ao salvar comentário.'], 500);
         }
