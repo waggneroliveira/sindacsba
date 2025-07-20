@@ -287,7 +287,7 @@
             height: 0 !important;
             overflow: hidden !important;
         }
-            .cke_notifications_area {
+        .cke_notifications_area {
             display: none !important;
         }
 

@@ -11,23 +11,6 @@ use HTMLPurifier_Config;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-
     public function store(Request $request)
     {
         if (!Auth::guard('client')->check()) {
@@ -66,7 +49,6 @@ class CommentController extends Controller
 
             return response()->json(['message' => 'Seu comentário foi enviado com sucesso e está aguardando moderação.']);
         } catch (\Exception $e) {
-            dd($e);
             DB::rollback();
             return response()->json(['message' => 'Erro ao salvar comentário.'], 500);
         }
@@ -102,14 +84,7 @@ class CommentController extends Controller
             return redirect()->back();
         }
     }
-    public function update(Request $request, Comment $comment)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Comment $comment)
     {
         $comment->delete();
