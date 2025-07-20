@@ -91,14 +91,14 @@
                                                     @if ($announcement->path_image)
                                                         <img src="{{ asset('storage/'.$announcement->path_image) }}" alt="table-announcement" class="me-2 rounded-circle" style="width: 40px; height: 40px;">
                                                         @else      
-                                                        <img src="{{Vite::asset('resources/assets/admin/images/announcements/announcement-3.jpg')}}" alt="table-announcement" class="me-2 rounded-circle">
+                                                        <img src="{{asset('build/admin/images/announcements/announcement-3.jpg')}}" alt="table-announcement" class="me-2 rounded-circle">
                                                     @endif
                                                 </td>                                                
                                                 <td class="table-announcement text-center">
                                                     @if ($announcement->path_image_vertical)
                                                         <img src="{{ asset('storage/'.$announcement->path_image_vertical) }}" alt="table-announcement" class="me-2 rounded-circle" style="width: 40px; height: 40px;">
                                                         @else      
-                                                        <img src="{{Vite::asset('resources/assets/admin/images/announcements/announcement-3.jpg')}}" alt="table-announcement" class="me-2 rounded-circle">
+                                                        <img src="{{asset('build/admin/images/announcements/announcement-3.jpg')}}" alt="table-announcement" class="me-2 rounded-circle">
                                                     @endif
                                                 </td>                                                
                                                 <td>

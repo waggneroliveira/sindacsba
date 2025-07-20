@@ -91,7 +91,8 @@
                                                     @if ($user->path_image)
                                                         <img src="{{ asset('storage/'.$user->path_image) }}" alt="table-user" class="me-2 rounded-circle">
                                                         @else      
-                                                        <img src="{{Vite::asset('resources/assets/admin/images/users/user-3.jpg')}}" alt="table-user" class="me-2 rounded-circle">
+                                                        <img src="{{asset('build/admin/images/users/user-3.jpg')}}" alt="table-user" class="me-2 rounded-circle">
+                                                        
                                                     @endif
                                                     <a href="javascript:void(0);" class="text-body fw-semibold">{{$user->name}}</a>
                                                 </td>

@@ -95,14 +95,14 @@
                                                     @if ($slide->path_image)
                                                         <img src="{{ asset('storage/'.$slide->path_image) }}" alt="table-slide" class="me-2 rounded-circle" style="width: 40px; height: 40px;">
                                                         @else      
-                                                        <img src="{{Vite::asset('resources/assets/admin/images/slides/slide-3.jpg')}}" alt="table-slide" class="me-2 rounded-circle">
+                                                        <img src="{{asset('build/admin/images/slides/slide-3.jpg')}}" alt="table-slide" class="me-2 rounded-circle">
                                                     @endif
                                                 </td>                                                
                                                 <td class="table-slide text-center">
                                                     @if ($slide->path_image_mobile)
                                                         <img src="{{ asset('storage/'.$slide->path_image_mobile) }}" alt="table-slide" class="me-2 rounded-circle" style="width: 40px; height: 40px;">
                                                         @else      
-                                                        <img src="{{Vite::asset('resources/assets/admin/images/slides/slide-3.jpg')}}" alt="table-slide" class="me-2 rounded-circle">
+                                                        <img src="{{asset('build/admin/images/slides/slide-3.jpg')}}" alt="table-slide" class="me-2 rounded-circle">                                                        
                                                     @endif
                                                 </td>                                                
                                                 <td>
