@@ -68,7 +68,7 @@
 
                                 <div class="mb-3">
                                     <label for="message">Mensagem *</label>
-                                    <textarea id="message" name="comment" cols="30" rows="5" class="form-control montserrat-regular font-15"></textarea>
+                                    <textarea id="message" name="comment" required cols="30" rows="5" class="form-control montserrat-regular font-15"></textarea>
                                 </div>
                                                                 
                                 <div class="mb-0">
@@ -201,60 +201,81 @@
     <!-- News With Sidebar End -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        function showMessage(message, type) {
+             $('#commentMessage').html(
+                 `<div class="alert alert-${type}">${message}</div>`
+             );
+ 
+             setTimeout(() => {
+                 $('#commentMessage').fadeOut('slow', function () {
+                     $(this).html('').show();
+                 });
+             }, 3000);
+         }
         //Envio do comentario via ajax
-        $(document).ready(function () {
-            $('#commentForm').on('submit', function (e) {
-                e.preventDefault();
+        $('#commentForm').on('submit', function (e) {
+            e.preventDefault();
 
-                const formData = $(this).serialize();
+            // Atualiza textarea com conteúdo do CKEditor
+            for (let instance in CKEDITOR.instances) {
+                CKEDITOR.instances[instance].updateElement();
+            }
 
-                $.ajax({
-                    url: "{{ route('blog.comment') }}",
-                    method: "POST",
-                    data: formData,
-                    success: function (response) {
-                        showMessage(response.message, 'success');
-                        $('#commentForm')[0].reset(); // limpa o form
+            const comment = $('#message').val();
 
-                        // Limpa o conteúdo do CKEditor
-                        for (let instance in CKEDITOR.instances) {
-                            CKEDITOR.instances[instance].setData('');
-                        }
-                    },
-                    error: function (xhr) {
-                        if (xhr.status === 401) {
-                            showMessage(xhr.responseJSON.message, 'warning');
+            // Remove tags HTML e espaços para verificar se tem conteúdo real
+            const commentText = $('<div>').html(comment).text().trim();
 
-                            // Abre o modal de login
-                            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-                            loginModal.show();
-                        } else if (xhr.status === 422) {
-                            const errors = xhr.responseJSON.errors;
-                            let errorMessages = '';
-                            for (let field in errors) {
-                                errorMessages += `<div>${errors[field][0]}</div>`;
-                            }
-                            showMessage(errorMessages, 'danger');
-                        } else {
-                            showMessage('É necessário estar logado para enviar um comentário.', 'danger');
-                        }
+            if (!commentText) {
+                showMessage('O campo mensagem é obrigatório e não pode conter apenas espaços.', 'danger');
+                return;
+            }
+
+            const $btn = $(this).find('button[type="submit"]');
+            $btn.prop('disabled', true);
+
+            const formData = $(this).serialize();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('blog.comment') }}",
+                method: "POST",
+                data: formData,
+                success: function (response) {
+                    showMessage(response.message, 'success');
+                    $('#commentForm')[0].reset();
+
+                    for (let instance in CKEDITOR.instances) {
+                        CKEDITOR.instances[instance].setData('');
                     }
-                });
+                    $btn.prop('disabled', false);
+                },
+                error: function (xhr) {
+                    $btn.prop('disabled', false);
 
-                function showMessage(message, type) {
-                    $('#commentMessage').html(
-                        `<div class="alert alert-${type}">${message}</div>`
-                    );
+                    console.log('Erro status:', xhr.status);
+                    console.log('Erro response:', xhr.responseText);
 
-                    setTimeout(() => {
-                        $('#commentMessage').fadeOut('slow', function () {
-                            $(this).html('').show(); // limpa e reexibe o contêiner vazio
-                        });
-                    }, 3000);
+                    if (xhr.status === 401) {
+                        showMessage(xhr.responseJSON?.message || 'É necessário estar logado para enviar um comentário.', 'warning');
+
+                        const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                        loginModal.show();
+                    } else if (xhr.status === 422) {
+                        const errors = xhr.responseJSON.errors;
+                        let errorMessages = '';
+                        for (let field in errors) {
+                            errorMessages += `<div>${errors[field][0]}</div>`;
+                        }
+                        showMessage(errorMessages, 'danger');
+                    } else {
+                        showMessage('Erro inesperado. Por favor, tente novamente.', 'danger');
+                    }
                 }
             });
         });
-
     </script>
 
     <style>

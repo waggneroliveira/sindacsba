@@ -35,9 +35,15 @@ class CommentController extends Controller
         }
 
         $validated = $request->validate([
-            'comment' => 'required|string|max:10000',
+            'comment' => ['required', 'max:10000', 'string', function ($attribute, $value, $fail) {
+                $clean = trim(strip_tags($value));
+                if ($clean === '') {
+                    $fail('O campo comentário não pode ficar vazio ou conter somente espaços.');
+                }
+            }],
             'blog_id' => 'required|exists:blogs,id',
         ]);
+
 
         try {
             // Configuração padrão do HTMLPurifier

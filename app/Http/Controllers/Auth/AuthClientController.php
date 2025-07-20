@@ -34,49 +34,13 @@ class AuthClientController extends Controller
 
         $client = Auth::guard('client')->user();
 
-        // Log de atividade
-        activity()
-            ->causedBy($client)
-            ->performedOn($client)
-            ->event('login')
-            ->withProperties([
-                'attributes' => [
-                    'id' => $client->id,
-                    'name' => $client->name,
-                    'email' => $client->email,
-                    'active' => $client->active,
-                    'remember_token' => $client->remember_token,
-                    'email_verified_at' => $client->email_verified_at,
-                    'event' => 'login',
-                ]
-            ])
-            ->log('login');
-
         session()->flash('success', 'Login realizado com sucesso!');
         return redirect()->back();
     }
 
     public function logout(Request $request)
     {
-        $client = Auth::guard('client')->user();
-
-        if ($client) {
-            activity()
-                ->causedBy($client)
-                ->performedOn($client)
-                ->event('logout')
-                ->withProperties([
-                    'attributes' => [
-                        'id' => $client->id,
-                        'name' => $client->name,
-                        'email' => $client->email,
-                        'event' => 'logout',
-                    ]
-                ])
-                ->log('logout');
-
-            Auth::guard('client')->logout();
-        }
+        Auth::guard('client')->logout();
 
         session()->flash('success', 'Logout realizado com sucesso!');
         return redirect()->back();
