@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Response;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\NoticiesRequestStore;
 use App\Http\Requests\NoticiesRequestUpdate;
+use App\Repositories\SettingThemeRepository;
 use App\Http\Controllers\Helpers\HelperArchive;
 
 class NoticiesController extends Controller
@@ -20,6 +21,10 @@ class NoticiesController extends Controller
     protected $pathUpload = 'admin/uploads/files/noticies/';
     public function index()
     {
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
+        if(!Auth::user()->hasPermissionTo('editais.visualizar')){
+            return view('admin.error.403', compact('settingTheme'));
+        }
         $noticies = Noticies::sorting()->get();
        
         return view('admin.blades.noticies.index', compact('noticies'));

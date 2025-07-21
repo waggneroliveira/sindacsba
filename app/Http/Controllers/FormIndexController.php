@@ -6,12 +6,18 @@ use Inertia\Inertia;
 use App\Models\FormIndex;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Repositories\SettingThemeRepository;
 
 class FormIndexController extends Controller
 {
 
     public function index()
     {
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
+        if(!Auth::user()->hasPermissionTo('lead contato.visualizar')){
+            return view('admin.error.403', compact('settingTheme'));
+        }
         $formIndexs = FormIndex::get();
 
         return view('admin.blades.lead.index', compact('formIndexs'));

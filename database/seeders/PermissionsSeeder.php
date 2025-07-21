@@ -17,7 +17,7 @@ class PermissionsSeeder extends Seeder
             'auditoria'=>[
                 'Visualizar',
             ],
-            'newslleter'=>[
+            'newsletter'=>[
                 'Visualizar',
                 'Remover'
             ],
@@ -48,16 +48,17 @@ class PermissionsSeeder extends Seeder
                 'Visualizar',
                 'Remover'
             ],
-            'categorias do blog'=>[
+            'categorias do noticias'=>[
                 'Criar',
                 'Editar',                
                 'Visualizar',
                 'Remover'
             ],
-            'blog'=>[
+            'noticias'=>[
                 'Criar',
                 'Editar',                
                 'Visualizar',
+                'Aprovar, Reprovar ou Remover Comentário',
                 'Remover'
             ],
             'slide'=>[

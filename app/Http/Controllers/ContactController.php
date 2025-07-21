@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Repositories\SettingThemeRepository;
 
 class ContactController extends Controller
 {
 
     public function index()
     {
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
+        if(!Auth::user()->hasPermissionTo('contato.visualizar')){
+            return view('admin.error.403', compact('settingTheme'));
+        }
         $contact = Contact::first();
         return view('admin.blades.contact.index', compact('contact'));
     }

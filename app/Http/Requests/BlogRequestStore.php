@@ -10,7 +10,9 @@ class BlogRequestStore extends FormRequest
 
     public function authorize(): bool
     {
-        if(!Auth::user()->hasRole('Super') && !Auth::user()->can('usuario.tornar usuario master') && !Auth::user()->can('usuario.visualizar')){
+        if(!Auth::user()->hasRole('Super') && 
+        !Auth::user()->can('usuario.tornar usuario master') && 
+        !Auth::user()->can('noticias.criar')){
             return false;
         }
         return true;

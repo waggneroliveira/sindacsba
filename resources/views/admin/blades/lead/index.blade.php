@@ -68,56 +68,63 @@
                                                 </td>
             
                                                 <td class="d-flex gap-lg-1 justify-center" style="padding: 18px 15px 0px 0px;">
-                                                    <button class="table-edit-button btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-formIndex-{{$formIndex->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-eye"></span></button>
-                                                    <div class="modal fade" id="modal-formIndex-{{$formIndex->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered" style="max-width: 980px;">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header bg-light">
-                                                                    <h4 class="modal-title" id="myCenterModalLabel">Lead contato</h4>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                                                                </div>
-                                                                <div class="modal-body p-4">
-                                                                    <div class="row mb-3">
-                                                                        <div class="col-12 col-lg-6">
-                                                                            <label for="form-label">Nome</label>
-                                                                            <input type="text" class="form-control" value="{{$formIndex->name}}" readonly>
-                                                                        </div>                                                                   
-                                                                        <div class="col-12 col-lg-6">
-                                                                            <label for="form-label">E-mail</label>
-                                                                            <input type="text" class="form-control" value="{{$formIndex->email}}" readonly>
-                                                                        </div>                                                                   
+                                                    @if (Auth::user()->hasRole('Super') || 
+                                                    Auth::user()->can('usuario.tornar usuario master') || 
+                                                    Auth::user()->can('lead contato.visualizar')) 
+                                                        <button class="table-edit-button btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-formIndex-{{$formIndex->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-eye"></span></button>
+                                                        <div class="modal fade" id="modal-formIndex-{{$formIndex->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" style="max-width: 980px;">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header bg-light">
+                                                                        <h4 class="modal-title" id="myCenterModalLabel">Lead contato</h4>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                                     </div>
-                                                                    <div class="row mb-3">
-                                                                        <div class="col-12 col-lg-6">
-                                                                            <label for="form-label">Assunto</label>
-                                                                            <input type="text" class="form-control" value="{{isset($formIndex->subject)?$formIndex->subject:''}}" readonly>
-                                                                        </div>                                                                   
-                                                                        <div class="col-12 col-lg-6">
-                                                                            <label for="form-label">Telefone</label>
-                                                                            <input type="text" class="form-control" value="{{$formIndex->phone}}" readonly>
-                                                                        </div>                                                                   
+                                                                    <div class="modal-body p-4">
+                                                                        <div class="row mb-3">
+                                                                            <div class="col-12 col-lg-6">
+                                                                                <label for="form-label">Nome</label>
+                                                                                <input type="text" class="form-control" value="{{$formIndex->name}}" readonly>
+                                                                            </div>                                                                   
+                                                                            <div class="col-12 col-lg-6">
+                                                                                <label for="form-label">E-mail</label>
+                                                                                <input type="text" class="form-control" value="{{$formIndex->email}}" readonly>
+                                                                            </div>                                                                   
+                                                                        </div>
+                                                                        <div class="row mb-3">
+                                                                            <div class="col-12 col-lg-6">
+                                                                                <label for="form-label">Assunto</label>
+                                                                                <input type="text" class="form-control" value="{{isset($formIndex->subject)?$formIndex->subject:''}}" readonly>
+                                                                            </div>                                                                   
+                                                                            <div class="col-12 col-lg-6">
+                                                                                <label for="form-label">Telefone</label>
+                                                                                <input type="text" class="form-control" value="{{$formIndex->phone}}" readonly>
+                                                                            </div>                                                                   
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="form-label">Texto</label>
+                                                                            <div class="bg-white form-control d-flex text-start border" readonly style="height: 150px;max-height:250px;overflow-y:scroll;">
+                                                                                {!!isset($formIndex->text)?$formIndex->text:''!!}
+                                                                            </div>
+                                                                        </div>    
+                                                                        <div class="mb-3">
+                                                                            <div class="form-check ps-0">
+                                                                                <label class="form-check-label" for="invalidCheck">Termo de privacidade:</label>
+                                                                                @if ($formIndex->term_privacy == 1)
+                                                                                    <div class="badge bg-success py-1 px-2">
+                                                                                        Aceito
+                                                                                    </div>
+                                                                                @endif
+                                                                            </div>
+                                                                        </div>                                                              
                                                                     </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="form-label">Texto</label>
-                                                                        <div class="bg-white form-control d-flex text-start border" readonly style="height: 150px;max-height:250px;overflow-y:scroll;">
-                                                                            {!!isset($formIndex->text)?$formIndex->text:''!!}
-                                                                        </div>
-                                                                    </div>    
-                                                                    <div class="mb-3">
-                                                                        <div class="form-check ps-0">
-                                                                            <label class="form-check-label" for="invalidCheck">Termo de privacidade:</label>
-                                                                            @if ($formIndex->term_privacy == 1)
-                                                                                <div class="badge bg-success py-1 px-2">
-                                                                                    Aceito
-                                                                                </div>
-                                                                            @endif
-                                                                        </div>
-                                                                    </div>                                                              
-                                                                </div>
-                                                            </div><!-- /.modal-content -->
-                                                        </div><!-- /.modal-dialog -->
-                                                    </div><!-- /.modal -->     
-                                                    @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['formIndex.visualizar', 'formIndex.remover']))
+                                                                </div><!-- /.modal-content -->
+                                                            </div><!-- /.modal-dialog -->
+                                                        </div><!-- /.modal -->     
+                                                    @endif
+                                                    @if (Auth::user()->hasRole('Super') || 
+                                                    Auth::user()->can('usuario.tornar usuario master') || 
+                                                    Auth::user()->can('lead contato.visualizar') &&
+                                                    Auth::user()->can('lead contato.remover'))
                                                         <form action="{{route('admin.dashboard.formIndex.destroy',['formIndex' => $formIndex->id])}}" style="width: 30px" method="POST">
                                                             @method('DELETE') @csrf        
                                                             

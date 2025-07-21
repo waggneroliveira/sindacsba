@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
@@ -13,21 +12,18 @@ use Illuminate\Support\Facades\Response;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\BlogCategoryRequest;
 use App\Repositories\SettingThemeRepository;
-use App\Repositories\UserPermissionRepository;
 use App\Http\Requests\BlogCategoryRequestUpdate;
 
 class BlogCategoryController extends Controller
 {
-    public function index(UserPermissionRepository $userPermissionRepository)
+    public function index()
     {
-        $blogCategories = BlogCategory::sorting()->get();
         $settingTheme = (new SettingThemeRepository())->settingTheme();
-        $users = User::excludeSuper()->with('roles');
-        $filteredUsers = $userPermissionRepository->filterUsersByPermissions($users);
-
-        if ($filteredUsers === 'forbidden') {
+        if(!Auth::user()->hasPermissionTo('categorias do noticias.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
+
+        $blogCategories = BlogCategory::sorting()->get();
 
         return view('admin.blades.blogCategory.index', compact('blogCategories'));
     }

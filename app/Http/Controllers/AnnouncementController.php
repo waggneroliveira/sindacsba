@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Repositories\SettingThemeRepository;
 use App\Http\Controllers\Helpers\HelperArchive;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 
@@ -20,6 +21,10 @@ class AnnouncementController extends Controller
 
     public function index()
     {
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
+        if(!Auth::user()->hasPermissionTo('anuncio.visualizar')){
+            return view('admin.error.403', compact('settingTheme'));
+        }
         $announcements = Announcement::sorting()->get();
         
         return view('admin.blades.announcement.index', compact('announcements'));

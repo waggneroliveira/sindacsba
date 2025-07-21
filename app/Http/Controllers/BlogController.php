@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\BlogRequestUpdate;
 use Illuminate\Support\Facades\Response;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Repositories\SettingThemeRepository;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 
 class BlogController extends Controller
@@ -22,6 +23,11 @@ class BlogController extends Controller
     protected $pathUpload = 'admin/uploads/images/blog/';
     public function index()
     {
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
+        if(!Auth::user()->hasPermissionTo('noticias.visualizar')){
+            return view('admin.error.403', compact('settingTheme'));
+        }
+
         $categories = BlogCategory::active()->sorting()->get();
         $blogs = Blog::with([
             'category',
@@ -81,7 +87,6 @@ class BlogController extends Controller
             session()->flash('success', __('dashboard.response_item_create'));
             return redirect()->back();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollback();
             Alert::error('error', __('dashboard.response_item_error_create'));
             return redirect()->back();

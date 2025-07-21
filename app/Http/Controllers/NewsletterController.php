@@ -2,18 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Newsletter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
+use App\Repositories\SettingThemeRepository;
+use App\Repositories\UserPermissionRepository;
 
 class NewsletterController extends Controller
 {
 
-    public function index()
+    public function index(UserPermissionRepository $userPermissionRepository)
     {
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
+        
+        if(!Auth::user()->hasPermissionTo('newsletter.visualizar')){
+            return view('admin.error.403', compact('settingTheme'));
+        }
+
         $newsletters = Newsletter::paginate(50);
 
         return view('admin.blades.newsletter.index', compact('newsletters'));

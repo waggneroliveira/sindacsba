@@ -14,12 +14,10 @@ public function filterUsersByPermissions($users)
     $permissoes = [
         'auditoria.visualizar',
         'email.visualizar',
-        'categorias dos produtos.visualizar',
-        'produtos.visualizar',
-        'locais de atendimentos.visualizar',
+        'categorias do blog.visualizar',
         'newsletter.visualizar',
-        'taxa.visualizar',
-        'stocks.visualizar',
+        'lead contato.visualizar',
+        'contato.visualizar',
         'grupo.visualizar',
         'slides.visualizar',
         'notificacao.visualizar',
@@ -37,12 +35,10 @@ public function filterUsersByPermissions($users)
             $q->where('name', 'Super');
         })->where('id', '<>', 1);
     }
-
     // Se não tem nenhuma permissão de visualização listada
     $temPermissao = collect($permissoes)->contains(function ($p) use ($user) {
         return $user->can($p);
     });
-
     if (!$temPermissao) {
         return 'forbidden';
     }

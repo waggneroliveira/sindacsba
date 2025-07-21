@@ -11,10 +11,10 @@
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Categorias do blog</li>
+                                    <li class="breadcrumb-item active">Categorias de Notícias</li>
                                 </ol>
                             </div>
-                            <h4 class="page-title">Categorias do blog</h4>
+                            <h4 class="page-title">Categorias de Notícias</h4>
                         </div>
                     </div>
                 </div>
@@ -27,17 +27,17 @@
                                 <div class="row mb-2">
                                     <div class="col-12 d-flex justify-between">
                                         <div class="col-6">
-                                            @if (Auth::user()->hasPermissionTo('categorias do blog.visualizar') &&
-                                            Auth::user()->hasPermissionTo('categorias do blog.remover') ||
-                                            Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                                            @if (Auth::user()->can('categorias do noticias.visualizar') &&
+                                            Auth::user()->can('categorias do noticias.remover') ||
+                                            Auth::user()->can('usuario.tornar usuario master') || 
                                             Auth::user()->hasRole('Super'))
                                                 <button id="btSubmitDelete" data-route="{{route('admin.dashboard.blogCategory.destroySelected')}}" type="button" class="btSubmitDelete btn btn-danger" style="display: none;">{{__('dashboard.btn_delete_all')}}</button>
                                             @endif
                                         </div>
                                         <div class="col-6 d-flex justify-content-end">
-                                            @if (Auth::user()->hasPermissionTo('categorias do blog.visualizar') &&
-                                            Auth::user()->hasPermissionTo('categorias do blog.criar') ||
-                                            Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                                            @if (Auth::user()->can('categorias do noticias.visualizar') &&
+                                            Auth::user()->can('categorias do noticias.criar') ||
+                                            Auth::user()->can('usuario.tornar usuario master') || 
                                             Auth::user()->hasRole('Super'))
                                                 <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#blogCategory-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
                                                 <!-- Modal -->
@@ -95,9 +95,9 @@
                                                         @endswitch
                                                     </td>
                                                     <td class="d-flex gap-lg-1 justify-center">
-                                                        @if (Auth::user()->hasPermissionTo('categorias do blog.visualizar') &&
-                                                        Auth::user()->hasPermissionTo('categorias do blog.editar') ||
-                                                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                                                        @if (Auth::user()->can('categorias do noticias.visualizar') &&
+                                                        Auth::user()->can('categorias do noticias.editar') ||
+                                                        Auth::user()->can('usuario.tornar usuario master') || 
                                                         Auth::user()->hasRole('Super'))
                                                             <button class="table-edit-button btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-group-edit-{{$blogCategory->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
                                                             <div class="modal fade" id="modal-group-edit-{{$blogCategory->id}}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -123,9 +123,9 @@
                                                             </div><!-- /.modal -->                                                        
                                                         @endif
 
-                                                        @if (Auth::user()->hasPermissionTo('categorias do blog.visualizar') &&
-                                                        Auth::user()->hasPermissionTo('categorias do blog.remover') ||
-                                                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                                                        @if (Auth::user()->can('categorias do noticias.visualizar') &&
+                                                        Auth::user()->can('categorias do noticias.remover') ||
+                                                        Auth::user()->can('usuario.tornar usuario master') || 
                                                         Auth::user()->hasRole('Super'))
                                                             <form action="{{route('admin.dashboard.blogCategory.destroy',['blogCategory' => $blogCategory->id])}}" style="width: 30px" method="POST">
                                                                 @method('DELETE') @csrf        

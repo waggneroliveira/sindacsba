@@ -32,12 +32,18 @@
                             <div class="row mb-2">
                                 <div class="col-12 d-flex justify-between">
                                     <div class="col-6">
-                                        @if(Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['anuncio.visualizar', 'anuncio.remover']))
+                                        @if(Auth::user()->hasRole('Super') || 
+                                        Auth::user()->can('usuario.tornar usuario master') || 
+                                        Auth::user()->can('anuncio.visualizar') &&
+                                        Auth::user()->can('anuncio.criar'))
                                             <button id="btSubmitDelete" data-route="{{route('admin.dashboard.announcement.destroySelected')}}" type="button" class="btSubmitDelete btn btn-danger" style="display: none;">{{__('dashboard.btn_delete_all')}}</button>
                                         @endif
                                     </div>
                                     <div class="col-6 d-flex justify-content-end">
-                                        @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['anuncio.visualizar', 'anuncio.criar']))
+                                        @if (Auth::user()->hasRole('Super') || 
+                                        Auth::user()->can('usuario.tornar usuario master') || 
+                                        Auth::user()->can('anuncio.visualizar') &&
+                                        Auth::user()->can('anuncio.criar'))
                                             <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#announcement-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="announcement-create" tabindex="-1" role="dialog" aria-hidden="true">
@@ -129,7 +135,10 @@
                                                 </td>
             
                                                 <td class="d-flex gap-lg-1 justify-center" style="padding: 18px 15px 0px 0px;">
-                                                    @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['anuncio.visualizar', 'anuncio.editar'])) 
+                                                    @if (Auth::user()->hasRole('Super') || 
+                                                    Auth::user()->can('usuario.tornar usuario master') || 
+                                                    Auth::user()->can('anuncio.visualizar') &&
+                                                    Auth::user()->can('anuncio.editar')) 
                                                         <button data-bs-toggle="modal" data-bs-target="#announcement-edit-{{$announcement->id}}" class="tabledit-edit-button btn btn-success" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
                                                         <div class="modal fade" id="announcement-edit-{{$announcement->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                             <div class="announcement modal-dialog modal-dialog-centered" style="max-width: 980px;">
@@ -153,7 +162,10 @@
                                                             </div><!-- /.modal-dialog -->
                                                         </div><!-- /.modal -->
                                                     @endif
-                                                    @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['anuncio.visualizar', 'anuncio.remover']))
+                                                    @if (Auth::user()->hasRole('Super') || 
+                                                    Auth::user()->can('usuario.tornar usuario master') || 
+                                                    Auth::user()->can('anuncio.visualizar') &&
+                                                    Auth::user()->can('anuncio.remover'))
                                                         <form action="{{route('admin.dashboard.announcement.destroy',['announcement' => $announcement->id])}}" style="width: 30px" method="POST">
                                                             @method('DELETE') @csrf        
                                                             

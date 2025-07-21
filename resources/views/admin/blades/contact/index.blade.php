@@ -32,7 +32,10 @@
                             <div class="row mb-2">
                                 <div class="col-12 d-flex justify-between">
                                     <div class="col-12 d-flex justify-content-end">
-                                        @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['contact.visualizar', 'contact.criar']))
+                                        @if (Auth::user()->hasRole('Super') || 
+                                        Auth::user()->can('usuario.tornar usuario master') || 
+                                        Auth::user()->can('contato.visualizar') &&
+                                        Auth::user()->can('contato.criar'))
                                             @if (empty($contact))                                            
                                                 <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#contact-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
                                             @endif
@@ -99,7 +102,10 @@
                                                 </td>
             
                                                 <td class="d-flex gap-lg-1 justify-center" style="padding: 18px 15px 0px 0px;">
-                                                    @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['contact.visualizar', 'contact.editar'])) 
+                                                    @if (Auth::user()->hasRole('Super') || 
+                                                    Auth::user()->can('usuario.tornar usuario master') || 
+                                                    Auth::user()->can('contato.visualizar') &&
+                                                    Auth::user()->can('contato.editar')) 
                                                         <button data-bs-toggle="modal" data-bs-target="#contact-edit-{{$contact->id}}" class="tabledit-edit-button btn btn-success" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
                                                         <div class="modal fade" id="contact-edit-{{$contact->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                             <div class="contact modal-dialog modal-dialog-centered" style="max-width: 100%;">
@@ -260,7 +266,10 @@
                                                             </div><!-- /.modal-dialog -->
                                                         </div><!-- /.modal -->
                                                     @endif
-                                                    @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['contact.visualizar', 'contact.remover']))
+                                                    @if (Auth::user()->hasRole('Super') || 
+                                                    Auth::user()->can('usuario.tornar usuario master') || 
+                                                    Auth::user()->can('contato.visualizar') &&
+                                                    Auth::user()->can('contato.remover'))
                                                         <form action="{{route('admin.dashboard.contact.destroy',['contact' => $contact->id])}}" style="width: 30px" method="POST">
                                                             @method('DELETE') @csrf        
                                                             

@@ -20,9 +20,9 @@
     <!-- end page title -->
 
     @if (Auth::user()->hasRole('Super') || 
-    Auth::user()->can('usuario.tornar usuario master') || 
-    Auth::user()->can('blog.visualizar') || 
-    Auth::user()->can('categorias do blog.visualizar'))
+    Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+    Auth::user()->hasPermissionTo('noticias.visualizar') || 
+    Auth::user()->hasPermissionTo('categorias do noticias.visualizar'))
         
         <div class="row">
             <div class="col-12">
@@ -31,8 +31,8 @@
                 </div>
             </div>
             @if (Auth::user()->hasRole('Super') || 
-            Auth::user()->can('usuario.tornar usuario master') || 
-            Auth::user()->can('categorias do blog.visualizar'))
+            Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+            Auth::user()->hasPermissionTo('categorias do noticias.visualizar'))
                 <div class="col-md-5 col-xl-3">
                     <div class="card borda-cx ratio ratio-4x3">
                         <div class="d-flex align-items-center justify-content-center">
@@ -54,8 +54,8 @@
             @endif
     
             @if (Auth::user()->hasRole('Super') || 
-            Auth::user()->can('usuario.tornar usuario master') || 
-            Auth::user()->can('blog.visualizar'))
+            Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+            Auth::user()->hasPermissionTo('noticias.visualizar'))
                 <div class="col-md-5 col-xl-3">
                     <div class="card borda-cx ratio ratio-4x3">
                         <div class="d-flex align-items-center justify-content-center">
@@ -79,10 +79,10 @@
     @endif
 
     @if (Auth::user()->hasRole('Super') || 
-    Auth::user()->can('usuario.tornar usuario master') || 
-    Auth::user()->can('newslleter.visualizar') || 
-    Auth::user()->can('contato.visualizar') || 
-    Auth::user()->can('lead contato.visualizar')) 
+    Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+    Auth::user()->hasPermissionTo('newsletter.visualizar') || 
+    Auth::user()->hasPermissionTo('contato.visualizar') || 
+    Auth::user()->hasPermissionTo('lead contato.visualizar')) 
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
@@ -90,8 +90,8 @@
                 </div>
             </div>
             @if (Auth::user()->hasRole('Super') || 
-            Auth::user()->can('usuario.tornar usuario master') || 
-            Auth::user()->can('contato.visualizar'))
+            Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+            Auth::user()->hasPermissionTo('contato.visualizar'))
                 <div class="col-md-5 col-xl-3">
                     <div class="card borda-cx ratio ratio-4x3">
                         <div class="d-flex align-items-center justify-content-center">
@@ -113,8 +113,8 @@
             @endif
     
             @if (Auth::user()->hasRole('Super') || 
-            Auth::user()->can('usuario.tornar usuario master') || 
-            Auth::user()->can('lead contato.visualizar'))
+            Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+            Auth::user()->hasPermissionTo('lead contato.visualizar'))
                 <div class="col-md-5 col-xl-3">
                     <div class="card borda-cx ratio ratio-4x3">
                         <div class="d-flex align-items-center justify-content-center">
@@ -135,8 +135,8 @@
                 </div> <!-- end col -->
             @endif
             @if (Auth::user()->hasRole('Super') || 
-            Auth::user()->can('usuario.tornar usuario master') || 
-            Auth::user()->can('newslleter.visualizar'))
+            Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+            Auth::user()->hasPermissionTo('newsletter.visualizar'))
                 <div class="col-md-5 col-xl-3">
                     <div class="card borda-cx ratio ratio-4x3">
                         <div class="d-flex align-items-center justify-content-center">
@@ -159,8 +159,8 @@
         </div>
     @endif
     @if (Auth::user()->hasRole('Super') || 
-    Auth::user()->can('usuario.tornar usuario master') || 
-    Auth::user()->can('anuncio.visualizar'))
+    Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+    Auth::user()->hasPermissionTo('anuncio.visualizar'))
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
@@ -189,8 +189,8 @@
         </div>
     @endif
     @if (Auth::user()->hasRole('Super') || 
-    Auth::user()->can('usuario.tornar usuario master') || 
-    Auth::user()->can('editais.visualizar'))
+    Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+    Auth::user()->hasPermissionTo('editais.visualizar'))
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
