@@ -151,7 +151,7 @@
                             </div>
                             <div class="col-12 d-flex align-items-center">
                                 <div class="form-check me-3">
-                                    <input class="form-check-input" required id="term_privacy" name="term_privacy" type="checkbox" id="privacyCheck">
+                                    <input class="form-check-input" required id="term_privacy" name="term_privacy" type="checkbox" value="1">
                                     <label class="form-check-label small montserrat-regular font-14 text-color" for="privacyCheck">
                                         Aceito os termos descritos na Política de Privacidade
                                     </label>
@@ -250,27 +250,12 @@
         $('#contactForm').on('submit', function(e) {
             e.preventDefault();
 
-            // Dados do formulário
-            const name = $('#nome').val();
-            const email = $('#email').val();
-            const phone = $('#phone').val();
-            const subject = $('#subject').val();
-            const text = $('#text').val();
-            const termPrivacy = $('#term_privacy').is(':checked') ? 1 : 0;
-            const token = $('input[name="_token"]').val();
+            const formData = $(this).serialize();
 
             $.ajax({
                 url: '{{ route("send-contact") }}',
                 type: 'POST',
-                data: {
-                    _token: token,
-                    name: name,
-                    email: email,
-                    phone: phone,
-                    subject: subject,
-                    text: text,
-                    term_privacy: termPrivacy
-                },                
+                data: formData,
                 success: function(response) {
                     if (typeof Swal !== 'undefined') {
                         Swal.fire({

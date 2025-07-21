@@ -23,48 +23,48 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $('#newsletterForm').on('submit', function(e) {
-    e.preventDefault();
+        e.preventDefault();
 
-    const formData = $(this).serialize();
+        const formData = $(this).serialize();
 
-    $.ajax({
-        url: '{{ route("send-newsletter") }}',
-        type: 'POST',
-        data: formData,
-        success: function(response) {
-            Swal.fire({
-                title: 'Sucesso!',
-                text: response.message,
-                icon: 'success',
-                timer: 1800,
-                showConfirmButton: false
-            });
-            $('#newsletterForm')[0].reset();
-        },
-        error: function(xhr) {
-            if (xhr.status === 422) {
-                const errors = xhr.responseJSON.errors;
-                let errorMessages = '';
-                for (let field in errors) {
-                    errorMessages += errors[field][0] + '\n';
+        $.ajax({
+            url: '{{ route("send-newsletter") }}',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                Swal.fire({
+                    title: 'Sucesso!',
+                    text: response.message,
+                    icon: 'success',
+                    timer: 1800,
+                    showConfirmButton: false
+                });
+                $('#newsletterForm')[0].reset();
+            },
+            error: function(xhr) {
+                if (xhr.status === 422) {
+                    const errors = xhr.responseJSON.errors;
+                    let errorMessages = '';
+                    for (let field in errors) {
+                        errorMessages += errors[field][0] + '\n';
+                    }
+
+                    Swal.fire({
+                        title: 'Erro',
+                        text: errorMessages,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Erro',
+                        text: 'Ocorreu um erro ao enviar seu cadastro. Tente novamente.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
                 }
-
-                Swal.fire({
-                    title: 'Erro',
-                    text: errorMessages,
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-            } else {
-                Swal.fire({
-                    title: 'Erro',
-                    text: 'Ocorreu um erro ao enviar seu cadastro. Tente novamente.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
             }
-        }
+        });
     });
-});
 
 </script>
