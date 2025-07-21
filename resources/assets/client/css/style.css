@@ -1155,6 +1155,16 @@ h1, h2, h3, h4, h5, h6  {
     }
 }
 @media (max-width:769px)  {
+    .announcement{
+        width: 90% !important;
+    }
+    .announcement .image{
+        max-width: inherit;
+        height: 200px;
+    }
+    .announcement .image img{
+        height: 100%;
+    }
     .proccess-list-item h3  {
         font-size: 1.125rem
     }

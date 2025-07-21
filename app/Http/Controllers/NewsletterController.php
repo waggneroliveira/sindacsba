@@ -19,7 +19,9 @@ class NewsletterController extends Controller
     {
         $settingTheme = (new SettingThemeRepository())->settingTheme();
         
-        if(!Auth::user()->hasPermissionTo('newsletter.visualizar')){
+        if(!Auth::user()->hasRole('Super') && 
+          !Auth::user()->can('usuario.tornar usuario master') &&
+          !Auth::user()->hasPermissionTo('newsletter.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
 

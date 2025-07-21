@@ -6,10 +6,16 @@
                     <div class="image rounded-3 overflow-hidden">
                         @if(isset($announcement) && !empty($announcement->link))
                             <a href="{{ $announcement->link }}" target="_blank" rel="nofollow noopener noreferrer">
-                                <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100">
+                                <picture>
+                                    <source media="(max-width: 576px)" srcset="{{ asset('storage/' . $announcement->path_image_mobile) }}">
+                                    <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100">
+                                </picture>
                             </a>
                         @else
-                            <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100">
+                            <picture>
+                                <source media="(max-width: 576px)" srcset="{{ asset('storage/' . $announcement->path_image_mobile) }}">
+                                <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100">
+                            </picture>
                         @endif
                     </div>
                 </div>

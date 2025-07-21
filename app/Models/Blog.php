@@ -21,6 +21,7 @@ class Blog extends Model
         'date',
         'text',
         'path_image',
+        'path_image_thumbnail',
         'active',
         'super_highlight',
         'highlight',

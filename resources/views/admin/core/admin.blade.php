@@ -95,7 +95,7 @@
                         Auth::user()->can('usuario.tornar usuario master') || 
                         Auth::user()->can('categorias de noticias.visualizar'))
                             <li class="menu-item">
-                                <a href="{{route('admin.dashboard.audit.index')}}" class="menu-link">
+                                <a href="{{route('admin.dashboard.blogCategory.index')}}" class="menu-link">
                                     <span class="menu-icon"><i class="mdi mdi-tag-multiple "></i></span>
                                     <span class="menu-text"> Categoria de notícias </span>
                                 </a>
@@ -105,7 +105,7 @@
                         Auth::user()->can('usuario.tornar usuario master') || 
                         Auth::user()->can('noticias.visualizar'))
                             <li class="menu-item">
-                                <a href="{{route('admin.dashboard.audit.index')}}" class="menu-link">
+                                <a href="{{route('admin.dashboard.blog.index')}}" class="menu-link">
                                     <span class="menu-icon"><i class="mdi mdi-newspaper-variant"></i></span>
                                     <span class="menu-text"> Notícias </span>
                                 </a>
@@ -115,7 +115,7 @@
                         Auth::user()->can('usuario.tornar usuario master') || 
                         Auth::user()->can('newsletter.visualizar'))
                             <li class="menu-item">
-                                <a href="{{route('admin.dashboard.audit.index')}}" class="menu-link">
+                                <a href="{{route('admin.dashboard.newsletter.index')}}" class="menu-link">
                                     <span class="menu-icon"><i class="mdi mdi-email-outline"></i></span>
                                     <span class="menu-text"> Newsletter </span>
                                 </a>
@@ -125,7 +125,7 @@
                         Auth::user()->can('usuario.tornar usuario master') || 
                         Auth::user()->can('lead contato.visualizar'))
                             <li class="menu-item">
-                                <a href="{{route('admin.dashboard.audit.index')}}" class="menu-link">
+                                <a href="{{route('admin.dashboard.formIndex.index')}}" class="menu-link">
                                     <span class="menu-icon"><i class="mdi mdi-account-box-outline"></i></span>
                                     <span class="menu-text"> Lead Contato </span>
                                 </a>
@@ -135,7 +135,7 @@
                         Auth::user()->can('usuario.tornar usuario master') || 
                         Auth::user()->can('contato.visualizar'))
                             <li class="menu-item">
-                                <a href="{{route('admin.dashboard.audit.index')}}" class="menu-link">
+                                <a href="{{route('admin.dashboard.contact.index')}}" class="menu-link">
                                     <span class="menu-icon"><i class="mdi mdi-card-account-mail-outline"></i></span>
                                     <span class="menu-text"> Contato </span>
                                 </a>
@@ -145,7 +145,7 @@
                         Auth::user()->can('usuario.tornar usuario master') || 
                         Auth::user()->can('anuncio.visualizar'))
                             <li class="menu-item">
-                                <a href="{{route('admin.dashboard.audit.index')}}" class="menu-link">
+                                <a href="{{route('admin.dashboard.announcement.index')}}" class="menu-link">
                                     <span class="menu-icon"><i class="mdi mdi-bullhorn-outline"></i></span>
                                     <span class="menu-text"> Anuncios </span>
                                 </a>
@@ -155,7 +155,7 @@
                         Auth::user()->can('usuario.tornar usuario master') || 
                         Auth::user()->can('editais.visualizar'))
                             <li class="menu-item">
-                                <a href="{{route('admin.dashboard.audit.index')}}" class="menu-link">
+                                <a href="{{route('admin.dashboard.noticies.index')}}" class="menu-link">
                                     <span class="menu-icon"><i class="mdi mdi-file-document"></i></span>
                                     <span class="menu-text"> Editais </span>
                                 </a>

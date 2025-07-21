@@ -22,7 +22,9 @@ class NoticiesController extends Controller
     public function index()
     {
         $settingTheme = (new SettingThemeRepository())->settingTheme();
-        if(!Auth::user()->hasPermissionTo('editais.visualizar')){
+        if(!Auth::user()->hasRole('Super') && 
+          !Auth::user()->can('usuario.tornar usuario master') &&
+          !Auth::user()->hasPermissionTo('editais.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
         $noticies = Noticies::sorting()->get();

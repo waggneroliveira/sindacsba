@@ -15,7 +15,9 @@ class FormIndexController extends Controller
     public function index()
     {
         $settingTheme = (new SettingThemeRepository())->settingTheme();
-        if(!Auth::user()->hasPermissionTo('lead contato.visualizar')){
+        if(!Auth::user()->hasRole('Super') && 
+          !Auth::user()->can('usuario.tornar usuario master') &&
+          !Auth::user()->hasPermissionTo('lead contato.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
         $formIndexs = FormIndex::get();

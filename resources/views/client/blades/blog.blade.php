@@ -105,7 +105,7 @@
                                  <div class="col-lg-12">
                                     <div class="row news-lg mx-0 mb-3 border rounded-2 overflow-hidden bg-white">
                                        <div class="col-md-6 h-100 px-0 overflow-hidden">
-                                             <img class="img-fluid h-100" src="{{ asset('storage/'.$blog->path_image) }}" alt="{{$blog->title}}" style="object-fit: cover;">
+                                             <img class="img-fluid h-100" src="{{ asset('storage/'.$blog->path_image_thumbnail) }}" alt="{{$blog->title}}" style="object-fit: cover;">
                                        </div>
                                        <div class="col-md-6 d-flex flex-column bg-white h-100 px-0">
                                              <div class="mt-auto p-4">

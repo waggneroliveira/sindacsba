@@ -22,7 +22,9 @@ class AnnouncementController extends Controller
     public function index()
     {
         $settingTheme = (new SettingThemeRepository())->settingTheme();
-        if(!Auth::user()->hasPermissionTo('anuncio.visualizar')){
+        if(!Auth::user()->hasRole('Super') && 
+            !Auth::user()->can('usuario.tornar usuario master') &&
+            !Auth::user()->hasPermissionTo('anuncio.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
         $announcements = Announcement::sorting()->get();
@@ -33,20 +35,13 @@ class AnnouncementController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        // $data = $request->except(['path_image', 'path_image_vertical']);
-        $helper = new HelperArchive();
         $manager = new ImageManager(GdDriver::class);
-
-        // $request->validate([
-        //     'path_image' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
-        //     'path_image_vertical' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
-        // ]);
 
         // anuncio horizontal
         if ($request->hasFile('path_image')) {
             $file = $request->file('path_image');
             $mime = $file->getMimeType();
-            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.webp';
+            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '_horizontal.webp';
 
             if ($mime === 'image/svg+xml') {
                 Storage::putFileAs($this->pathUpload, $file, $filename);
@@ -65,11 +60,34 @@ class AnnouncementController extends Controller
             $data['path_image'] = $this->pathUpload . $filename;
         }
 
+        // anuncio horizontal mobile
+        if ($request->hasFile('path_image_mobile')) {
+            $file = $request->file('path_image_mobile');
+            $mime = $file->getMimeType();
+            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '_horizontal_mobile.webp';
+
+            if ($mime === 'image/svg+xml') {
+                Storage::putFileAs($this->pathUpload, $file, $filename);
+            } else {
+                $image = $manager->read($file)
+                    ->resize(576, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })
+                    ->toWebp(quality: 95)
+                    ->toString();
+
+                Storage::put($this->pathUpload . $filename, $image);
+            }
+
+            $data['path_image_mobile'] = $this->pathUpload . $filename;
+        }
+
         // anuncio vertical
         if ($request->hasFile('path_image_vertical')) {
             $fileMobile = $request->file('path_image_vertical');
             $mimeMobile = $fileMobile->getMimeType();
-            $filenameMobile = pathinfo($fileMobile->getClientOriginalName(), PATHINFO_FILENAME) . '_mobile.webp';
+            $filenameMobile = pathinfo($fileMobile->getClientOriginalName(), PATHINFO_FILENAME) . '_vertical.webp';
 
             if ($mimeMobile === 'image/svg+xml') {
                 Storage::putFileAs($this->pathUpload, $fileMobile, $filenameMobile);
@@ -96,7 +114,6 @@ class AnnouncementController extends Controller
             DB::commit();
             session()->flash('success', __('dashboard.response_item_create'));
         } catch (\Exception $e) {
-            dd($e);
             DB::rollback();
             Alert::error('Erro', __('dashboard.response_item_error_create'));
         }
@@ -115,7 +132,7 @@ class AnnouncementController extends Controller
         if ($request->hasFile('path_image')) {
             $file = $request->file('path_image');
             $mime = $file->getMimeType();
-            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.webp';
+            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '_horizontal.webp';
 
             if ($mime === 'image/svg+xml') {
                 Storage::putFileAs($this->pathUpload, $file, $filename);
@@ -135,6 +152,30 @@ class AnnouncementController extends Controller
             $data['path_image'] = $this->pathUpload . $filename;
         }
 
+        // Anuncio horizontal mobile
+        if ($request->hasFile('path_image_mobile')) {
+            $file = $request->file('path_image_mobile');
+            $mime = $file->getMimeType();
+            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '_horizontal_mobile.webp';
+
+            if ($mime === 'image/svg+xml') {
+                Storage::putFileAs($this->pathUpload, $file, $filename);
+            } else {
+                $image = $manager->read($file)
+                    ->resize(576, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })
+                    ->toWebp(quality: 95)
+                    ->toString();
+
+                Storage::put($this->pathUpload . $filename, $image);
+            }
+
+            Storage::delete(isset($announcement->path_image_mobile)??$announcement->path_image_mobile);
+            $data['path_image_mobile'] = $this->pathUpload . $filename;
+        }
+
         if (isset($request->delete_path_image)) {
             Storage::delete(isset($announcement->path_image)??$announcement->path_image);
             $data['path_image'] = null;
@@ -144,7 +185,7 @@ class AnnouncementController extends Controller
         if ($request->hasFile('path_image_vertical')) {
             $fileMobile = $request->file('path_image_vertical');
             $mimeMobile = $fileMobile->getMimeType();
-            $filenameMobile = pathinfo($fileMobile->getClientOriginalName(), PATHINFO_FILENAME) . '_mobile.webp';
+            $filenameMobile = pathinfo($fileMobile->getClientOriginalName(), PATHINFO_FILENAME) . '_vertical.webp';
 
             if ($mimeMobile === 'image/svg+xml') {
                 Storage::putFileAs($this->pathUpload, $fileMobile, $filenameMobile);
@@ -187,6 +228,7 @@ class AnnouncementController extends Controller
     public function destroy(Announcement $announcement)
     {
         Storage::delete(isset($announcement->path_image)??$announcement->path_image);
+        Storage::delete(isset($announcement->path_image_mobile)??$announcement->path_image_mobile);
         Storage::delete(isset($announcement->path_image_vertical)??$announcement->path_image_vertical);
         $announcement->delete();
         Session::flash('success',__('dashboard.response_item_delete'));
@@ -208,6 +250,7 @@ class AnnouncementController extends Controller
                             'id' => $announcementId,
                             'link' => $announcement->link,
                             'path_image' => $announcement->path_image,
+                            'path_image_mobile' => $announcement->path_image_mobile,
                             'path_image_vertical' => $announcement->path_image_vertical,
                             'sorting' => $announcement->sorting,
                             'active' => $announcement->active,
@@ -251,6 +294,7 @@ class AnnouncementController extends Controller
                             'id' => $id,
                             'link' => $announcement->link,
                             'path_image' => $announcement->path_image,
+                            'path_image_mobile' => $announcement->path_image_mobile,
                             'path_image_vertical' => $announcement->path_image_vertical,
                             'sorting' => $announcement->sorting,
                             'active' => $announcement->active,

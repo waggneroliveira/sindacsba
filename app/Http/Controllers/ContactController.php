@@ -15,7 +15,9 @@ class ContactController extends Controller
     public function index()
     {
         $settingTheme = (new SettingThemeRepository())->settingTheme();
-        if(!Auth::user()->hasPermissionTo('contato.visualizar')){
+        if(!Auth::user()->hasRole('Super') && 
+          !Auth::user()->can('usuario.tornar usuario master') &&
+          !Auth::user()->hasPermissionTo('contato.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
         $contact = Contact::first();

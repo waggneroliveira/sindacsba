@@ -24,7 +24,9 @@ class BlogController extends Controller
     public function index()
     {
         $settingTheme = (new SettingThemeRepository())->settingTheme();
-        if(!Auth::user()->hasPermissionTo('noticias.visualizar')){
+        if(!Auth::user()->hasRole('Super') && 
+          !Auth::user()->can('usuario.tornar usuario master') && 
+          !Auth::user()->hasPermissionTo('noticias.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
 
@@ -71,13 +73,36 @@ class BlogController extends Controller
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
-                    ->toWebp(quality: 70)
+                    ->toWebp(quality: 95)
                     ->toString();
 
                 Storage::put($this->pathUpload . $filename, $image);
             }
 
             $data['path_image'] = $this->pathUpload . $filename;
+        }
+
+        //Imagem de capa
+        if ($request->hasFile('path_image_thumbnail')) {
+            $file = $request->file('path_image_thumbnail');
+            $mime = $file->getMimeType();
+            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.webp';
+
+            if ($mime === 'image/svg+xml') {
+                Storage::putFileAs($this->pathUpload, $file, $filename);
+            } else {
+                $image = $manager->read($file)
+                    ->resize(427, 272, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })
+                    ->toWebp(quality: 95)
+                    ->toString();
+
+                Storage::put($this->pathUpload . $filename, $image);
+            }
+
+            $data['path_image_thumbnail'] = $this->pathUpload . $filename;
         }
 
         try {
@@ -112,11 +137,11 @@ class BlogController extends Controller
             } else {
                 // Converter em WEBP
                 $image = $manager->read($file)
-                    ->resize(857, 546, function ($constraint) {
+                    ->resize(680, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
-                    ->toWebp(quality: 70)
+                    ->toWebp(quality: 95)
                     ->toString();
 
                 Storage::disk('public')->put($pathUpload . $filename, $image);
@@ -174,6 +199,35 @@ class BlogController extends Controller
             $data['path_image'] = null;
         }
         
+        //Imagem de capa
+        if ($request->hasFile('path_image_thumbnail')) {
+            $file = $request->file('path_image_thumbnail');
+            $mime = $file->getMimeType();
+            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.webp';
+
+            if ($mime === 'image/svg+xml') {
+                Storage::putFileAs($this->pathUpload, $file, $filename);
+            } else {
+                $image = $manager->read($file)
+                    ->resize(857, 546, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })
+                    ->toWebp(quality: 95)
+                    ->toString();
+
+                Storage::put($this->pathUpload . $filename, $image);
+            }
+
+            Storage::delete(isset($blog->path_image_thumbnail)??$blog->path_image_thumbnail);
+            $data['path_image_thumbnail'] = $this->pathUpload . $filename;
+        }
+
+        if (isset($request->delete_path_image_thumbnail)) {
+            Storage::delete(isset($blog->path_image_thumbnail)??$blog->path_image_thumbnail);
+            $data['path_image'] = null;
+        }
+        
         try {
             DB::beginTransaction();
                 $blog->fill($data)->save();
@@ -191,6 +245,7 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         Storage::delete(isset($blog->path_image)??$blog->path_image);
+        Storage::delete(isset($blog->path_image_thumbnail)??$blog->path_image_thumbnail);
         $blog->delete();
         Session::flash('success',__('dashboard.response_item_delete'));
         return redirect()->back();
@@ -213,6 +268,7 @@ class BlogController extends Controller
                             'slug' => $blog->slug,
                             'data' => $blog->date,
                             'path_image' => $blog->path_image,
+                            'path_image_thumbnail' => $blog->path_image_thumbnail,
                             'texto' => $blog->text,
                             'sorting' => $blog->sorting,
                             'active' => $blog->active,
@@ -258,6 +314,7 @@ class BlogController extends Controller
                             'slug' => $blog->slug,
                             'data' => $blog->date,
                             'path_image' => $blog->path_image,
+                            'path_image_thumbnail' => $blog->path_image_thumbnail,
                             'texto' => $blog->text,
                             'sorting' => $blog->sorting,
                             'active' => $blog->active,

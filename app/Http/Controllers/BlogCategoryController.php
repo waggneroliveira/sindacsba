@@ -19,7 +19,9 @@ class BlogCategoryController extends Controller
     public function index()
     {
         $settingTheme = (new SettingThemeRepository())->settingTheme();
-        if(!Auth::user()->hasPermissionTo('categorias do noticias.visualizar')){
+        if(!Auth::user()->hasRole('Super') && 
+          !Auth::user()->can('usuario.tornar usuario master') && 
+          !Auth::user()->hasPermissionTo('categorias do noticias.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
 
