@@ -34,7 +34,7 @@
                                     {!!$contact->address_one!!}
                                 </div>
                             @endif
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between flex-wrap">
                                 @if (isset($contact) && $contact->opening_hours_one != null)  
                                     <p class="mb-1 text-color montserrat-regular font-14 small col-12 col-lg-5">{{$contact->opening_hours_one}}</p>
                                 @endif
@@ -72,7 +72,7 @@
                                     {!!$contact->address_two!!}
                                 </div>
                             @endif
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between flex-wrap">
                                 @if (isset($contact) && $contact->opening_hours_one != null)  
                                     <p class="mb-1 text-color montserrat-regular font-14 small col-12 col-lg-5">{{$contact->opening_hours_two}}</p>
                                 @endif
@@ -110,7 +110,7 @@
                                     {!!$contact->address_three!!}
                                 </div>
                             @endif
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between flex-wrap">
                                 @if (isset($contact) && $contact->opening_hours_one != null)  
                                     <p class="mb-1 text-color montserrat-regular font-14 small col-12 col-lg-5">{{$contact->opening_hours_three}}</p>
                                 @endif
@@ -149,7 +149,7 @@
                             <div class="col-md-12">
                                 <textarea id="text" required name="text" class="form-control montserrat-regular font-15 text-color" rows="4" placeholder="Digite aqui...."></textarea>
                             </div>
-                            <div class="col-12 d-flex align-items-center">
+                            <div class="col-12 d-flex align-items-center flex-wrap">
                                 <div class="form-check me-3">
                                     <input class="form-check-input" required id="term_privacy" name="term_privacy" type="checkbox" value="1">
                                     <label class="form-check-label small montserrat-regular font-14 text-color" for="privacyCheck">
@@ -191,7 +191,7 @@
                         </div>
                     </div>
                 @endif
-                <div class="col-6">
+                <div class="col-6 sc">
                     <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 flex-column">
                         <div class="dark-background rounded-3 px-5 py-4">
                             <nav class="site-navigation position-relative text-end w-25 redes-sociais">

@@ -273,8 +273,8 @@
                                                                                                     </div>
                                                                                                     <div class="w-100 mt-2 d-block">
                                                                                                         <div class="mb-3 col-12 d-flex align-items-start flex-column">
-                                                                                                            <label for="textarea-edit-{{ $comment->id }}" class="form-label">Comentário</label>
-                                                                                                            <textarea name="text" readonly class="form-control col-12 ck-readonly" id="textarea-edit-{{ $comment->id }}" rows="5">{!! $comment->comment !!}</textarea>
+                                                                                                            <label for="textarea-commit-edit-{{ $comment->id }}" class="form-label">Comentário</label>
+                                                                                                            <textarea name="text" readonly class="form-control col-12 ck-readonly" id="textarea-commit-edit-{{ $comment->id }}" rows="5">{!! $comment->comment !!}</textarea>
                                                                                                         </div>
                                                                                                     </div>                                                                                                
                                                                                                 </div>
@@ -354,6 +354,7 @@
             width: 100%;
         }
     </style>
+
 
     <script>
         // Inicializa o CKEditor para o textarea de criação
