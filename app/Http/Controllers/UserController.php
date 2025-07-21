@@ -26,33 +26,32 @@ class UserController extends Controller
 {
     protected $pathUpload = 'admin/uploads/images/usuario/';
 
-    public function index(UserPermissionRepository $userPermissionRepository)
-    {
-
-        $users = User::excludeSuper()->with('roles');
+    public function index(UserPermissionRepository $userPermissionRepository){
         $settingTheme = (new SettingThemeRepository())->settingTheme();
-        $filteredUsers = $userPermissionRepository->filterUsersByPermissions($users);
 
-        if ($filteredUsers === 'forbidden') {
+        $query = User::query(); 
+        $filteredQuery = $userPermissionRepository->filterUsersByPermissions($query);
+
+        if ($filteredQuery === 'forbidden') {
             return view('admin.error.403', compact('settingTheme'));
         }
 
-        $users = $filteredUsers->sorting()->get();
+        $users = $filteredQuery->with('roles')->sorting()->get();
         $roles = (new UserRoleRepository())->userRole($users);
         $otherRoles = $roles['otherRoles'] ?? collect();
         $currentRoles = $roles['currentRoles'] ?? collect();
             
         $permissions = Permission::join('role_has_permissions', 'permissions.id', 'role_has_permissions.permission_id')
-        ->groupBy('permissions.name')
-        ->select('permissions.name')
-        ->get();
+            ->groupBy('permissions.name')
+            ->select('permissions.name')
+            ->get();
         
         return view('admin.blades.user.index', compact('users','otherRoles','permissions','currentRoles'));
     }
 
     public function store(RequestStoreUser $request)
     {   
-        $data = $request->except('path_image');
+        $data = $request->except(['path_image', 'is_super']);
         $helper = new HelperArchive();
 
         $request->validate([
@@ -61,8 +60,6 @@ class UserController extends Controller
     
         $path_image = null;
         if ($request->hasFile('path_image')) {
-            $file = $request->file('path_image');
-            $mime = $file->getMimeType();
             $path_image = $helper->renameArchiveUpload($request, 'path_image');
         }
 
@@ -102,6 +99,7 @@ class UserController extends Controller
                     $request->file('path_image')->storeAs($this->pathUpload, $path_image);
                 }
                 DB::commit();
+                
                 session()->flash('success', __('dashboard.response_item_create'));
                 return redirect()->route('admin.dashboard.user.index');
             }
@@ -133,7 +131,7 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request, User $user)
     {
-        $data = $request->except('password','path_image');
+        $data = $request->except('password','path_image','is_super');
         $helper = new HelperArchive();
         $roles = $request->input('roles', []);
 
@@ -143,8 +141,6 @@ class UserController extends Controller
     
         $path_image = null;
         if ($request->hasFile('path_image')) {
-            $file = $request->file('path_image');
-            $mime = $file->getMimeType();
             $path_image = $helper->renameArchiveUpload($request, 'path_image');
         }
     
@@ -160,13 +156,7 @@ class UserController extends Controller
                 if ($user->path_image) { 
                     Storage::delete($user->path_image);
                 }
-                if ($mime === 'image/svg+xml') {
-                    $file->storeAs($this->pathUpload, $path_image);
-                } else {
-                    $manager = app(\Intervention\Image\ImageManager::class);
-                    $image = $manager->read($file)->toWebp(quality: 75)->toString();
-                    Storage::put($this->pathUpload . $path_image, $image);
-                }
+                $request->file('path_image')->storeAs($this->pathUpload, $path_image);
             }
 
             if (isset($request->delete_path_image) && !$path_image) {
@@ -269,14 +259,10 @@ class UserController extends Controller
         foreach($request->arrId as $sorting => $id) {
             $user = User::find($id);
     
-            if($user) {
-                
-                // Log para verificar os dados do usuário
-                \Log::info('Dados do usuário antes da exclusão:', [
-                    'id' => $user->id,
-                    'name' => $user->name,
-                    'sorting' => $user->sorting,
-                ]);
+            if($user) {               
+                            
+                $user->sorting = $sorting;
+                $user->save();
 
                 activity()
                     ->causedBy(Auth::user())
