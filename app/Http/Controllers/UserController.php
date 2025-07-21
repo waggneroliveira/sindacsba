@@ -122,6 +122,7 @@ class UserController extends Controller
         $currentRoles = $user->roles;
         $otherRoles = Role::where('id', '!=', 1)->whereNotIn('id', $currentRoles->pluck('id'))->get();
 
+
         return view('admin.blades.user.edit', [
             'user' => $user,
             'currentRoles' => $currentRoles,

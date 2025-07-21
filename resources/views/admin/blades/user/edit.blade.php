@@ -26,6 +26,12 @@
                         <form action="{{route('admin.dashboard.user.update', ['user' => $user->id])}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('put')
+                            
+                            @if ($currentRoles->isNotEmpty())
+                                @foreach($currentRoles as $role)  
+                                    <input type="hidden" name="roles[]" value="{{ $role->name }}">                    
+                                @endforeach        
+                            @endif
 
                             <div class="row">
                                 <div class="col-6 col-md-6">
