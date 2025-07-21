@@ -200,8 +200,8 @@
                             @endphp
                             <div class="image-profile">
                                 <picture>
-                                    <source srcset="{{ isset($defaultImage)?$defaultImage:asset('build/client/images/user-login.svg') }}" type="image/svg+xml">
-                                    <img src="{{ isset($defaultImage)?$defaultImage:asset('build/client/images/user-login.svg') }}"
+                                    <source srcset="{{ isset($defaultImage) && $defaultImage <> null ?$defaultImage:asset('build/client/images/user.jpg') }}" type="image/svg+xml">
+                                    <img src="{{ isset($defaultImage) && $defaultImage <> null ?$defaultImage:asset('build/client/images/user.jpg') }}"
                                         alt="Imagem de Login"
                                         class="img-fluid rounded-circle">
                                 </picture>

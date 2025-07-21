@@ -1333,6 +1333,26 @@ h1, h2, h3, h4, h5, h6  {
     }
 }
 @media (max-width:476px)  {
+    .m-0.text-uppercase.montserrat-bold.font-22.title-blue{
+        font-size: 1.125rem;
+    }
+    .badge.badge-primary.montserrat-semiBold.font-12.me-2.background-red.text-uppercase.font-weight-semi-bold.p-2{
+        font-size: 0.625rem;
+    }   
+    .h6.m-0.text-uppercase.montserrat-bold.font-14.title-blue{
+        font-size: 0.75rem;
+    } 
+    #news{
+        padding-top: 0px !important;
+    }
+    .h2.m-0.text-white.text-uppercase.montserrat-bold.font-32.d-block{
+        font-size: 1.125rem;
+    }
+    .h6.m-0.text-white.text-uppercase.montserrat-bold.font-16.d-block,
+    .h4.d-block.mb-3.text-uppercase.montserrat-semiBold.font-20.title-blue,
+    .m-0.text-color.montserrat-regular.font-16{
+        font-size: 0.938rem;
+    }
     .faq .ex.title  {
         padding: 0 10px
     }
