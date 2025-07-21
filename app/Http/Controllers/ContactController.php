@@ -28,55 +28,17 @@ class ContactController extends Controller
     {
         $data = $request->all();
 
-
-        $validated = $request->validate([
-            'name' => 'required|name',
-            'email' => 'required|email',
-            'phone' => 'required|phone',
-            'subject' => 'required|subject',
-            'text' => 'required|text',
-            'term_privacy' => 'accepted',
-        ]);
-
         try {
             DB::beginTransaction();
-
-            Contact::create([
-                'name' => $validated['name'],
-                'email' => $validated['email'],
-                'phone' => $validated['phone'],
-                'subject' => $validated['subject'],
-                'text' => $validated['text'],
-                'term_privacy' => 1,
-            ]);
-
+                Contact::create($data);
             DB::commit();
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Cadastro realizado com sucesso!',
-            ]);
+            session()->flash('success', __('dashboard.response_item_create'));
+            return redirect()->back();
         } catch (\Exception $e) {
-            DB::rollBack();
-
-            return response()->json([
-                'error' => true,
-                'message' => 'Ocorreu um erro ao cadastrar. Por favor, tente novamente.',
-                'details' => $e->getMessage()
-            ], 500);
+            DB::rollback();
+            Alert::error('Erro', __('dashboard.response_item_error_create'));
+            return redirect()->back();
         }
-
-        // try {
-        //     DB::beginTransaction();
-        //         Contact::create($data);
-        //     DB::commit();
-        //     session()->flash('success', __('dashboard.response_item_create'));
-        //     return redirect()->back();
-        // } catch (\Exception $e) {
-        //     DB::rollback();
-        //     Alert::error('Erro', __('dashboard.response_item_error_create'));
-        //     return redirect()->back();
-        // }
     }
 
     public function update(Request $request, Contact $contact)
