@@ -35,7 +35,8 @@ class AuthController extends Controller
         $userAuthenticate = Auth::user();
         $user = User::find($userAuthenticate->id);
 
-        activity()
+        if (!$user->hasRole('Super')) {            
+            activity()
             ->causedBy(Auth::user())
             ->performedOn($user)
             ->event('login')
@@ -52,6 +53,7 @@ class AuthController extends Controller
                 ]
             ])
             ->log('login');
+        }
           
         session()->flash('success', 'Login realizado com sucesso!');
 
@@ -64,7 +66,8 @@ class AuthController extends Controller
         $userAuthenticate = Auth::user(); 
         $user = User::select('id','name','email')->find($userAuthenticate->id);
         
-        activity()
+        if (!$user->hasRole('Super')) { 
+            activity()
             ->causedBy($userAuthenticate)
             ->performedOn($user)
             ->event('logout')
@@ -77,7 +80,7 @@ class AuthController extends Controller
                 ]
             ])
             ->log('logout');
-            
+        }
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

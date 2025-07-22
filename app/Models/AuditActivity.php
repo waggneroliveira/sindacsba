@@ -13,12 +13,20 @@ class AuditActivity extends Model
     {
         switch ($subjectType) { 
            
-            case Project::class:
-                return 'Projetos';
-            case StackSessionTitle::class:
-                return 'Título Sessão Tecnologias';
-            case Stack::class:
-                return 'Tecnologias';
+            case Announcement::class:
+                return 'Anuncios';
+            case Noticies::class:
+                return 'Editais';
+            case Contact::class:
+                return 'Contato';
+            case FormIndex::class:
+                return 'Lead contato - Infrmações enviadas pelo site (formulário de contato)';
+            case Newsletter::class:
+                return 'Newsletter - E-mail enviado pelo site';
+            case BlogCategory::class:
+                return 'Categoria de notícias';
+            case Blog::class:
+                return 'Notícias';
             case Slide::class:
                 return 'Slides';
             case User::class:

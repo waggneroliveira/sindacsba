@@ -128,24 +128,16 @@
                         <img src="{{asset('build/client/images/logo.svg')}}" alt="Instituto Baiano de Medicina Desportivao" title="Instituto Baiano de Medicina Desportivao" class="img-fluid">
                     </a>
                 </div>
-                <!-- Botão menu sandwich -->
-                <button id="menu-toggle" class="d-lg-none btn btn-link p-0 ms-2" aria-label="Abrir menu" type="button">
-                    <span class="menu-icon" style="display:inline-block;width:32px;height:32px;">
-                        <span class="d-block w-100 rounded-1" style="height:4px;background:#FFF;margin:6px 0;"></span>
-                        <span class="d-block w-100 rounded-1" style="height:4px;background:#FFF;margin:6px 0;"></span>
-                        <span class="d-block w-100 rounded-1" style="height:4px;background:#FFF;margin:6px 0;"></span>
-                    </span>
-                </button>
         
                 <div class="social-links d-flex justify-content-between align-items-center gap-4 text-center col-9">
-                    <nav class="site-navigation ul position-relative text-end width-75">
+                    <nav class="none site-navigation ul position-relative text-end width-75">
                         <ul class="d-flex flex-row justify-content-start align-items-center gap-4 mb-0 list-unstyled">
                             <li><a href="{{route('blog')}}" class="nav-link montserrat-regular font-18 {{ request()->routeIs('blog') ? 'active' : '' }} {{ request()->routeIs('blog-inner') ? 'active' : '' }}">Notícias</a></li>
                             <li><a href="{{route('noticies')}}" class="nav-link montserrat-regular font-18 {{ request()->routeIs('noticies') ? 'active' : '' }}">Editais</a></li>
                             <li><a href="{{route('contact')}}" class="nav-link montserrat-regular font-18 {{ request()->routeIs('contact') ? 'active' : '' }}">Contato</a></li>
                         </ul>                      
                     </nav>
-                    <nav class="site-navigation position-relative text-end w-auto redes-sociais">
+                    <nav class="none site-navigation position-relative text-end w-auto redes-sociais">
                         <ul class="p-0 d-flex justify-content-start gap-4 flex-row mb-0">
                             @if (isset($contact) && $contact->link_insta)
                                 <li class="li d-flex justify-content-start align-items-center rounded-circle">
@@ -184,6 +176,7 @@
                             @endif
                         </ul> 
                     </nav>
+
                     <div class="login d-flex justify-content-start align-items-center gap-2 w-auto">                        
                         @if (!Auth::guard('client')->check())                            
                             <div class="d-flex justify-content-start align-items-center gap-2">
@@ -191,7 +184,7 @@
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M46.793 8.62893C44.5547 8.62893 42.7344 6.81253 42.7344 4.57423C42.7344 2.33593 44.5547 0.519531 46.793 0.519531L80.57 0.503906C88.8044 0.503906 95.5 7.20311 95.5 15.4339V80.5789C95.5 88.8055 88.8008 95.5089 80.57 95.5089H46.793C44.5469 95.5089 42.7266 93.6847 42.7266 91.4386C42.7266 89.1886 44.5469 87.3683 46.793 87.3683H80.57C84.3083 87.3683 87.3591 84.3136 87.3591 80.5831V15.4311C87.3591 11.7006 84.3083 8.63031 80.57 8.63031L46.793 8.62893ZM49.6914 68.2459L66.5504 51.0619C67.398 50.3158 67.9332 49.2181 67.9332 47.9994C67.9332 46.7807 67.398 45.683 66.5504 44.9408L49.6914 27.7568C48.1133 26.1591 45.543 26.1357 43.9492 27.71C42.3515 29.2803 42.3281 31.8545 43.9062 33.4522L54.1792 43.9322L4.5742 43.9283C2.3281 43.9283 0.5 45.7525 0.5 47.9986C0.5 50.2486 2.3281 52.0689 4.5742 52.0689H54.1762L43.9032 62.5459C42.3251 64.1436 42.3524 66.7138 43.9462 68.288C45.5439 69.8583 48.1103 69.8389 49.6884 68.2412L49.6914 68.2459Z" fill="white"/>
                                 </svg>
 
-                                <h2 class="m-0 montserrat-medium font-14 text-start" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#loginModal">Login</h2>
+                                <h2 class="off-login m-0 montserrat-medium font-14 text-start" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#loginModal">Login</h2>
                             </div>
                         @else
                             @php
@@ -208,7 +201,7 @@
                             </div>
                             <div class="d-flex flex-column align-items-start gap-1">
                                 <div class="d-flex justify-content-start align-items-center gap-2 lh-0">
-                                    <h2 class="m-0 montserrat-medium font-14 text-start">Bem vindo,</h2>   
+                                    <h2 class="loginOn m-0 montserrat-medium font-14 text-start">Bem vindo,</h2>   
                                     <h3 class="m-0 montserrat-medium font-14 text-start">{{$names = collect(explode(' ', Auth::guard('client')->user()->name))->slice(0, 1)->implode(' ')}}!</h3>      
                                     <a class="nav-link waves-effect waves-light" href="#" data-bs-toggle="modal" data-bs-target="#editClientModal-{{Auth::guard('client')->user()->id}}">
                                         <i class="bi bi-gear font-18"></i>
@@ -221,20 +214,49 @@
                             </div>
                         @endif
                     </div>
+
+                    <!-- Botão menu sandwich -->
+                    <button id="menu-toggle" class="d-lg-none btn btn-link p-0 ms-2" aria-label="Abrir menu" type="button">
+                        <span class="menu-icon" style="display:inline-block;width:32px;height:32px;">
+                            <span class="d-block w-100 rounded-1" style="height:4px;background:#FFF;margin:6px 0;"></span>
+                            <span class="d-block w-100 rounded-1" style="height:4px;background:#FFF;margin:6px 0;"></span>
+                            <span class="d-block w-100 rounded-1" style="height:4px;background:#FFF;margin:6px 0;"></span>
+                        </span>
+                    </button>
                 </div>         
             </div>
         </div>     
         @if ($blogCategories->count())
             <div class="header--category w-100 grey-medium-background social-links">
-                <nav>
-                    <ul class="d-flex justify-content-center align-items-center mb-0 py-2 gap-4 px-0">
+                {{-- Versão Mobile (com Swiper) --}}
+                <nav class="d-block d-sm-none position-relative">
+                    <div class="swiper carrossel-mobile category-swiper">
+                        <div class="swiper-wrapper">
+                            @foreach ($blogCategories as $category)
+                                <div class="swiper-slide">
+                                    <a href="{{ route('blog', ['category' => $category->slug]) }}#news"
+                                    class="carrossel title-blue montserrat-semiBold font-14 d-inline-block px-2
+                                    {{ (request()->routeIs('blog-inner') && isset($blogInner) && $blogInner->category->id === $category->id) ||
+                                        (request()->routeIs('blog') && request()->route('category') === $category->slug)
+                                        ? 'active' : '' }}">
+                                        {{ $category->title }}
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </nav>
+
+                {{-- Versão Desktop (sem Swiper) --}}
+                <nav class="d-none d-sm-block">
+                    <ul class="list-unstyled d-flex justify-content-center flex-wrap gap-2 px-3 py-2">
                         @foreach ($blogCategories as $category)
-                            <li class="nav-link">
+                            <li>
                                 <a href="{{ route('blog', ['category' => $category->slug]) }}#news"
-                                class="title-blue montserrat-semiBold font-14
+                                class="title-blue montserrat-semiBold font-14 d-inline-block px-2
                                 {{ (request()->routeIs('blog-inner') && isset($blogInner) && $blogInner->category->id === $category->id) ||
-                                (request()->routeIs('blog') && request()->route('category') === $category->slug)
-                                ? 'active' : '' }}">
+                                    (request()->routeIs('blog') && request()->route('category') === $category->slug)
+                                    ? 'active' : '' }}">
                                     {{ $category->title }}
                                 </a>
                             </li>
@@ -243,6 +265,26 @@
                 </nav>
             </div>
         @endif
+        <script>
+            let swiperInstance = null;
+
+            function initCategorySwiper() {
+                if (window.innerWidth < 576 && !swiperInstance) {
+                    swiperInstance = new Swiper('.category-swiper', {
+                        slidesPerView: 3.3,
+                        spaceBetween: 10,
+                        freeMode: true,
+                    });
+                } else if (window.innerWidth >= 576 && swiperInstance) {
+                    swiperInstance.destroy(true, true);
+                    swiperInstance = null;
+                }
+            }
+
+            window.addEventListener('load', initCategorySwiper);
+            window.addEventListener('resize', initCategorySwiper);
+        </script>
+
     </header>
     <!-- Modal de Login -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -457,6 +499,45 @@
                 <li><a href="{{route('contact')}}" class=" text-white nav-link montserrat-regular font-18">Contato</a></li>
             </ul>
         </nav>
+        <nav class="site-navigation position-relative text-end w-auto redes-sociais">
+            <ul class="p-0 d-flex justify-content-start gap-4 flex-row mb-0">
+                @if (isset($contact) && $contact->link_insta)
+                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                        <a href="{{$contact->link_insta}}" rel="nofollow noopener noreferrer" target="_blank">
+                            <img src="{{asset('build/client/images/insta.svg')}}" alt="Instagram">
+                        </a>
+                    </li>
+                @endif
+                @if (isset($contact) && $contact->link_x)
+                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                        <a href="{{$contact->link_x}}" rel="nofollow noopener noreferrer" target="_blank">
+                            <img src="{{asset('build/client/images/x.svg')}}" alt="X">
+                        </a>
+                    </li>
+                @endif
+                @if (isset($contact) && $contact->link_youtube)
+                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                        <a href="{{$contact->link_youtube}}" rel="nofollow noopener noreferrer" target="_blank">
+                            <img src="{{asset('build/client/images/youtube.svg')}}" alt="Youtube">
+                        </a>
+                    </li>
+                @endif
+                @if (isset($contact) && $contact->link_face)
+                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                        <a href="{{$contact->link_face}}" rel="nofollow noopener noreferrer" target="_blank">
+                            <img src="{{asset('build/client/images/face.svg')}}" alt="Facebook">
+                        </a>
+                    </li>
+                @endif
+                @if (isset($contact) && $contact->link_tik_tok)
+                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                        <a href="{{$contact->link_tik_tok}}a" rel="nofollow noopener noreferrer" target="_blank">
+                            <img src="{{asset('build/client/images/tiktok.svg')}}" alt="Tiktok">
+                        </a>
+                    </li>
+                @endif
+            </ul> 
+        </nav>
     </div>
 
     <main>
@@ -531,8 +612,50 @@
                 </div>
             </div>
         </div>
+        <div class="menu-mobile-down w-100 position-fixed bottom-0 left-0">
+            <ul class="list-unstyled h-100 d-flex justify-content-center align-items-center gap-3 p-0 position-relative">
+                {{-- @if (isset($contact) && $contact->link_insta)
+                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                        <a href="{{$contact->link_insta}}" rel="nofollow noopener noreferrer" target="_blank">
+                            <img src="{{asset('build/client/images/insta.svg')}}" alt="Instagram">
+                        </a>
+                    </li>
+                @endif            
+                @if (isset($contact) && $contact->link_youtube)
+                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                        <a href="{{$contact->link_youtube}}" rel="nofollow noopener noreferrer" target="_blank">
+                            <img src="{{asset('build/client/images/youtube.svg')}}" alt="Youtube">
+                        </a>
+                    </li>
+                @endif --}}
+                <li class="nav-mob-center position-absolute">
+                    <a href="#" class="icon-text btn_sidebar">
+                        <span class="menu-icon" style="display:inline-block;width:32px;height:32px;">
+                            <span class="d-block w-100 rounded-1" style="height:4px;background:#FFF;margin:6px 0;"></span>
+                            <span class="d-block w-100 rounded-1" style="height:4px;background:#FFF;margin:6px 0;"></span>
+                            <span class="d-block w-100 rounded-1" style="height:4px;background:#FFF;margin:6px 0;"></span>
+                        </span>
+                    </a>
+                </li>
+                {{-- @if (isset($contact) && $contact->link_face)
+                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                        <a href="{{$contact->link_face}}" rel="nofollow noopener noreferrer" target="_blank">
+                            <img src="{{asset('build/client/images/face.svg')}}" alt="Facebook">
+                        </a>
+                    </li>
+                @endif
+                @if (isset($contact) && $contact->link_tik_tok)
+                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                        <a href="{{$contact->link_tik_tok}}a" rel="nofollow noopener noreferrer" target="_blank">
+                            <img src="{{asset('build/client/images/tiktok.svg')}}" alt="Tiktok">
+                        </a>
+                    </li>
+                @endif --}}
+            </ul>
+        </div>
     </footer>
     <a href=# id=scroll-top class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
     
     <script src="https://cdn.ckeditor.com/4.22.1/basic/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>

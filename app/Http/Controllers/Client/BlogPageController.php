@@ -13,7 +13,7 @@ class BlogPageController extends Controller
     public function index(Request $request, $category = null)
     {
         $search = $request->input('search');
-        $blogCategories = BlogCategory::whereHas('blogs')->active()->sorting()->get();
+        $blogCategories = BlogCategory::whereHas('blogs')->active()->sorting()->limit(5)->get();
         $blogSuperHighlights = Blog::whereHas('category', function($active){
             $active->where('active', 1);
         })->superHighlightOnly()->active()->sorting()->limit(6)->get();

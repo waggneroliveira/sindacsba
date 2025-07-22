@@ -1,3 +1,28 @@
+.menu-mobile-down{
+    display: none;
+}
+.carrossel-mobile{
+    height: 35px;
+}
+.menu-mobile-down{
+    background-color: var(--background-blue);
+    /* border-top: 1px solid var(--background-red); */
+    z-index: 12;
+    height: 50px;
+}
+.nav-mob-center{
+    left: 50%;
+    top: -25px;
+    transform: translate(-50%, 0px);
+    background: var(--background-blue);
+    border: 3px solid var(--background-red);
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .comment-scroll{
     height: 100%;
     max-height: 460px;
@@ -79,7 +104,7 @@ aside .img-fluid.annun{
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(75, 124, 135, 1);
+    background: var(--background-blue);
     z-index: 10 !important;
     padding: 2rem;
     flex-direction: column;
@@ -1060,7 +1085,10 @@ h1, h2, h3, h4, h5, h6  {
     }
 }
 @media (max-width: 991.98px) {
-    .social-links {
+    .social-links.d-flex.justify-content-between.align-items-center.gap-4.text-center.col-9{
+        justify-content: flex-end !important;
+    }
+    .none {
         display: none !important;
     }
 }
@@ -1332,7 +1360,50 @@ h1, h2, h3, h4, h5, h6  {
         margin-bottom: 30px
     }
 }
+@media (max-width:576px)  {
+    .menu-mobile-down{
+        display: block;
+    }
+    .social-links .carrossel{
+        width: 100%;
+        height: auto;
+        line-height: 14px;
+        text-align: center;
+        font-size: 0.75rem;
+    }
+    .menu-icon{
+        width: 25px !important;
+        height: 25px !important;
+    }
+    .menu-icon span{
+        height: 2.5px !important;
+    }
+    .bi.bi-box-arrow-right.font-18{
+        font-size: 0.875rem;
+    }
+    .image-profile{
+        width: 35px;
+        height: 35px;   
+    }
+    .login h2, .login h3{
+        font-size: 0.75rem;
+    }
+}
 @media (max-width:476px){
+    .login .loginOn{
+        font-size: 0.563rem;
+    }
+    .social-links.d-flex.justify-content-between.align-items-center.gap-4.text-center.col-9{
+        padding-right: 15px;
+    }
+    .d-flex.justify-content-start.align-items-center.gap-2.text-decoration-none.lh-0,
+    .nav-link.waves-effect.waves-light{
+        width: inherit;
+        height: inherit;
+    }
+    #menu-toggle{
+        display: none;
+    }
     .d-flex.justify-content-between.align-items-center.mt-5 {
         margin-top: 0 !important;
     }
@@ -1555,7 +1626,11 @@ h1, h2, h3, h4, h5, h6  {
         font-size: .938rem
     }
     .logo-img  {
-        width: 130px
+        padding: 0 !important;
+        width: 150px
+    }
+    .social-links.d-flex.justify-content-between.align-items-center.gap-4.text-center.col-9{
+        padding-right: 5px;
     }
     .content-right p, .hero p, .perfect-choice .content-right .text, .proccess-top p, .text-left-project, .transformed p  {
         font-size: .938rem !important
