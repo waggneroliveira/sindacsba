@@ -188,18 +188,23 @@
     //Menu mobile
     const s = document.getElementById("menu-toggle"),
         a = document.getElementById("menu-mobile"),
-        c = document.getElementById("menu-close");
+        c = document.getElementById("menu-close"),
+        d = document.querySelector(".btn_sidebar"); // botão do menu inferior
 
-    s.addEventListener("click", (function() {
+    s.addEventListener("click", function () {
         const e = a.classList.toggle("active");
-        document.body.style.overflow = e ? "hidden" : ""
-    }));
+        document.body.style.overflow = e ? "hidden" : "";
+    });
 
-    c.addEventListener("click", (function() {
+    c.addEventListener("click", function () {
         a.classList.remove("active");
-        document.body.style.overflow = ""
-    }));
+        document.body.style.overflow = "";
+    });
 
+    d.addEventListener("click", function () {
+        const e = a.classList.toggle("active");
+        document.body.style.overflow = e ? "hidden" : "";
+    });
 
     a.querySelectorAll("a").forEach(link => {
         link.addEventListener("click", function(e) {

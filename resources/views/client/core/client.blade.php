@@ -249,7 +249,7 @@
 
                 {{-- Versão Desktop (sem Swiper) --}}
                 <nav class="d-none d-sm-block">
-                    <ul class="list-unstyled d-flex justify-content-center flex-wrap gap-2 px-3 py-2">
+                    <ul class="list-unstyled d-flex justify-content-center flex-wrap gap-2 px-3 py-2 mb-0">
                         @foreach ($blogCategories as $category)
                             <li>
                                 <a href="{{ route('blog', ['category' => $category->slug]) }}#news"
@@ -484,60 +484,61 @@
         </div>
     </div>
 
-
-    <div id="menu-mobile" class="menu-mobile d-flex flex-column justify-content-center align-items-center">
-        <div class="logo-img px-3 py-2 mb-4 rounded-2 d-flex justify-content-center align-items-center">
+    <div id="menu-mobile" class="menu-mobile d-flex flex-column justify-content-start align-items-center">
+        <div class="d-flex justify-content-end align-items-start w-100">    
+            <button id="menu-close" aria-label="Fechar menu" class="col-2 btn-close-menu p-0 bg-transparent" type="button">&times;</button>
+        </div>
+        <div class="col-10 logo-img px-3 py-2 mb-4 rounded-2 d-flex justify-content-center align-items-center">
             <img src="{{asset('build/client/images/logo.svg')}}" alt="Instituto Baiano de Medicina Desportivao" title="Instituto Baiano de Medicina Desportivao" class="img-fluid">
         </div>
-
-        <button id="menu-close" aria-label="Fechar menu" class="btn-close-menu" type="button">&times;</button>
-
-        <nav>
-            <ul class="list-unstyled text-center">
-                <li><a href="{{route('blog')}}" class=" text-white nav-link montserrat-regular font-18">Notícias</a></li>
-                <li><a href="{{route('noticies')}}" class=" text-white nav-link montserrat-regular font-18">Editais</a></li>
-                <li><a href="{{route('contact')}}" class=" text-white nav-link montserrat-regular font-18">Contato</a></li>
-            </ul>
-        </nav>
-        <nav class="site-navigation position-relative text-end w-auto redes-sociais">
-            <ul class="p-0 d-flex justify-content-start gap-4 flex-row mb-0">
-                @if (isset($contact) && $contact->link_insta)
-                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                        <a href="{{$contact->link_insta}}" rel="nofollow noopener noreferrer" target="_blank">
-                            <img src="{{asset('build/client/images/insta.svg')}}" alt="Instagram">
-                        </a>
-                    </li>
-                @endif
-                @if (isset($contact) && $contact->link_x)
-                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                        <a href="{{$contact->link_x}}" rel="nofollow noopener noreferrer" target="_blank">
-                            <img src="{{asset('build/client/images/x.svg')}}" alt="X">
-                        </a>
-                    </li>
-                @endif
-                @if (isset($contact) && $contact->link_youtube)
-                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                        <a href="{{$contact->link_youtube}}" rel="nofollow noopener noreferrer" target="_blank">
-                            <img src="{{asset('build/client/images/youtube.svg')}}" alt="Youtube">
-                        </a>
-                    </li>
-                @endif
-                @if (isset($contact) && $contact->link_face)
-                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                        <a href="{{$contact->link_face}}" rel="nofollow noopener noreferrer" target="_blank">
-                            <img src="{{asset('build/client/images/face.svg')}}" alt="Facebook">
-                        </a>
-                    </li>
-                @endif
-                @if (isset($contact) && $contact->link_tik_tok)
-                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                        <a href="{{$contact->link_tik_tok}}a" rel="nofollow noopener noreferrer" target="_blank">
-                            <img src="{{asset('build/client/images/tiktok.svg')}}" alt="Tiktok">
-                        </a>
-                    </li>
-                @endif
-            </ul> 
-        </nav>
+        <div class="row justify-content-center gap-5">
+            <nav class="mt-5">
+                <ul class="list-unstyled text-center">
+                    <li><a href="{{route('blog')}}" class=" text-white nav-link montserrat-regular font-18">Notícias</a></li>
+                    <li><a href="{{route('noticies')}}" class=" text-white nav-link montserrat-regular font-18">Editais</a></li>
+                    <li><a href="{{route('contact')}}" class=" text-white nav-link montserrat-regular font-18">Contato</a></li>
+                </ul>
+            </nav>
+            <nav class="site-navigation position-relative text-end w-auto redes-sociais">
+                <ul class="p-0 d-flex justify-content-start gap-4 flex-row mb-0">
+                    @if (isset($contact) && $contact->link_insta)
+                        <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                            <a href="{{$contact->link_insta}}" rel="nofollow noopener noreferrer" target="_blank">
+                                <img src="{{asset('build/client/images/insta.svg')}}" alt="Instagram">
+                            </a>
+                        </li>
+                    @endif
+                    @if (isset($contact) && $contact->link_x)
+                        <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                            <a href="{{$contact->link_x}}" rel="nofollow noopener noreferrer" target="_blank">
+                                <img src="{{asset('build/client/images/x.svg')}}" alt="X">
+                            </a>
+                        </li>
+                    @endif
+                    @if (isset($contact) && $contact->link_youtube)
+                        <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                            <a href="{{$contact->link_youtube}}" rel="nofollow noopener noreferrer" target="_blank">
+                                <img src="{{asset('build/client/images/youtube.svg')}}" alt="Youtube">
+                            </a>
+                        </li>
+                    @endif
+                    @if (isset($contact) && $contact->link_face)
+                        <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                            <a href="{{$contact->link_face}}" rel="nofollow noopener noreferrer" target="_blank">
+                                <img src="{{asset('build/client/images/face.svg')}}" alt="Facebook">
+                            </a>
+                        </li>
+                    @endif
+                    @if (isset($contact) && $contact->link_tik_tok)
+                        <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                            <a href="{{$contact->link_tik_tok}}a" rel="nofollow noopener noreferrer" target="_blank">
+                                <img src="{{asset('build/client/images/tiktok.svg')}}" alt="Tiktok">
+                            </a>
+                        </li>
+                    @endif
+                </ul> 
+            </nav>
+        </div>
     </div>
 
     <main>
@@ -614,20 +615,7 @@
         </div>
         <div class="menu-mobile-down w-100 position-fixed bottom-0 left-0">
             <ul class="list-unstyled h-100 d-flex justify-content-center align-items-center gap-3 p-0 position-relative">
-                {{-- @if (isset($contact) && $contact->link_insta)
-                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                        <a href="{{$contact->link_insta}}" rel="nofollow noopener noreferrer" target="_blank">
-                            <img src="{{asset('build/client/images/insta.svg')}}" alt="Instagram">
-                        </a>
-                    </li>
-                @endif            
-                @if (isset($contact) && $contact->link_youtube)
-                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                        <a href="{{$contact->link_youtube}}" rel="nofollow noopener noreferrer" target="_blank">
-                            <img src="{{asset('build/client/images/youtube.svg')}}" alt="Youtube">
-                        </a>
-                    </li>
-                @endif --}}
+
                 <li class="nav-mob-center position-absolute">
                     <a href="#" class="icon-text btn_sidebar">
                         <span class="menu-icon" style="display:inline-block;width:32px;height:32px;">
@@ -637,20 +625,6 @@
                         </span>
                     </a>
                 </li>
-                {{-- @if (isset($contact) && $contact->link_face)
-                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                        <a href="{{$contact->link_face}}" rel="nofollow noopener noreferrer" target="_blank">
-                            <img src="{{asset('build/client/images/face.svg')}}" alt="Facebook">
-                        </a>
-                    </li>
-                @endif
-                @if (isset($contact) && $contact->link_tik_tok)
-                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                        <a href="{{$contact->link_tik_tok}}a" rel="nofollow noopener noreferrer" target="_blank">
-                            <img src="{{asset('build/client/images/tiktok.svg')}}" alt="Tiktok">
-                        </a>
-                    </li>
-                @endif --}}
             </ul>
         </div>
     </footer>

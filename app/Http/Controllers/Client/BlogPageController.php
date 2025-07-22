@@ -42,7 +42,7 @@ class BlogPageController extends Controller
             $blogAll = $blogAll->whereHas('category')->where('title', 'like', '%' . $search . '%');
         }
 
-        $blogAll = $blogAll->active()->sorting()->paginate(3);
+        $blogAll = $blogAll->active()->sorting()->paginate(15);
         
         $blogSeeAlso = Blog::with('category')
         ->whereHas('category', function($active){

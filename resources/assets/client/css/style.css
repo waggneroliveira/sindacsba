@@ -1,3 +1,10 @@
+html, body {
+  overflow-x: hidden;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 .menu-mobile-down{
     display: none;
 }
@@ -5,10 +12,10 @@
     height: 35px;
 }
 .menu-mobile-down{
-    background-color: var(--background-blue);
+    background-color: #00000066;
     /* border-top: 1px solid var(--background-red); */
     z-index: 12;
-    height: 50px;
+    height: 35px;
 }
 .nav-mob-center{
     left: 50%;
@@ -234,6 +241,9 @@ body .uwy.userway_p1 .userway_buttons_wrapper  {
 }
 .bg-box-contact{
     background: #F1F0F0;
+}
+.btn-close-menu{
+    font-size: 35px !important;
 }
 .font-10 {
     font-size: 0.625rem;
@@ -574,7 +584,8 @@ h1, h2, h3, h4, h5, h6  {
 .relative.z-0.inline-flex.shadow-sm.rounded-md{
     box-shadow: inherit !important;
 }
-.btn-reset {
+.btn-reset,
+.btn-close-menu {
     all: unset;
     cursor: pointer;
 }
@@ -1361,6 +1372,13 @@ h1, h2, h3, h4, h5, h6  {
     }
 }
 @media (max-width:576px)  {
+    .menu-mobile .text-white.nav-link.montserrat-regular.font-18{
+        font-size: 0.938rem;
+    }
+    .modal-dialog.modal-dialog-centered{
+        width: 95% !important;
+        margin: 0 auto;
+    }
     .menu-mobile-down{
         display: block;
     }
@@ -1390,6 +1408,16 @@ h1, h2, h3, h4, h5, h6  {
     }
 }
 @media (max-width:476px){
+    .footer .container{
+        padding-bottom: 35px !important;
+        padding-top: 35px !important;
+    }
+    .sitemap .logo img{
+        width: 95px;
+    }
+    br{
+        display: none;
+    }
     .login .loginOn{
         font-size: 0.563rem;
     }
@@ -1406,17 +1434,23 @@ h1, h2, h3, h4, h5, h6  {
     }
     .d-flex.justify-content-between.align-items-center.mt-5 {
         margin-top: 0 !important;
+        margin-bottom: 35px;
     }
     .d-flex.justify-content-between.align-items-center.mt-5 p{
         text-align: center !important;
     }
     .d-flex.justify-content-end.flex-column.w-auto.montserrat-semiBold span a{
-        flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         margin: 0 auto;
+        text-align: left;
+        font-size: 0.75rem;
+    }
+    .d-flex.justify-content-end.flex-column.w-auto.montserrat-semiBold span a svg{
+        width: 30px;
     }
     .d-flex.justify-content-end.flex-column.w-auto.montserrat-semiBold{
         text-align: center;
+        align-items: center;
     }
     .footer ul{
         text-align: center!important;
@@ -1439,6 +1473,12 @@ h1, h2, h3, h4, h5, h6  {
     .sc{
         width: 100%;
     }
+    .sitemap{
+        margin-bottom: 35px !important;
+    }
+    .credits img{
+        width: 85px;
+    }
     .socials-network{
         height: 200px;
         padding-top: 0 !important;
@@ -1448,8 +1488,13 @@ h1, h2, h3, h4, h5, h6  {
         width: 100% !important;
     }
     #commentForm button,
-    .montserrat-semiBold.font-16.d-flex.justify-content-between.align-items-center.gap-2.background-red.py-2.px-3.text-white.rounded-3{
+    .montserrat-semiBold.font-16.d-flex.justify-content-between.align-items-center.gap-2.background-red.py-2.px-3.text-white.rounded-3,
+    .bg-webmail{
         padding: 5px 10px;
+    }
+    .bg-webmail{
+        width: 100px;
+        height: auto;
     }
     .bg-white.border.border-top-0.p-4{
         padding: 10px !important;
@@ -1467,12 +1512,18 @@ h1, h2, h3, h4, h5, h6  {
     .section-title.rounded-top-left.rounded-3.d-flex.justify-content-between.align-items-center.h-100 svg{
         width: 20px;
     }
-
+    .btn.px-4.background-red.rounded-3.text-white.montserrat-medium.font-15,
+    .btn.bg-secondary.rounded-3.text-white.montserrat-medium.font-15,
+    .btn.px-5.background-red.rounded-3.text-white.montserrat-medium.font-15{
+        padding: 5px 15px;
+        font-size: 0.75rem;
+    }
     .m-0.text-uppercase.montserrat-bold.font-22.title-blue,
     .mb-3.title-blue.montserrat-bold.font-32.text-uppercase,
     .montserrat-bold.font-30.mb-2.title-blue,
     .montserrat-bold.font-28.mt-5.title-blue,
-    .montserrat-bold.font-30.mb-0.title-blue{
+    .montserrat-bold.font-30.mb-0.title-blue,
+    .modal-title.text-uppercase.montserrat-bold.font-22.text-white{
         font-size: 1.125rem;
     }
     .badge.badge-primary.montserrat-semiBold.font-12.me-2.background-red.text-uppercase.font-weight-semi-bold.p-2,
@@ -1482,7 +1533,8 @@ h1, h2, h3, h4, h5, h6  {
     .h6.m-0.text-uppercase.montserrat-bold.font-14.title-blue,
     .btn.btn-sm.btn-outline-secondary.montserrat-semiBold.font-14.m-1,
     .mb-1.montserrat-bold.font-15.title-blue.text-uppercase,
-    .text-muted.text-color.montserrat-regular.font-16.title-blue{
+    .text-muted.text-color.montserrat-regular.font-16.title-blu,
+    .montserrat-regular.font-15.text-white.text-center{
         font-size: 0.75rem;
     } 
     #news{
@@ -1498,11 +1550,14 @@ h1, h2, h3, h4, h5, h6  {
     .text-color.montserrat-regular.font-16.text-start,
     .text-blog-inner.montserrat-regular.font-16 p,
     .montserrat-semiBold.font-16.d-flex.justify-content-between.align-items-center.gap-2.background-red.py-2.px-3.text-white.rounded-3,
-    #commentForm button, #contactForm button, .d-flex.justify-content-between.align-items-center.mt-5 p{
+    #commentForm button, #contactForm button{
         font-size: 0.938rem;
     }
     .montserrat-regular.text-color.font-12{
         text-align: left;
+    }
+    #footer-text{
+        font-size: 0.75rem;
     }
     #newsletterForm .input-group-append, 
     #contactForm button{
