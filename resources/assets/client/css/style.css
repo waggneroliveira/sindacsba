@@ -4,7 +4,10 @@ html, body {
 *, *::before, *::after {
   box-sizing: border-box;
 }
-
+.swiper-button-next, .swiper-button-prev{
+    color: var(--text-color-blog-inner);
+    width: 2px;
+}
 .menu-mobile-down{
     display: none;
 }
@@ -13,7 +16,6 @@ html, body {
 }
 .menu-mobile-down{
     background-color: #00000066;
-    /* border-top: 1px solid var(--background-red); */
     z-index: 12;
     height: 35px;
 }
@@ -22,7 +24,6 @@ html, body {
     top: -25px;
     transform: translate(-50%, 0px);
     background: var(--background-blue);
-    border: 3px solid var(--background-red);
     width: 50px;
     height: 50px;
     border-radius: 100%;
@@ -1406,6 +1407,10 @@ h1, h2, h3, h4, h5, h6  {
     .login h2, .login h3{
         font-size: 0.75rem;
     }
+    .swiper-button-next:after, .swiper-button-prev:after  {
+        font-size: 18px;
+        font-weight: 800;
+    }
 }
 @media (max-width:476px){
     .footer .container{
@@ -1624,9 +1629,6 @@ h1, h2, h3, h4, h5, h6  {
     .project-list-carousel  {
         width: 100%;
         padding: 0 10px
-    }
-    .swiper-button-next:after, .swiper-button-prev:after  {
-        font-size: 30px
     }
     .stack-details-slider  {
         padding-bottom: 35px
