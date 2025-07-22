@@ -17,7 +17,11 @@ class AuthClientMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::guard('client')->check()) {
-            return redirect()->route('noticias'); // Redireciona se não estiver autenticado como cliente
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Você precisa estar logado para comentar.'], 401);
+            }
+
+            return redirect()->back();
         }
 
         return $next($request);

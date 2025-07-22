@@ -104,7 +104,7 @@ class BlogController extends Controller
 
             $data['path_image_thumbnail'] = $this->pathUpload . $filename;
         }
-
+        
         try {
             DB::beginTransaction();
                 Blog::create($data);
@@ -164,13 +164,14 @@ class BlogController extends Controller
     public function update(BlogRequestUpdate $request, Blog $blog)
     {
         $data = $request->all();
-        $data['active'] = $request->active?1:0;
-        $data['super_highlight'] = $request->super_highlight?1:0;
-        $data['highlight'] = $request->highlight?1:0;
+        $data['active'] = $request->active ? 1 : 0;
+        $data['super_highlight'] = $request->super_highlight ? 1 : 0;
+        $data['highlight'] = $request->highlight ? 1 : 0;
         $data['slug'] = Str::slug($request->title);
 
         $manager = new ImageManager(GdDriver::class);
 
+        // Imagem principal
         if ($request->hasFile('path_image')) {
             $file = $request->file('path_image');
             $mime = $file->getMimeType();
@@ -190,16 +191,21 @@ class BlogController extends Controller
                 Storage::put($this->pathUpload . $filename, $image);
             }
 
-            Storage::delete(isset($blog->path_image)??$blog->path_image);
+            if (!empty($blog->path_image)) {
+                Storage::delete($blog->path_image);
+            }
+
             $data['path_image'] = $this->pathUpload . $filename;
         }
 
-        if (isset($request->delete_path_image)) {
-            Storage::delete(isset($blog->path_image)??$blog->path_image);
+        if ($request->has('delete_path_image')) {
+            if (!empty($blog->path_image)) {
+                Storage::delete($blog->path_image);
+            }
             $data['path_image'] = null;
         }
-        
-        //Imagem de capa
+
+        // Imagem de capa
         if ($request->hasFile('path_image_thumbnail')) {
             $file = $request->file('path_image_thumbnail');
             $mime = $file->getMimeType();
@@ -219,19 +225,25 @@ class BlogController extends Controller
                 Storage::put($this->pathUpload . $filename, $image);
             }
 
-            Storage::delete(isset($blog->path_image_thumbnail)??$blog->path_image_thumbnail);
+            if (!empty($blog->path_image_thumbnail)) {
+                Storage::delete($blog->path_image_thumbnail);
+            }
+
             $data['path_image_thumbnail'] = $this->pathUpload . $filename;
         }
 
-        if (isset($request->delete_path_image_thumbnail)) {
-            Storage::delete(isset($blog->path_image_thumbnail)??$blog->path_image_thumbnail);
-            $data['path_image'] = null;
+        if ($request->has('delete_path_image_thumbnail')) {
+            if (!empty($blog->path_image_thumbnail)) {
+                Storage::delete($blog->path_image_thumbnail);
+            }
+            $data['path_image_thumbnail'] = null;
         }
-        
+
         try {
             DB::beginTransaction();
                 $blog->fill($data)->save();
             DB::commit();
+
             session()->flash('success', __('dashboard.response_item_update'));
             return redirect()->back();
         } catch (\Exception $e) {
@@ -240,7 +252,6 @@ class BlogController extends Controller
             return redirect()->back();
         }
     }
-
 
     public function destroy(Blog $blog)
     {

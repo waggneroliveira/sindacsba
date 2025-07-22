@@ -1,7 +1,7 @@
 @extends('client.core.client')
 @section('content')
     <!-- News With Sidebar Start -->
-    <div class="container-fluid mb-5">
+    <div class="container-fluid mb-5 blog-inn">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8" data-aos=fade-right data-aos-delay=150>
@@ -17,7 +17,10 @@
                                 <span class="badge background-red montserrat-semiBold font-12 text-uppercase py-2 px-2 me-2">{{$blogInner->category->title}}</span>
                                 <p class="text-color mb-0 montserrat-regular font-15">{{$dataFormatada}}</p>
                             </div>
-                            <img class="img-fluid w-100 rounded-3" src="{{ asset('storage/'.$blogInner->path_image) }}" alt="{{$blogInner->title}}" style="object-fit: cover;">
+                            <img class="img-fluid w-100 rounded-3"
+                              src="{{ $blogInner->path_image ? asset('storage/'.$blogInner->path_image) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
+                              alt="{{ $blogInner->title ? $blogInner->title : 'Sem imagem'}}"
+                              style="object-fit: cover;">
                             <div class="py-4"> 
                                 <div class="text-blog-inner montserrat-regular font-16">
                                     {!! $blogInner->text !!}
@@ -159,15 +162,17 @@
                                     @endphp                               
                                     <article>
                                         <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
-                                            <img class="img-fluid" src="{{asset('storage/'.$relacionado->path_image)}}" alt="{{$relacionado->title}}">
+                                            <img class="img-fluid"
+                                            src="{{ $relacionado->path_image_thumbnail ? asset('storage/'.$relacionado->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
+                                            alt="{{ $relacionado->title ? $blogInner->title : 'Sem imagem'}}">
                                             <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                            <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
-                                                <span class="badge badge-primary montserrat-semiBold font-10 text-uppercase py-1 px-2 mr-2 background-red">{{$relacionado->category->title}}</span>
-                                                <p class="text-color mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
-                                            </div>
-                                            <a href="{{route('blog-inner', ['slug' => $relacionado->slug])}}" class="underline">
-                                                <h3 class="h6 m-0 text-uppercase montserrat-bold font-14 title-blue">{{$relacionado->title}}</h3>
-                                            </a>
+                                                <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
+                                                    <span class="badge badge-primary montserrat-semiBold font-10 text-uppercase py-1 px-2 mr-2 background-red">{{$relacionado->category->title}}</span>
+                                                    <p class="text-color mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
+                                                </div>
+                                                <a href="{{route('blog-inner', ['slug' => $relacionado->slug])}}" class="underline">
+                                                    <h3 class="h6 m-0 text-uppercase montserrat-bold font-14 title-blue">{{$relacionado->title}}</h3>
+                                                </a>
                                             </div>
                                         </div>
                                     </article>

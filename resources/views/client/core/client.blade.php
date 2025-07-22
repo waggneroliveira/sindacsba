@@ -558,6 +558,15 @@
     <main>
         <div  class="mt-0">
             @include('client.includes.announcement')
+
+            @if ($announcements->isEmpty())
+                <style>
+                    .contact, .blog-inn {
+                        margin-top: 35px;
+                    }
+                </style>
+            @endif
+
         </div>
         @yield('content') 
     </main>

@@ -6,7 +6,7 @@ html, body {
 }
 .swiper-button-next, .swiper-button-prev{
     color: var(--text-color-blog-inner);
-    width: 2px;
+    width: 15px;
 }
 .menu-mobile-down{
     display: none;
@@ -1373,6 +1373,12 @@ h1, h2, h3, h4, h5, h6  {
     }
 }
 @media (max-width:576px)  {
+    .rounded-top-left{
+        margin-bottom: 30px !important;
+    }
+    .col-12.col-lg-9.mb-5.pb-4.d-flex.justify-content-between.gap-3.flex-wrap.align-items-center{
+        margin-bottom: 10px !important;
+    }
     .menu-mobile .text-white.nav-link.montserrat-regular.font-18{
         font-size: 0.938rem;
     }
@@ -1389,6 +1395,7 @@ h1, h2, h3, h4, h5, h6  {
         line-height: 14px;
         text-align: center;
         font-size: 0.75rem;
+        z-index: -1;
     }
     .menu-icon{
         width: 25px !important;

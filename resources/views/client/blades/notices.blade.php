@@ -35,7 +35,7 @@
                 @else
                 <div class="alert alert-warning col-12 col-lg-8 m-auto d-flex align-items-center flex-column text-center py-4" role="alert">
                     <i class="bi bi-emoji-frown fs-1 mb-2"></i>
-                    <h4 class="alert-heading text-uppercase montserrat-bold font-20">Nenhum edital encontrada</h4>
+                    <h4 class="alert-heading text-uppercase montserrat-bold font-20">Nenhum edital encontrado</h4>
                 </div>
             @endif
         </div>
