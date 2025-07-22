@@ -190,7 +190,10 @@
                                     @endphp                                
                                     <article>
                                        <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
-                                          <img class="img-fluid" src="{{asset('storage/'.$seeAlso->path_image)}}" alt="{{$seeAlso->title}}">
+                                          <img class="img-fluid"
+                                          src="{{ $seeAlso->path_image_thumbnail ? asset('storage/'.$seeAlso->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
+                                          alt="{{ $seeAlso->title ? $seeAlso->title : 'Sem imagem'}}"
+                                          style="height: 110px;">
                                           <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                              <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
                                                 <span class="badge badge-primary montserrat-semiBold font-10 text-uppercase py-1 px-2 mr-2 background-red">{{$seeAlso->category->title}}</span>

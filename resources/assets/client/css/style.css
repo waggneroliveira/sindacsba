@@ -6,7 +6,7 @@ html, body {
 }
 .swiper-button-next, .swiper-button-prev{
     color: var(--text-color-blog-inner);
-    width: 15px;
+    width: 30px;
 }
 .menu-mobile-down{
     display: none;
@@ -1420,6 +1420,9 @@ h1, h2, h3, h4, h5, h6  {
     }
 }
 @media (max-width:476px){
+    .text-color.mb-0.montserrat-regular.font-12{
+        font-size: 0.625rem;
+    }
     .footer .container{
         padding-bottom: 35px !important;
         padding-top: 35px !important;
