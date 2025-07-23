@@ -13,6 +13,7 @@
         <link href="{{ asset('build/admin/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('build/admin/css/app.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('build/admin/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('build/admin/css/custom.css') }}" rel="stylesheet" type="text/css" />
 
         <script src="{{ asset('build/admin/js/head.js') }}"></script>
    

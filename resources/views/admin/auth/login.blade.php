@@ -4,21 +4,21 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-4">
-                    <div class="card bg-pattern">
+                    <div class="card bg-pattern">{{-- bg-black-whi --}}
 
                         <div class="card-body p-4">
                             
                             <div class="text-center w-75 m-auto">
                                 <div class="auth-brand">
-                                    <a href="index.html" class="logo logo-dark text-center">
+                                    <a href="https://www.whi.dev.br/" target="_blank"  class="logo logo-dark text-center">
                                         <span class="logo-lg">
-                                            <img src="{{asset('build/admin/images/whi.png')}}" alt="" height="22">
+                                            <img src="{{asset('build/admin/images/whi-black.png')}}" alt="Logo WHI" height="50">
                                         </span>
                                     </a>
                 
-                                    <a href="index.html" class="logo logo-light text-center">
+                                    <a href="https://www.whi.dev.br/" target="_blank"  class="logo logo-light text-center">
                                         <span class="logo-lg">
-                                            <img src="{{asset('build/admin/images/whi.png')}}" alt="" height="22">
+                                            <img src="{{asset('build/admin/images/whi.png')}}" alt="Logo WHI" height="50">
                                         </span>
                                     </a>
                                 </div>
@@ -61,7 +61,7 @@
                                 </div>
 
                                 <div class="text-center d-grid">
-                                    <button class="btn btn-primary" type="submit"> Entrar </button>
+                                    <button class="py-1 px-2 rounded-3 btn-green-whi text-back fw-bold" type="submit"> Entrar </button>
                                 </div>
 
                             </form>
@@ -69,7 +69,6 @@
                             <div class="row mt-3">
                                 <div class="col-12 text-center">
                                     <p> <a href="{{route('password.request')}}" class="text-muted ms-1">Esqueceu sua senha?</a></p>
-                                    <p class="text-muted">Não tem uma conta? <a href="auth-register.html" class="text-muted ms-1"><b>Inscrever-se</b></a></p>
                                 </div> <!-- end col -->
                             </div>
                             <!-- end row -->
