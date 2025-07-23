@@ -82,7 +82,7 @@
                <div class="col-lg-8 mb-4" data-aos=fade-right data-aos-delay=150>
                   @if ($blogAll->count())                     
                      <div class="mb-5 rounded-top-left">
-                        <h4 class="m-0 text-uppercase montserrat-bold font-22 title-blue">Notícias</h4>
+                        <h3 class="m-0 text-uppercase montserrat-bold font-22 title-blue">Notícias</h3>
                      </div>
                      <div class="row">
                         <div class="col-12 col-lg-9 mb-5 pb-4 d-flex justify-content-between gap-3 flex-wrap align-items-center">
@@ -148,7 +148,7 @@
                      @else
                      <div class="alert alert-warning d-flex align-items-center flex-column text-center py-4" role="alert">
                         <i class="bi bi-emoji-frown fs-1 mb-2"></i>
-                        <h4 class="alert-heading text-uppercase montserrat-bold font-20">Nenhuma notícia encontrada</h4>
+                        <h3 class="alert-heading text-uppercase montserrat-bold font-20">Nenhuma notícia encontrada</h3>
                      </div>
                   @endif
                </div>
