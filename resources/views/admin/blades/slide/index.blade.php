@@ -38,7 +38,7 @@
                                     </div>
                                     <div class="col-6 d-flex justify-content-end">
                                         @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['slide.visualizar', 'slide.criar']))
-                                            <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#slide-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
+                                            <button type="button" class="btn btn-primary text-black waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#slide-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="slide-create" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="slide modal-dialog modal-dialog-centered">
@@ -53,7 +53,7 @@
                                                                 @include('admin.blades.slide.form', ['textareaId' => 'textarea-create'])  
                                                                 <div class="d-flex justify-content-end gap-2">
                                                                     <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
-                                                                    <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
+                                                                    <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
                                                                 </div>                                                 
                                                             </form>
                                                         </div>
@@ -134,7 +134,7 @@
             
                                                 <td class="d-flex gap-lg-1 justify-center" style="padding: 18px 15px 0px 0px;">
                                                     @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['slide.visualizar', 'slide.editar'])) 
-                                                        <button data-bs-toggle="modal" data-bs-target="#slide-edit-{{$slide->id}}" class="tabledit-edit-button btn btn-success" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
+                                                        <button data-bs-toggle="modal" data-bs-target="#slide-edit-{{$slide->id}}" class="tabledit-edit-button btn btn-primary text-black" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
                                                         <div class="modal fade" id="slide-edit-{{$slide->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                             <div class="slide modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
@@ -149,7 +149,7 @@
                                                                             @include('admin.blades.slide.form')   
                                                                             <div class="d-flex justify-content-end gap-2">
                                                                                 <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
-                                                                                <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_save')}}</button>
+                                                                                <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_save')}}</button>
                                                                             </div>                                                                                                                      
                                                                         </form>                                                                    
                                                                     </div>

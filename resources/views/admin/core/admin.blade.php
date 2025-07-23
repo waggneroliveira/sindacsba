@@ -12,13 +12,13 @@
   
     <head>
         <meta charset="utf-8" />
-        <title>{{env('APP_NAME')}} - Painel Gerenciador</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WHI - Painel Gerenciador</title>{{-- {{env('APP_NAME')}} --}}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <meta name="author" content="WHI - Web de Alta Inspiração">
-        <meta name="description" content="Painel gerenciador de conteúdo {{env('APP_NAME')}}">
+        <meta name="description" content="Painel gerenciador de conteúdo WHI">
         <meta name="copyright" content="© 2024 WHI - Web de Alta Inspiração." />
         <meta name="robots" content="none">
         <meta name="googlebot" content="noarchive">
@@ -31,7 +31,7 @@
         </script>
 
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{ asset('build/admin/images/whi.png') }}">
+        <link rel="shortcut icon" href="{{ asset('build/admin/images/favicon.png') }}">
 
         <!-- Load da pagina -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -73,14 +73,14 @@
                 <div class="logo-box">
                     <!-- Brand Logo Light -->
                     <a href="{{route('admin.dashboard')}}" class="logo-light">
-                        <img src="{{asset('build/admin/images/whi.png')}}" alt="logo" class="logo-lg">
+                        <img src="{{asset('build/admin/images/whi-green-horizontal.png')}}" alt="logo" class="logo-lg">
                         <img src="{{asset('build/admin/images/whi.png')}}" alt="small logo" class="logo-sm">
                     </a>
 
                     <!-- Brand Logo Dark -->
                     <a href="{{route('admin.dashboard')}}" class="logo-dark">
-                        <img src="{{asset('build/admin/images/whi.png')}}" alt="dark logo" class="logo-lg">
-                        <img src="{{asset('build/admin/images/whi.png')}}" alt="small logo" class="logo-sm">
+                        <img src="{{asset('build/admin/images/whi-black-horizontal.png')}}" alt="dark logo" class="logo-lg">
+                        <img src="{{asset('build/admin/images/whi-black.png')}}" alt="small logo" class="logo-sm">
                     </a>
                 </div>
 
@@ -307,7 +307,7 @@
                                         @if (Auth::user()->hasRole('Super') || 
                                             Auth::user()->can('usuario.tornar usuario master') || 
                                             Auth::user()->can('notificacao.visualizar') &&  Auth::user()->can('notificacao.notificacao de auditoria'))
-                                            <span class="badge bg-danger rounded-circle noti-icon-badge">{{ isset($auditCount) ? $auditCount : "0" }}</span>
+                                            <span class="badge btn-green-whi text-black rounded-circle noti-icon-badge">{{ isset($auditCount) ? $auditCount : "0" }}</span>
                                         @endif
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">

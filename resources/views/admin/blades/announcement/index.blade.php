@@ -44,7 +44,7 @@
                                         Auth::user()->can('usuario.tornar usuario master') || 
                                         Auth::user()->can('anuncio.visualizar') &&
                                         Auth::user()->can('anuncio.criar'))
-                                            <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#announcement-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
+                                            <button type="button" class="btn btn-primary text-black waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#announcement-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="announcement-create" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="announcement modal-dialog modal-dialog-centered" style="max-width: 980px;">
@@ -53,13 +53,13 @@
                                                             <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.btn_create')}}</h4>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                         </div>
-                                                        <div class="modal-body p-4">
+                                                        <div class="modal-body p-2 px-3 px-md-4">
                                                             <form action="{{route('admin.dashboard.announcement.store')}}" method="POST" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @include('admin.blades.announcement.form', ['textareaId' => 'textarea-create'])  
                                                                 <div class="d-flex justify-content-end gap-2">
                                                                     <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
-                                                                    <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
+                                                                    <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
                                                                 </div>                                                 
                                                             </form>
                                                         </div>
@@ -139,7 +139,7 @@
                                                     Auth::user()->can('usuario.tornar usuario master') || 
                                                     Auth::user()->can('anuncio.visualizar') &&
                                                     Auth::user()->can('anuncio.editar')) 
-                                                        <button data-bs-toggle="modal" data-bs-target="#announcement-edit-{{$announcement->id}}" class="tabledit-edit-button btn btn-success" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
+                                                        <button data-bs-toggle="modal" data-bs-target="#announcement-edit-{{$announcement->id}}" class="tabledit-edit-button btn btn-primary text-black" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
                                                         <div class="modal fade" id="announcement-edit-{{$announcement->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                             <div class="announcement modal-dialog modal-dialog-centered" style="max-width: 980px;">
                                                                 <div class="modal-content">
@@ -147,14 +147,14 @@
                                                                         <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.btn_edit')}}</h4>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                                     </div>
-                                                                    <div class="modal-body p-4">
+                                                                    <div class="modal-body p-2 px-3 px-md-4">
                                                                         <form action="{{ route('admin.dashboard.announcement.update', ['announcement' => $announcement->id]) }}" method="POST" enctype="multipart/form-data">
                                                                             @csrf
                                                                             @method('PUT')
                                                                             @include('admin.blades.announcement.form')   
                                                                             <div class="d-flex justify-content-end gap-2">
                                                                                 <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
-                                                                                <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_save')}}</button>
+                                                                                <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_save')}}</button>
                                                                             </div>                                                                                                                      
                                                                         </form>                                                                    
                                                                     </div>

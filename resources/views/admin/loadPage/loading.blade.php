@@ -11,8 +11,7 @@
         z-index: 9999;
     }
     .loading-indicator .row img{
-        width: 100%;
-        max-width: 70px;
+        width: 280px;
         margin-bottom: 15px;
     }
     .loading-indicator .row{
@@ -44,12 +43,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #37424c;
+    background: #10131C;
     display: flex;
     justify-content: center;
     align-items: center;" class="loading-indicator">
     <div class="row">
-        <img id="load" src="{{asset('build/admin/images/whi.png')}}" alt="Sincronizando suas preferências..." />
+        <img id="load" src="{{asset('build/admin/images/whi-green-horizontal.png')}}" alt="Sincronizando suas preferências..." />
         @php
             $locales = [
                 'pt' => __('dashboard.message_sinc_load'), // Português

@@ -44,7 +44,7 @@
                                         Auth::user()->hasPermissionTo('usuario.criar') ||
                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                         Auth::user()->hasRole('Super'))  
-                                            <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#user-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
+                                            <button type="button" class="btn btn-primary text-black waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#user-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="user-create" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
@@ -53,13 +53,13 @@
                                                             <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.btn_create')}}</h4>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                         </div>
-                                                        <div class="modal-body p-4">
+                                                        <div class="modal-body  p-2 px-3 px-md-4">
                                                             <form action="{{route('admin.dashboard.user.store')}}" method="POST" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @include('admin.blades.user.form')  
                                                                 <div class="d-flex justify-content-end gap-2">
                                                                     <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
-                                                                    <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
+                                                                    <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
                                                                 </div>                                                 
                                                             </form>
                                                         </div>
@@ -135,7 +135,7 @@
                                                     @if (Auth::user()->hasPermissionTo('grupo.visualizar') ||
                                                     Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                                     Auth::user()->hasRole('Super'))   
-                                                        <button class="table-edit-button btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-group-edit-{{$user->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-account-group-outline"></span></button>
+                                                        <button class="table-edit-button btn btn-primary text-black" data-bs-toggle="modal" data-bs-target="#modal-group-edit-{{$user->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-account-group-outline"></span></button>
                                                         <div class="modal fade" id="modal-group-edit-{{$user->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
@@ -143,7 +143,7 @@
                                                                         <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.group_and_permission')}}</h4>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                                     </div>
-                                                                    <div class="modal-body p-4">
+                                                                    <div class="modal-body  p-2 px-3 px-md-4">
                                                                         <form action="{{ route('admin.dashboard.user.update', ['user' => $user->id]) }}" method="POST" enctype="multipart/form-data">
                                                                             @csrf
                                                                             @method('PUT')
@@ -159,7 +159,7 @@
                                                     Auth::user()->hasPermissionTo('usuario.editar') ||
                                                     Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                                     Auth::user()->hasRole('Super'))
-                                                        <button data-bs-toggle="modal" data-bs-target="#user-edit-{{$user->id}}" class="tabledit-edit-button btn btn-success" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
+                                                        <button data-bs-toggle="modal" data-bs-target="#user-edit-{{$user->id}}" class="tabledit-edit-button btn btn-primary text-black" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
                                                         <div class="modal fade" id="user-edit-{{$user->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
@@ -167,14 +167,14 @@
                                                                         <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.btn_edit')}}</h4>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                                     </div>
-                                                                    <div class="modal-body p-4">
+                                                                    <div class="modal-body p-2 px-3 px-md-4">
                                                                         <form action="{{ route('admin.dashboard.user.update', ['user' => $user->id]) }}" method="POST" enctype="multipart/form-data">
                                                                             @csrf
                                                                             @method('PUT')
                                                                             @include('admin.blades.user.form')   
                                                                             <div class="d-flex justify-content-end gap-2">
                                                                                 <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
-                                                                                <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_save')}}</button>
+                                                                                <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_save')}}</button>
                                                                             </div>                                                                                                                      
                                                                         </form>                                                                    
                                                                     </div>

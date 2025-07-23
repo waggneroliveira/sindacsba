@@ -34,7 +34,7 @@
             Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
             Auth::user()->hasPermissionTo('categorias do noticias.visualizar'))
                 <div class="col-md-5 col-xl-3">
-                    <div class="card borda-cx ratio ratio-4x3">
+                    <div class="card borda-cx ratio ratio-4x3 border-whi">
                         <div class="d-flex align-items-center justify-content-center">
                             <a href="{{route('admin.dashboard.blogCategory.index')}}">
                                 <div class="row">
@@ -57,7 +57,7 @@
             Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
             Auth::user()->hasPermissionTo('noticias.visualizar'))
                 <div class="col-md-5 col-xl-3">
-                    <div class="card borda-cx ratio ratio-4x3">
+                    <div class="card borda-cx ratio ratio-4x3 border-whi">
                         <div class="d-flex align-items-center justify-content-center">
                             <a href="{{route('admin.dashboard.blog.index')}}">
                                 <div class="row">
@@ -93,7 +93,7 @@
             Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
             Auth::user()->hasPermissionTo('contato.visualizar'))
                 <div class="col-md-5 col-xl-3">
-                    <div class="card borda-cx ratio ratio-4x3">
+                    <div class="card borda-cx ratio ratio-4x3 border-whi">
                         <div class="d-flex align-items-center justify-content-center">
                             <a href="{{route('admin.dashboard.contact.index')}}">
                                 <div class="row">
@@ -116,7 +116,7 @@
             Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
             Auth::user()->hasPermissionTo('lead contato.visualizar'))
                 <div class="col-md-5 col-xl-3">
-                    <div class="card borda-cx ratio ratio-4x3">
+                    <div class="card borda-cx ratio ratio-4x3 border-whi">
                         <div class="d-flex align-items-center justify-content-center">
                             <a href="{{route('admin.dashboard.formIndex.index')}}">
                                 <div class="row">
@@ -138,7 +138,7 @@
             Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
             Auth::user()->hasPermissionTo('newsletter.visualizar'))
                 <div class="col-md-5 col-xl-3">
-                    <div class="card borda-cx ratio ratio-4x3">
+                    <div class="card borda-cx ratio ratio-4x3 border-whi">
                         <div class="d-flex align-items-center justify-content-center">
                             <a href="{{route('admin.dashboard.newsletter.index')}}">
                                 <div class="row">
@@ -169,7 +169,7 @@
             </div>
             
             <div class="col-md-5 col-xl-3">
-                <div class="card borda-cx ratio ratio-4x3">
+                <div class="card borda-cx ratio ratio-4x3 border-whi">
                     <div class="d-flex align-items-center justify-content-center">
                         <a href="{{route('admin.dashboard.announcement.index')}}">
                             <div class="row">
@@ -199,7 +199,7 @@
             </div>
             
             <div class="col-md-5 col-xl-3">
-                <div class="card borda-cx ratio ratio-4x3">
+                <div class="card borda-cx ratio ratio-4x3 border-whi">
                     <div class="d-flex align-items-center justify-content-center">
                         <a href="{{route('admin.dashboard.noticies.index')}}">
                             <div class="row">
@@ -229,7 +229,7 @@
                 </div>
             </div>
             <div class="col-md-5 col-xl-3">
-                <div class="card borda-cx ratio ratio-4x3">
+                <div class="card borda-cx ratio ratio-4x3 border-whi">
                     <div class="d-flex align-items-center justify-content-center">
                         <a href="{{route('admin.dashboard.settingEmail.index')}}">
                             <div class="row">
@@ -261,7 +261,7 @@
             </div>
             @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can('auditoria.visualizar'))
                 <div class="col-md-5 col-xl-3">
-                    <div class="card borda-cx ratio ratio-4x3">
+                    <div class="card borda-cx ratio ratio-4x3 border-whi">
                         <div class="d-flex align-items-center justify-content-center">
                             <a href="{{route('admin.dashboard.audit.index')}}">
                                 <div class="row">
@@ -282,7 +282,7 @@
             
             @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can('grupo.visualizar'))
                 <div class="col-md-5 col-xl-3">
-                    <div class="card borda-cx ratio ratio-4x3">
+                    <div class="card borda-cx ratio ratio-4x3 border-whi">
                         <div class="d-flex align-items-center justify-content-center">
                             <a href="{{route('admin.dashboard.group.index')}}">
                                 <div class="row">
@@ -303,7 +303,7 @@
     
             @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can('usuario.visualizar'))
                 <div class="col-md-5 col-xl-3">
-                    <div class="card borda-cx ratio ratio-4x3">
+                    <div class="card borda-cx ratio ratio-4x3 border-whi">
                         <div class="d-flex align-items-center justify-content-center">
                             <a href="{{route('admin.dashboard.user.index')}}">
                                 <div class="row">

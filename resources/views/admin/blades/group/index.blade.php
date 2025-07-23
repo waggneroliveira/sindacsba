@@ -38,7 +38,7 @@
                                     </div>
                                     <div class="col-6 d-flex justify-content-end">
                                         @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['grupo.visualizar', 'grupo.criar']))                                                        
-                                            <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#group-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}} </button>
+                                            <button type="button" class="btn btn-primary text-black waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#group-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}} </button>
                                         @endif
                                         <!-- Modal -->
                                         <div class="modal fade" id="group-create" tabindex="-1" role="dialog" aria-hidden="true">
@@ -48,7 +48,7 @@
                                                         <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.btn_create')}} </h4>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                     </div>
-                                                    <div class="modal-body p-4">
+                                                    <div class="modal-body p-2 px-3 px-md-4">
                                                         <form action="{{route('admin.dashboard.group.store')}}" method="POST">
                                                             @csrf
                                                             @include('admin.blades.group.form')                                                   
@@ -105,7 +105,7 @@
                                                 
                                                 <td class="d-flex flex-row gap-2">
                                                     @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['grupo.visualizar', 'grupo.editar']))                                                        
-                                                        <button data-bs-toggle="modal" data-bs-target="#group-edit-{{$group->id}}" class="tabledit-edit-button btn btn-success" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
+                                                        <button data-bs-toggle="modal" data-bs-target="#group-edit-{{$group->id}}" class="tabledit-edit-button btn btn-primary text-black" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
                                                     @endif
                                                     <div class="modal fade" id="group-edit-{{$group->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" style="max-width: 760px">
@@ -114,7 +114,7 @@
                                                                     <h4 class="modal-title" id="myCenterModalLabel">Editar grupo</h4>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                                 </div>
-                                                                <div class="modal-body p-4">
+                                                                <div class="modal-body p-2 px-3 px-md-4">
                                                                     <form action="{{ route('admin.dashboard.group.update', ['role' => $group->id]) }}" method="POST" enctype="multipart/form-data">
                                                                         @csrf
                                                                         @method('PUT')

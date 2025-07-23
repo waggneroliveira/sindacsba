@@ -30,6 +30,6 @@
         <!-- ============================================================== -->
 
         <!-- Authentication js -->
-        <script src="{{ asset('build/admin/js/pages/authentication.init.js') }}"></script>
+        {{-- <script src="{{ asset('build/admin/js/pages/authentication.init.js') }}"></script> --}}
     </body>
 </html>

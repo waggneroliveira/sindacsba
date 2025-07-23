@@ -39,7 +39,7 @@
                                             Auth::user()->can('editais.criar') ||
                                             Auth::user()->can('usuario.tornar usuario master') || 
                                             Auth::user()->hasRole('Super'))
-                                                <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#noticies-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
+                                                <button type="button" class="btn btn-primary text-black waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#noticies-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="noticies-create" tabindex="-1" role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" style="max-width: 980px;">
@@ -48,43 +48,75 @@
                                                                 <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.btn_create')}}</h4>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                             </div>
-                                                            <div class="modal-body p-4">
-                                                                <form action="{{route('admin.dashboard.noticies.store')}}" method="POST" enctype="multipart/form-data">
+                                                            <div class="modal-body p-2 px-3 px-md-4">
+                                                                <form action="{{ route('admin.dashboard.noticies.store') }}" method="POST" enctype="multipart/form-data">
                                                                     @csrf
-                                                                    <div class="row">
-                                                                        <div class="mb-3 col-8">
+                                                                    <div class="row g-3">
+                                                                        <div class="mb-3 col-12 col-md-8">
                                                                             <label for="title" class="form-label">Título</label>
-                                                                            <input type="text" name="title" class="form-control" id="title" placeholder="Digite seu nome">
+                                                                            <input 
+                                                                                type="text" 
+                                                                                name="title" 
+                                                                                class="form-control" 
+                                                                                id="title" 
+                                                                                placeholder="Digite seu nome" 
+                                                                                required
+                                                                            >
                                                                         </div>
-                                                                        <div class="mb-3 col-4">
+                                                                        <div class="mb-3 col-12 col-md-4">
                                                                             <label for="date" class="form-label">Data de publicação</label>
-                                                                            <input type="date" name="date" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="col-lg-12">
-                                                                        <div class="mt-3">
-                                                                            <label for="path_file" class="form-label">Arquivo</label>
-                                                                            <input type="file" name="path_file" accept="application/pdf" data-plugins="dropify" required/>
-                                                                            <p class="text-muted text-center mt-2 mb-0">{{__('dashboard.text_img_size')}} <b class="text-danger">2 MB</b>.</p>
+                                                                            <input 
+                                                                                type="date" 
+                                                                                name="date" 
+                                                                                class="form-control" 
+                                                                                id="date" 
+                                                                                required
+                                                                            >
                                                                         </div>
                                                                     </div>
                                                                     
                                                                     <div class="mb-3">
-                                                                        <div class="form-check">
-                                                                            <input name="active" type="checkbox" accept="application/pdf" class="form-check-input" id="invalidCheck{{isset($noticie->id)?$noticie->id:''}}" />
-                                                                            <label class="form-check-label" for="invalidCheck">{{__('dashboard.active')}}?</label>
-                                                                            <div class="invalid-feedback">
-                                                                                You must agree before submitting.
-                                                                            </div>
+                                                                        <label for="path_file" class="form-label">Arquivo</label>
+                                                                        <input 
+                                                                            type="file" 
+                                                                            name="path_file" 
+                                                                            accept="application/pdf" 
+                                                                            data-plugins="dropify" 
+                                                                            class="form-control" 
+                                                                            required
+                                                                            id="path_file"
+                                                                        />
+                                                                        <p class="text-muted text-center mt-2 mb-0">
+                                                                            {{ __('dashboard.text_img_size') }} <b class="text-danger">2 MB</b>.
+                                                                        </p>
+                                                                    </div>
+                                                                    
+                                                                    <div class="mb-3 form-check">
+                                                                        <input 
+                                                                            name="active" 
+                                                                            type="checkbox" 
+                                                                            class="form-check-input" 
+                                                                            id="invalidCheck{{ isset($noticie->id) ? $noticie->id : '' }}" 
+                                                                        />
+                                                                        <label class="form-check-label" for="invalidCheck{{ isset($noticie->id) ? $noticie->id : '' }}">
+                                                                            {{ __('dashboard.active') }}?
+                                                                        </label>
+                                                                        <div class="invalid-feedback">
+                                                                            You must agree before submitting.
                                                                         </div>
                                                                     </div>
+                                                                    
                                                                     <div class="d-flex justify-content-end gap-2">
-                                                                        <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
-                                                                        <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
-                                                                    </div>                                                 
+                                                                        <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">
+                                                                            {{ __('dashboard.btn_cancel') }}
+                                                                        </button>
+                                                                        <button type="submit" class="btn btn-primary text-black waves-effect waves-light">
+                                                                            {{ __('dashboard.btn_create') }}
+                                                                        </button>
+                                                                    </div>
                                                                 </form>
                                                             </div>
+
                                                         </div><!-- /.modal-content -->
                                                     </div><!-- /.modal-dialog -->
                                                 </div><!-- /.modal -->
@@ -139,7 +171,7 @@
                                                         Auth::user()->can('editais.editar') ||
                                                         Auth::user()->can('usuario.tornar usuario master') || 
                                                         Auth::user()->hasRole('Super'))
-                                                            <button class="table-edit-button btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-group-edit-{{$noticie->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
+                                                            <button class="table-edit-button btn btn-primary text-black" data-bs-toggle="modal" data-bs-target="#modal-group-edit-{{$noticie->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
                                                             <div class="modal fade" id="modal-group-edit-{{$noticie->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered" style="max-width: 980px;">
                                                                     <div class="modal-content">
@@ -147,14 +179,14 @@
                                                                             <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.group_and_permission')}}</h4>
                                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                                         </div>
-                                                                        <div class="modal-body p-4">
+                                                                        <div class="modal-body  p-2 px-3 px-md-4">
                                                                             <form action="{{ route('admin.dashboard.noticies.update', ['noticies' => $noticie->id]) }}" method="POST" enctype="multipart/form-data">
                                                                                 @csrf
                                                                                 @method('PUT')
                                                                                 @include('admin.blades.noticies.form', ['textareaId' => 'textarea-edit-' . $noticie->id])    
                                                                                 <div class="d-flex justify-content-end gap-2">
                                                                                     <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
-                                                                                    <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_save')}}</button>
+                                                                                    <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_save')}}</button>
                                                                                 </div>                                                                                                                                                                                            
                                                                             </form>                                                                    
                                                                         </div>

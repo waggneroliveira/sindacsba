@@ -39,7 +39,7 @@
                                             Auth::user()->hasPermissionTo('noticias.criar') ||
                                             Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                             Auth::user()->hasRole('Super'))
-                                                <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#blog-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
+                                                <button type="button" class="btn btn-primary text-black waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#blog-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="blog-create" tabindex="-1" role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" style="max-width: 980px;">
@@ -126,7 +126,7 @@
                                                                     </div>
                                                                     <div class="d-flex justify-content-end gap-2">
                                                                         <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
-                                                                        <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
+                                                                        <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
                                                                     </div>                                                 
                                                                 </form>
                                                             </div>
@@ -207,7 +207,7 @@
                                                                 $pendingCount = $blog->comments->where('active', 0)->count();
                                                             @endphp
                                                             
-                                                            <button class="table-edit-button btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#modal-blog-{{$blog->id}}" style="padding: 2px 8px;width: 30px">
+                                                            <button class="table-edit-button btn btn-secondary position-relative" data-bs-toggle="modal" data-bs-target="#modal-blog-{{$blog->id}}" style="padding: 2px 8px;width: 30px">
                                                                 <span class="mdi mdi-message-bulleted"></span> 
                                                                 @if($pendingCount > 0)
                                                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 10px;">
@@ -236,50 +236,51 @@
                                                                                     @endphp
 
                                                                                     @if ($client)
-                                                                                        <div class="d-flex gap-2 flex-column mb-4">
-                                                                                            <div class="d-flex mb-0 gap-3">
+                                                                                        <div class="d-flex flex-column gap-2 mb-4">
+                                                                                            <div class="d-flex flex-column flex-md-row gap-3">
                                                                                                 <img src="{{ $client->path_image ? url($client->path_image) : asset('build/client/images/user.jpg') }}"
                                                                                                     alt="Imagem do cliente"
-                                                                                                    class="img-fluid mr-3 mt-1 rounded-circle"
+                                                                                                    class="img-fluid rounded-circle"
                                                                                                     style="width: 50px; height: 50px; object-fit: cover;">
-                                                                                                <div class="d-flex flex-column col-10">
-                                                                                                    <div class="d-flex justify-content-between align-items-center">
-                                                                                                        <div class="d-flex flex-column">
+
+                                                                                                <div class="flex-grow-1 w-100">
+                                                                                                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start">
+                                                                                                        <div>
                                                                                                             <h6 class="title-blue montserrat-bold font-15 mb-0">{{ $client->name }}</h6>
-                                                                                                            <small class="title-blue mb-0 montserrat-regular font-12">
-                                                                                                                {{ $dataFormatada }}
-                                                                                                            </small>
+                                                                                                            <small class="title-blue mb-0 montserrat-regular font-12">{{ $dataFormatada }}</small>
                                                                                                         </div>
-                                                                                                        <div class="d-flex justify-content-end align-item-center gap-2">
+
+                                                                                                        <div class="d-flex flex-wrap justify-content-md-end justify-content-start align-items-center gap-2 mt-2 mt-md-0">
                                                                                                             @if ($comment->active == 1)
-                                                                                                                <form action="{{route('comment.desactive.update', $comment->id)}}" method="POST">
+                                                                                                                <form action="{{ route('comment.desactive.update', $comment->id) }}" method="POST">
                                                                                                                     @csrf
                                                                                                                     @method('put')
-                                                                                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Desativar comentário</button>
+                                                                                                                    <button type="submit" class="btn btn-primary btn-sm text-black">Desativar comentário</button>
                                                                                                                 </form>
                                                                                                             @else
-                                                                                                                <form action="{{route('comment.active.update', $comment->id)}}" method="POST">
+                                                                                                                <form action="{{ route('comment.active.update', $comment->id) }}" method="POST">
                                                                                                                     @csrf
                                                                                                                     @method('put')
-                                                                                                                    <button type="submit" class="btn btn-success waves-effect waves-light">Ativar comentário</button>
+                                                                                                                    <button type="submit" class="btn btn-secondary btn-sm">Ativar comentário</button>
                                                                                                                 </form>
                                                                                                             @endif
-                                                                                                            <form action="{{route('comment.delete', $comment->id)}}" method="POST">
+
+                                                                                                            <form action="{{ route('comment.delete', $comment->id) }}" method="POST">
                                                                                                                 @csrf
                                                                                                                 @method('DELETE')
-                                                                                                                <button type="submit" class="btn btn-danger waves-effect waves-light">Excluir comentário</button>
+                                                                                                                <button type="submit" class="btn btn-danger btn-sm">Excluir comentário</button>
                                                                                                             </form>
                                                                                                         </div>
                                                                                                     </div>
-                                                                                                    <div class="w-100 mt-2 d-block">
-                                                                                                        <div class="mb-3 col-12 d-flex align-items-start flex-column">
-                                                                                                            <label for="textarea-commit-edit-{{ $comment->id }}" class="form-label">Comentário</label>
-                                                                                                            <textarea name="text" readonly class="form-control col-12 ck-readonly" id="textarea-commit-edit-{{ $comment->id }}" rows="5">{!! $comment->comment !!}</textarea>
-                                                                                                        </div>
-                                                                                                    </div>                                                                                                
+
+                                                                                                    <div class="mt-3">
+                                                                                                        <label for="textarea-commit-edit-{{ $comment->id }}" class="form-label">Comentário</label>
+                                                                                                        <textarea name="text" readonly class="form-control ck-readonly" id="textarea-commit-edit-{{ $comment->id }}" rows="5">{!! $comment->comment !!}</textarea>
+                                                                                                    </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
+
                                                                                     @endif
                                                                                 @endforeach                                                                         
                                                                             @endif
@@ -292,7 +293,7 @@
                                                         Auth::user()->hasPermissionTo('noticias.editar') ||
                                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                                         Auth::user()->hasRole('Super'))
-                                                            <button class="table-edit-button btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-group-edit-{{$blog->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
+                                                            <button class="table-edit-button btn btn-primary text-black" data-bs-toggle="modal" data-bs-target="#modal-group-edit-{{$blog->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
                                                             <div class="modal fade" id="modal-group-edit-{{$blog->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered" style="max-width: 980px;">
                                                                     <div class="modal-content">
@@ -307,7 +308,7 @@
                                                                                 @include('admin.blades.blog.form', ['textareaId' => 'textarea-edit-' . $blog->id])    
                                                                                 <div class="d-flex justify-content-end gap-2">
                                                                                     <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
-                                                                                    <button type="submit" class="btn btn-success waves-effect waves-light">{{__('dashboard.btn_save')}}</button>
+                                                                                    <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_save')}}</button>
                                                                                 </div>                                                                                                                                                                                            
                                                                             </form>                                                                    
                                                                         </div>

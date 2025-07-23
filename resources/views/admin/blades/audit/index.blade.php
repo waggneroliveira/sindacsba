@@ -173,9 +173,9 @@
                                 </table>
 
                                 {{-- PAGINATION --}}
-                                {{-- <div class="mt-3 float-end">
+                                <div class="mt-3 float-end">
                                     {{$activities->links()}}
-                                </div> --}}
+                                </div>
                             </div>
                         </div> <!-- end card-->
                     </div> <!-- end col-->
