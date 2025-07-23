@@ -3,7 +3,7 @@
   RewriteEngine On
   RewriteCond %{HTTPS} off [OR]
   RewriteCond %{HTTP_HOST} !^www\. [NC]
-  RewriteRule ^(.*)$ https://www.sindacsba.org.br/$1 [R=301,L]
+  RewriteRule ^(.*)$ https://www.clinicajosiasribeiro.com.br/$1 [R=301,L]
 </IfModule>
 
 # Compressão Brotli (se disponível)
