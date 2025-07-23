@@ -644,7 +644,7 @@
             <ul class="list-unstyled h-100 d-flex justify-content-center align-items-center gap-3 p-0 position-relative">
 
                 <li class="nav-mob-center position-absolute">
-                    <a href="#" class="icon-text btn_sidebar">
+                    <a href="#" class="icon-text btn_sidebar" title="Abrir menu principal" aria-label="Abrir menu principal" rel="noopener noreferrer">
                         <span class="menu-icon" style="display:inline-block;width:32px;height:32px;">
                             <span class="d-block w-100 rounded-1" style="height:4px;background:#FFF;margin:6px 0;"></span>
                             <span class="d-block w-100 rounded-1" style="height:4px;background:#FFF;margin:6px 0;"></span>

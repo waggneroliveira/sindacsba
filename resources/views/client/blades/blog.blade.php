@@ -60,7 +60,7 @@
                                     <p class="text-white mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
                                  </div>
                                  <a href="{{route('blog-inner', ['slug' => $blogHighlight->slug])}}">                              
-                                    <h3 class="h6 m-0 text-white text-uppercase montserrat-bold font-16 d-block">{{$blogHighlight->title}}</h3>
+                                    <h2 class="h6 m-0 text-white text-uppercase montserrat-bold font-16 d-block">{{$blogHighlight->title}}</h2>
                                  </a>
                               </div>
                            </div>
@@ -90,7 +90,7 @@
                               @csrf
                               <div class="input-group input-group-lg">
                                  <input type="search" name="search" class="form-control border-end-0 text-color montserrat-regular bg-white py-0" placeholder="Pesquise aqui">
-                                 <button type="submit" class="btn-reset input-group-text bg-white border">
+                                 <button type="submit" title="search" class="btn-reset input-group-text bg-white border">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M6.99989 0C3.13331 0 0 3.13427 0 6.99979C0 10.8663 3.13351 14.0004 6.99989 14.0004C8.49916 14.0004 9.88877 13.5285 11.0281 12.7252L15.9512 17.6491C16.4199 18.117 17.1798 18.117 17.6485 17.6491C18.1172 17.1804 18.1172 16.4205 17.6485 15.9518L12.7254 11.0288C13.5279 9.88936 13.9998 8.4997 13.9998 6.99983C13.9998 3.13411 10.8655 0 6.99989 0ZM2.39962 6.99979C2.39962 4.45981 4.45907 2.40019 6.99989 2.40019C9.54072 2.40019 11.6002 4.45961 11.6002 6.99979C11.6002 9.54058 9.54072 11.6 6.99989 11.6C4.45907 11.6 2.39962 9.54058 2.39962 6.99979Z" fill="#31404B"/>
                                     </svg>                                    
@@ -159,7 +159,7 @@
                         <!-- Tags Start -->
                         <div class="mb-3">
                            <div class="section-title mb-0 rounded-top-left">                              
-                                 <h4 class="m-0 text-uppercase montserrat-bold font-22 title-blue">CATEGORIAS</h4>
+                                 <h3 class="m-0 text-uppercase montserrat-bold font-22 title-blue">CATEGORIAS</h3>
                            </div>
                            <div class="bg-white border border-top-0 p-3">
                                  <div class="d-flex flex-wrap m-n1">
@@ -180,7 +180,7 @@
                         <!-- Popular News Start -->
                         <div class="mb-3">
                            <div class="section-title mb-0 rounded-top-left">
-                                 <h4 class="m-0 text-uppercase montserrat-bold font-22 title-blue">VEJA TAMBÉM</h4>
+                                 <h3 class="m-0 text-uppercase montserrat-bold font-22 title-blue">VEJA TAMBÉM</h3>
                            </div>
                            <div class="bg-white border border-top-0 p-3">
                                  @foreach ($blogSeeAlso as $seeAlso)  
@@ -214,7 +214,7 @@
                       <!-- Newsletter Start -->
                       <div class="mb-3">
                           <div class="section-title mb-0 rounded-top-left">
-                              <h4 class="m-0 text-uppercase montserrat-bold font-22 title-blue">Newsletter</h4>
+                              <h3 class="m-0 text-uppercase montserrat-bold font-22 title-blue">Newsletter</h3>
                           </div>
                           @include('client.includes.newsletter')
                       </div>
