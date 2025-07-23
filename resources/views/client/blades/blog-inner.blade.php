@@ -104,7 +104,7 @@
                                                     alt="Imagem do cliente"
                                                     class="img-fluid mr-3 mt-1 rounded-circle"
                                                     style="width: 50px; height: 50px; object-fit: cover;">
-                                                <div class="d-flex flex-column col-10">
+                                                <div class="d-flex flex-column col-10 comment">
                                                     <h6 class="title-blue montserrat-bold font-15 mb-0">{{ $client->name }}</h6>
                                                     <small class="title-blue mb-0 montserrat-regular font-12">
                                                         {{ $dataFormatada }}

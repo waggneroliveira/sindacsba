@@ -6,22 +6,22 @@
     <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <meta http-equiv=X-UA-Compatible content="ie=edge">
     <meta name=theme-color content=#0d0d0d>
-    <meta name=description content="Criação de sites, lojas virtuais e estratégias de marketing digital em Salvador. A WHI desenvolve soluções profissionais e personalizadas para o seu negócio crescer online.">
-    <meta name=keywords content="Agência de marketing Salvador, criação de sites Salvador, marketing digital, desenvolvimento web, loja virtual, SEO local, redes sociais, tráfego pago, Google Ads, branding, identidade visual, WHI">
-    <title>WHI | Agência de Marketing Digital e Criação de Sites em Salvador</title>
-    <meta property=og:url content=https://whi.dev.br>
+    <meta name=description content="O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.">
+    <meta name=keywords content="Sindacs Bahia, Sindicato Bahia, agentes comunitários de saúde, agentes de combate às endemias, ACS Bahia, ACE Bahia, sindicato ACS ACE, saúde pública Bahia, trabalhadores da saúde Bahia, direitos dos agentes de saúde, sindicato saúde Bahia, categoria ACS ACE, luta sindical Bahia, representação sindical saúde, agentes comunitários Bahia, agentes endemias Bahia, sindicato dos agentes Bahia">
+    <title>Sindacs Bahia</title>
+    <meta property=og:url content=https://www.sindacsba.org.br>
     <meta property=og:type content=website>
-    <meta property=og:title content="WHI | Agência de Marketing Digital e Criação de Sites em Salvador">
-    <meta property=og:description content="Soluções digitais completas em Salvador: sites profissionais, marketing de performance, identidade visual e presença online com a WHI.">
+    <meta property=og:title content="Sindicato de agentes comunitários de saúde e agentes de combate as endemias da Bahia.">
+    <meta property=og:description content="O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.">
     <meta name=twitter:card content=summary_large_image>
-    <meta name=twitter:url content=https://whi.dev.br>
-    <meta name=twitter:title content="WHI | Agência de Marketing Digital e Criação de Sites em Salvador">
-    <meta name=twitter:description content="Soluções digitais completas em Salvador: sites profissionais, marketing de performance, identidade visual e presença online com a WHI.">
-    <meta name=twitter:image content=https://whi.dev.br/assets/images/logo.png>
-    <link rel=canonical href=https://www.whi.dev.br/>
+    <meta name=twitter:url content=https://www.sindacsba.org.br>
+    <meta name=twitter:title content="Sindicato de agentes comunitários de saúde e agentes de combate as endemias da Bahia.">
+    <meta name=twitter:description content="O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.">
+    <meta name=twitter:image content=https://www.sindacsba.org.br/assets/images/logo.png>
+    <link rel=canonical href=https://www.sindacsba.org.br>
     <meta name=copyright content="Direitos reservados WHI">
     <meta name=author content=WHI>
-    <link rel="shortcut icon" href=https://whi.dev.br/assets/images/favicon.svg>
+    <link rel="shortcut icon" href=https://www.sindacsba.org.br/assets/images/favicon.svg>
 
     <link rel=preconnect href=https://fonts.googleapis.com>
     <link rel=preconnect href=https://fonts.gstatic.com crossorigin>    
@@ -29,11 +29,6 @@
     <noscript>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
     </noscript>
-
-
-
-    <link rel=preload as=image href="{{asset('build/client/images/banner.webp')}}">
-    <link rel="preload" as="image" href="{{asset('build/client/images/banner-mob.webp')}}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
@@ -59,33 +54,36 @@
         {
             "@context": "https://schema.org",
             "@type": "Organization",
-            "@id": "https://whi.dev.br/#organization",
-            "name": "WHI",
-            "legalName": "WHI Agência Digital",
-            "url": "https://whi.dev.br",
-            "logo": "https://whi.dev.br/assets/images/logo.png",
-            "image": "https://whi.dev.br/assets/images/logo.png",
-            "description": "Agência de desenvolvimento web e marketing digital em Salvador - Criação de sites, lojas virtuais e estratégias digitais personalizadas.",
-            "foundingDate": "2023",
-            "email": "contato@whi.dev.br",
-            "telephone": "+55-71-99648-3853",
+            "@id": "https://www.sindacsba.org.br/#organization",
+            "name": "Sindacs Bahia",
+            "legalName": "Sindicato de agentes comunitários de saúde e agentes de combate as endemias da Bahia.",
+            "url": "https://www.sindacsba.org.br",
+            "logo": "https://www.sindacsba.org.br/assets/images/logo.png",
+            "image": "https://www.sindacsba.org.br/assets/images/logo.png",
+            "description": "O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.",
+            "foundingDate": "2003",
+            "email": "sindacsbahia@gmail.com",
+            "telephone": "3017-4112",
             "sameAs": [
-                "https://www.instagram.com/agenciawhi",
-                "https://www.linkedin.com/company/106948313"
+                "https://www.instagram.com/sindacsbahia",
+                "https://www.tiktok.com/@sindacsbahia",
+                "https://www.youtube.com/channel/UCG0q-E25LZ2Lx73N50tCD8Q",
+                "https://x.com/SindacsBahia",
+                "https://www.facebook.com/sindacsbahia.org.br"
             ],
             "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "Rua Ápio Patrocínio, 148 - Boa Vista de São Caetano",
+                "streetAddress": "Rua Do Tesouro, 56 - Edif Santa Cruz Andar 7 Sala 700 - Comércio",
                 "addressLocality": "Salvador",
                 "addressRegion": "BA",
-                "postalCode": "40386-050",
+                "postalCode": "40026-028",
                 "addressCountry": "BR"
             },
             "contactPoint": {
                 "@type": "ContactPoint",
-                "telephone": "+55-71-99648-3853",
+                "telephone": "3017-4112",
                 "contactType": "customer service",
-                "email": "contato@whi.dev.br",
+                "email": "sindacsbahia@gmail.com",
                 "areaServed": "BR",
                 "availableLanguage": ["Portuguese", "English"]
             },
@@ -98,23 +96,29 @@
                     "Thursday",
                     "Friday"
                 ],
-                "opens": "09:00",
-                "closes": "18:00"
+                "opens": "08:00",
+                "closes": "17:00"
             },
-            "duns": "39.985.136/0001-33",
-            "slogan": "Web de Alta Inspiração",
+            "duns": "06.953.941/0001-26",
+            "slogan": "Sindacs Bahia",
             "keywords": [
-                "Criação de sites",
-                "Lojas virtuais",
-                "Marketing digital",
-                "Agência WHI",
-                "Salvador",
-                "Desenvolvimento Web",
-                "Google Ads",
-                "Tráfego pago",
-                "SEO",
-                "Agência de Desenvolvimento Web em Salvador",
-                "WHI",
+                "Sindacs Bahia",
+                "Sindicato Bahia",
+                "agentes comunitários de saúde",
+                "agentes de combate às endemias",
+                "ACS Bahia",
+                "ACE Bahia",
+                "sindicato ACS ACE",
+                "saúde pública Bahia",
+                "trabalhadores da saúde Bahia",
+                "direitos dos agentes de saúde",
+                "sindicato saúde Bahia",
+                "categoria ACS ACE",
+                "luta sindical Bahia",
+                "representação sindical saúde",
+                "agentes comunitários Bahia",
+                "agentes endemias Bahia",
+                "sindicato dos agentes Bahia",
             ]
         }
     </script>
@@ -589,7 +593,7 @@
                             <path d="M9 0C4.03157 0 0 4.125 0 9.20857C0 18.7864 8.63908 21.9136 8.72355 21.9529C8.8157 21.9843 8.90017 22 9 22C9.09215 22 9.1843 21.9843 9.26877 21.9529C9.36092 21.9214 18 18.7943 18 9.20857C18 4.125 13.9608 0 9 0ZM9 14.0407C6.36604 14.0407 4.23123 11.8486 4.23123 9.16929C4.23123 6.47429 6.37372 4.29 9 4.29C11.6263 4.29 13.7611 6.48214 13.7611 9.16929C13.7611 11.8486 11.6263 14.0407 9 14.0407Z" fill="#F9F9F9"/>
                             </svg>
 
-                            Rua Do Tesouro, 56 - Edif Santa Cruz Andar 7 <br> Sala 700 - Comércio - Salvador/BA, CEP: 40020-056
+                            Rua Do Tesouro, 56 - Edif Santa Cruz Andar 7 <br> Sala 700 - Comércio - Salvador/BA, CEP: 40026-028
                         </a>
                     </span>
                     <span>
@@ -630,7 +634,7 @@
                     </script>
                 </div>
                 <div class=credits>
-                    <a href="https://whi.dev.br/" target=_blank rel="noopener noreferrer">
+                    <a href="https://www.sindacsba.org.br/" target=_blank rel="noopener noreferrer">
                         <img src="{{asset('build/client/images/developed.svg')}}"  alt="WHI - Web de Alta Inovação" title="WHI - Web de Alta Inovação" loading=lazy>
                     </a>
                 </div>

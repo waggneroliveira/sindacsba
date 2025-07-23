@@ -1420,6 +1420,9 @@ h1, h2, h3, h4, h5, h6  {
     }
 }
 @media (max-width:476px){
+    .d-flex.flex-column.col-10.comment{
+        width: 80%;
+    }
     .text-color.mb-0.montserrat-regular.font-12{
         font-size: 0.625rem;
     }
