@@ -46,18 +46,18 @@
                     <div style="padding: 28px 0px; text-align: center;padding-bottom:10px;">
                         <img src="{{ asset('build/admin/images/whi-green-horizontal.png') }}" alt="WHI - Web de Alta Inovação" style="width: 210px; display: block; margin: 0 auto;">
                     </div>
-                    
-                    <div style="text-align: center;">
-                        <a href="https://www.instagram.com/agenciawhi/?igsh=MXNkODZwOGp0MmFpbg%3D%3D#" target="_blank" style="font-weight: bold;color: #CBFF4D;font-size: 12px;text-decoration: none;display: inline-block;">
-                            @agenciawhi
-                        </a>
-                    </div>
+
                     <!-- Rodapé com links e texto -->
                     <div style="padding: 10px 20px; font-family: Arial, sans-serif; color: #94a0ad; position:relative">
                         <table width="100%" cellpadding="0" cellspacing="0" border="0" style="color: #94a0ad;">
                             <tr>
                                 <td style="text-align: left; font-size:12px;">
                                     {{ date('Y') }} © WHI - Web de Alta Inovação
+                                </td>
+                                <td style="font-size: 12px; color: #CBFF4D; text-align: center;">
+                                    <a href="https://www.instagram.com/agenciawhi/?igsh=MXNkODZwOGp0MmFpbg%3D%3D#" target="_blank" style="font-weight: bold;color: #CBFF4D;font-size: 12px;text-decoration: none;display: inline-block;">
+                                        @agenciawhi
+                                    </a>
                                 </td>
                                 <td style="text-align: right;">
                                     <a href="https://www.whi.dev.br/" target="_blank" style="font-size:12px; color:#94a0ad; text-decoration: none; margin-left: 10px;">Sobre a WHI</a>
