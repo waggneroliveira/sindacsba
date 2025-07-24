@@ -359,9 +359,13 @@
 
     <script>
         // Inicializa o CKEditor para o textarea de criação
+                // Inicializa o CKEditor para o textarea de criação
         CKEDITOR.replace('textarea-create', {
-            filebrowserUploadUrl: "{{ route('admin.dashboard.blog.uploadImageCkeditor', ['_token' => csrf_token() ]) }}",
-            filebrowserUploadMethod: 'form'
+                filebrowserUploadUrl: "{{ route('admin.dashboard.blog.uploadImageCkeditor') }}",
+                // filebrowserUploadMethod: 'form',
+                fileTools_requestHeaders: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
         });
 
         // Inicializa o CKEditor para todos os textareas de edição
