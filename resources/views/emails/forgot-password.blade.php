@@ -50,12 +50,7 @@
                     <!-- Rodapé com links e texto -->
                     <div style="padding: 10px 40px; font-family: Arial, sans-serif; color: #94a0ad; position:relative">
                         <div style="position: absolute;left: 4px;top: 29px;transform: translateY(-50%) rotate(-90deg);transform-origin: left top;">
-                            <a href="https://www.instagram.com/agenciawhi/?igsh=MXNkODZwOGp0MmFpbg%3D%3D#" target="_blank" style="
-                                color: #CBFF4D;
-                                font-size: 12px;
-                                text-decoration: none;
-                                display: inline-block;
-                            ">
+                            <a href="https://www.instagram.com/agenciawhi/?igsh=MXNkODZwOGp0MmFpbg%3D%3D#" target="_blank" style="color: #CBFF4D;font-size: 12px;text-decoration: none; display: inline-block; ">
                                 @agenciawhi
                             </a>
                         </div>
@@ -73,12 +68,7 @@
                         </table>
 
                         <div style="position: absolute;right: 0;top: 29px;ransform: translateY(-50%) rotate(90deg);transform-origin: right top;">
-                            <a href="https://www.instagram.com/agenciawhi/?igsh=MXNkODZwOGp0MmFpbg%3D%3D#" target="_blank" style="
-                                color: #CBFF4D;
-                                font-size: 12px;
-                                text-decoration: none;
-                                display: inline-block;
-                            ">
+                            <a href="https://www.instagram.com/agenciawhi/?igsh=MXNkODZwOGp0MmFpbg%3D%3D#" target="_blank" style="color: #CBFF4D;font-size: 12px;text-decoration: none;display: inline-block;">
                                 @agenciawhi
                             </a>
                         </div>
