@@ -358,23 +358,42 @@
 
 
     <script>
-        // Inicializa o CKEditor para o textarea de criação
-                // Inicializa o CKEditor para o textarea de criação
-        CKEDITOR.replace('textarea-create', {
-                filebrowserUploadUrl: "{{ route('admin.dashboard.blog.uploadImageCkeditor') }}",
-                // filebrowserUploadMethod: 'form',
-                fileTools_requestHeaders: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-        });
+    // Inicializa o CKEditor para o textarea de criação
+    CKEDITOR.replace('textarea-create', {
+        allowedContent: false,
+        toolbar: [
+            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
+            { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
+            { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar'] },
+            { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+            { name: 'colors', items: ['TextColor', 'BGColor'] },
+            { name: 'tools', items: ['Maximize'] }
+        ],
+        filebrowserUploadUrl: "{{ route('admin.dashboard.blog.uploadImageCkeditor') }}",
+        fileTools_requestHeaders: {
+            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        }
+    });
 
-        // Inicializa o CKEditor para todos os textareas de edição
-        @foreach ($blogs as $blog)
-            CKEDITOR.replace('textarea-edit-{{ $blog->id }}', {
-                filebrowserUploadUrl: "{{ route('admin.dashboard.blog.uploadImageCkeditor', ['_token' => csrf_token() ]) }}",
-                filebrowserUploadMethod: 'form'
-            });
-        @endforeach
+    // Inicializa o CKEditor para todos os textareas de edição
+    @foreach ($blogs as $blog)
+        CKEDITOR.replace('textarea-edit-{{ $blog->id }}', {
+            allowedContent: false,
+            toolbar: [
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
+                { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar'] },
+                { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                { name: 'colors', items: ['TextColor', 'BGColor'] },
+                { name: 'tools', items: ['Maximize'] }
+            ],
+            filebrowserUploadUrl: "{{ route('admin.dashboard.blog.uploadImageCkeditor') }}",
+            fileTools_requestHeaders: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            }
+        });
+    @endforeach
+
 
         // Inicializa o CKEditor para todos os textareas de comentários
   

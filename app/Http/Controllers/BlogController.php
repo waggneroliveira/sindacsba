@@ -137,7 +137,7 @@ class BlogController extends Controller
             } else {
                 // Converter em WEBP
                 $image = $manager->read($file)
-                    ->resize(680, null, function ($constraint) {
+                    ->resize(null, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })

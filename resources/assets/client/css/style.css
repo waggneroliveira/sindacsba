@@ -423,6 +423,13 @@ p{
     font-style: normal;
     font-weight: 300;
 }
+.text-blog-inner.montserrat-regular.font-16 p img{
+    height: 100% !important;
+    max-width: 370px;
+    width: 100% !important;
+    max-height: 435px;
+    margin: 0 15px;
+}
 .bg-webmail{
     background: var(--background-color-client);
     width: 170px;

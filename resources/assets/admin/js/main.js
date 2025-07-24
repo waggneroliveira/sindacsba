@@ -111,16 +111,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const textarea = modal.querySelector('textarea');
             if (textarea && !CKEDITOR.instances[textarea.id]) {
                 CKEDITOR.replace(textarea.id, {
+                    allowedContent: false,
                     toolbar: [
                         { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
                         { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
-                        { name: 'links', items: ['Link', 'Unlink'] },
                         { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar'] },
                         { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
                         { name: 'colors', items: ['TextColor', 'BGColor'] },
                         { name: 'tools', items: ['Maximize'] }
                     ],
-                    height: 260
+                    height: 260,
                 });
             }
         });
