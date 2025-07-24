@@ -12,7 +12,7 @@
             <!-- Header -->
             <tr>
                 <td colspan="2" style="background: #2F368B; text-align: center; padding: 40px 0;">
-                    <img src="{{asset('build/client/images/logo.png')}}" alt="sindacs-BA" style="width: 185px; display: block; margin: 0 auto;">
+                    <img src="{{secure_asset('build/client/images/logo.png')}}" alt="sindacs-BA" style="width: 185px; display: block; margin: 0 auto;">
                 </td>
             </tr>
 
@@ -41,7 +41,7 @@
                 <td colspan="2" style="background: #f3f3f3; padding: 0;">
                     <div style="width: 100%; height: 4px; background-color: #E5282A;"></div>
                     <div style="background: #2F368B; padding: 28px 40px; text-align: center;">
-                        <img src="{{asset('build/client/images/logo.png')}}" alt="sindacs-BA" style="width: 107px; margin: 0 auto;">
+                        <img src="{{secure_asset('build/client/images/logo.png'))}}" alt="sindacs-BA" style="width: 107px; margin: 0 auto;">
                     </div>
                 </td>
             </tr>

@@ -12,7 +12,7 @@
             <!-- Header -->
             <tr>
                 <td colspan="2" style="text-align: center; padding: 40px 0;position: relative;overflow:hidden; background-image: url('{{ asset('build/admin/images/fundo.png') }}'); background-position: top center; background-repeat: no-repeat; background-size: cover;">
-                    <img src="{{ asset('build/admin/images/whi-green-horizontal.png') }}" alt="WHI - Web de Alta Inovação" style="width: 210px; display: block; margin: 0 auto;">
+                    <img src="{{ secure_asset('build/admin/images/whi-green-horizontal.png') }}" alt="WHI - Web de Alta Inovação" style="width: 210px; display: block; margin: 0 auto;">
                 </td>
             </tr>
 
@@ -44,7 +44,7 @@
 
                     <!-- Logotipo centralizado -->
                     <div style="padding: 20px 0px; text-align: center;padding-bottom:10px;">
-                        <img src="{{ asset('build/admin/images/whi-green-horizontal.png') }}" alt="WHI - Web de Alta Inovação" style="width: 210px; display: block; margin: 0 auto;">
+                        <img src="{{ secure_asset('build/admin/images/whi-green-horizontal.png') }}" alt="WHI - Web de Alta Inovação" style="width: 210px; display: block; margin: 0 auto;">
                     </div>
                     
                     <div style="text-align: center;">
