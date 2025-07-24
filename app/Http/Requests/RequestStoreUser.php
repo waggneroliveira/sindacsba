@@ -35,7 +35,7 @@ class RequestStoreUser extends FormRequest
             'active' => 'boolean',
             'sorting' => ['nullable', 'integer'],
             'roles'=>'array',
-            'path_image' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif']
+            'path_image' => ['nullable', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
         ];
     }
 
@@ -48,6 +48,7 @@ class RequestStoreUser extends FormRequest
             'password.required' => 'A senha é obrigatória.',
             'password.min' => 'A senha deve ter pelo menos 8 caracteres.',
             'path_image.max' => 'A imagem deve ter no máximo 2MB.',
+            'path_image.mimes' => 'A imagem deve estar nos formatos: jpg, jpeg, png ou gif.',
         ];
     }
 }
