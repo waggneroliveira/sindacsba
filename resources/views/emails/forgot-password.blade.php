@@ -11,15 +11,15 @@
         <tbody>
             <!-- Header -->
             <tr>
-                <td colspan="2" style="background: #10131C; text-align: center; padding: 40px 0;">
-                    <img src="{{ asset('build/admin/images/whi-green-horizontal.png') }}" alt="WHI - Web de Alta Inovação" style="width: 185px; display: block; margin: 0 auto;">
+                <td colspan="2" style="text-align: center; padding: 40px 0;position: relative;overflow:hidden; background-image: url('{{ asset('build/admin/images/fundo.png') }}'); background-position: top center; background-repeat: no-repeat; background-size: cover;">
+                    <img src="{{ asset('build/admin/images/whi-green-horizontal.png') }}" alt="WHI - Web de Alta Inovação" style="width: 210px; display: block; margin: 0 auto;">
                 </td>
             </tr>
 
             <!-- Main Content -->
             <tr>
-                <td colspan="2" style="padding: 40px 63px;">
-                    <h1 style="color: #333; font-size: 24px; margin: 0 0 20px; text-align: center;">Redefinição de Senha</h1>
+                <td colspan="2" style="padding: 40px 63px;background-image: url('{{ asset('build/admin/images/bg-transparente.png') }}'); background-position: top center; background-repeat: no-repeat; background-size: cover;">
+                    <h1 style="color: #10131C; font-size: 24px; margin: 0 0 20px; text-align: center;">Redefinição de Senha</h1>
                     <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">Olá,</p>
                     <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
                         Você solicitou a redefinição de sua senha. Clique no link abaixo para redefini-la:
@@ -38,28 +38,62 @@
 
             <!-- Footer -->
             <tr>
-                <td colspan="2" style="background: #10131C; padding: 0;">
+                <td colspan="2" style="background-image: url('{{ asset('build/admin/images/fundo.png') }}'); background-position: top center; background-repeat: no-repeat; background-size: cover; padding: 0;">
                     <!-- Linha superior colorida -->
                     <div style="width: 100%; height: 4px; background-color: #CBFF4D;"></div>
 
                     <!-- Logotipo centralizado -->
-                    <div style="background: #10131C; padding: 28px 40px; text-align: center;">
-                        <img src="{{ asset('build/admin/images/whi-green-horizontal.png') }}" alt="WHI - Web de Alta Inovação" style="width: 107px; display: block; margin: 0 auto;">
+                    <div style="padding: 28px 0px; text-align: center;padding-bottom:10px;">
+                        <img src="{{ asset('build/admin/images/whi-green-horizontal.png') }}" alt="WHI - Web de Alta Inovação" style="width: 210px; display: block; margin: 0 auto;">
                     </div>
 
                     <!-- Rodapé com links e texto -->
-                    <div style="padding: 10px 40px; font-family: Arial, sans-serif; font-size: 14px; color: #94a0ad;">
+                    <div style="padding: 10px 40px; font-family: Arial, sans-serif; color: #94a0ad; position:relative">
+                        <div class="mention" style="
+                            position: absolute;
+                            left: 4px;
+                            top: 29px;
+                            transform: translateY(-50%) rotate(-90deg);
+                            transform-origin: left top;
+                        ">
+                            <a href="https://www.instagram.com/agenciawhi/?igsh=MXNkODZwOGp0MmFpbg%3D%3D#" target="_blank" style="
+                                color: #CBFF4D;
+                                font-size: 12px;
+                                text-decoration: none;
+                                display: inline-block;
+                            ">
+                                @agenciawhi
+                            </a>
+                        </div>
+
                         <table width="100%" cellpadding="0" cellspacing="0" border="0" style="color: #94a0ad;">
                             <tr>
-                                <td style="text-align: left;">
+                                <td style="text-align: left; font-size:12px;">
                                     {{ date('Y') }} © WHI - Web de Alta Inovação
                                 </td>
                                 <td style="text-align: right;">
-                                    <a href="https://www.whi.dev.br/" target="_blank" style="color:#94a0ad; text-decoration: none; margin-left: 10px;">Sobre a WHI</a>
-                                    <a href="https://wa.me/5571996483853" target="_blank" style="color:#94a0ad; text-decoration: none; margin-left: 10px;">Fale conosco</a>
+                                    <a href="https://www.whi.dev.br/" target="_blank" style="font-size:12px; color:#94a0ad; text-decoration: none; margin-left: 10px;">Sobre a WHI</a>
+                                    <a href="https://wa.me/5571996483853" target="_blank" style="font-size:12px; color:#94a0ad; text-decoration: none; margin-left: 10px;">Fale conosco</a>
                                 </td>
                             </tr>
                         </table>
+
+                        <div class="mention" style="
+                            position: absolute;
+                            right: 0;
+                            top: 29px;
+                            transform: translateY(-50%) rotate(90deg);
+                            transform-origin: right top;
+                        ">
+                            <a href="https://www.instagram.com/agenciawhi/?igsh=MXNkODZwOGp0MmFpbg%3D%3D#" target="_blank" style="
+                                color: #CBFF4D;
+                                font-size: 12px;
+                                text-decoration: none;
+                                display: inline-block;
+                            ">
+                                @agenciawhi
+                            </a>
+                        </div>
                     </div>
                 </td>
             </tr>
