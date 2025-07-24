@@ -14,13 +14,13 @@
                                 <div class="auth-brand">
                                     <a href="index.html" class="logo logo-dark text-center">
                                         <span class="logo-lg">
-                                            <img src="{{asset('build/admin/images/whi.png')}}" alt="" height="22">
+                                            <img src="{{asset('build/admin/images/whi-green-horizontal.png')}}" alt="" height="50">
                                         </span>
                                     </a>
                 
                                     <a href="index.html" class="logo logo-light text-center">
                                         <span class="logo-lg">
-                                            <img src="{{asset('build/admin/images/whi.png')}}" alt="" height="22">
+                                            <img src="{{asset('build/admin/images/whi-black-horizontal.png')}}" alt="" height="50">
                                         </span>
                                     </a>
                                 </div>

@@ -61,7 +61,7 @@
                                 </div>
 
                                 <div class="text-center d-grid">
-                                    <button class="py-1 px-2 rounded-3 btn-green-whi text-back fw-bold" type="submit"> Entrar </button>
+                                    <button class="py-1 px-2 rounded-3 btn-green-whi text-black fw-bold" type="submit"> Entrar </button>
                                 </div>
 
                             </form>
