@@ -33,6 +33,7 @@ class UserUpdateRequest extends FormRequest
             'active' => 'boolean',
             'sorting' => ['nullable', 'integer'],
             'roles'=>'array',
+            'path_image' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
         ];
     }
 
@@ -44,6 +45,7 @@ class UserUpdateRequest extends FormRequest
             'email.unique' => 'Este e-mail já está em uso.',
             'password.required' => 'A senha é obrigatória.',
             'password.min' => 'A senha deve ter pelo menos 8 caracteres.',
+            'path_image.max' => 'A imagem deve ter no máximo 2MB.',
         ];
     }
 }

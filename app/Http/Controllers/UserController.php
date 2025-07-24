@@ -54,10 +54,6 @@ class UserController extends Controller
         $data = $request->except(['path_image', 'is_super']);
         $helper = new HelperArchive();
 
-        $request->validate([
-            'path_image' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
-        ]);
-    
         $path_image = null;
         if ($request->hasFile('path_image')) {
             $path_image = $helper->renameArchiveUpload($request, 'path_image');
@@ -136,10 +132,6 @@ class UserController extends Controller
         $helper = new HelperArchive();
         $roles = $request->input('roles', []);
 
-        $request->validate([
-            'path_image' => ['nullable', 'file', 'image', 'max:2048', 'mimes:jpg,jpeg,png,gif'],
-        ]);
-    
         $path_image = null;
         if ($request->hasFile('path_image')) {
             $path_image = $helper->renameArchiveUpload($request, 'path_image');
