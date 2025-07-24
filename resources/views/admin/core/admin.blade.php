@@ -325,7 +325,7 @@
                                         </div>
 
                                         <div class="px-1" style="max-height: 300px;" data-simplebar>
-                                            @if (Auth::user()->hasRole('Super') || Auth::user()->can('notificacao.notificacao de auditoria'))
+                                            @if (Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can('notificacao.notificacao de auditoria'))
                                                 @if (isset($auditorias) && $auditorias->count() > 0)
                                                     <h5 class="text-muted font-13 fw-normal mt-2">{{__('dashboard.day_notification')}}</h5>
                                                     <!-- item-->
