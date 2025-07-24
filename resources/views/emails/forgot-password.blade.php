@@ -49,7 +49,7 @@
 
                     <!-- Rodapé com links e texto -->
                     <div style="padding: 10px 40px; font-family: Arial, sans-serif; color: #94a0ad; position:relative">
-                        <div class="mention" style="
+                        <div style="
                             position: absolute;
                             left: 4px;
                             top: 29px;
@@ -78,7 +78,7 @@
                             </tr>
                         </table>
 
-                        <div class="mention" style="
+                        <div style="
                             position: absolute;
                             right: 0;
                             top: 29px;
