@@ -11,14 +11,14 @@
         <tbody>
             <!-- Header -->
             <tr>
-                <td colspan="2" style="text-align: center; padding: 40px 0;position: relative;overflow:hidden; background-image: url('https://www.sindacsba.org.br/homologacao/build/admin/images/fundo.png'); background-position: top center; background-repeat: no-repeat; background-size: cover;">
-                    <img src="https://www.sindacsba.org.br/homologacao/build/admin/images/whi-green-horizontal.png" alt="WHI - Web de Alta Inovação" style="width: 210px; display: block; margin: 0 auto;">
+                <td colspan="2" style="text-align: center; padding: 40px 0;position: relative;overflow:hidden; background-image: url('{{ asset('build/admin/images/fundo.png') }}'); background-position: top center; background-repeat: no-repeat; background-size: cover;">
+                    <img src="{{ asset('build/admin/images/whi-green-horizontal.png') }}" alt="WHI - Web de Alta Inovação" style="width: 210px; display: block; margin: 0 auto;">
                 </td>
             </tr>
 
             <!-- Main Content -->
             <tr>
-                <td colspan="2" style="padding: 35px;background-image: url('https://www.sindacsba.org.br/homologacao/build/admin/images/bg-transparente.png'); background-position: top center; background-repeat: no-repeat; background-size: cover;">
+                <td colspan="2" style="padding: 35px;background-image: url('{{ asset('build/admin/images/bg-transparente.png') }}'); background-position: top center; background-repeat: no-repeat; background-size: cover;">
                     <h1 style="color: #10131C; font-size: 24px; margin: 0 0 20px; text-align: center;">Redefinição de Senha</h1>
                     <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">Olá,</p>
                     <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
@@ -32,19 +32,19 @@
                     <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
                         Se você não solicitou esta alteração, nenhuma ação é necessária.
                     </p>
-                    <p style="color: #555; font-size: 16px; line-height: 1.5;">Atenciosamente,<br><img src="https://www.sindacsba.org.br/homologacao/build/admin/images/whi-black.png" alt="WHI - Web de Alta Inovação" style="width: 50px"></p>
+                    <p style="color: #555; font-size: 16px; line-height: 1.5;">Atenciosamente,<br><img src="{{ asset('build/admin/images/whi-black.png') }}" alt="WHI - Web de Alta Inovação" style="width: 50px"></p>
                 </td>
             </tr>
 
             <!-- Footer -->
             <tr>
-                <td colspan="2" style="background-image: url('https://www.sindacsba.org.br/homologacao/build/admin/images/fundo.png'); background-position: top center; background-repeat: no-repeat; background-size: cover; padding: 0;">
+                <td colspan="2" style="background-image: url('{{ asset('build/admin/images/fundo.png') }}'); background-position: top center; background-repeat: no-repeat; background-size: cover; padding: 0;">
                     <!-- Linha superior colorida -->
                     <div style="width: 100%; height: 4px; background-color: #CBFF4D;"></div>
 
                     <!-- Logotipo centralizado -->
                     <div style="padding: 20px 0px; text-align: center;padding-bottom:10px;">
-                        <img src="https://www.sindacsba.org.br/homologacao/build/admin/images/whi-green-horizontal.png" alt="WHI - Web de Alta Inovação" style="width: 210px; display: block; margin: 0 auto;">
+                        <img src="{{ asset('build/admin/images/whi-green-horizontal.png') }}" alt="WHI - Web de Alta Inovação" style="width: 210px; display: block; margin: 0 auto;">
                     </div>
                     
                     <div style="text-align: center;">
