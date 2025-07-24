@@ -18,7 +18,7 @@
 
             <!-- Main Content -->
             <tr>
-                <td colspan="2" style="padding: 40px 63px;background-image: url('{{ asset('build/admin/images/bg-transparente.png') }}'); background-position: top center; background-repeat: no-repeat; background-size: cover;">
+                <td colspan="2" style="padding: 35px;background-image: url('{{ asset('build/admin/images/bg-transparente.png') }}'); background-position: top center; background-repeat: no-repeat; background-size: cover;">
                     <h1 style="color: #10131C; font-size: 24px; margin: 0 0 20px; text-align: center;">Redefinição de Senha</h1>
                     <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">Olá,</p>
                     <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
@@ -48,13 +48,7 @@
                     </div>
 
                     <!-- Rodapé com links e texto -->
-                    <div style="padding: 10px 40px; font-family: Arial, sans-serif; color: #94a0ad; position:relative">
-                        <div style="position: absolute;left: 4px;top: 29px;transform: translateY(-50%) rotate(-90deg);transform-origin: left top;">
-                            <a href="https://www.instagram.com/agenciawhi/?igsh=MXNkODZwOGp0MmFpbg%3D%3D#" target="_blank" style="color: #CBFF4D;font-size: 12px;text-decoration: none; display: inline-block; ">
-                                @agenciawhi
-                            </a>
-                        </div>
-
+                    <div style="padding: 10px 20px; font-family: Arial, sans-serif; color: #94a0ad; position:relative">
                         <table width="100%" cellpadding="0" cellspacing="0" border="0" style="color: #94a0ad;">
                             <tr>
                                 <td style="text-align: left; font-size:12px;">
@@ -66,9 +60,8 @@
                                 </td>
                             </tr>
                         </table>
-
-                        <div style="position: absolute;right: 0;top: 29px;ransform: translateY(-50%) rotate(90deg);transform-origin: right top;">
-                            <a href="https://www.instagram.com/agenciawhi/?igsh=MXNkODZwOGp0MmFpbg%3D%3D#" target="_blank" style="color: #CBFF4D;font-size: 12px;text-decoration: none;display: inline-block;">
+                        <div style="text-align: center;">
+                            <a href="https://www.instagram.com/agenciawhi/?igsh=MXNkODZwOGp0MmFpbg%3D%3D#" target="_blank" style="font-weight: bold;color: #CBFF4D;font-size: 12px;text-decoration: none;display: inline-block;">
                                 @agenciawhi
                             </a>
                         </div>
