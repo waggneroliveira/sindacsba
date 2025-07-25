@@ -11,7 +11,7 @@
                                     <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100">
                                 </picture>
                             </a>
-                        @elseif(isset($announcement) && !empty($announcement->path_image_mobile))
+                        @elseif(isset($announcement) && $announcement->path_image_mobile <> null)
                             <picture>
                                 <source media="(max-width: 576px)" srcset="{{ asset('storage/' . $announcement->path_image_mobile) }}">
                                 <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100">
