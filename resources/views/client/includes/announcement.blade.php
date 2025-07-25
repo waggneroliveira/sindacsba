@@ -7,17 +7,19 @@
                         @if(isset($announcement) && !empty($announcement->link))
                             <a href="{{ $announcement->link }}" target="_blank" rel="nofollow noopener noreferrer">
                                 <picture>
-                                    <source media="(max-width: 576px)" srcset="{{ asset('storage/' . $announcement->path_image_mobile) }}">
+                                    @if (isset($announcement) && $announcement->path_image_mobile != null)                                        
+                                        <source media="(max-width: 576px)" srcset="{{ asset('storage/' . $announcement->path_image_mobile) }}">
+                                    @endif
                                     <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100">
                                 </picture>
                             </a>
                         @elseif
-                            @if (isset($announcement) && $announcement->path_image_mobile != null)                            
                                 <picture>
-                                    <source media="(max-width: 576px)" srcset="{{ asset('storage/' . $announcement->path_image_mobile) }}">
+                                    @if (isset($announcement) && $announcement->path_image_mobile != null)                            
+                                        <source media="(max-width: 576px)" srcset="{{ asset('storage/' . $announcement->path_image_mobile) }}">
+                                    @endif
                                     <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100">
                                 </picture>
-                            @endif
                         @endif
                     </div>
                 </div>
