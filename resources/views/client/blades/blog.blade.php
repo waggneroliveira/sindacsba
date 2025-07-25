@@ -1,5 +1,35 @@
 @extends('client.core.client')
 @section('content')
+<!-- Pop-up -->
+<div id="popup" class="popup">
+   <div class="popup-content">
+      {{-- &times; --}}
+      <span class="close-btn font-24 montserrat-bold">x</span>
+      <img src="{{asset('build/client/images/pop-up.png')}}" alt="Pop-up">
+   </div>
+</div>
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+      let popup = document.getElementById("popup");
+      let closeBtn = document.querySelector(".close-btn");
+
+      // Exibir o pop-up quando a página carregar
+      popup.style.display = "flex";
+
+      // Fechar o pop-up ao clicar no botão de fechar
+      closeBtn.addEventListener("click", function () {
+            popup.style.display = "none";
+      });
+
+      // Fechar ao clicar fora do pop-up
+      window.addEventListener("click", function (event) {
+            if (event.target === popup) {
+               popup.style.display = "none";
+            }
+      });
+   });
+</script>
+
 <section class="blog mb-5" data-aos=fade-up data-aos-delay=150>
     <div class="container-fluid">
        <div class="row">
