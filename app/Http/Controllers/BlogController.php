@@ -53,8 +53,9 @@ class BlogController extends Controller
     public function create(){
         $settingTheme = (new SettingThemeRepository())->settingTheme();
         if(!Auth::user()->hasRole('Super') && 
-          !Auth::user()->can('usuario.tornar usuario master') && 
-          !Auth::user()->hasPermissionTo('noticias.visualizar')){
+          !Auth::user()->can('usuario.tornar usuario master') &&  
+          !Auth::user()->hasPermissionTo('noticias.visualizar') &&
+          !Auth::user()->hasPermissionTo('noticias.criar')){
             return view('admin.error.403', compact('settingTheme'));
         }
 
@@ -73,7 +74,8 @@ class BlogController extends Controller
         $settingTheme = (new SettingThemeRepository())->settingTheme();
         if(!Auth::user()->hasRole('Super') && 
           !Auth::user()->can('usuario.tornar usuario master') && 
-          !Auth::user()->hasPermissionTo('noticias.visualizar')){
+          !Auth::user()->hasPermissionTo('noticias.visualizar') && 
+          !Auth::user()->hasPermissionTo('noticias.editar')){
             return view('admin.error.403', compact('settingTheme'));
         }
 
