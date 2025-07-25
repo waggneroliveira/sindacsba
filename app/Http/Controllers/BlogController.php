@@ -50,6 +50,42 @@ class BlogController extends Controller
         return view('admin.blades.blog.index', compact('blogs', 'categories', 'blogCategory'));
     }
 
+    public function create(){
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
+        if(!Auth::user()->hasRole('Super') && 
+          !Auth::user()->can('usuario.tornar usuario master') && 
+          !Auth::user()->hasPermissionTo('noticias.visualizar')){
+            return view('admin.error.403', compact('settingTheme'));
+        }
+
+        $categories = BlogCategory::active()->sorting()->get();
+
+
+        $blogCategory = [];
+
+        foreach ($categories as $category) {
+            $blogCategory[$category->id] = $category->title;
+        }
+        return view('admin.blades.blog.create', compact('categories', 'blogCategory'));
+    }
+
+    public function edit(Blog $blog){
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
+        if(!Auth::user()->hasRole('Super') && 
+          !Auth::user()->can('usuario.tornar usuario master') && 
+          !Auth::user()->hasPermissionTo('noticias.visualizar')){
+            return view('admin.error.403', compact('settingTheme'));
+        }
+
+        $categories = BlogCategory::active()->sorting()->get();
+        $blogCategory = [];
+
+        foreach ($categories as $category) {
+            $blogCategory[$category->id] = $category->title;
+        }
+        return view('admin.blades.blog.edit', compact('blog', 'categories', 'blogCategory'));
+    }
+
     public function store(BlogRequestStore $request)
     {
         $data = $request->all();
@@ -110,7 +146,7 @@ class BlogController extends Controller
                 Blog::create($data);
             DB::commit();
             session()->flash('success', __('dashboard.response_item_create'));
-            return redirect()->back();
+            return redirect()->route('admin.dashboard.blog.index');
         } catch (\Exception $e) {
             DB::rollback();
             Alert::error('error', __('dashboard.response_item_error_create'));
@@ -245,7 +281,7 @@ class BlogController extends Controller
             DB::commit();
 
             session()->flash('success', __('dashboard.response_item_update'));
-            return redirect()->back();
+            return redirect()->route('admin.dashboard.blog.index');
         } catch (\Exception $e) {
             DB::rollback();
             Alert::error('error', __('dashboard.response_item_error_update'));

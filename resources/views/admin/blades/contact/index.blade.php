@@ -285,14 +285,4 @@
         </div>
     </div>
 </div>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const editors = ["address_one-1", "address_two-2", "address_three-3"];
-    editors.forEach(function(id) {
-        if (document.getElementById(id)) {
-            CKEDITOR.replace(id);
-        }
-    });
-});
-</script>
 @endsection

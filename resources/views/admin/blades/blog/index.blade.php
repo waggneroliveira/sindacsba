@@ -39,100 +39,7 @@
                                             Auth::user()->hasPermissionTo('noticias.criar') ||
                                             Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                             Auth::user()->hasRole('Super'))
-                                                <button type="button" class="btn btn-primary text-black waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#blog-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="blog-create" tabindex="-1" role="dialog" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" style="max-width: 980px;">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header bg-light">
-                                                                <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.btn_create')}}</h4>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                                                            </div>
-                                                            <div class="modal-body p-4">
-                                                                <form action="{{route('admin.dashboard.blog.store')}}" method="POST" enctype="multipart/form-data">
-                                                                    @csrf
-                                                                    <div class="row">
-                                                                        <div class="mb-3 col-6 d-flex align-items-start flex-column">
-                                                                            <label for="category-select" class="form-label">Categoria(s) <span class="text-danger">*</span></label>
-                                                                            @php
-                                                                                $currentCategory = isset($blog) ? $blog->blog_category : null;
-                                                                            @endphp
-                                                                        
-                                                                            <select name="blog_category_id" class="form-select" id="category-select" required>
-                                                                                <option value="" disabled selected>Selecione o Cliente</option>
-                                                                                @foreach ($blogCategory as $categoryValue => $categoryLabel)
-                                                                                    <option value="{{ $categoryValue }}" {{ $categoryValue == $currentCategory ? 'selected' : '' }}>
-                                                                                        {{ $categoryLabel }}
-                                                                                    </option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="mb-3 col-6">
-                                                                            <label for="date" class="form-label">Data de publicação</label>
-                                                                            <input type="date" name="date" class="form-control">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <label for="title" class="form-label">Título</label>
-                                                                        <input type="text" name="title" class="form-control" id="title" placeholder="Digite seu nome">
-                                                                    </div>
-                                                                    
-                                                                    <div class="mb-3 col-12 d-flex align-items-start flex-column">
-                                                                        <label for="textarea-create" class="form-label">Texto</label>
-                                                                        <textarea name="text" class="form-control col-12" id="textarea-create" rows="5"></textarea>
-                                                                    </div>
-                                                                    
-                                                                    <div class="row">
-                                                                        <div class="col-12 col-lg-6">
-                                                                            <div class="mt-3">
-                                                                                <label for="path_image_thumbnail" class="form-label">Imagem de capa</label>
-                                                                                <input type="file" name="path_image_thumbnail" data-plugins="dropify" />
-                                                                                <p class="text-muted text-center mt-2 mb-0">{{__('dashboard.text_img_size')}} <b class="text-danger">2 MB</b>.</p>
-                                                                            </div>
-                                                                        </div>
-                                                                        
-                                                                        <div class="col-12 col-lg-6">
-                                                                            <div class="mt-3">
-                                                                                <label for="path_image" class="form-label">Imagem</label>
-                                                                                <input type="file" name="path_image" data-plugins="dropify" />
-                                                                                <p class="text-muted text-center mt-2 mb-0">{{__('dashboard.text_img_size')}} <b class="text-danger">2 MB</b>.</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="mb-3">
-                                                                        <div class="form-check">
-                                                                            <input name="active" type="checkbox" class="form-check-input" id="invalidCheck{{isset($blog->id)?$blog->id:''}}" />
-                                                                            <label class="form-check-label" for="invalidCheck">{{__('dashboard.active')}}?</label>
-                                                                            <div class="invalid-feedback">
-                                                                                You must agree before submitting.
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-check">
-                                                                            <input name="super_highlight" {{ isset($blog->super_highlight) && $blog->super_highlight == 1 ? 'checked' : '' }} type="checkbox" class="form-check-input" id="invalidCheck2{{isset($blog->id)?$blog->id:''}}" />
-                                                                            <label class="form-check-label" for="invalidCheck2{{isset($blog->id)?$blog->id:''}}">Super destaque?</label>
-                                                                            <div class="invalid-feedback">
-                                                                                You must agree before submitting.
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-check">
-                                                                            <input name="highlight" {{ isset($blog->highlight) && $blog->highlight == 1 ? 'checked' : '' }} type="checkbox" class="form-check-input" id="invalidCheck3{{isset($blog->id)?$blog->id:''}}" />
-                                                                            <label class="form-check-label" for="invalidCheck3{{isset($blog->id)?$blog->id:''}}">Destaque?</label>
-                                                                            <div class="invalid-feedback">
-                                                                                You must agree before submitting.
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-end gap-2">
-                                                                        <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
-                                                                        <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
-                                                                    </div>                                                 
-                                                                </form>
-                                                            </div>
-                                                        </div><!-- /.modal-content -->
-                                                    </div><!-- /.modal-dialog -->
-                                                </div><!-- /.modal -->
+                                                <a href="{{route('admin.dashboard.blog.create')}}" class="mdi mdi-plus-circle me-1 btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_create')}}</a>
                                             @endif
                                         </div>
                                     </div>
@@ -293,28 +200,7 @@
                                                         Auth::user()->hasPermissionTo('noticias.editar') ||
                                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                                         Auth::user()->hasRole('Super'))
-                                                            <button class="table-edit-button btn btn-primary text-black" data-bs-toggle="modal" data-bs-target="#modal-group-edit-{{$blog->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
-                                                            <div class="modal fade" id="modal-group-edit-{{$blog->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered" style="max-width: 980px;">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header bg-light">
-                                                                            <h4 class="modal-title" id="myCenterModalLabel">Editar notícia</h4>
-                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                                                                        </div>
-                                                                        <div class="modal-body p-4">
-                                                                            <form action="{{ route('admin.dashboard.blog.update', ['blog' => $blog->id]) }}" method="POST" enctype="multipart/form-data">
-                                                                                @csrf
-                                                                                @method('PUT')
-                                                                                @include('admin.blades.blog.form', ['textareaId' => 'textarea-edit-' . $blog->id])    
-                                                                                <div class="d-flex justify-content-end gap-2">
-                                                                                    <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
-                                                                                    <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_save')}}</button>
-                                                                                </div>                                                                                                                                                                                            
-                                                                            </form>                                                                    
-                                                                        </div>
-                                                                    </div><!-- /.modal-content -->
-                                                                </div><!-- /.modal-dialog -->
-                                                            </div><!-- /.modal -->                                                        
+                                                            <a href="{{route('admin.dashboard.blog.edit', ['blog' => $blog->id])}}" class="mdi mdi-pencil table-edit-button btn btn-primary text-black" style="padding: 2px 8px;width: 30px"></a>
                                                         @endif
 
                                                         @if (Auth::user()->hasPermissionTo('noticias.visualizar') &&
@@ -356,47 +242,8 @@
         }
     </style>
 
-
     <script>
-    // Inicializa o CKEditor para o textarea de criação
-    CKEDITOR.replace('textarea-create', {
-        allowedContent: false,
-        toolbar: [
-            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
-            { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
-            { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar'] },
-            { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
-            { name: 'colors', items: ['TextColor', 'BGColor'] },
-            { name: 'tools', items: ['Maximize'] }
-        ],
-        filebrowserUploadUrl: "{{ route('admin.dashboard.blog.uploadImageCkeditor') }}",
-        fileTools_requestHeaders: {
-            'X-CSRF-TOKEN': "{{ csrf_token() }}"
-        }
-    });
-
-    // Inicializa o CKEditor para todos os textareas de edição
-    @foreach ($blogs as $blog)
-        CKEDITOR.replace('textarea-edit-{{ $blog->id }}', {
-            allowedContent: false,
-            toolbar: [
-                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
-                { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
-                { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar'] },
-                { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
-                { name: 'colors', items: ['TextColor', 'BGColor'] },
-                { name: 'tools', items: ['Maximize'] }
-            ],
-            filebrowserUploadUrl: "{{ route('admin.dashboard.blog.uploadImageCkeditor') }}",
-            fileTools_requestHeaders: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}"
-            }
-        });
-    @endforeach
-
-
         // Inicializa o CKEditor para todos os textareas de comentários
-  
         document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll(".ck-readonly").forEach(function(el) {
                 CKEDITOR.replace(el.id, {

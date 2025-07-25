@@ -1,6 +1,9 @@
 body.loaded {
     opacity: 1;
 }
+.cke_dialog {
+    z-index: 99999 !important;
+}
 .cke_notifications_area{
     z-index: -1 !important;
     top: 0 !important;

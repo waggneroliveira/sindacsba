@@ -54,7 +54,8 @@
 
         <!-- Theme Config Js -->
         <script src="{{ asset('build/admin/js/head.js') }}"></script>
-        <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+        <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+
         <script>
             $url = "{{url('')}}";
         </script>
@@ -437,7 +438,7 @@
 
                     <!-- Start Content-->
                     <div class="container-fluid">
-                        
+
                         @yield('content')                        
 
                     </div> <!-- container -->
@@ -691,6 +692,7 @@
         <script src="{{ asset('build/admin/js/libs/dropify/js/dropify.min.js') }}"></script>
         <script src="{{ asset('build/admin/js/pages/form-fileuploads.init.js') }}"></script>
         <script src="{{ asset('build/admin/js/main.js') }}"></script>
+
 
         <!-- Dashboard 2 init -->
         <script src="{{ asset('build/admin/js/pages/dashboard-2.init.js') }}"></script>       

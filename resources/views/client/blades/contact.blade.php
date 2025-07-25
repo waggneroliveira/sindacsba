@@ -31,7 +31,7 @@
                             @endif
                             @if (isset($contact) && $contact->address_one != null)                            
                                 <div class="my-2 text-address">
-                                    {!!$contact->address_one!!}
+                                    <p>{{$contact->address_one}}</p>
                                 </div>
                             @endif
                             <div class="d-flex justify-content-between flex-wrap">
@@ -69,7 +69,7 @@
                             @endif
                             @if (isset($contact) && $contact->address_two != null)                            
                                 <div class="my-2 text-address">
-                                    {!!$contact->address_two!!}
+                                    <p>{{$contact->address_two}}</p>
                                 </div>
                             @endif
                             <div class="d-flex justify-content-between flex-wrap">
@@ -107,7 +107,7 @@
                             @endif
                             @if (isset($contact) && $contact->address_three != null)                            
                                 <div class="my-2 text-address">
-                                    {!!$contact->address_three!!}
+                                    <p>{{$contact->address_three}}</p>
                                 </div>
                             @endif
                             <div class="d-flex justify-content-between flex-wrap">
