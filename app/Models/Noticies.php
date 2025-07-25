@@ -27,8 +27,7 @@ class Noticies extends Model
 
     public function scopeSorting($query){
         return $query->orderByRaw('YEAR(`date`) DESC')
-        ->orderByRaw('DAY(`date`) DESC')
-        ->orderBy('sorting', 'DESC');
+        ->orderBy('created_at', 'DESC');
     }
 
     public function getActivitylogOptions(): LogOptions

@@ -128,7 +128,7 @@
                                     <table class="table-sortable table table-centered table-nowrap table-striped">
                                         <thead>
                                             <tr>
-                                                <th></th>
+                                                {{-- <th></th> --}}
                                                 <th class="bs-checkbox">
                                                     <label><input name="btnSelectAll" type="checkbox"></label>
                                                 </th>
@@ -147,7 +147,7 @@
                                                     $year = \Carbon\Carbon::parse($noticie->date)->format('Y')
                                                 @endphp
                                                 <tr data-code="{{$noticie->id}}">
-                                                    <td><span class="btnDrag mdi mdi-drag-horizontal font-22"></span></td>
+                                                    {{-- <td><span class="btnDrag mdi mdi-drag-horizontal font-22"></span></td> --}}
                                                     <td class="bs-checkbox">
                                                         <label><input data-index="{{$key}}" name="btnSelectItem" class="btnSelectItem" type="checkbox" value="{{$noticie->id}}"></label>
                                                     </td>
