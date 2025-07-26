@@ -182,7 +182,7 @@
         || isset($contact) && $contact->link_face || isset($contact) && $contact->link_tik_tok ||
         isset($contact) && $contact->link_youtube || isset($contact) && $contact->link_x)
             <!-- Redes Sociais -->
-            <div class="bg-light padding-t-80 pb-0 mt-5 d-flex flex-wrap align-items-start justify-content-between socials-network" data-aos=fade-right data-aos-delay=150>
+            <div class="bg-light padding-t-80 pb-0 mt-5 d-flex flex-wrap align-items-start justify-content-between socials-network">
                 @if (isset($contact) && $contact->name_section_social_media)                
                     <div class="d-flex justify-content-start gap-2 align-items-start flex-nowrap mt-4">
                         <span class="firula-contact mt-2"></span>

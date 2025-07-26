@@ -581,7 +581,7 @@
         @yield('content') 
     </main>
 
-    <footer id=footer class="footer position-relative dark-background" data-aos=fade-down data-aos-delay=150>
+    <footer id=footer class="footer position-relative dark-background">
         <div class="container pt-5 pb-3">
             <div class="sitemap mt-2 mb-5 row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-3 justify-content-between align-items-center">
                 <div class=logo>

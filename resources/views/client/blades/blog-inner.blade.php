@@ -4,7 +4,7 @@
     <div class="container-fluid mb-5 blog-inn mt-4">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8" data-aos=fade-right data-aos-delay=150>
+                <div class="col-lg-8">
                     @php
                         \Carbon\Carbon::setLocale('pt_BR');
                         $dataFormatada = \Carbon\Carbon::parse($blogInner->date)->translatedFormat('d \d\e F \d\e Y');

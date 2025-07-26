@@ -106,7 +106,7 @@
    <div class="container-fluid">
        <div class="container">
            <div class="row">
-               <div class="col-lg-8 mb-4" data-aos=fade-right data-aos-delay=150>
+               <div class="col-lg-8 mb-4">
                   @if ($blogAll->count())                     
                      <div class="mb-5 rounded-top-left">
                         <h3 class="m-0 text-uppercase montserrat-bold font-22 title-blue">Notícias</h3>
