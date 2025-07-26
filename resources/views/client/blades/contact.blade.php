@@ -2,7 +2,7 @@
 @section('content')
     <section class="contact mb-0 mt-4">
         @if (isset($contact) && $contact->name_section != null)
-            <div class="d-flex justify-content-start gap-2 align-items-start flex-nowrap" data-aos=fade-up data-aos-delay=150>
+            <div class="d-flex justify-content-start gap-2 align-items-start flex-nowrap">
                 <span class="firula-contact mt-2"></span>
                 <div class="description">
                     <h3 class="montserrat-bold font-30 mb-0 title-blue">{{$contact->name_section}}</h3>
@@ -10,7 +10,7 @@
                 </div>
             </div>
         @endif
-        <div class="container py-5" data-aos=fade-up data-aos-delay=150>
+        <div class="container py-5">
             <!-- Filiais -->
             <div class="row g-3 mb-4">
                 @if (isset($contact) && $contact->name_one != null ||

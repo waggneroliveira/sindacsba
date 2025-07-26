@@ -1,6 +1,6 @@
 @extends('client.core.client')
 @section('content')
-    <section class="notices mb-5" data-aos=fade-up data-aos-delay=150>
+    <section class="notices mb-5">
         <div class="container py-4">
             @if ($groupedNoticies->count())                
                 <h1 class="montserrat-bold font-30 mb-2 title-blue">EDITAIS PUBLICADOS</h1>
