@@ -113,7 +113,9 @@ aside .img-fluid.annun{
     object-fit: contain;
     aspect-ratio: inherit;
 }
-
+.blog-content .col-md-6.h-100.px-0.overflow-hidden{
+    background: #cccccc33;
+}
 .text-color.montserrat-regular.font-16 p{
     font-size: 1rem;
     color: #9A9DA2;

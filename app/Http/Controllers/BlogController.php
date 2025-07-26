@@ -91,62 +91,64 @@ class BlogController extends Controller
     public function store(BlogRequestStore $request)
     {
         $data = $request->all();
-        $data['active'] = $request->active?1:0;
-        $data['super_highlight'] = $request->super_highlight?1:0;
-        $data['highlight'] = $request->highlight?1:0;
+        $data['active'] = $request->active ? 1 : 0;
+        $data['super_highlight'] = $request->super_highlight ? 1 : 0;
+        $data['highlight'] = $request->highlight ? 1 : 0;
         $data['slug'] = Str::slug($request->title);
 
-        $manager = new ImageManager(GdDriver::class);
+        $manager = new ImageManager(new GdDriver());
 
+        // Imagem principal
         if ($request->hasFile('path_image')) {
             $file = $request->file('path_image');
             $mime = $file->getMimeType();
-            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.webp';
+            $filename = Str::uuid() . '.webp';
 
             if ($mime === 'image/svg+xml') {
-                Storage::putFileAs($this->pathUpload, $file, $filename);
+                Storage::disk('public')->putFileAs($this->pathUpload, $file, $filename);
             } else {
                 $image = $manager->read($file)
-                    ->resize(857, 546, function ($constraint) {
+                    ->resize(857, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
                     ->toWebp(quality: 95)
                     ->toString();
 
-                Storage::put($this->pathUpload . $filename, $image);
+                Storage::disk('public')->put($this->pathUpload . $filename, $image);
             }
 
-            $data['path_image'] = $this->pathUpload . $filename;
+            $data['path_image'] = $this->pathUpload . $filename; // sem 'storage/'
         }
 
-        //Imagem de capa
+        // Imagem de capa (thumbnail)
         if ($request->hasFile('path_image_thumbnail')) {
             $file = $request->file('path_image_thumbnail');
             $mime = $file->getMimeType();
-            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.webp';
+            $filename = Str::uuid() . '_thumbnail.webp';
 
             if ($mime === 'image/svg+xml') {
-                Storage::putFileAs($this->pathUpload, $file, $filename);
+                Storage::disk('public')->putFileAs($this->pathUpload, $file, $filename);
             } else {
                 $image = $manager->read($file)
-                    ->resize(427, 272, function ($constraint) {
+                    ->resize(427, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
                     ->toWebp(quality: 95)
                     ->toString();
 
-                Storage::put($this->pathUpload . $filename, $image);
+                Storage::disk('public')->put($this->pathUpload . $filename, $image);
             }
 
-            $data['path_image_thumbnail'] = $this->pathUpload . $filename;
+            $data['path_image_thumbnail'] = $this->pathUpload . $filename; // sem 'storage/'
         }
-        
+
         try {
             DB::beginTransaction();
                 Blog::create($data);
             DB::commit();
+
             session()->flash('success', __('dashboard.response_item_create'));
             return redirect()->route('admin.dashboard.blog.index');
         } catch (\Exception $e) {
@@ -207,38 +209,38 @@ class BlogController extends Controller
         $data['highlight'] = $request->highlight ? 1 : 0;
         $data['slug'] = Str::slug($request->title);
 
-        $manager = new ImageManager(GdDriver::class);
+        $manager = new ImageManager(new GdDriver());
 
         // Imagem principal
         if ($request->hasFile('path_image')) {
             $file = $request->file('path_image');
             $mime = $file->getMimeType();
-            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.webp';
+            $filename = Str::uuid() . '.webp';
 
             if ($mime === 'image/svg+xml') {
-                Storage::putFileAs($this->pathUpload, $file, $filename);
+                Storage::disk('public')->putFileAs($this->pathUpload, $file, $filename);
             } else {
                 $image = $manager->read($file)
-                    ->resize(857, 546, function ($constraint) {
+                    ->resize(857, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
                     ->toWebp(quality: 95)
                     ->toString();
 
-                Storage::put($this->pathUpload . $filename, $image);
+                Storage::disk('public')->put($this->pathUpload . $filename, $image);
             }
 
             if (!empty($blog->path_image)) {
-                Storage::delete($blog->path_image);
+                Storage::disk('public')->delete($blog->path_image);
             }
 
-            $data['path_image'] = $this->pathUpload . $filename;
+            $data['path_image'] = $this->pathUpload . $filename; // <== sem 'storage/'
         }
 
         if ($request->has('delete_path_image')) {
             if (!empty($blog->path_image)) {
-                Storage::delete($blog->path_image);
+                Storage::disk('public')->delete($blog->path_image);
             }
             $data['path_image'] = null;
         }
@@ -247,32 +249,32 @@ class BlogController extends Controller
         if ($request->hasFile('path_image_thumbnail')) {
             $file = $request->file('path_image_thumbnail');
             $mime = $file->getMimeType();
-            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.webp';
+            $filename = Str::uuid() . '_thumbnail.webp';
 
             if ($mime === 'image/svg+xml') {
-                Storage::putFileAs($this->pathUpload, $file, $filename);
+                Storage::disk('public')->putFileAs($this->pathUpload, $file, $filename);
             } else {
                 $image = $manager->read($file)
-                    ->resize(857, 546, function ($constraint) {
+                    ->resize(427, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
                     ->toWebp(quality: 95)
                     ->toString();
 
-                Storage::put($this->pathUpload . $filename, $image);
+                Storage::disk('public')->put($this->pathUpload . $filename, $image);
             }
 
             if (!empty($blog->path_image_thumbnail)) {
-                Storage::delete($blog->path_image_thumbnail);
+                Storage::disk('public')->delete($blog->path_image_thumbnail);
             }
 
-            $data['path_image_thumbnail'] = $this->pathUpload . $filename;
+            $data['path_image_thumbnail'] = $this->pathUpload . $filename; // <== sem 'storage/'
         }
 
         if ($request->has('delete_path_image_thumbnail')) {
             if (!empty($blog->path_image_thumbnail)) {
-                Storage::delete($blog->path_image_thumbnail);
+                Storage::disk('public')->delete($blog->path_image_thumbnail);
             }
             $data['path_image_thumbnail'] = null;
         }
@@ -290,7 +292,6 @@ class BlogController extends Controller
             return redirect()->back();
         }
     }
-
     public function destroy(Blog $blog)
     {
         Storage::delete(isset($blog->path_image)??$blog->path_image);
