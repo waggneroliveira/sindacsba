@@ -17,7 +17,7 @@
                                 <span class="badge background-red montserrat-semiBold font-12 text-uppercase py-2 px-2 me-2">{{$blogInner->category->title}}</span>
                                 <p class="text-color mb-0 montserrat-regular font-15">{{$dataFormatada}}</p>
                             </div>
-                            <img class="img-fluid w-100 rounded-3"
+                            <img class="img-fluid w-100 rounded-3 image-inner"
                               src="{{ $blogInner->path_image ? asset('storage/'.$blogInner->path_image) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
                               alt="{{ $blogInner->title ? $blogInner->title : 'Sem imagem'}}"
                               style="object-fit: cover;">

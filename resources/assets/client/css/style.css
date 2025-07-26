@@ -116,6 +116,10 @@ aside .img-fluid.annun{
 .blog-content .col-md-6.h-100.px-0.overflow-hidden{
     background: #cccccc33;
 }
+.image-inner{
+    max-height: 545px;
+    max-width: 856px;
+}
 .text-color.montserrat-regular.font-16 p{
     font-size: 1rem;
     color: #9A9DA2;
