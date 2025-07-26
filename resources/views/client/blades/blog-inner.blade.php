@@ -127,9 +127,21 @@
 
                 <div class="col-lg-4" data-aos=fade-left data-aos-delay=150>
                   <aside>
+                    <style>
+                        @media (max-width: 576px) {
+                            .cat-mt {
+                                margin-top: 15px;
+                            }
+                            .text-blog-inner.montserrat-regular.font-16 p img{
+                                max-width: 350px;
+                                max-height: inherit;
+                                margin: 0;
+                            }
+                        }
+                    </style>
                      <!-- Tags Start -->
                       <div class="mb-3">
-                          <div class="section-title mb-0 rounded-top-left">
+                          <div class="section-title mb-0 rounded-top-left cat-mt">
                               <h4 class="m-0 text-uppercase montserrat-bold font-22 title-blue">CATEGORIAS</h4>
                           </div>
                           <div class="bg-white border border-top-0 p-3">
