@@ -19,7 +19,7 @@
     <meta name="twitter:title" content="Sindicato de agentes comunitários de saúde e agentes de combate as endemias da Bahia.">
     <meta name="twitter:description" content="O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.">
     <meta name="twitter:image" content=https://www.sindacsba.org.br/assets/images/logo.png>
-    <link rel="canonical" href=https://www.sindacsba.org.br>
+    <link rel="canonical" href=https://www.sindacsba.org.br/noticias>
     <meta name="copyright" content="Direitos reservados WHI">
     <meta name="author" content="WHI">
     <link rel="shortcut icon" href="https://www.sindacsba.org.br/assets/images/favicon.svg">
