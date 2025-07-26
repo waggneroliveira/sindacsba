@@ -664,16 +664,16 @@
     <a href=# id=scroll-top class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     
-    <script src="https://cdn.ckeditor.com/4.22.1/basic/ckeditor.js"></script>
+    <script defer src="https://cdn.ckeditor.com/4.22.1/basic/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="{{ asset('build/admin/js/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-    <script src="{{ asset('build/admin/js/libs/dropzone/min/dropzone.min.js') }}"></script>
-    <script src="{{ asset('build/admin/js/libs/dropify/js/dropify.min.js') }}"></script>
-    <script src="{{ asset('build/admin/js/pages/form-fileuploads.init.js') }}"></script>
+    <script defer src="{{ asset('build/admin/js/libs/dropzone/min/dropzone.min.js') }}"></script>
+    <script defer src="{{ asset('build/admin/js/libs/dropify/js/dropify.min.js') }}"></script>
+    <script defer src="{{ asset('build/admin/js/pages/form-fileuploads.init.js') }}"></script>
 
     <script src="{{ asset('build/client/css/bootstrap/js/bootstrap.bundle.js') }}"></script>
-    <script src="{{ asset('build/client/css/typed.js/typed.umd.js') }}"></script>
+    <script defer src="{{ asset('build/client/css/typed.js/typed.umd.js') }}"></script>
     <script src="{{ asset('build/client/js/default.js') }}"></script>
 
 
