@@ -5,16 +5,29 @@
    <div id="popup" class="popup" style="display: flex;">
       <div class="popup-content">
          <span class="close-btn font-24 montserrat-bold">x</span>
-
-         <img 
-            src="{{ asset('storage/' . $popUp->path_image) }}" 
-            alt="Pop-up"
-            fetchpriority="high" 
-            width="500" 
-            height="auto"
-            decoding="async"
-            loading="eager"
-         />
+         @if ($popUp->link != null)            
+            <a href="{{ $popUp->link }}" target="_blank" rel="noopener noreferrer">
+               <img 
+                  src="{{ asset('storage/' . $popUp->path_image) }}" 
+                  alt="Pop-up"
+                  fetchpriority="high" 
+                  width="500" 
+                  height="auto"
+                  decoding="async"
+                  loading="eager"
+               />
+            </a>
+            @else
+            <img 
+               src="{{ asset('storage/' . $popUp->path_image) }}" 
+               alt="Pop-up"
+               fetchpriority="high" 
+               width="500" 
+               height="auto"
+               decoding="async"
+               loading="eager"
+            />
+         @endif
 
       </div>
    </div>
