@@ -44,7 +44,7 @@
                            <div class="position-relative overflow-hidden" style="height: 500px;">
                               <img class="img-fluid h-100 w-100"
                               src="{{ $blogSuperHighlight->path_image ? asset('storage/'.$blogSuperHighlight->path_image) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
-                              alt="{{ $blogSuperHighlight->title ? $blogSuperHighlight->title : 'Sem imagem'}}"
+                              alt="{{ $blogSuperHighlight->path_image ? 'Notícia super destaque' : 'Sem imagem'}}"
                               style="object-fit: cover; aspect-ratio: 2 / 1;">
 
                               <div class="overlay">
