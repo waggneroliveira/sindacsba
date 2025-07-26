@@ -29,6 +29,7 @@ use App\Http\Controllers\AuditActivityController;
 use App\Http\Controllers\StackSessionTitleController;
 use App\Http\Controllers\Auth\PasswordEmailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\PopUpController;
 
 Route::get('painel/', function () {
     return redirect()->route('admin.dashboard.painel');
@@ -85,6 +86,9 @@ Route::prefix('painel/')->group(function () {
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+        Route::resource('pop-up', PopUpController::class)
+        ->names('admin.dashboard.popUp')
+        ->parameters(['pop-up'=>'popUp']);
         //AUDITORIA
         Route::resource('auditorias', AuditActivityController::class)
         ->names('admin.dashboard.audit')

@@ -23,7 +23,12 @@ class AuditActivityController extends Controller
             return view('admin.error.403', compact('settingTheme'));
         }
 
-        $activities = Activity::with('causer')->orderBy('created_at', 'DESC')->paginate(50);
+        $activities = Activity::with('causer')
+        ->whereHas('causer.roles', function ($query) {
+            $query->where('name', '!=', 'Super');
+        })
+        ->orderBy('created_at', 'DESC')
+        ->paginate(50);
 
         return view('admin.blades.audit.index', [
             'activities' => $activities,

@@ -13,6 +13,8 @@ class AuditActivity extends Model
     {
         switch ($subjectType) { 
            
+            case PopUp::class:
+                return 'Pop-Up';
             case Announcement::class:
                 return 'Anuncios';
             case Noticies::class:
@@ -20,7 +22,7 @@ class AuditActivity extends Model
             case Contact::class:
                 return 'Contato';
             case FormIndex::class:
-                return 'Lead contato - Infrmações enviadas pelo site (formulário de contato)';
+                return 'Lead contato - Informações enviadas pelo site (formulário de contato)';
             case Newsletter::class:
                 return 'Newsletter - E-mail enviado pelo site';
             case BlogCategory::class:

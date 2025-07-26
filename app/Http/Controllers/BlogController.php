@@ -235,7 +235,7 @@ class BlogController extends Controller
                 Storage::disk('public')->delete($blog->path_image);
             }
 
-            $data['path_image'] = $this->pathUpload . $filename; // <== sem 'storage/'
+            $data['path_image'] = $this->pathUpload . $filename; 
         }
 
         if ($request->has('delete_path_image')) {
@@ -269,7 +269,7 @@ class BlogController extends Controller
                 Storage::disk('public')->delete($blog->path_image_thumbnail);
             }
 
-            $data['path_image_thumbnail'] = $this->pathUpload . $filename; // <== sem 'storage/'
+            $data['path_image_thumbnail'] = $this->pathUpload . $filename; 
         }
 
         if ($request->has('delete_path_image_thumbnail')) {

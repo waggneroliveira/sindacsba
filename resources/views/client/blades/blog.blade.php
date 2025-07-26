@@ -1,31 +1,33 @@
 @extends('client.core.client')
 @section('content')
 <!-- Pop-up -->
-<div id="popup" class="popup" style="display: flex;">
-   <div class="popup-content">
-      <span class="close-btn font-24 montserrat-bold">x</span>
+@if (isset($popUp))
+   <div id="popup" class="popup" style="display: flex;">
+      <div class="popup-content">
+         <span class="close-btn font-24 montserrat-bold">x</span>
 
-      <img 
-         src="{{ asset('build/client/images/pop-up.png') }}" 
-         alt="Pop-up"
-         fetchpriority="high" 
-         width="500" 
-         height="auto"
-         decoding="async"
-         loading="eager"
-      />
+         <img 
+            src="{{ asset('storage/' . $popUp->path_image) }}" 
+            alt="Pop-up"
+            fetchpriority="high" 
+            width="500" 
+            height="auto"
+            decoding="async"
+            loading="eager"
+         />
 
+      </div>
    </div>
-</div>
-<script defer>
-   document.addEventListener("DOMContentLoaded", function () {
-      let popup = document.getElementById("popup");
-      let closeBtn = document.querySelector(".close-btn");
-      popup.style.display = "flex";
-      closeBtn.addEventListener("click", () => popup.style.display = "none");
-      window.addEventListener("click", (e) => { if (e.target === popup) popup.style.display = "none"; });
-   });
-</script>
+   <script defer>
+      document.addEventListener("DOMContentLoaded", function () {
+         let popup = document.getElementById("popup");
+         let closeBtn = document.querySelector(".close-btn");
+         popup.style.display = "flex";
+         closeBtn.addEventListener("click", () => popup.style.display = "none");
+         window.addEventListener("click", (e) => { if (e.target === popup) popup.style.display = "none"; });
+      });
+   </script>
+@endif
 
 <section class="blog mb-5">
     <div class="container-fluid">
@@ -142,7 +144,7 @@
                                              <img class="img-fluid h-100"
                                              src="{{ $blog->path_image_thumbnail ? asset('storage/'.$blog->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
                                              alt="{{ $blog->title ? $blog->title : 'Sem imagem'}}"
-                                             style="object-fit: cover;">
+                                             style="object-fit: cover;max-height:272px;width:100%;">
                                        </div>
                                        <div class="col-md-6 d-flex flex-column bg-white h-100 px-0">
                                              <div class="mt-auto p-4">

@@ -7,6 +7,7 @@ use App\Models\Announcement;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\PopUp;
 
 class BlogPageController extends Controller
 {
@@ -55,6 +56,7 @@ class BlogPageController extends Controller
         ->get();
 
         $announcements = Announcement::active()->sorting()->get();
+        $popUp = PopUp::active()->first();
 
         return view('client.blades.blog', compact(
             'blogCategories',
@@ -63,6 +65,7 @@ class BlogPageController extends Controller
             'blogAll',
             'blogSeeAlso',
             'announcements',
+            'popUp',
         ));
     }
 
