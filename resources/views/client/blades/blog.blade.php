@@ -4,32 +4,28 @@
 <div id="popup" class="popup" style="display: flex;">
    <div class="popup-content">
       <span class="close-btn font-24 montserrat-bold">x</span>
+
       <img 
          src="{{ asset('build/client/images/pop-up.png') }}" 
          alt="Pop-up"
-         fetchpriority="high"
+         fetchpriority="high" 
+         width="500" 
+         height="auto"
          decoding="async"
-      >
+         loading="eager"
+      />
+
    </div>
 </div>
-
-<script>
+<script defer>
    document.addEventListener("DOMContentLoaded", function () {
       let popup = document.getElementById("popup");
       let closeBtn = document.querySelector(".close-btn");
-
-      closeBtn.addEventListener("click", function () {
-         popup.style.display = "none";
-      });
-
-      window.addEventListener("click", function (event) {
-         if (event.target === popup) {
-            popup.style.display = "none";
-         }
-      });
+      popup.style.display = "flex";
+      closeBtn.addEventListener("click", () => popup.style.display = "none");
+      window.addEventListener("click", (e) => { if (e.target === popup) popup.style.display = "none"; });
    });
 </script>
-
 
 <section class="blog mb-5" data-aos=fade-up data-aos-delay=150>
     <div class="container-fluid">

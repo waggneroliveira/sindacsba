@@ -34,7 +34,8 @@
     <link rel="preload" as="image" href="{{ asset('build/client/images/pop-up.png') }}" fetchpriority="high">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"></noscript>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="{{ asset('build/admin/js/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('build/admin/js/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
@@ -120,6 +121,13 @@
             ]
         }
     </script>
+    <!-- CSS Crítico inline -->
+    <style>
+    body { margin: 0; font-family: 'Montserrat', sans-serif; }
+    .popup { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); align-items:center; justify-content:center; }
+    .popup-content { padding:20px; border-radius:10px; max-width:500px; width:90%; }
+    .close-btn { cursor:pointer; }
+    </style>
 </head>
 <body>
     <header id="header" class="w-100 d-flex flex-column position p-0">   
