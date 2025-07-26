@@ -151,6 +151,12 @@
                                     <span class="menu-text"> Anuncios </span>
                                 </a>
                             </li>
+                            <li class="menu-item">
+                                <a href="{{route('admin.dashboard.popUp.index')}}" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-window-maximize"></i></span>
+                                    <span class="menu-text"> Pop-up </span>
+                                </a>
+                            </li>
                         @endif
                         @if (Auth::user()->hasRole('Super') || 
                         Auth::user()->can('usuario.tornar usuario master') || 
