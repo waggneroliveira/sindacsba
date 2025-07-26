@@ -244,8 +244,8 @@
 
     </section>
 
-<script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script defer>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
     $(document).ready(function() {
         $('#contactForm').on('submit', function(e) {
             e.preventDefault();
