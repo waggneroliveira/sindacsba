@@ -154,7 +154,7 @@
                                  <div class="col-lg-12">
                                     <div class="row news-lg mx-0 mb-3 border rounded-2 overflow-hidden bg-white">
                                        <div class="col-md-6 h-100 px-0 overflow-hidden">
-                                             <img class="img-fluid h-100"
+                                             <img loading="lazy" class="img-fluid h-100"
                                              src="{{ $blog->path_image_thumbnail ? asset('storage/'.$blog->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
                                              alt="{{ $blog->title ? $blog->title : 'Sem imagem'}}"
                                              style="object-fit: cover;max-height:272px;width:100%;">
@@ -232,7 +232,7 @@
                                     @endphp                                
                                     <article>
                                        <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
-                                          <img class="img-fluid"
+                                          <img loading="lazy" class="img-fluid"
                                           src="{{ $seeAlso->path_image_thumbnail ? asset('storage/'.$seeAlso->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
                                           alt="{{ $seeAlso->title ? $seeAlso->title : 'Sem imagem'}}"
                                           style="height: 110px;">
