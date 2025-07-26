@@ -41,8 +41,9 @@
     <link href="{{ asset('build/admin/js/libs/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('build/client/css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('build/client/css/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="preload" href="{{ asset('build/client/css/bootstrap-icons/bootstrap-icons.css') }}" as="style" onload="this.rel='stylesheet'">
     <link href="{{ asset('build/client/css/style.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="preload" href="{{ asset('build/client/css/bootstrap-icons/fonts/bootstrap-icons.woff2') }}" as="font" type="font/woff2" crossorigin>
     
     <script defer src="https://cdn.userway.org/widget.js" data-account="qSpdtrySSt"></script>
     <link rel="preconnect" href="https://vlibras.gov.br" crossorigin>
