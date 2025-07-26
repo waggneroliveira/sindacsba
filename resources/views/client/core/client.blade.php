@@ -1,31 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset=UTF-8>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-    <meta http-equiv=X-UA-Compatible content="ie=edge">
-    <meta name=theme-color content=#0d0d0d>
-    <meta name=description content="O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.">
-    <meta name=keywords content="Sindacs Bahia, Sindicato Bahia, agentes comunitários de saúde, agentes de combate às endemias, ACS Bahia, ACE Bahia, sindicato ACS ACE, saúde pública Bahia, trabalhadores da saúde Bahia, direitos dos agentes de saúde, sindicato saúde Bahia, categoria ACS ACE, luta sindical Bahia, representação sindical saúde, agentes comunitários Bahia, agentes endemias Bahia, sindicato dos agentes Bahia">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content=#0d0d0d>
+    <meta name="description" content="O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.">
+    <meta name="keywords" content="Sindacs Bahia, Sindicato Bahia, agentes comunitários de saúde, agentes de combate às endemias, ACS Bahia, ACE Bahia, sindicato ACS ACE, saúde pública Bahia, trabalhadores da saúde Bahia, direitos dos agentes de saúde, sindicato saúde Bahia, categoria ACS ACE, luta sindical Bahia, representação sindical saúde, agentes comunitários Bahia, agentes endemias Bahia, sindicato dos agentes Bahia">
     <title>Sindacs Bahia</title>
-    <meta property=og:url content=https://www.sindacsba.org.br>
-    <meta property=og:type content=website>
-    <meta property=og:title content="Sindicato de agentes comunitários de saúde e agentes de combate as endemias da Bahia.">
-    <meta property=og:description content="O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.">
-    <meta name=twitter:card content=summary_large_image>
-    <meta name=twitter:url content=https://www.sindacsba.org.br>
-    <meta name=twitter:title content="Sindicato de agentes comunitários de saúde e agentes de combate as endemias da Bahia.">
-    <meta name=twitter:description content="O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.">
-    <meta name=twitter:image content=https://www.sindacsba.org.br/assets/images/logo.png>
-    <link rel=canonical href=https://www.sindacsba.org.br>
-    <meta name=copyright content="Direitos reservados WHI">
-    <meta name=author content=WHI>
-    <link rel="shortcut icon" href=https://www.sindacsba.org.br/assets/images/favicon.svg>
+    <meta property="og:url" content="https://www.sindacsba.org.br">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sindicato de agentes comunitários de saúde e agentes de combate as endemias da Bahia.">
+    <meta property="og:description" content="O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.">
+    <meta name="twitter:card" content=summary_large_image>
+    <meta name="twitter:url" content=https://www.sindacsba.org.br>
+    <meta name="twitter:title" content="Sindicato de agentes comunitários de saúde e agentes de combate as endemias da Bahia.">
+    <meta name="twitter:description" content="O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.">
+    <meta name="twitter:image" content=https://www.sindacsba.org.br/assets/images/logo.png>
+    <link rel="canonical" href=https://www.sindacsba.org.br>
+    <meta name="copyright" content="Direitos reservados WHI">
+    <meta name="author" content="WHI">
+    <link rel="shortcut icon" href="https://www.sindacsba.org.br/assets/images/favicon.svg">
 
-    <link rel=preconnect href=https://fonts.googleapis.com>
-    <link rel=preconnect href=https://fonts.gstatic.com crossorigin>    
-    <link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" onload='this.onload=null,this.rel="stylesheet"'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    
+    <link rel="preload" as=style href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" onload='this.onload=null,this.rel="stylesheet"'>
     <noscript>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
     </noscript>
@@ -41,15 +42,9 @@
     <link href="{{ asset('build/client/css/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('build/client/css/style.css') }}" rel="stylesheet" type="text/css" />
     
-    <script defer src=https://cdn.userway.org/widget.js data-account=qSpdtrySSt></script>
-    <link rel=preconnect href=https://vlibras.gov.br crossorigin>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6RXZ6TZT0V"></script>
-    <script defer>
-        function gtag() {
-            dataLayer.push(arguments)
-        }
-        window.dataLayer = window.dataLayer || [], gtag("js", new Date), gtag("config", "G-6RXZ6TZT0V")
-    </script>
+    <script defer src="https://cdn.userway.org/widget.js" data-account="qSpdtrySSt"></script>
+    <link rel="preconnect" href="https://vlibras.gov.br" crossorigin>
+
     <script type=application/ld+json>
         {
             "@context": "https://schema.org",

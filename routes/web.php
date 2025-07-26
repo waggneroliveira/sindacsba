@@ -25,13 +25,6 @@ Route::get('/', function () {
     return redirect()->route('blog');
 });
 
-// Route::get('forgot', function () {
-//     return view('emails.forgot-password');
-// })->name('admin.forgott');
-
-// Route::get('/home', function () {
-//     return view('client.blades.index');  
-// })->name('index');  
 Route::post('login.do', [AuthClientController::class, 'authenticate'])
 ->name('client.user.authenticate');
 

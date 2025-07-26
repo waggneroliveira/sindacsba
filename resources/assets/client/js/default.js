@@ -98,16 +98,6 @@
             }
         }))
     }));
-    let y = document.getElementById("stars-container");
-    if (y) {
-        for (let i = 0; i < 5; i++) {
-            let star = document.createElement("img");
-            star.src = "build/client/images/star.svg";
-            star.alt = "Estrela Rating";
-            star.title = "Estrela Rating";
-            y.appendChild(star);
-        }
-    }
 
     function l() {
         if (window.innerWidth <= 885) {
@@ -139,19 +129,6 @@
         }))
 
     document.addEventListener('DOMContentLoaded', function() {
-        const swiper = new Swiper('.main-swiper', {
-            loop: true,
-            speed: 1200,
-            autoplay: {
-                delay: 8000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            }
-        });
-
         const swiperAnuncio = new Swiper('.announcement', {
             loop: true,
             speed: 1200,

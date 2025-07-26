@@ -13,9 +13,7 @@ class HomePageController extends Controller
     public function index()
     {
         $slides = Slide::active()->sorting()->get();
-        $stacks = Stack::active()->sorting()->get();
-        $stackSessionTitle = StackSessionTitle::active()->first();
 
-        return view('client.blades.index', compact('slides', 'stacks', 'stackSessionTitle'));
+        return view('client.blades.index', compact('slides'));
     }
 }

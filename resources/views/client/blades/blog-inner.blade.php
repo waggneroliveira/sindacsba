@@ -1,7 +1,7 @@
 @extends('client.core.client')
 @section('content')
     <!-- News With Sidebar Start -->
-    <div class="container-fluid mb-5 blog-inn">
+    <div class="container-fluid mb-5 blog-inn mt-4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8" data-aos=fade-right data-aos-delay=150>
