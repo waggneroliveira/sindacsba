@@ -118,7 +118,7 @@ class BlogController extends Controller
                 Storage::disk('public')->put($this->pathUpload . $filename, $image);
             }
 
-            $data['path_image'] = $this->pathUpload . $filename; // sem 'storage/'
+            $data['path_image'] = $this->pathUpload . $filename; 
         }
 
         // Imagem de capa (thumbnail)
@@ -141,7 +141,7 @@ class BlogController extends Controller
                 Storage::disk('public')->put($this->pathUpload . $filename, $image);
             }
 
-            $data['path_image_thumbnail'] = $this->pathUpload . $filename; // sem 'storage/'
+            $data['path_image_thumbnail'] = $this->pathUpload . $filename; 
         }
 
         try {
