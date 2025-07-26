@@ -216,8 +216,8 @@
         </div>
     </div>
     <!-- News With Sidebar End -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer>
         function showMessage(message, type) {
              $('#commentMessage').html(
                  `<div class="alert alert-${type}">${message}</div>`
