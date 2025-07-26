@@ -27,7 +27,7 @@
    });
 </script>
 
-<section class="blog mb-5" data-aos=fade-up data-aos-delay=150>
+<section class="blog mb-5">
     <div class="container-fluid">
        <div class="row">
           <div class="col-lg-7 p-0">
