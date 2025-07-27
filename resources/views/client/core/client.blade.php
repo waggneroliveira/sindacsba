@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset=UTF-8>
+    <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="theme-color" content=#0d0d0d>
+    <meta name="theme-color" content="#0d0d0d">
     <meta name="description" content="O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.">
     <meta name="keywords" content="Sindacs Bahia, Sindicato Bahia, agentes comunitários de saúde, agentes de combate às endemias, ACS Bahia, ACE Bahia, sindicato ACS ACE, saúde pública Bahia, trabalhadores da saúde Bahia, direitos dos agentes de saúde, sindicato saúde Bahia, categoria ACS ACE, luta sindical Bahia, representação sindical saúde, agentes comunitários Bahia, agentes endemias Bahia, sindicato dos agentes Bahia">
     <title>Sindacs Bahia</title>
@@ -19,7 +19,7 @@
     <meta name="twitter:title" content="Sindicato de agentes comunitários de saúde e agentes de combate as endemias da Bahia.">
     <meta name="twitter:description" content="O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.">
     <meta name="twitter:image" content=https://www.sindacsba.org.br/assets/images/logo.png>
-    <link rel="canonical" href=https://www.sindacsba.org.br/noticias>
+    <link rel="canonical" href="{{ url()->current() }}">
     <meta name="copyright" content="Direitos reservados WHI">
     <meta name="author" content="WHI">
     <link rel="shortcut icon" href="https://www.sindacsba.org.br/assets/images/favicon.svg">
@@ -126,6 +126,7 @@
     </script>
 </head>
 <body>
+    <div id="organization" hidden></div>
     <header id="header" class="w-100 d-flex flex-column position p-0">   
         <div class="w-100 py-2 py-sm-2 header-color">
             <div class="container m-auto d-flex align-items-center justify-content-between flex-row">
