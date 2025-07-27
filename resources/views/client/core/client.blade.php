@@ -124,13 +124,6 @@
             ]
         }
     </script>
-    <!-- CSS Crítico inline -->
-    <style>
-    body { margin: 0; font-family: 'Montserrat', sans-serif; }
-    .popup { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); align-items:center; justify-content:center; }
-    .popup-content { padding:20px; border-radius:10px; max-width:500px; width:90%; }
-    .close-btn { cursor:pointer; }
-    </style>
 </head>
 <body>
     <header id="header" class="w-100 d-flex flex-column position p-0">   
