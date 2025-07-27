@@ -65,7 +65,7 @@
             "description": "O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.",
             "foundingDate": "2003",
             "email": "sindacsbahia@gmail.com",
-            "telephone": "3017-4112",
+            "telephone": "+55 71 3017-4112",
             "sameAs": [
                 "https://www.instagram.com/sindacsbahia",
                 "https://www.tiktok.com/@sindacsbahia",
@@ -83,25 +83,23 @@
             },
             "contactPoint": {
                 "@type": "ContactPoint",
-                "telephone": "3017-4112",
+                "telephone": "+55 71 3017-4112",
                 "contactType": "customer service",
                 "email": "sindacsbahia@gmail.com",
                 "areaServed": "BR",
-                "availableLanguage": ["Portuguese", "English"]
+                "availableLanguage": ["pt", "en"]
             },
             "openingHoursSpecification": {
                 "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday"
-                ],
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
                 "opens": "08:00",
                 "closes": "17:00"
             },
-            "duns": "06.953.941/0001-26",
+            "identifier": {
+                "@type": "PropertyValue",
+                "propertyID": "CNPJ",
+                "value": "06.953.941/0001-26"
+            },
             "slogan": "Sindacs Bahia",
             "keywords": [
                 "Sindacs Bahia",
@@ -120,7 +118,7 @@
                 "representação sindical saúde",
                 "agentes comunitários Bahia",
                 "agentes endemias Bahia",
-                "sindicato dos agentes Bahia",
+                "sindicato dos agentes Bahia"
             ]
         }
     </script>
