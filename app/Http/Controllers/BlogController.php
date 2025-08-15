@@ -108,7 +108,7 @@ class BlogController extends Controller
                 Storage::disk('public')->putFileAs($this->pathUpload, $file, $filename);
             } else {
                 $image = $manager->read($file)
-                    ->resize(857, null, function ($constraint) {
+                    ->resize(null, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
@@ -131,7 +131,7 @@ class BlogController extends Controller
                 Storage::disk('public')->putFileAs($this->pathUpload, $file, $filename);
             } else {
                 $image = $manager->read($file)
-                    ->resize(427, null, function ($constraint) {
+                    ->resize(null, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
@@ -221,7 +221,7 @@ class BlogController extends Controller
                 Storage::disk('public')->putFileAs($this->pathUpload, $file, $filename);
             } else {
                 $image = $manager->read($file)
-                    ->resize(857, null, function ($constraint) {
+                    ->resize(null, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
@@ -255,7 +255,7 @@ class BlogController extends Controller
                 Storage::disk('public')->putFileAs($this->pathUpload, $file, $filename);
             } else {
                 $image = $manager->read($file)
-                    ->resize(427, null, function ($constraint) {
+                    ->resize(null, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })

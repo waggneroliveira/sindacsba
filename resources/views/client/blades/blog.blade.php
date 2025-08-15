@@ -58,9 +58,9 @@
                         <article>
                            <div class="position-relative overflow-hidden" style="height: 500px;">
                               <img class="img-fluid h-100 w-100"
-                              src="{{ $blogSuperHighlight->path_image ? asset('storage/'.$blogSuperHighlight->path_image) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
-                              alt="{{ $blogSuperHighlight->path_image ? 'Notícia super destaque' : 'Sem imagem'}}"
-                              style="object-fit: cover; aspect-ratio: 2 / 1;">
+                              src="{{ $blogSuperHighlight->path_image_thumbnail ? asset('storage/'.$blogSuperHighlight->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
+                              alt="{{ $blogSuperHighlight->path_image_thumbnail ? 'Notícia super destaque' : 'Sem imagem'}}"
+                              style="object-fit: cover; aspect-ratio: 1.91/1;">
 
                               <div class="overlay">
                                  <div class="mb-2 d-flex justify-content-center align-items-center gap-1 flex-wrap">
@@ -95,7 +95,7 @@
                               <img class="img-fluid h-100 w-100"
                               src="{{ $blogHighlight->path_image_thumbnail ? asset('storage/'.$blogHighlight->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
                               alt="{{ $blogHighlight->title ? $blogHighlight->title : 'Sem imagem'}}"
-                              style="object-fit: cover; aspect-ratio: 2 / 1;">
+                              style="object-fit: cover; aspect-ratio: 1 / 1;">
                               <div class="overlay">
                                  <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
                                     <span class="badge background-red text-uppercase montserrat-semiBold font-12 py-2 px-2 me-2">{{$blogHighlight->category->title}}</span>
@@ -153,11 +153,11 @@
                               <article>
                                  <div class="col-lg-12">
                                     <div class="row news-lg mx-0 mb-3 border rounded-2 overflow-hidden bg-white">
-                                       <div class="col-md-6 h-100 px-0 overflow-hidden">
-                                             <img loading="lazy" class="img-fluid h-100"
+                                       <div class="col-md-6 h-100 px-0 overflow-hidden d-flex justify-content-center align-items-center" style="aspect-ratio:1/1;">
+                                             <img loading="lazy" class="img-fluid h-auto w-auto"
                                              src="{{ $blog->path_image_thumbnail ? asset('storage/'.$blog->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
                                              alt="{{ $blog->title ? $blog->title : 'Sem imagem'}}"
-                                             style="object-fit: cover;max-height:272px;width:100%;">
+                                             >
                                        </div>
                                        <div class="col-md-6 d-flex flex-column bg-white h-100 px-0">
                                              <div class="mt-auto p-4">
@@ -174,8 +174,8 @@
                                                       {{$blog->title}}
                                                    </h2>
                                                 </a>
-                                                <p class="m-0 text-color montserrat-regular font-16">
-                                                   {!!substr(strip_tags($blog->text), 0, 150)!!}
+                                                <p class="m-0 text-color montserrat-medium font-16">
+                                                   {!!substr(strip_tags($blog->text), 0, 450)!!}...
                                                 </p>
                                              </div>
                                        </div>

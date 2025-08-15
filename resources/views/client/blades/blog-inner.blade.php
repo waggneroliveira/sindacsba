@@ -17,12 +17,12 @@
                                 <span class="badge background-red montserrat-semiBold font-12 text-uppercase py-2 px-2 me-2">{{$blogInner->category->title}}</span>
                                 <p class="text-color mb-0 montserrat-regular font-15">{{$dataFormatada}}</p>
                             </div>
-                            <img class="img-fluid w-100 rounded-3 image-inner"
-                              src="{{ $blogInner->path_image ? asset('storage/'.$blogInner->path_image) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
+                            <img class="border img-fluid w-100 rounded-3 image-inner d-flex justify-content-center align-items-center"
+                              src="{{ $blogInner->path_image_thumbnail ? asset('storage/'.$blogInner->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
                               alt="{{ $blogInner->title ? $blogInner->title : 'Sem imagem'}}"
-                              style="object-fit: cover;">
+                              style="aspect-ratio:1.91/1;object-fit: contain;">
                             <div class="py-4"> 
-                                <div class="text-blog-inner montserrat-regular font-16">
+                                <div class="text-blog-inner montserrat-medium font-16">
                                     {!! $blogInner->text !!}
                                 </div>
                             </div>                        
@@ -100,7 +100,7 @@
                                     @if ($client)
                                         <div class="d-flex gap-2 flex-column mb-4">
                                             <div class="d-flex mb-0 gap-3">
-                                                <img src="{{ $client->path_image ? url($client->path_image) : asset('build/client/images/user.jpg') }}"
+                                                <img src="{{ $client->path_image_thumbnail ? url($client->path_image_thumbnail) : asset('build/client/images/user.jpg') }}"
                                                     alt="Imagem do cliente"
                                                     class="img-fluid mr-3 mt-1 rounded-circle"
                                                     style="width: 50px; height: 50px; object-fit: cover;">
@@ -175,7 +175,7 @@
                                     <article>
                                         <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
                                             <img loading="lazy" class="img-fluid"
-                                            src="{{ $relacionado->path_image_thumbnail ? asset('storage/'.$relacionado->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
+                                            src="{{ $relacionado->path_image_thumbnail_thumbnail ? asset('storage/'.$relacionado->path_image_thumbnail_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
                                             alt="{{ $relacionado->title ? $blogInner->title : 'Sem imagem'}}">
                                             <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                                 <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
