@@ -127,22 +127,152 @@
     <div id="organization" hidden></div>
     <header id="header" class="w-100 d-flex flex-column position p-0">   
         <div class="w-100 py-2 py-sm-2 header-color">
-            <div class="container m-auto d-flex align-items-center justify-content-between flex-row">
-                <div class="logo-img px-3 py-2 rounded-2 d-flex justify-content-start align-items-center">
-                    <a href="{{route('blog')}}">
-                        <img src="{{asset('build/client/images/logo.svg')}}" alt="Instituto Baiano de Medicina Desportivao" title="Instituto Baiano de Medicina Desportivao" class="img-fluid">
-                    </a>
+            <div class="container m-auto d-flex align-items-center justify-content-between flex-column">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                    <div class="overfllow-hidden col-4">
+                        <nav class="none site-navigation position-relative text-end w-auto redes-sociais">
+                            <ul class="p-0 d-flex justify-content-start gap-4 flex-row mb-0">
+                                @if (isset($contact) && $contact->link_insta)
+                                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                                        <a href="{{$contact->link_insta}}" rel="nofollow noopener noreferrer" target="_blank">
+                                            <img src="{{asset('build/client/images/insta.svg')}}" alt="Instagram">
+                                        </a>
+                                    </li>
+                                @endif
+                                @if (isset($contact) && $contact->link_x)
+                                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                                        <a href="{{$contact->link_x}}" rel="nofollow noopener noreferrer" target="_blank">
+                                            <img src="{{asset('build/client/images/x.svg')}}" alt="X">
+                                        </a>
+                                    </li>
+                                @endif
+                                @if (isset($contact) && $contact->link_youtube)
+                                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                                        <a href="{{$contact->link_youtube}}" rel="nofollow noopener noreferrer" target="_blank">
+                                            <img src="{{asset('build/client/images/youtube.svg')}}" alt="Youtube">
+                                        </a>
+                                    </li>
+                                @endif
+                                @if (isset($contact) && $contact->link_face)
+                                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                                        <a href="{{$contact->link_face}}" rel="nofollow noopener noreferrer" target="_blank">
+                                            <img src="{{asset('build/client/images/face.svg')}}" alt="Facebook">
+                                        </a>
+                                    </li>
+                                @endif
+                                @if (isset($contact) && $contact->link_tik_tok)
+                                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
+                                        <a href="{{$contact->link_tik_tok}}a" rel="nofollow noopener noreferrer" target="_blank">
+                                            <img src="{{asset('build/client/images/tiktok.svg')}}" alt="Tiktok">
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul> 
+                        </nav>
+                    </div>
+                    <div class="logo-img px-3 py-2 rounded-2 d-flex justify-content-start align-items-center col-4">
+                        <a href="{{route('blog')}}">
+                            <img src="{{asset('build/client/images/logo.svg')}}" alt="Instituto Baiano de Medicina Desportivao" title="Instituto Baiano de Medicina Desportivao" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center gap-2 col-4">                        
+                        @if (!Auth::guard('client')->check())                            
+                            <div class="d-flex justify-content-start align-items-center gap-2">
+                                <svg width="20" height="20" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M46.793 8.62893C44.5547 8.62893 42.7344 6.81253 42.7344 4.57423C42.7344 2.33593 44.5547 0.519531 46.793 0.519531L80.57 0.503906C88.8044 0.503906 95.5 7.20311 95.5 15.4339V80.5789C95.5 88.8055 88.8008 95.5089 80.57 95.5089H46.793C44.5469 95.5089 42.7266 93.6847 42.7266 91.4386C42.7266 89.1886 44.5469 87.3683 46.793 87.3683H80.57C84.3083 87.3683 87.3591 84.3136 87.3591 80.5831V15.4311C87.3591 11.7006 84.3083 8.63031 80.57 8.63031L46.793 8.62893ZM49.6914 68.2459L66.5504 51.0619C67.398 50.3158 67.9332 49.2181 67.9332 47.9994C67.9332 46.7807 67.398 45.683 66.5504 44.9408L49.6914 27.7568C48.1133 26.1591 45.543 26.1357 43.9492 27.71C42.3515 29.2803 42.3281 31.8545 43.9062 33.4522L54.1792 43.9322L4.5742 43.9283C2.3281 43.9283 0.5 45.7525 0.5 47.9986C0.5 50.2486 2.3281 52.0689 4.5742 52.0689H54.1762L43.9032 62.5459C42.3251 64.1436 42.3524 66.7138 43.9462 68.288C45.5439 69.8583 48.1103 69.8389 49.6884 68.2412L49.6914 68.2459Z" fill="white"/>
+                                </svg>
+
+                                <h2 class="off-login m-0 montserrat-medium font-14 text-start" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#loginModal">Login</h2>
+                            </div>
+                        @else
+                            @php
+                                $user = Auth::guard('client')->user();
+                                $defaultImage = $user && $user->path_image ? url($user->path_image) : '';
+                            @endphp
+                            <div class="image-profile">
+                                <picture>
+                                    <source srcset="{{ isset($defaultImage) && $defaultImage <> null ?$defaultImage:asset('build/client/images/user.jpg') }}" type="image/svg+xml">
+                                    <img src="{{ isset($defaultImage) && $defaultImage <> null ?$defaultImage:asset('build/client/images/user.jpg') }}"
+                                        alt="Imagem de Login"
+                                        class="img-fluid rounded-circle">
+                                </picture>
+                            </div>
+                            <div class="d-flex flex-column align-items-start gap-1">
+                                <div class="d-flex justify-content-start align-items-center gap-2 lh-0">
+                                    <h2 class="loginOn m-0 montserrat-medium font-14 text-start">Bem vindo,</h2>   
+                                    <h3 class="m-0 montserrat-medium font-14 text-start">{{$names = collect(explode(' ', Auth::guard('client')->user()->name))->slice(0, 1)->implode(' ')}}!</h3>      
+                                    <a class="nav-link waves-effect waves-light" href="#" data-bs-toggle="modal" data-bs-target="#editClientModal-{{Auth::guard('client')->user()->id}}">
+                                        <i class="bi bi-gear font-18"></i>
+                                    </a>                 
+                                </div>  
+                                <a href="{{route('client.user.logout')}}" class="d-flex justify-content-start align-items-center gap-2 text-decoration-none lh-0">
+                                    <i class="bi bi-box-arrow-right font-18"></i>
+                                    <h4 class="montserrat-medium font-12 m-0">Sair</h4>
+                                </a>                                               
+                            </div>
+                        @endif
+                    </div>
                 </div>
         
-                <div class="social-links d-flex justify-content-between align-items-center gap-4 text-center col-9">
+                <div class="social-links d-flex justify-content-center align-items-center gap-4 mb-2 mt-3 text-center col-12">
                     <nav class="none site-navigation ul position-relative text-end width-75">
                         <ul class="d-flex flex-row justify-content-start align-items-center gap-4 mb-0 list-unstyled">
-                            <li><a href="{{route('blog')}}" class="nav-link montserrat-regular font-18 {{ request()->routeIs('blog') ? 'active' : '' }} {{ request()->routeIs('blog-inner') ? 'active' : '' }}">Notícias</a></li>
-                            <li><a href="{{route('noticies')}}" class="nav-link montserrat-regular font-18 {{ request()->routeIs('noticies') ? 'active' : '' }}">Editais</a></li>
-                            <li><a href="{{route('contact')}}" class="nav-link montserrat-regular font-18 {{ request()->routeIs('contact') ? 'active' : '' }}">Contato</a></li>
+                            <li><a href="{{route('blog')}}" class="nav-link montserrat-medium text-center font-18">Home</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle montserrat-medium text-center font-18" 
+                                href="{{route('blog')}}" 
+                                id="sobreNosDropdown" 
+                                role="button" 
+                                data-bs-toggle="dropdown" 
+                                aria-expanded="false">
+                                    Sobre Nós <i class="bi bi-chevron-down"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="sobreNosDropdown">
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">História</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Missão e Visão</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Equipe</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle montserrat-medium text-center font-18" 
+                                href="{{route('blog')}}" 
+                                id="servicosDropdown" 
+                                role="button" 
+                                data-bs-toggle="dropdown" 
+                                aria-expanded="false">
+                                    Serviços ao sindicalizados <i class="bi bi-chevron-down"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="servicosDropdown">
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Benefícios</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Convênios</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Atendimentos</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle montserrat-medium text-center font-18" 
+                                href="{{route('blog')}}" 
+                                id="juridicoDropdown" 
+                                role="button" 
+                                data-bs-toggle="dropdown" 
+                                aria-expanded="false">
+                                    Jurídico <i class="bi bi-chevron-down"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="juridicoDropdown">
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Consultas</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Processos</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Orientações</a></li>
+                                </ul>
+                            </li>
+
+                            <li><a href="{{route('blog')}}" class="nav-link montserrat-medium text-center font-18">Regionais</a></li>
+                            <li><a href="{{route('blog')}}" class="nav-link montserrat-medium text-center font-18 {{ request()->routeIs('blog') ? 'active' : '' }} {{ request()->routeIs('blog-inner') ? 'active' : '' }}">Notícias</a></li>
+                            <li><a href="{{route('noticies')}}" class="nav-link montserrat-medium text-center font-18 {{ request()->routeIs('noticies') ? 'active' : '' }}">Editais</a></li>
+                            <li><a href="{{route('contact')}}" class="nav-link montserrat-medium text-center font-18 {{ request()->routeIs('contact') ? 'active' : '' }}">Contato</a></li>
                         </ul>                      
                     </nav>
-                    <nav class="none site-navigation position-relative text-end w-auto redes-sociais">
+                    {{-- <nav class="none site-navigation position-relative text-end w-auto redes-sociais">
                         <ul class="p-0 d-flex justify-content-start gap-4 flex-row mb-0">
                             @if (isset($contact) && $contact->link_insta)
                                 <li class="li d-flex justify-content-start align-items-center rounded-circle">
@@ -180,45 +310,49 @@
                                 </li>
                             @endif
                         </ul> 
-                    </nav>
-
-                    <div class="login d-flex justify-content-start align-items-center gap-2 w-auto">                        
-                        @if (!Auth::guard('client')->check())                            
-                            <div class="d-flex justify-content-start align-items-center gap-2">
-                                <svg width="20" height="20" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M46.793 8.62893C44.5547 8.62893 42.7344 6.81253 42.7344 4.57423C42.7344 2.33593 44.5547 0.519531 46.793 0.519531L80.57 0.503906C88.8044 0.503906 95.5 7.20311 95.5 15.4339V80.5789C95.5 88.8055 88.8008 95.5089 80.57 95.5089H46.793C44.5469 95.5089 42.7266 93.6847 42.7266 91.4386C42.7266 89.1886 44.5469 87.3683 46.793 87.3683H80.57C84.3083 87.3683 87.3591 84.3136 87.3591 80.5831V15.4311C87.3591 11.7006 84.3083 8.63031 80.57 8.63031L46.793 8.62893ZM49.6914 68.2459L66.5504 51.0619C67.398 50.3158 67.9332 49.2181 67.9332 47.9994C67.9332 46.7807 67.398 45.683 66.5504 44.9408L49.6914 27.7568C48.1133 26.1591 45.543 26.1357 43.9492 27.71C42.3515 29.2803 42.3281 31.8545 43.9062 33.4522L54.1792 43.9322L4.5742 43.9283C2.3281 43.9283 0.5 45.7525 0.5 47.9986C0.5 50.2486 2.3281 52.0689 4.5742 52.0689H54.1762L43.9032 62.5459C42.3251 64.1436 42.3524 66.7138 43.9462 68.288C45.5439 69.8583 48.1103 69.8389 49.6884 68.2412L49.6914 68.2459Z" fill="white"/>
-                                </svg>
-
-                                <h2 class="off-login m-0 montserrat-medium font-14 text-start" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#loginModal">Login</h2>
-                            </div>
-                        @else
-                            @php
-                                $user = Auth::guard('client')->user();
-                                $defaultImage = $user && $user->path_image ? url($user->path_image) : '';
-                            @endphp
-                            <div class="image-profile">
-                                <picture>
-                                    <source srcset="{{ isset($defaultImage) && $defaultImage <> null ?$defaultImage:asset('build/client/images/user.jpg') }}" type="image/svg+xml">
-                                    <img src="{{ isset($defaultImage) && $defaultImage <> null ?$defaultImage:asset('build/client/images/user.jpg') }}"
-                                        alt="Imagem de Login"
-                                        class="img-fluid rounded-circle">
-                                </picture>
-                            </div>
-                            <div class="d-flex flex-column align-items-start gap-1">
-                                <div class="d-flex justify-content-start align-items-center gap-2 lh-0">
-                                    <h2 class="loginOn m-0 montserrat-medium font-14 text-start">Bem vindo,</h2>   
-                                    <h3 class="m-0 montserrat-medium font-14 text-start">{{$names = collect(explode(' ', Auth::guard('client')->user()->name))->slice(0, 1)->implode(' ')}}!</h3>      
-                                    <a class="nav-link waves-effect waves-light" href="#" data-bs-toggle="modal" data-bs-target="#editClientModal-{{Auth::guard('client')->user()->id}}">
-                                        <i class="bi bi-gear font-18"></i>
-                                    </a>                 
-                                </div>  
-                                <a href="{{route('client.user.logout')}}" class="d-flex justify-content-start align-items-center gap-2 text-decoration-none lh-0">
-                                    <i class="bi bi-box-arrow-right font-18"></i>
-                                    <h4 class="montserrat-medium font-12 m-0">Sair</h4>
-                                </a>                                               
-                            </div>
-                        @endif
+                    </nav> --}}
+                    <div class="btn-filie-se">
+                        <a href="" class="badge badge-primary montserrat-medium font-14 text-uppercase me-2 background-red rounded-4 font-weight-semi-bold py-2 px-5">Filie-se</a>
                     </div>
+                    {{-- <div class="w-auto d-flex justify-content-center align-items-center gap-2">
+                        <div class="login d-flex justify-content-start align-items-center gap-2 w-auto">                        
+                            @if (!Auth::guard('client')->check())                            
+                                <div class="d-flex justify-content-start align-items-center gap-2">
+                                    <svg width="20" height="20" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M46.793 8.62893C44.5547 8.62893 42.7344 6.81253 42.7344 4.57423C42.7344 2.33593 44.5547 0.519531 46.793 0.519531L80.57 0.503906C88.8044 0.503906 95.5 7.20311 95.5 15.4339V80.5789C95.5 88.8055 88.8008 95.5089 80.57 95.5089H46.793C44.5469 95.5089 42.7266 93.6847 42.7266 91.4386C42.7266 89.1886 44.5469 87.3683 46.793 87.3683H80.57C84.3083 87.3683 87.3591 84.3136 87.3591 80.5831V15.4311C87.3591 11.7006 84.3083 8.63031 80.57 8.63031L46.793 8.62893ZM49.6914 68.2459L66.5504 51.0619C67.398 50.3158 67.9332 49.2181 67.9332 47.9994C67.9332 46.7807 67.398 45.683 66.5504 44.9408L49.6914 27.7568C48.1133 26.1591 45.543 26.1357 43.9492 27.71C42.3515 29.2803 42.3281 31.8545 43.9062 33.4522L54.1792 43.9322L4.5742 43.9283C2.3281 43.9283 0.5 45.7525 0.5 47.9986C0.5 50.2486 2.3281 52.0689 4.5742 52.0689H54.1762L43.9032 62.5459C42.3251 64.1436 42.3524 66.7138 43.9462 68.288C45.5439 69.8583 48.1103 69.8389 49.6884 68.2412L49.6914 68.2459Z" fill="white"/>
+                                    </svg>
+    
+                                    <h2 class="off-login m-0 montserrat-medium font-14 text-start" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#loginModal">Login</h2>
+                                </div>
+                            @else
+                                @php
+                                    $user = Auth::guard('client')->user();
+                                    $defaultImage = $user && $user->path_image ? url($user->path_image) : '';
+                                @endphp
+                                <div class="image-profile">
+                                    <picture>
+                                        <source srcset="{{ isset($defaultImage) && $defaultImage <> null ?$defaultImage:asset('build/client/images/user.jpg') }}" type="image/svg+xml">
+                                        <img src="{{ isset($defaultImage) && $defaultImage <> null ?$defaultImage:asset('build/client/images/user.jpg') }}"
+                                            alt="Imagem de Login"
+                                            class="img-fluid rounded-circle">
+                                    </picture>
+                                </div>
+                                <div class="d-flex flex-column align-items-start gap-1">
+                                    <div class="d-flex justify-content-start align-items-center gap-2 lh-0">
+                                        <h2 class="loginOn m-0 montserrat-medium font-14 text-start">Bem vindo,</h2>   
+                                        <h3 class="m-0 montserrat-medium font-14 text-start">{{$names = collect(explode(' ', Auth::guard('client')->user()->name))->slice(0, 1)->implode(' ')}}!</h3>      
+                                        <a class="nav-link waves-effect waves-light" href="#" data-bs-toggle="modal" data-bs-target="#editClientModal-{{Auth::guard('client')->user()->id}}">
+                                            <i class="bi bi-gear font-18"></i>
+                                        </a>                 
+                                    </div>  
+                                    <a href="{{route('client.user.logout')}}" class="d-flex justify-content-start align-items-center gap-2 text-decoration-none lh-0">
+                                        <i class="bi bi-box-arrow-right font-18"></i>
+                                        <h4 class="montserrat-medium font-12 m-0">Sair</h4>
+                                    </a>                                               
+                                </div>
+                            @endif
+                        </div>
+                    </div> --}}
 
                     <!-- Botão menu sandwich -->
                     <button id="menu-toggle" class="d-lg-none btn btn-link p-0 ms-2" aria-label="Abrir menu" type="button">
@@ -233,43 +367,45 @@
         </div>     
         @if ($blogCategories->count())
             <div class="header--category w-100 grey-medium-background social-links">
-                {{-- Versão Mobile (com Swiper) --}}
-                <nav class="d-block d-sm-none position-relative">
-                    <div class="swiper carrossel-mobile category-swiper">
-                        <div class="swiper-wrapper">
+                <div class="container d-flex justify-content-center align-items-center">
+                    {{-- Versão Mobile (com Swiper) --}}
+                    <nav class="d-block d-sm-none position-relative">
+                        <div class="swiper carrossel-mobile category-swiper">
+                            <div class="swiper-wrapper">
+                                @foreach ($blogCategories as $category)
+                                    <div class="swiper-slide">
+                                        <a href="{{ route('blog', ['category' => $category->slug]) }}#news"
+                                        class="carrossel title-blue montserrat-semiBold font-14 d-inline-block px-2
+                                        {{ (request()->routeIs('blog-inner') && isset($blogInner) && $blogInner->category->id === $category->id) ||
+                                            (request()->routeIs('blog') && request()->route('category') === $category->slug)
+                                            ? 'active' : '' }}">
+                                            {{ $category->title }}
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </nav>
+    
+                    {{-- Versão Desktop (sem Swiper) --}}
+                    <nav class="d-none d-sm-block">
+                        <ul class="list-unstyled d-flex justify-content-center flex-wrap gap-x-1rem px-0 py-2 mb-0">
                             @foreach ($blogCategories as $category)
-                                <div class="swiper-slide">
+                                <li>
                                     <a href="{{ route('blog', ['category' => $category->slug]) }}#news"
-                                    class="carrossel title-blue montserrat-semiBold font-14 d-inline-block px-2
+                                    class="title-blue montserrat-semiBold font-14 d-inline-block px-0
                                     {{ (request()->routeIs('blog-inner') && isset($blogInner) && $blogInner->category->id === $category->id) ||
                                         (request()->routeIs('blog') && request()->route('category') === $category->slug)
                                         ? 'active' : '' }}">
                                         {{ $category->title }}
                                     </a>
-                                </div>
+                                </li>
                             @endforeach
-                        </div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>
-                    </div>
-                </nav>
-
-                {{-- Versão Desktop (sem Swiper) --}}
-                <nav class="d-none d-sm-block">
-                    <ul class="list-unstyled d-flex justify-content-center flex-wrap gap-2 px-3 py-2 mb-0">
-                        @foreach ($blogCategories as $category)
-                            <li>
-                                <a href="{{ route('blog', ['category' => $category->slug]) }}#news"
-                                class="title-blue montserrat-semiBold font-14 d-inline-block px-2
-                                {{ (request()->routeIs('blog-inner') && isset($blogInner) && $blogInner->category->id === $category->id) ||
-                                    (request()->routeIs('blog') && request()->route('category') === $category->slug)
-                                    ? 'active' : '' }}">
-                                    {{ $category->title }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </nav>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         @endif
         <script>

@@ -77,7 +77,7 @@ View::composer('client.core.client', function ($view) {
     $blogCategories = BlogCategory::whereHas('blogs')
     ->active()
     ->sorting()
-    ->limit(6)
+    ->limit(10)
     ->get();
     $announcements = Announcement::active()->sorting()->get();
     $contact = Contact::first();
