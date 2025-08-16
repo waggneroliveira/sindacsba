@@ -119,7 +119,12 @@
         allowedContent: true,
         toolbar: [
             { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
-            { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
+            { name: 'paragraph', items: [
+                'NumberedList', 'BulletedList', '-', 
+                'Outdent', 'Indent', '-', 
+                'Blockquote', '-', 
+                'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'
+            ] },
             { name: 'links', items: ['Link', 'Unlink'] },
             { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar'] },
             { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },

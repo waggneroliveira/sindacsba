@@ -369,7 +369,7 @@
             <div class="header--category w-100 grey-medium-background social-links">
                 <div class="container d-flex justify-content-center align-items-center">
                     {{-- Versão Mobile (com Swiper) --}}
-                    <nav class="d-block d-sm-none position-relative">
+                    <nav class="d-block d-sm-none position-relative col-12">
                         <div class="swiper carrossel-mobile category-swiper">
                             <div class="swiper-wrapper">
                                 @foreach ($blogCategories as $category)
@@ -426,7 +426,7 @@
                                 slidesPerView: 2,
                             },
                             476: {
-                                slidesPerView: 3,
+                                slidesPerView: 3.2,
                             },
                         }
                     });
