@@ -71,6 +71,9 @@ Route::post('send-newsletter', [NewsletterController::class, 'store'])->name('se
 
 Route::post('cliente/cadastro', [ClientController::class, 'store'])->name('register-client');
 
+Route::get('/evento', function () {
+    return view('client.blades.event');
+})->name('client.event');
 
 
 View::composer('client.core.client', function ($view) {
