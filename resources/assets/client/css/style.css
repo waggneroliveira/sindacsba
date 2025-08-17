@@ -52,12 +52,13 @@
     font-weight: 600;
     font-size: 1.563rem;
 }
-.event-item strong{
-    color: var(--text-color);
+.event-item strong, .event-item span{
+    color: var(--background-red);
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
     font-weight: 600;
+    font-size: 1rem;
 }
 .event-item h4{
     color: var(--background-blue);
@@ -66,6 +67,7 @@
     font-style: normal;
     font-weight: 600;
     font-size: 1.25rem;
+    text-transform: uppercase;
 }
 .event-item a{
     color: var(--background-blue);

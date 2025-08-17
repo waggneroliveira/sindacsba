@@ -3,6 +3,9 @@
 @section('content')
 
 <style>
+    .announcement{
+        display: none;
+    }
     @media (max-width: 600px) {
     #calendar {
         grid-template-columns: repeat(7, 1fr);
@@ -39,6 +42,14 @@
     }
 }
 </style>
+
+<div class="d-flex justify-content-start gap-2 align-items-start flex-nowrap mt-5 mb-3">
+    <span class="firula-contact mt-2"></span>
+    <div class="description">
+        <h1 class="montserrat-bold font-30 mb-0 title-blue">Agenda</h1>
+    </div>
+</div>
+
 <div class="container mx-auto p-4">
     <div id="calendar"></div>
     <div id="events-list" class="mt-6"></div>
@@ -46,12 +57,12 @@
 
 <script>
     const events = [
-        { date: '2025-08-10', title: 'Reunião com Cliente na semana que vem', description: 'Discussão do projeto X', link: '#' },
-        { date: '2025-08-10', title: 'Justiça nomeia perita contábil em processo de insalubridade dos Agentes de Combate às Endemias do município de Salvador', description: 'Discussão do projeto X', link: '#' },
-        { date: '2025-08-13', title: 'Revisão do Contrato', description: 'Revisão de termos com equipe jurídica', link: '#' },
-        { date: '2025-08-15', title: 'Entrega do Relatório', description: 'Finalização do relatório mensal', link: '#' },
-        { date: '2025-08-19', title: 'Reunião com Cliente na semana que vem 01', description: 'Discussão do projeto X', link: '#' },
-        { date: '2025-08-20', title: 'Workshop', description: 'Treinamento interno', link: '#' }
+        { date: '2025-08-10', title: 'Reunião com Cliente na semana que vem', hours: '18:30', description: 'Discussão do projeto X', link: '#' },
+        { date: '2025-08-10', title: 'Justiça nomeia perita contábil em processo de insalubridade dos Agentes de Combate às Endemias do município de Salvador', hours: '18:30', description: 'Discussão do projeto X', link: '#' },
+        { date: '2025-08-13', title: 'Revisão do Contrato', hours: '18:30', description: 'Revisão de termos com equipe jurídica', link: '#' },
+        { date: '2025-08-15', title: 'Entrega do Relatório', hours: '18:30', description: 'Finalização do relatório mensal', link: '#' },
+        { date: '2025-08-19', title: 'Reunião com Cliente na semana que vem 01', hours: '18:30', description: 'Discussão do projeto X', link: '#' },
+        { date: '2025-08-20', title: 'Workshop', hours: '18:30', description: 'Treinamento interno', link: '#' }
     ];
 
     const holidays = [
@@ -189,19 +200,6 @@
             return date.getMonth() === month && date.getFullYear() === year;
         });
 
-        function formatDateExtenso(dateStr) {
-            const date = new Date(dateStr);
-            // retorna "07 de setembro"
-            let formatted = date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long' });
-
-            // separa em [dia, 'de', mês]
-            let [dia, de, mes] = formatted.split(' ');
-            // capitaliza só o mês
-            mes = mes.charAt(0).toUpperCase() + mes.slice(1);
-
-            return `${dia} ${de} ${mes}`;
-        }
-
         if (monthHolidays.length > 0) {
             const block = document.createElement('div');
             block.id = 'holidays-block';
@@ -210,7 +208,7 @@
             monthHolidays.forEach(h => {
                 const div = document.createElement('div');
                 div.className = 'holiday-item';
-                div.innerHTML = `${formatDateExtenso(h.date)}: <strong>${h.name}</strong>`;
+                div.innerHTML = `${formatDateLocal(h.date)}: <strong>${h.name}</strong>`;
                 block.appendChild(div);
             });
 
@@ -231,7 +229,7 @@
             const div = document.createElement('div');
             div.className = 'event-item';
             div.innerHTML = `
-                <strong>${formatDateLocal(e.date)}</strong> <br> <h4>${e.title}</h4>
+                <strong>${formatDateLocal(e.date)}</strong> - <span>${e.hours}</span> <br> <h4>${e.title}</h4>
                 <div class="description">${e.description}</div> <br>
                 <a href="${e.link}">Acessar</a>
             `;
@@ -262,7 +260,7 @@
             const div = document.createElement('div');
             div.className = 'event-item';
             div.innerHTML = `
-                <strong>${formatDateLocal(e.date)}</strong> <br> <h4>${e.title}</h4>
+                <strong>${formatDateLocal(e.date)}</strong> - <span>${e.hours}</span> <br> <h4>${e.title}</h4>
                 <div class="description">${e.description}</div> <br>
                 <a href="${e.link}">Acessar</a>
             `;
