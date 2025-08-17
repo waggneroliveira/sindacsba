@@ -47,7 +47,7 @@
 <script>
     const events = [
         { date: '2025-08-10', title: 'Reunião com Cliente na semana que vem', description: 'Discussão do projeto X', link: '#' },
-        { date: '2025-08-10', title: 'Reunião com Cliente na semana que vem 02', description: 'Discussão do projeto X', link: '#' },
+        { date: '2025-08-10', title: 'Justiça nomeia perita contábil em processo de insalubridade dos Agentes de Combate às Endemias do município de Salvador', description: 'Discussão do projeto X', link: '#' },
         { date: '2025-08-13', title: 'Revisão do Contrato', description: 'Revisão de termos com equipe jurídica', link: '#' },
         { date: '2025-08-15', title: 'Entrega do Relatório', description: 'Finalização do relatório mensal', link: '#' },
         { date: '2025-08-19', title: 'Reunião com Cliente na semana que vem 01', description: 'Discussão do projeto X', link: '#' },
@@ -164,6 +164,8 @@
 
                 // Renderiza eventos do dia
                 renderEvents(fullDate);
+
+                eventsListEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
 
             calendarEl.appendChild(dayEl);
@@ -229,7 +231,7 @@
             const div = document.createElement('div');
             div.className = 'event-item';
             div.innerHTML = `
-                <strong>${new Date(e.date).toLocaleDateString()}</strong> <br> <h4>${e.title}</h4>
+                <strong>${formatDateLocal(e.date)}</strong> <br> <h4>${e.title}</h4>
                 <div class="description">${e.description}</div> <br>
                 <a href="${e.link}">Acessar</a>
             `;
@@ -239,6 +241,12 @@
         if (monthEvents.length === 0) {
             eventsListEl.innerHTML = '<p>Nenhum evento neste mês.</p>';
         }
+    }
+
+    function formatDateLocal(dateStr) {
+        const parts = dateStr.split('-'); // "2025-08-15" => ["2025","08","15"]
+        const date = new Date(parts[0], parts[1]-1, parts[2]); // mês é 0-index
+        return date.toLocaleDateString('pt-BR');
     }
 
     function renderEvents(date) {
@@ -254,7 +262,7 @@
             const div = document.createElement('div');
             div.className = 'event-item';
             div.innerHTML = `
-                <strong>${new Date(e.date).toLocaleDateString()}</strong> <br> <h4>${e.title}</h4>
+                <strong>${formatDateLocal(e.date)}</strong> <br> <h4>${e.title}</h4>
                 <div class="description">${e.description}</div> <br>
                 <a href="${e.link}">Acessar</a>
             `;
