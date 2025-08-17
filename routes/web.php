@@ -75,6 +75,10 @@ Route::get('/evento', function () {
     return view('client.blades.event');
 })->name('client.event');
 
+Route::get('/sobre', function () {
+    return view('client.blades.about');
+})->name('about');
+
 
 View::composer('client.core.client', function ($view) {
     $blogCategories = BlogCategory::whereHas('blogs')

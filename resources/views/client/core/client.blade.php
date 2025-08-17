@@ -228,9 +228,9 @@
                                     Sobre Nós <i class="bi bi-chevron-down"></i>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="sobreNosDropdown">
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">História</a></li>
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Missão e Visão</a></li>
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Equipe</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#about-1">História</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#about-2">Missão e Visão</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#board">Equipe</a></li>
                                 </ul>
                             </li>
 

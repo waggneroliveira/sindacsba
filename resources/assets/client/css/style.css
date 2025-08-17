@@ -724,6 +724,9 @@
     display: flex;
     gap: 0 1rem;
 }
+.function{
+    color: var(--background-blue);
+}
  .text-blog-inner {
      color: var(--text-color-blog-inner);
  }
@@ -851,7 +854,42 @@
      color: var(--heading-color);
      font-family: var(--heading-font)
  }
-
+ .board .image{
+    aspect-ratio: 1/1;
+    width: 90px;
+    height: 90px;
+ }
+.board .image img{
+    object-fit: contain;
+    object-position: center;  
+    width: 100%;
+ }
+.about .description ul li{
+    list-style: none;
+}
+.about .description ul li::before{
+    content:'';
+    background-image: url('../images/ok.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 21px;
+    height: 21px;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+ }
+ .about:nth-of-type(even){
+    flex-direction: row-reverse !important;
+ }
+.about .image{
+    aspect-ratio: 1/1;
+    max-width: 450px;
+}
+.about .image img{
+    object-fit: contain;
+    object-position: center;
+}
  .d-flex.justify-content-end.flex-column.w-auto {
      height: auto;
      gap: 10px
