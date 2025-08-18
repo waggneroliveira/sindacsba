@@ -244,9 +244,9 @@
                                     Serviços ao sindicalizados <i class="bi bi-chevron-down"></i>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="servicosDropdown">
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Benefícios</a></li>
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Convênios</a></li>
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Atendimentos</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('unionized')}}#partnes">Convênios</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('unionized')}}#benefit">Benefícios</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('unionized')}}#complaint">Denuncias</a></li>
                                 </ul>
                             </li>
 
@@ -266,7 +266,7 @@
                                 </ul>
                             </li>
 
-                            <li><a href="{{route('blog')}}" class="nav-link montserrat-medium text-center font-18">Regionais</a></li>
+                            <li><a href="{{route('regional')}}" class="nav-link montserrat-medium text-center font-18">Regionais</a></li>
                             <li><a href="{{route('blog')}}" class="nav-link montserrat-medium text-center font-18 {{ request()->routeIs('blog') ? 'active' : '' }} {{ request()->routeIs('blog-inner') ? 'active' : '' }}">Notícias</a></li>
                             <li><a href="{{route('noticies')}}" class="nav-link montserrat-medium text-center font-18 {{ request()->routeIs('noticies') ? 'active' : '' }}">Editais</a></li>
                             <li><a href="{{route('contact')}}" class="nav-link montserrat-medium text-center font-18 {{ request()->routeIs('contact') ? 'active' : '' }}">Contato</a></li>

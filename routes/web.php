@@ -79,6 +79,18 @@ Route::get('/sobre', function () {
     return view('client.blades.about');
 })->name('about');
 
+Route::get('/servicos-aos-sindicalizados', function () {
+    return view('client.blades.unionized');
+})->name('unionized');
+
+Route::get('/regionais', function () {
+    return view('client.blades.regional');
+})->name('regional');
+
+Route::get('/juridico', function () {
+    return view('client.blades.juridico');
+})->name('juridico');
+
 
 View::composer('client.core.client', function ($view) {
     $blogCategories = BlogCategory::whereHas('blogs')

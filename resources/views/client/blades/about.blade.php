@@ -9,7 +9,7 @@
     <div class="d-flex justify-content-start gap-2 align-items-start flex-nowrap mt-5 mb-3">
         <span class="firula-contact mt-2"></span>
         <div class="description">
-            <h1 class="montserrat-bold font-30 mb-0 title-blue">Sobre Nós</h1>
+            <h1 class="montserrat-bold font-30 mb-0 title-blue text-uppercase">Sobre Nós</h1>
         </div>
     </div>
 
@@ -18,7 +18,7 @@
             <div id="about-1" class="d-flex justify-content-between align-items-start about flex-wrap w-100 pt-4 pt-lg-5">
                 <div class="col-11 col-lg-4 animate-on-scroll mb-3" data-animation="animate__fadeInRight">
                     <div class="image d-flex justify-content-end">
-                        <img src="{{asset('build/client/images/aboutt.png')}}" alt="About" class="w-100 h-100 about-image d-sm-block" loading="lazy">
+                        <img src="{{asset('build/client/images/aboutt.png')}}" loading="lazy" alt="About" class="w-100 h-100 about-image d-sm-block" loading="lazy">
                     </div>
                 </div>
 
@@ -47,7 +47,7 @@
             <div id="about-2" class="d-flex justify-content-between align-items-start about flex-wrap w-100 pt-4 pt-lg-5">
                 <div class="col-11 col-lg-4 animate-on-scroll mb-3" data-animation="animate__fadeInRight">
                     <div class="image d-flex justify-content-end">
-                        <img src="{{asset('build/client/images/aboutt-1.png')}}" alt="About" class="w-100 h-100 about-image d-sm-block" loading="lazy">
+                        <img src="{{asset('build/client/images/aboutt-1.png')}}" loading="lazy" alt="About" class="w-100 h-100 about-image d-sm-block" loading="lazy">
                     </div>
                 </div>
 
@@ -81,6 +81,23 @@
                 
             </div>
         </div>
+
+        <div class="partner-about">
+            <div class="container py-5">
+                <div class="row g-3 justify-content-center">
+                    @for ($a = 0; $a < 4; $a++)                    
+                        <div class="col-6 col-sm-4 col-md-2 d-flex justify-content-center">
+                            <div class="partner-card border rounded-2 d-flex justify-content-center align-items-center py-2 px-4 w-100">
+                                <img src="{{ asset('build/client/images/cut.png') }}" 
+                                    alt="Logo do parceiro" 
+                                    class="img-fluid" 
+                                    loading="lazy"/>                            
+                            </div>
+                        </div>
+                    @endfor
+                </div>
+            </div>
+        </div>
 </section>
 
 <!-- Diretoria -->
@@ -92,7 +109,7 @@
         <div class="col-md-4 col-sm-12">
             <div class="d-flex justify-content-start gap-3 align-items-center">
                 <div class="image">
-                    <img src="{{asset('build/client/images/user.png')}}" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
+                    <img src="{{asset('build/client/images/user.png')}}" loading="lazy" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
                 </div>
                 <div class="description d-flex flex-column justify-content-center">
                     <h5 class="mb-1 montserrat-bold font-18 title-blue">Clayton Ferreira da Silva</h5>
@@ -103,7 +120,7 @@
         <div class="col-md-4 col-sm-12">
             <div class="d-flex justify-content-start gap-3 align-items-center">
                 <div class="image">
-                    <img src="{{asset('build/client/images/user.png')}}" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
+                    <img src="{{asset('build/client/images/user.png')}}" loading="lazy" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
                 </div>
                 <div class="description d-flex flex-column justify-content-center">
                     <h5 class="mb-1 montserrat-bold font-18 title-blue">Clayton Ferreira da Silva</h5>
@@ -114,7 +131,7 @@
         <div class="col-md-4 col-sm-12">
             <div class="d-flex justify-content-start gap-3 align-items-center">
                 <div class="image">
-                    <img src="{{asset('build/client/images/user.png')}}" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
+                    <img src="{{asset('build/client/images/user.png')}}" loading="lazy" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
                 </div>
                 <div class="description d-flex flex-column justify-content-center">
                     <h5 class="mb-1 montserrat-bold font-18 title-blue">Clayton Ferreira da Silva</h5>
@@ -125,7 +142,7 @@
         <div class="col-md-4 col-sm-12">
             <div class="d-flex justify-content-start gap-3 align-items-center">
                 <div class="image">
-                    <img src="{{asset('build/client/images/user.png')}}" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
+                    <img src="{{asset('build/client/images/user.png')}}" loading="lazy" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
                 </div>
                 <div class="description d-flex flex-column justify-content-center">
                     <h5 class="mb-1 montserrat-bold font-18 title-blue">Clayton Ferreira da Silva</h5>
@@ -136,7 +153,7 @@
         <div class="col-md-4 col-sm-12">
             <div class="d-flex justify-content-start gap-3 align-items-center">
                 <div class="image">
-                    <img src="{{asset('build/client/images/user.png')}}" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
+                    <img src="{{asset('build/client/images/user.png')}}" loading="lazy" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
                 </div>
                 <div class="description d-flex flex-column justify-content-center">
                     <h5 class="mb-1 montserrat-bold font-18 title-blue">Clayton Ferreira da Silva</h5>
@@ -147,7 +164,7 @@
         <div class="col-md-4 col-sm-12">
             <div class="d-flex justify-content-start gap-3 align-items-center">
                 <div class="image">
-                    <img src="{{asset('build/client/images/user.png')}}" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
+                    <img src="{{asset('build/client/images/user.png')}}" loading="lazy" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
                 </div>
                 <div class="description d-flex flex-column justify-content-center">
                     <h5 class="mb-1 montserrat-bold font-18 title-blue">Clayton Ferreira da Silva</h5>
