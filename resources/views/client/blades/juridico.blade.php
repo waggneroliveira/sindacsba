@@ -19,9 +19,9 @@
                 <div class="col-11 col-lg-12 d-flex flex-wrap gap-3 justify-content-center">
                     <div class="col-11 col-lg-12 d-flex flex-wrap justify-content-between align-items-center">
                         <div class="filter-esq col-8">
-                            <button class="px-5 w-auto border btn-title montserrat-bold text-uppercase font-18 btn btn-juridico active">Leis</button>
-                            <button class="px-5 w-auto border btn-title montserrat-bold text-uppercase font-18 btn btn-juridico">Decretos</button>
-                            <button class="px-5 w-auto border btn-title montserrat-bold text-uppercase font-18 btn btn-juridico">Portaria</button>
+                            <button class="px-5 w-auto rounded-0 border btn-title montserrat-bold text-uppercase font-15 btn btn-juridico active">Leis</button>
+                            <button class="px-5 w-auto rounded-0 border btn-title montserrat-bold text-uppercase font-15 btn btn-juridico">Decretos</button>
+                            <button class="px-5 w-auto rounded-0 border btn-title montserrat-bold text-uppercase font-15 btn btn-juridico">Portaria</button>
                         </div>
     
                         <div class="filter-dir col-4 d-flex justify-content-end align-items-center gap-3">
@@ -31,8 +31,8 @@
                             <path d="M18.2 7.80005C16.51 7.80005 15.08 8.84005 14.56 10.4H0V13H14.56C15.08 14.56 16.51 15.6 18.2 15.6C19.89 15.6 21.32 14.56 21.84 13H26V10.4H21.84C21.32 8.84005 19.89 7.80005 18.2 7.80005ZM18.2 13C17.42 13 16.9 12.48 16.9 11.7C16.9 10.92 17.42 10.4 18.2 10.4C18.98 10.4 19.5 10.92 19.5 11.7C19.5 12.48 18.98 13 18.2 13Z" fill="#2F368B"/>
                             </svg>
 
-                            <button class="px-3 montserrat-bold text-uppercase font-18 btn btn-juridico btn-title-filter active">NACIONAL</button>
-                            <button class="px-3 montserrat-bold text-uppercase font-18 btn btn-juridico btn-title-filter">Municipal</button>
+                            <button class="px-4 rounded-0 montserrat-bold text-uppercase font-15 btn btn-juridico btn-title-filter active">NACIONAL</button>
+                            <button class="px-4 rounded-0 montserrat-bold text-uppercase font-15 btn btn-juridico btn-title-filter">Municipal</button>
                         </div>
                     </div>
                     <div class="search col-11 col-md-12">

@@ -57,11 +57,11 @@ public function store(Request $request)
             Storage::putFileAs($this->pathUpload, $file, $filename);
         } else {
             $image = $manager->read($file)
-                ->resize(1200, null, function ($constraint) {
+                ->resize(null, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
-                ->toWebp(quality: 70)
+                ->toWebp(quality: 95)
                 ->toString();
 
             Storage::put($this->pathUpload . $filename, $image);
@@ -80,11 +80,11 @@ public function store(Request $request)
             Storage::putFileAs($this->pathUpload, $fileMobile, $filenameMobile);
         } else {
             $imageMobile = $manager->read($fileMobile)
-                ->resize(768, null, function ($constraint) {
+                ->resize(null, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
-                ->toWebp(quality: 70)
+                ->toWebp(quality: 95)
                 ->toString();
 
             Storage::put($this->pathUpload . $filenameMobile, $imageMobile);
@@ -125,7 +125,7 @@ public function update(Request $request, Slide $slide)
             Storage::putFileAs($this->pathUpload, $file, $filename);
         } else {
             $image = $manager->read($file)
-                ->resize(1200, 780, function ($constraint) {
+                ->resize(null, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
@@ -154,11 +154,11 @@ public function update(Request $request, Slide $slide)
             Storage::putFileAs($this->pathUpload, $fileMobile, $filenameMobile);
         } else {
             $imageMobile = $manager->read($fileMobile)
-                ->resize(480, 768, function ($constraint) {
+                ->resize(null, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
-                ->toWebp(quality: 70)
+                ->toWebp(quality: 95)
                 ->toString();
 
             Storage::put($this->pathUpload . $filenameMobile, $imageMobile);

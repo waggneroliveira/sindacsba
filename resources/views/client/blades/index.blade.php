@@ -1,5 +1,10 @@
 @extends('client.core.client')
 @section('content')
+<style>
+    .announcement{
+        display: none;
+    }
+</style>
 <section id=hero class="hero position-relative d-flex flex-column section dark-background overflow-hidden">
     @foreach ($slides as $slide)
         <picture>

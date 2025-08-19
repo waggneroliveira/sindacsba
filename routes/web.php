@@ -22,7 +22,7 @@ use App\Http\Controllers\Auth\ResetPasswordClientController;
 require __DIR__ . '/dashboard.php';
 
 Route::get('/', function () {
-    return redirect()->route('blog');
+    return redirect()->route('index');
 });
 
 Route::post('login.do', [AuthClientController::class, 'authenticate'])
@@ -70,6 +70,7 @@ Route::post('noticias/search', [BlogPageController::class, 'index'])->name('blog
 Route::post('send-newsletter', [NewsletterController::class, 'store'])->name('send-newsletter');
 
 Route::post('cliente/cadastro', [ClientController::class, 'store'])->name('register-client');
+Route::get('home', [HomePageController::class, 'index'])->name('index');
 
 Route::get('/evento', function () {
     return view('client.blades.event');

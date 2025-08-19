@@ -721,7 +721,11 @@
 .btn-title, .btn-title-filter{
     color: var(--background-blue);
 }
-.juridico .btn:hover, .btn-title-filter.active{
+.btn.btn-title.btn-juridico:hover{
+    background-color: var(--background-blue);
+    color: var(--color-white);
+}
+.juridico .btn.btn-juridico.btn-title-filter:hover, .btn-title-filter.active{
     background-color: var(--background-color-grey-medium);
     color: var(--background-blue);
 }
@@ -1129,9 +1133,8 @@
  }
 
  .hero {
-     width: 100%;
-     height: 100%;
-     justify-content: center
+    width: 100%;
+    height: 70vh;
  }
 
  .hero h1 {
@@ -1153,11 +1156,12 @@
  }
 
  .image-hero {
-     width: 100%;
-     height: auto;
-     aspect-ratio: 1200 / 780;
-     object-fit: cover;
-     display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1.91 / 1;
+    object-fit: cover;
+    object-position: center;
+    display: block;
  }
 
  .section {

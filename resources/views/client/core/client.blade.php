@@ -171,7 +171,7 @@
                         </nav>
                     </div>
                     <div class="logo-img px-3 py-2 rounded-2 d-flex justify-content-start align-items-center col-4">
-                        <a href="{{route('blog')}}">
+                        <a href="{{route('index')}}">
                             <img src="{{asset('build/client/images/logo.svg')}}" alt="Instituto Baiano de Medicina Desportivao" title="Instituto Baiano de Medicina Desportivao" class="img-fluid">
                         </a>
                     </div>
@@ -217,10 +217,10 @@
                 <div class="social-links d-flex justify-content-center align-items-center gap-4 mb-2 mt-3 text-center col-12">
                     <nav class="none site-navigation ul position-relative text-end width-75">
                         <ul class="d-flex flex-row justify-content-start align-items-center gap-4 mb-0 list-unstyled">
-                            <li><a href="{{route('blog')}}" class="nav-link montserrat-medium text-center font-18">Home</a></li>
+                            <li><a href="{{route('index')}}" class="nav-link montserrat-medium text-center font-18">Home</a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle montserrat-medium text-center font-18" 
-                                href="{{route('blog')}}" 
+                                href="{{route('about')}}" 
                                 id="sobreNosDropdown" 
                                 role="button" 
                                 data-bs-toggle="dropdown" 
@@ -236,7 +236,7 @@
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle montserrat-medium text-center font-18" 
-                                href="{{route('blog')}}" 
+                                href="{{route('unionized')}}" 
                                 id="servicosDropdown" 
                                 role="button" 
                                 data-bs-toggle="dropdown" 
@@ -252,7 +252,7 @@
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle montserrat-medium text-center font-18" 
-                                href="{{route('blog')}}" 
+                                href="{{route('juridico')}}" 
                                 id="juridicoDropdown" 
                                 role="button" 
                                 data-bs-toggle="dropdown" 
@@ -260,9 +260,9 @@
                                     Jurídico <i class="bi bi-chevron-down"></i>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="juridicoDropdown">
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Consultas</a></li>
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Processos</a></li>
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="#">Orientações</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('juridico')}}">Consultas</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('juridico')}}">Processos</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('juridico')}}">Orientações</a></li>
                                 </ul>
                             </li>
 
