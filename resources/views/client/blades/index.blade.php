@@ -41,13 +41,14 @@
 <section id="topic" class="topic">
     <div class="container py-5">
         <div class="row g-3 justify-content-center">
-            @for ($a = 0; $a < 4; $a++)                    
+            @for ($a = 0; $a < 5; $a++)                    
                 <div class="col-6 col-sm-4 col-md-2 d-flex justify-content-center">
-                    <div class="partner-card border rounded-2 d-flex justify-content-center align-items-center py-2 px-4 w-100">
-                        <img src="{{ asset('build/client/images/cut.png') }}" 
+                    <div class="partner-card dark-background border rounded-2 d-flex flex-column justify-content-center align-items-start gap-3 p-3 w-100">
+                        <img src="{{ asset('build/client/images/call.svg') }}" 
                             alt="Logo do parceiro" 
                             class="img-fluid" 
-                            loading="lazy"/>                            
+                            loading="lazy"/>
+                        <h2 class="montserrat-bold montserrat-bold font-18  mb-0 title-blue text-uppercase mb-0 text-white">Atendimento</h2>                            
                     </div>
                 </div>
             @endfor
