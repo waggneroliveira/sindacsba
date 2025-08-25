@@ -698,7 +698,7 @@
 
     <main>
         <div  class="mt-0">
-            @include('client.includes.announcement')
+            {{-- @include('client.includes.announcement') --}}
 
             @if ($announcements->isEmpty())
                 <style>
