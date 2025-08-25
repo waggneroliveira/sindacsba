@@ -53,7 +53,7 @@
 </section>
 
 <section class="blog mb-5">
-    <div class="container">
+    <div class="container-fluid">
        <div class="row">
           <div class="col-lg-7 p-0">
              <!-- Swiper Main Carousel -->
@@ -184,127 +184,222 @@
     </div>
 @endif
 
-  <style>
-    /* .mySwiper.swiper {
-      width: 100%;
-      height: 100%;
-      min-height: 480px;
-    } */
-    .mySwiper .swiper-slide {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px;
-      cursor: pointer;
-      border-radius: 6px;
-    }
-    .mySwiper .swiper-slide.active {
-      background: #fff;
-      color: #000;
-      font-weight: bold;
-    }
-    .mySwiper .swiper-slide img {
-      width: 30px;
-      height: 30px;
-    }
-    .mySwiper .swiper-button-up,
-    .mySwiper .swiper-button-down {
-      color: white;
-      font-size: 20px;
-      margin: 5px 0;
-      cursor: pointer;
-    }
-    .content-video, .right, .mySwiper.swiper, .right iframe{
-        min-height: 460px;
-    }
-    .nav-video{
-        right: 50px;
-        bottom: 50px;
-    }
-     
-    .right iframe {
-      border: none;
-    }
-  </style>
 <section class="video">
-    <div class="container">
-        <div class="content-video d-flex justify-content-center align-items-center">
-            <!-- Carrossel -->
-            <div class="left col-5 dark-background h-100 position-relative">
-                <div class="swiper mySwiper">
-                    <div class="swiper-wrapper flex-column align-items-start justify-content-start col-10 m-auto">
-                        <div class="swiper-slide align-items-center justify-content-start" data-video="https://www.youtube.com/embed/ysz5S6PUM-U">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="external-icon" viewBox="0 0 28.57  20" focusable="false" style="pointer-events: none; display: block; width: 40px; height: auto;">
-                            <svg viewBox="0 0 28.57 20" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-                                <g>
-                                <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000"></path>
-                                <path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white"></path>
-                                </g>
-                            </svg>
-                            </svg>
-                            <h4 class="title montserrat-medium font-16 mb-0">Protesto a favor do governo de Obama</h4>                        
-                        </div>
-                        <div class="swiper-slide align-items-center justify-content-start" data-video="https://www.youtube.com/embed/ScMzIvxBSi4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="external-icon" viewBox="0 0 28.57  20" focusable="false" style="pointer-events: none; display: block; width: 40px; height: auto;">
-                            <svg viewBox="0 0 28.57 20" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-                                <g>
-                                <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000"></path>
-                                <path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white"></path>
-                                </g>
-                            </svg>
-                            </svg>
-                            <h4 class="title montserrat-medium font-16 mb-0">Protesto pelo aumento do salário mínimo</h4>                        
-                        </div>
-                        <div class="swiper-slide align-items-center justify-content-start" data-video="//www.youtube.com/embed/Z5CEq_8DLwQ?si=-wpVZgp7y6bdbIxI">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="external-icon" viewBox="0 0 28.57  20" focusable="false" style="pointer-events: none; display: block; width: 40px; height: auto;">
-                            <svg viewBox="0 0 28.57 20" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-                                <g>
-                                <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000"></path>
-                                <path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white"></path>
-                                </g>
-                            </svg>
-                            </svg>
-                            <h4 class="title montserrat-medium font-16 mb-0">Protesto contra cortes na educação</h4>                        
-                        </div>
+    <div class="container-fluid p-0">
+        <div class="content-video d-flex justify-content-center align-items-center bg-black">
+            <!-- Lista -->
+            <div class="left col-5 dark-background h-100 d-flex justify-content-center align-items-end flex-column position-relative">                
+                <div class="swiper mySwiper position-relative">
+                    <div class="swiper-wrapper py-4 flex-column align-items-start justify-content-start m-auto position-relative">
+                        @for ($s = 0; $s < 10; $s++)                        
+                            <div class="swiper-slide align-items-center mb-3 justify-content-start" data-video="//www.youtube.com/embed/Z5CEq_8DLwQ?si=-wpVZgp7y6bdbIxI">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="external-icon" viewBox="0 0 28.57  20" focusable="false" style="pointer-events: none; display: block; width: 35px; height: auto;">
+                                <svg viewBox="0 0 28.57 20" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                    <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000"></path>
+                                    <path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white"></path>
+                                    </g>
+                                </svg>
+                                </svg>
+                                <h4 class="title montserrat-medium font-16 mb-0">Protesto contra cortes na educação</h4>                        
+                            </div>
+                        @endfor
                     </div>
                 </div>
-                <div class="nav-video position-absolute">
+                <div class="nav-video position-absolute d-flex flex-column align-items-end me-5">
                     <div class="swiper-button-up">▲</div>
                     <div class="swiper-button-down">▼</div>
                 </div>
+               
             </div>
             <!-- Player -->
             <div class="right col-7 bg-black d-flex justify-content-center align-items-center">
                 <iframe id="videoPlayer" class="w-100 h-100" src="//www.youtube.com/embed/Z5CEq_8DLwQ?si=-wpVZgp7y6bdbIxI" allowfullscreen></iframe>
             </div>
-            </div>
         </div>
+    </div>
 </section>
 
+<style>
+   
+</style>
+
+<section class="category-blog-home py-0">
+    <div class="container-fluid p-0">
+        <div class="row g-3 justify-content-center">
+            @for ($cat = 0; $cat < 5; $cat++)
+                <div class="col-6 col-sm-4 col-md-2 col-lg d-flex justify-content-center p-0">
+                    <div class="box-category text-center w-100 position-relative overflow-hidden">
+                        <img src="{{asset('build/client/images/blg.png')}}" alt="" class="w-100 img-fluid mx-auto">
+                        <div class="overlay">
+                            <a href="" class="w-100 text-center">
+                                <h4 class="title montserrat-semiBold font-18 text-white mt-2">Saúde</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endfor
+        </div>
+    </div>
+</section>
+
+<section class="news-home py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-11 col-lg-9 animate-on-scroll" data-animation="animate__fadeInLeft">
+                <div class="border-bottom news mb-4 d-flex justify-content-between align-items-end">
+                    <h2 class="section-title rounded-top-left d-table px-4 w-auto m-0 montserrat-bold font-18 title-blue text-uppercase">Últimas notícias</h2>
+
+                    <nav>
+                        <ul class="list-unstyled d-flex justify-content-center gap-3 align-items-end mb-0 h-100">
+                            <li class="py-2 px-3 text-uppercase montserrat-semiBold text-white background-red font-14 active"><a href="">Jurídico</a></li>
+                            <li class="py-2 px-3 text-uppercase montserrat-semiBold text-black font-14"><a href="">Política</a></li>
+                            <li class="py-2 px-3 text-uppercase montserrat-semiBold text-black font-14"><a href="">Educação</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <article>
+                    <div class="col-lg-12">
+                        <div class="row news-lg mx-0 mb-3 border rounded-2 overflow-hidden bg-white" style="height: 285px;">
+                            <div class="col-md-6 h-100 px-0 overflow-hidden d-flex justify-content-center align-items-center" style="aspect-ratio:1/1;">
+                                    <img loading="lazy" class="img-fluid h-auto w-auto"
+                                    src="{{asset('build/client/images/mobile-1.png')}}"
+                                    alt="Sem imagem"
+                                    >
+                            </div>
+                            <div class="col-md-6 d-flex flex-column bg-white h-100 px-0">
+                                <div class="mt-auto p-4">
+                                    <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
+                                        <span class="badge badge-primary montserrat-semiBold font-12 me-2 background-red text-uppercase font-weight-semi-bold p-2">
+                                            Política
+                                        </span>
+                                        <p class="text-color mb-0 montserrat-regular font-14">
+                                            11 de Janeiro de 2025
+                                        </p>
+                                    </div>
+                                    <a href="" class="underline">
+                                        <h2 class="h4 d-block mb-3 text-uppercase montserrat-semiBold font-20 title-blue">
+                                            PARTICIPE DA REELEIÇÃO DA SINCADS BA! AS ELEIÇÕES CONTecem NO DIA....
+                                        </h2>
+                                    </a>
+                                    <p class="m-0 text-color montserrat-medium font-16">
+                                        Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna rebum clita rebum dolor stet amet justo Dolor lorem eos dolor duo et eirmod sea.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="row">
+                    @for ($rel = 0; $rel < 10; $rel++)
+                        <article class="col-6">
+                            <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
+                                <img loading="lazy" class="img-fluid col-3"
+                                src="{{asset('build/client/images/news-110x110-3.jpg')}}"
+                                alt="Sem imagem"
+                                style="height: 110px;aspect-ratio:1/1;">
+                                <div class="col-9 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                                    <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
+                                    <span class="badge badge-primary montserrat-semiBold font-10 text-uppercase py-1 px-2 mr-2 background-red">Política</span>
+                                    <p class="text-color mb-0 montserrat-regular font-12">11 de Janeiro de 2025</p>
+                                    </div>
+                                    <a href="" class="underline">
+                                    <h3 class="h6 m-0 text-uppercase montserrat-bold font-14 title-blue">exclusivo, ELEIÇÃO DA SINCADS BAhia, ainda hoje, não...</h3>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    @endfor
+                </div>
+            </div>
+            <div class="col-lg-3" data-aos="fade-left" data-aos-delay="100">
+                <div class="section-title mb-0 rounded-top-left">
+                    <h3 class="m-0 text-uppercase montserrat-bold font-18 title-blue">Agenda</h3>
+                </div>
+
+                <div class="bg-white p-3">      
+                    @for ($art = 0; $art < 5; $art++)                        
+                        <article>
+                            <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 80px;">
+                                <div class="date col-4 h-100 d-flex justify-content-center align-items-center flex-column border border-right-1">
+                                    <span class="montserrat-bold w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue">02</span>
+                                    <span class="montserrat-medium w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue background-red text-white">Dezembro</span>
+                                </div>
+                                <div class="col-8 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                                    <a href="" class="underline">
+                                    <h3 class="h6 m-0 montserrat-bold font-14 title-blue">Eleição Sindacs BA novo presidente 2025</h3>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    @endfor  
+                    <div class="btn-about d-table m-auto mt-5">
+                        <a href="{{route('about')}}" class="background-red montserrat-semiBold font-18 py-2 px-4 rounded-5">Ver todos</a>
+                    </div>                      
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@include('client.includes.complaint')
+
 <script>
-  const swiper = new Swiper(".mySwiper", {
-    direction: "vertical",
-    slidesPerView: 5,
-    spaceBetween: 10,
-    navigation: {
-      nextEl: ".swiper-button-down",
-      prevEl: ".swiper-button-up",
-    },
-  });
+const section = document.querySelector('section.video');
+const wrapper = section.querySelector('.mySwiper .swiper-wrapper');
+const slides  = Array.from(section.querySelectorAll(".mySwiper .swiper-slide"));
+const player  = section.querySelector("#videoPlayer");
 
-  // Trocar vídeo ao clicar
-  const slides = document.querySelectorAll(".swiper-slide");
-  const player = document.getElementById("videoPlayer");
+let currentIndex = 0; // controla o slide ativo
 
-  slides.forEach(slide => {
-    slide.addEventListener("click", () => {
-      slides.forEach(s => s.classList.remove("active"));
-      slide.classList.add("active");
-      player.src = slide.getAttribute("data-video");
-    });
-  });
+// Normaliza URL
+function norm(url) {
+  if (!url) return "";
+  return url.startsWith("//") ? window.location.protocol + url : url;
+}
 
-  // Marcar o primeiro ativo
-  slides[0].classList.add("active");
+// Marca ativo e troca vídeo
+function setActiveByIndex(index) {
+  if (index < 0 || index >= slides.length) return; // evita erro
+  slides.forEach(s => s.classList.remove("active"));
+  const slide = slides[index];
+  slide.classList.add("active");
+
+  const url = norm(slide.getAttribute("data-video"));
+  if (url) player.src = url;
+
+  currentIndex = index;
+
+  // garante que o slide ativo esteja visível na lista
+  slide.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+// Clique direto em um item da lista
+slides.forEach((slide, idx) => {
+  slide.addEventListener("click", () => setActiveByIndex(idx));
+});
+
+// Inicializa no primeiro
+if (slides.length > 0) setActiveByIndex(0);
+
+// Navegação ↑ ↓ para trocar de vídeo
+const btnUp = section.querySelector(".swiper-button-up");
+const btnDown = section.querySelector(".swiper-button-down");
+
+btnUp.addEventListener("click", () => {
+  if (currentIndex > 0) {
+    setActiveByIndex(currentIndex - 1);
+  }
+});
+
+btnDown.addEventListener("click", () => {
+  if (currentIndex < slides.length - 1) {
+    setActiveByIndex(currentIndex + 1);
+  }
+});
 </script>
+
+
 @endsection
