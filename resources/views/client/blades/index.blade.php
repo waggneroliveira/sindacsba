@@ -224,7 +224,7 @@
    
 </style>
 
-<section class="category-blog-home py-0">
+<section class="category-blog-home py-0 mt-5">
     <div class="container-fluid p-0">
         <div class="row g-3 justify-content-center">
             @for ($cat = 0; $cat < 5; $cat++)
