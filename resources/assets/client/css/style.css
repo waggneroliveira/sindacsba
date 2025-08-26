@@ -1265,10 +1265,11 @@
  }
 
  .logo-img .img-fluid {
-     width: 320px;
-     height: auto;
-     object-fit: cover;
-     display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    max-width: 720px;
  }
 .news-home  .section-title{
     border-left: 5px solid var(--background-red);

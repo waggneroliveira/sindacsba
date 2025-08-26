@@ -126,7 +126,7 @@
       </div>
 </section>
 
-<section class="about">
+<section class="aboutt">
     <div class="container">
         <div id="about-1" class="d-flex justify-content-between align-items-start about flex-wrap w-100 pt-4 pb-3 pt-lg-5">
             <div class="col-11 col-lg-7 animate-on-scroll" data-animation="animate__fadeInLeft">
@@ -219,10 +219,6 @@
         </div>
     </div>
 </section>
-
-<style>
-   
-</style>
 
 <section class="category-blog-home py-0 mt-5">
     <div class="container-fluid p-0">
@@ -348,58 +344,70 @@
 
 <script>
 const section = document.querySelector('section.video');
-const wrapper = section.querySelector('.mySwiper .swiper-wrapper');
-const slides  = Array.from(section.querySelectorAll(".mySwiper .swiper-slide"));
-const player  = section.querySelector("#videoPlayer");
+if (section) {
+    const wrapper = section.querySelector('.mySwiper .swiper-wrapper');
+    const slides  = Array.from(section.querySelectorAll(".mySwiper .swiper-slide"));
+    const player  = section.querySelector("#videoPlayer");
 
-let currentIndex = 0; // controla o slide ativo
+    let currentIndex = 0; // controla o slide ativo
+    let firstLoad = true;  // flag para controlar rolagem no carregamento
 
-// Normaliza URL
-function norm(url) {
-  if (!url) return "";
-  return url.startsWith("//") ? window.location.protocol + url : url;
+    // Normaliza URL
+    function norm(url) {
+        if (!url) return "";
+        return url.startsWith("//") ? window.location.protocol + url : url;
+    }
+
+    // Marca ativo e troca vídeo
+    function setActiveByIndex(index, userTriggered = false) {
+        if (index < 0 || index >= slides.length) return;
+
+        slides.forEach(s => s.classList.remove("active"));
+        const slide = slides[index];
+        slide.classList.add("active");
+
+        const url = norm(slide.getAttribute("data-video"));
+        if (url) player.src = url;
+
+        currentIndex = index;
+
+        // Só rola se foi clique do usuário ou se não é o primeiro load
+        if (!firstLoad || userTriggered) {
+            slide.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+    }
+
+    // Clique direto em um item da lista
+    slides.forEach((slide, idx) => {
+        slide.addEventListener("click", () => setActiveByIndex(idx, true));
+    });
+
+    // Inicializa no primeiro slide (sem rolagem)
+    if (slides.length > 0) setActiveByIndex(0);
+
+    // Depois do carregamento da página, libera rolagem para próximas interações
+    window.addEventListener("load", () => {
+        setTimeout(() => {
+            firstLoad = false;
+        }, 500);
+    });
+
+    // Navegação ↑ ↓ para trocar de vídeo
+    const btnUp = section.querySelector(".swiper-button-up");
+    const btnDown = section.querySelector(".swiper-button-down");
+
+    btnUp && btnUp.addEventListener("click", () => {
+        if (currentIndex > 0) {
+            setActiveByIndex(currentIndex - 1, true);
+        }
+    });
+
+    btnDown && btnDown.addEventListener("click", () => {
+        if (currentIndex < slides.length - 1) {
+            setActiveByIndex(currentIndex + 1, true);
+        }
+    });
 }
-
-// Marca ativo e troca vídeo
-function setActiveByIndex(index) {
-  if (index < 0 || index >= slides.length) return; // evita erro
-  slides.forEach(s => s.classList.remove("active"));
-  const slide = slides[index];
-  slide.classList.add("active");
-
-  const url = norm(slide.getAttribute("data-video"));
-  if (url) player.src = url;
-
-  currentIndex = index;
-
-  // garante que o slide ativo esteja visível na lista
-  slide.scrollIntoView({ behavior: "smooth", block: "nearest" });
-}
-
-// Clique direto em um item da lista
-slides.forEach((slide, idx) => {
-  slide.addEventListener("click", () => setActiveByIndex(idx));
-});
-
-// Inicializa no primeiro
-if (slides.length > 0) setActiveByIndex(0);
-
-// Navegação ↑ ↓ para trocar de vídeo
-const btnUp = section.querySelector(".swiper-button-up");
-const btnDown = section.querySelector(".swiper-button-down");
-
-btnUp.addEventListener("click", () => {
-  if (currentIndex > 0) {
-    setActiveByIndex(currentIndex - 1);
-  }
-});
-
-btnDown.addEventListener("click", () => {
-  if (currentIndex < slides.length - 1) {
-    setActiveByIndex(currentIndex + 1);
-  }
-});
 </script>
-
 
 @endsection

@@ -128,54 +128,13 @@
     <header id="header" class="w-100 d-flex flex-column position p-0">   
         <div class="w-100 py-2 py-sm-2 header-color">
             <div class="container m-auto d-flex align-items-center justify-content-between flex-column">
-                <div class="d-flex w-100 justify-content-between align-items-center">
-                    <div class="overfllow-hidden col-4">
-                        <nav class="none site-navigation position-relative text-end w-auto redes-sociais">
-                            <ul class="p-0 d-flex justify-content-start gap-4 flex-row mb-0">
-                                @if (isset($contact) && $contact->link_insta)
-                                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                                        <a href="{{$contact->link_insta}}" rel="nofollow noopener noreferrer" target="_blank">
-                                            <img src="{{asset('build/client/images/insta.svg')}}" alt="Instagram">
-                                        </a>
-                                    </li>
-                                @endif
-                                @if (isset($contact) && $contact->link_x)
-                                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                                        <a href="{{$contact->link_x}}" rel="nofollow noopener noreferrer" target="_blank">
-                                            <img src="{{asset('build/client/images/x.svg')}}" alt="X">
-                                        </a>
-                                    </li>
-                                @endif
-                                @if (isset($contact) && $contact->link_youtube)
-                                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                                        <a href="{{$contact->link_youtube}}" rel="nofollow noopener noreferrer" target="_blank">
-                                            <img src="{{asset('build/client/images/youtube.svg')}}" alt="Youtube">
-                                        </a>
-                                    </li>
-                                @endif
-                                @if (isset($contact) && $contact->link_face)
-                                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                                        <a href="{{$contact->link_face}}" rel="nofollow noopener noreferrer" target="_blank">
-                                            <img src="{{asset('build/client/images/face.svg')}}" alt="Facebook">
-                                        </a>
-                                    </li>
-                                @endif
-                                @if (isset($contact) && $contact->link_tik_tok)
-                                    <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                                        <a href="{{$contact->link_tik_tok}}a" rel="nofollow noopener noreferrer" target="_blank">
-                                            <img src="{{asset('build/client/images/tiktok.svg')}}" alt="Tiktok">
-                                        </a>
-                                    </li>
-                                @endif
-                            </ul> 
-                        </nav>
-                    </div>
-                    <div class="logo-img px-3 py-2 rounded-2 d-flex justify-content-start align-items-center col-4">
+                <div class="d-flex col-12 col-lg-11 justify-content-end align-items-start">
+                    <div class="logo-img px-0 py-2 rounded-2 d-flex justify-content-start align-items-center w-auto">
                         <a href="{{route('index')}}">
-                            <img src="{{asset('build/client/images/logo.svg')}}" alt="Instituto Baiano de Medicina Desportivao" title="Instituto Baiano de Medicina Desportivao" class="img-fluid">
+                            <img src="{{asset('build/client/images/sindacsba.png')}}" alt="Instituto Baiano de Medicina Desportivao" title="Instituto Baiano de Medicina Desportivao" class="img-fluid">
                         </a>
                     </div>
-                    <div class="d-flex justify-content-end align-items-center gap-2 col-4">                        
+                    <div class="d-flex justify-content-center align-items-center gap-2 mt-3" style="width: 23%;">                        
                         @if (!Auth::guard('client')->check())                            
                             <div class="d-flex justify-content-start align-items-center gap-2">
                                 <svg width="20" height="20" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
