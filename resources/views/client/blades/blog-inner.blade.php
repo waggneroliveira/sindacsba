@@ -21,12 +21,246 @@
                               src="{{ $blogInner->path_image_thumbnail ? asset('storage/'.$blogInner->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
                               alt="{{ $blogInner->title ? $blogInner->title : 'Sem imagem'}}"
                               style="aspect-ratio:1.91/1;object-fit: contain;">
-                            <div class="py-4"> 
-                                <div class="text-blog-inner montserrat-medium font-16">
-                                    {!! $blogInner->text !!}
+                            <div class="py-4">
+                                <div class="barra-de-progresso mt-2 d-flex align-items-center gap-2">
+                                    <i id="audioIcon" class="fa fa-play d-flex justify-content-center align-items-center dark-background rounded-5 font-12" onclick="togglePlayPause()"></i>
+                                    <span id="audioStatus" class="text-muted montserrat-semiBold font-12"></span>
+
+                                    <div id="progressContainer" class="progressContainer flex-grow-1">
+                                        <div id="progressBar" class="background-red" style="width:0%;"></div>
+                                    </div>
+
+                                    <!-- Controlador de velocidade -->
+                                    <div class="d-flex gap-1 align-items-center">
+                                        <button id="decreaseSpeed" class="btn-voz d-flex justify-content-center align-items-center btn btn-sm btn-outline-secondary">-</button>
+                                        <span id="speedLabel" class="text-muted montserrat-semiBold font-12 ms-1 me-1">1x</span>
+                                        <button id="increaseSpeed" class="btn-voz d-flex justify-content-center align-items-center btn btn-sm btn-outline-secondary">+</button>
+                                    </div>
+
+                                    <!-- Controlador de volume simplificado -->
+                                    <div class="d-flex align-items-center ms-3 justify-content-center">
+                                        <i class="fa fa-volume-up text-muted me-2"></i>
+                                        <input id="volumeSlider" type="range" min="0" max="1" step="0.1" value="1" class="form-range w-50">
+                                    </div>
                                 </div>
+
+                                <div class="text-blog-inner montserrat-medium font-16 mt-4 text-audio">
+                                    {!! $blogInner->text !!}
+                                </div>                                
                             </div>                        
                         </article>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+
+                                let isPaused = false;
+                                let isReading = false;
+                                let progressInterval;
+                                let estimatedDuration = 0;
+                                let progressPercentage = 0;
+                                let synth = window.speechSynthesis;
+                                let currentBlockIndex = 0;
+                                let utterance;
+                                let textBlocks = [];
+                                let rate = 1; 
+                                let volume = 1; 
+
+                                const icon = document.getElementById('audioIcon');
+                                const progressBar = document.getElementById('progressBar');
+                                const statusText = document.getElementById('audioStatus');
+                                const speedLabel = document.getElementById('speedLabel');
+                                const increaseSpeedBtn = document.getElementById('increaseSpeed');
+                                const decreaseSpeedBtn = document.getElementById('decreaseSpeed');
+
+                                // Volume
+                                const volumeSlider = document.getElementById('volumeSlider');
+
+                                window.addEventListener('beforeunload', function() {
+                                    if (synth) synth.cancel();
+                                });
+
+                                function splitTextIntoBlocks(text, wordsPerBlock = 100) {
+                                    const words = text.split(/\s+/);
+                                    let blocks = [];
+                                    for (let i = 0; i < words.length; i += wordsPerBlock) {
+                                        blocks.push(words.slice(i, i + wordsPerBlock).join(' '));
+                                    }
+                                    return blocks;
+                                }
+
+                                function updateProgressBar(duration) {
+                                    const intervalTime = 100;
+                                    const totalTicks = duration / intervalTime;
+                                    let currentTick = progressPercentage / 100 * totalTicks;
+
+                                    clearInterval(progressInterval);
+                                    progressInterval = setInterval(() => {
+                                        if (currentTick >= totalTicks || isPaused) {
+                                            clearInterval(progressInterval);
+                                        } else {
+                                            currentTick++;
+                                            progressPercentage = (currentTick / totalTicks) * 100;
+                                            progressBar.style.width = progressPercentage + '%';
+                                        }
+                                    }, intervalTime);
+                                }
+
+                                async function speakBlock(block) {
+                                    if (!('speechSynthesis' in window)) {
+                                        alert('Seu navegador não suporta texto para fala.');
+                                        return;
+                                    }
+
+                                    statusText.innerText = "Carregando áudio...";
+                                    icon.classList.add('fa-spin');
+
+                                    await new Promise(resolve => {
+                                        const voices = synth.getVoices();
+                                        if (voices.length === 0) {
+                                            synth.onvoiceschanged = resolve;
+                                        } else {
+                                            resolve();
+                                        }
+                                    });
+
+                                    icon.classList.remove('fa-spin');
+                                    statusText.innerText = "Lendo...";
+
+                                    utterance = new SpeechSynthesisUtterance(block);
+                                    const voices = synth.getVoices();
+                                    utterance.voice = voices.find(v => v.name === 'Google português do Brasil') || voices[0];
+                                    utterance.lang = 'pt-BR';
+                                    utterance.rate = rate; 
+                                    utterance.volume = volume; // aplica volume
+
+                                    utterance.onend = function() {
+                                        currentBlockIndex++;
+                                        if (currentBlockIndex < textBlocks.length && !isPaused) {
+                                            speakBlock(textBlocks[currentBlockIndex]);
+                                        } else {
+                                            isReading = false;
+                                            isPaused = false;
+                                            icon.classList.remove('fa-pause');
+                                            icon.classList.add('fa-play');
+                                            clearInterval(progressInterval);
+                                            progressBar.style.width = '100%';
+                                            statusText.innerText = "Clique para ouvir";
+                                        }
+                                    };
+
+                                    synth.speak(utterance);
+                                    isReading = true;
+                                    updateProgressBar(estimatedDuration / textBlocks.length);
+                                }
+
+                                function readAllTextByClass(className) {
+                                    if (synth) synth.cancel();
+
+                                    const elements = document.getElementsByClassName(className);
+                                    let fullText = '';
+                                    for (let i = 0; i < elements.length; i++) {
+                                        fullText += elements[i].innerText || elements[i].textContent;
+                                        fullText += ' ';
+                                    }
+
+                                    const wordCount = fullText.split(/\s+/).length;
+                                    estimatedDuration = (wordCount / 150) * 60 * 1000;
+
+                                    textBlocks = splitTextIntoBlocks(fullText, 200);
+                                    currentBlockIndex = 0;
+
+                                    speakBlock(textBlocks[currentBlockIndex]);
+                                }
+
+                                window.togglePlayPause = function() {
+                                    if (isReading && !isPaused) {
+                                        synth.pause();
+                                        isPaused = true;
+                                        icon.classList.remove('fa-pause');
+                                        icon.classList.add('fa-play');
+                                        statusText.innerText = "Pausado";
+                                    } else if (isPaused) {
+                                        synth.resume();
+                                        isPaused = false;
+                                        icon.classList.remove('fa-play');
+                                        icon.classList.add('fa-pause');
+                                        statusText.innerText = "Lendo...";
+                                        updateProgressBar(estimatedDuration * (1 - progressPercentage / 100));
+                                    } else if (!isReading) {
+                                        readAllTextByClass('text-audio');
+                                        icon.classList.remove('fa-play');
+                                        icon.classList.add('fa-pause');
+                                        statusText.innerText = "Carregando áudio...";
+                                    }
+                                };
+
+                                // Controles de velocidade
+                                increaseSpeedBtn.addEventListener('click', () => {
+                                    rate = Math.min(rate + 0.1, 3); 
+                                    speedLabel.innerText = rate.toFixed(1) + 'x';
+                                    if (isReading) {
+                                        synth.cancel();
+                                        speakBlock(textBlocks[currentBlockIndex]);
+                                    }
+                                });
+
+                                decreaseSpeedBtn.addEventListener('click', () => {
+                                    rate = Math.max(rate - 0.1, 0.5); 
+                                    speedLabel.innerText = rate.toFixed(1) + 'x';
+                                    if (isReading) {
+                                        synth.cancel();
+                                        speakBlock(textBlocks[currentBlockIndex]);
+                                    }
+                                });
+
+                                // Controle de volume via slider
+                                volumeSlider.addEventListener('input', () => {
+                                    volume = parseFloat(volumeSlider.value);
+                                    if (isReading) {
+                                        synth.cancel();
+                                        speakBlock(textBlocks[currentBlockIndex]);
+                                    }
+                                });
+
+                            });
+                            </script>
+
+                        <style>
+                            .btn-voz{
+                                padding: 0;
+                                width: 25px;
+                                height: 25px;
+                            }
+                            #audioIcon{
+                                cursor: pointer;
+                                height: 32px;
+                                width: 35px;
+                            }
+                            .barra-de-progresso{
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 100%;
+                                height: 45px;
+                                background: #d9d9d9;
+                                padding: 0px 15px 0px 15px;
+                                gap: 15px;
+                                border-radius: 5px;
+                            }
+                            #progressContainer {
+                                border-radius: 10px;
+                                overflow: hidden;
+                            }
+                            .progressContainer{
+                                width: 65%; 
+                                background-color: #f3f3f3; 
+                                height: 5px; 
+                            }
+                            #progressBar {
+                                transition: width 0.1s linear;
+                                height: 100%;
+                                border-radius: 10px;
+                            }
+                        </style>
 
                         <div class="d-flex justify-content-between align-items-center">
                             <a href="{{route('blog')}}" class="montserrat-semiBold font-16 d-flex justify-content-between align-items-center gap-2 background-red py-2 px-3 text-white rounded-3">
