@@ -38,7 +38,7 @@
     <div class="container py-5">
         <div class="row g-3 justify-content-center">
             @for ($a = 0; $a < 5; $a++)                    
-                <div class="col-6 col-sm-4 col-md-2 d-flex justify-content-center">
+                <div class="col-12 col-sm-4 col-md-2 d-flex justify-content-center">
                     <div class="partner-card dark-background border rounded-2 d-flex flex-column justify-content-center align-items-start gap-3 p-3 w-100">
                         <img src="{{ asset('build/client/images/call.svg') }}" 
                             alt="Logo do parceiro" 
@@ -128,8 +128,8 @@
 
 <section class="aboutt">
     <div class="container">
-        <div id="about-1" class="d-flex justify-content-between align-items-start about flex-wrap w-100 pt-4 pb-3 pt-lg-5">
-            <div class="col-11 col-lg-7 animate-on-scroll" data-animation="animate__fadeInLeft">
+        <div id="about-1" class="d-flex justify-content-between align-items-start about flex-wrap w-100 pt-3 pb-3 pt-lg-5">
+            <div class="col-12 col-lg-7 animate-on-scroll" data-animation="animate__fadeInLeft">
                 <div class="border-bottom mb-0">
                     <h2 class="section-title rounded-top-left d-table px-4 w-auto m-0 montserrat-bold font-18 title-blue">História</h2>
                 </div>
@@ -146,7 +146,7 @@
                     </p>
                 </div>
 
-                <div class="btn-about mt-4">
+                <div class="btn-about my-4">
                     <a href="{{route('about')}}" class="background-red montserrat-semiBold font-15 py-2 px-4 rounded-4">Saiba mais</a>
                 </div>
             </div>
@@ -158,7 +158,7 @@
         </div>     
         
         <div class="partner-about">
-            <div class="container py-5">
+            <div class="container pt-3 pb-5">
                 <div class="row g-3 justify-content-center">
                     @for ($a = 0; $a < 4; $a++)                    
                         <div class="col-6 col-sm-4 col-md-2 d-flex justify-content-center">
@@ -224,7 +224,7 @@
     <div class="container-fluid p-0">
         <div class="row g-3 justify-content-center">
             @for ($cat = 0; $cat < 5; $cat++)
-                <div class="col-6 col-sm-4 col-md-2 col-lg d-flex justify-content-center p-0">
+                <div class="col-6 col-sm-4 col-md-2 col-lg d-flex justify-content-center p-0 mt-0">
                     <div class="box-category text-center w-100 position-relative overflow-hidden">
                         <img src="{{asset('build/client/images/blg.png')}}" alt="" class="w-100 img-fluid mx-auto">
                         <div class="overlay">
@@ -242,32 +242,42 @@
 <section class="news-home py-5">
     <div class="container">
         <div class="row">
-            <div class="col-11 col-lg-9 animate-on-scroll" data-animation="animate__fadeInLeft">
-                <div class="border-bottom news mb-4 d-flex justify-content-between align-items-end">
-                    <h2 class="section-title rounded-top-left d-table px-4 w-auto m-0 montserrat-bold font-18 title-blue text-uppercase">Últimas notícias</h2>
+            <div class="col-12 col-lg-9 animate-on-scroll mb-3" data-animation="animate__fadeInLeft">
+                <div class="border-bottom news mb-4">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-end">
+                        <h2 class="section-title d-table px-4 py-2 w-auto m-0 montserrat-bold font-18 title-blue text-uppercase rounded-top-left">
+                            Últimas notícias
+                        </h2>
 
-                    <nav>
-                        <ul class="list-unstyled d-flex justify-content-center gap-3 align-items-end mb-0 h-100">
-                            <li class="py-2 px-3 text-uppercase montserrat-semiBold text-white background-red font-14 active"><a href="">Jurídico</a></li>
-                            <li class="py-2 px-3 text-uppercase montserrat-semiBold text-black font-14"><a href="">Política</a></li>
-                            <li class="py-2 px-3 text-uppercase montserrat-semiBold text-black font-14"><a href="">Educação</a></li>
-                        </ul>
-                    </nav>
+                        <nav class="mt-3 mt-md-0">
+                            <ul class="list-unstyled d-flex flex-row flex-wrap gap-2 gap-md-3 justify-content-start justify-content-md-center mb-0">
+                                <li class="py-2 px-3 text-uppercase montserrat-semiBold text-white background-red font-14 active">
+                                    <a href="#" class="text-decoration-none text-white">Jurídico</a>
+                                </li>
+                                <li class="py-2 px-3 text-uppercase montserrat-semiBold text-black font-14">
+                                    <a href="#" class="text-decoration-none text-black">Política</a>
+                                </li>
+                                <li class="py-2 px-3 text-uppercase montserrat-semiBold text-black font-14">
+                                    <a href="#" class="text-decoration-none text-black">Educação</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
 
                 <article>
-                    <div class="col-lg-12">
-                        <div class="row news-lg mx-0 mb-3 border rounded-2 overflow-hidden bg-white" style="height: 285px;">
-                            <div class="col-md-6 h-100 px-0 overflow-hidden d-flex justify-content-center align-items-center" style="aspect-ratio:1/1;">
-                                    <img loading="lazy" class="img-fluid h-auto w-auto"
-                                    src="{{asset('build/client/images/mobile-1.png')}}"
+                    <div class="col-12">
+                        <div class="row news-lg mx-0 mb-3 border rounded-2 align-items-center overflow-hidden bg-white flex-column flex-md-row">
+                            <div class="col-12 col-md-6 h-auto px-0 d-flex justify-content-center align-items-center" style="aspect-ratio:1.91/1;">
+                                <img loading="lazy" class="img-fluid w-100 h-auto"
+                                    src="{{ asset('build/client/images/news-800x500-1.jpg') }}"
                                     alt="Sem imagem"
-                                    >
+                                    style="object-fit: cover;">
                             </div>
-                            <div class="col-md-6 d-flex flex-column bg-white h-100 px-0">
-                                <div class="mt-auto p-4">
+                            <div class="col-12 col-md-6 d-flex flex-column bg-white px-3 px-md-0">
+                                <div class="p-3 p-md-4">
                                     <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
-                                        <span class="badge badge-primary montserrat-semiBold font-12 me-2 background-red text-uppercase font-weight-semi-bold p-2">
+                                        <span class="badge badge-primary montserrat-semiBold font-12 me-2 background-red text-uppercase p-2">
                                             Política
                                         </span>
                                         <p class="text-color mb-0 montserrat-regular font-14">
@@ -275,11 +285,11 @@
                                         </p>
                                     </div>
                                     <a href="" class="underline">
-                                        <h2 class="h4 d-block mb-3 text-uppercase montserrat-semiBold font-20 title-blue">
+                                        <h2 class="h5 h-md4 mb-3 text-uppercase montserrat-semiBold font-18 font-md-20 title-blue">
                                             PARTICIPE DA REELEIÇÃO DA SINCADS BA! AS ELEIÇÕES CONTecem NO DIA....
                                         </h2>
                                     </a>
-                                    <p class="m-0 text-color montserrat-medium font-16">
+                                    <p class="m-0 text-color montserrat-medium font-14 font-md-16">
                                         Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna rebum clita rebum dolor stet amet justo Dolor lorem eos dolor duo et eirmod sea.
                                     </p>
                                 </div>
@@ -290,7 +300,7 @@
 
                 <div class="row">
                     @for ($rel = 0; $rel < 10; $rel++)
-                        <article class="col-6">
+                        <article class="col-12 col-sm-12 col-md-6">
                             <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
                                 <img loading="lazy" class="img-fluid col-3"
                                 src="{{asset('build/client/images/news-110x110-3.jpg')}}"

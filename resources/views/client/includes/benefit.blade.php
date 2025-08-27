@@ -28,7 +28,7 @@
         <div class="row-down row align-items-center justify-content-center">
             <div class="row g-4 justify-content-center p-0">
                 @for ($i = 0; $i < 5; $i++)                        
-                    <div class="col-6 col-md-4 col-lg-2">
+                    <div class="col-12 col-md-4 col-lg-2">
                         <div class="card h-100 text-center border-0 shadow-sm rounded-3 p-3">
                             <div class="mb-3">
                                 <img src="{{asset('build/client/images/defesa.png')}}" alt="Direitos trabalhistas" width="60" loading="lazy">
