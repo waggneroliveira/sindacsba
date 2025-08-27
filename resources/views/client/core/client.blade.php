@@ -10,15 +10,33 @@
     <meta name="description" content="O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.">
     <meta name="keywords" content="Sindacs Bahia, Sindicato Bahia, agentes comunitários de saúde, agentes de combate às endemias, ACS Bahia, ACE Bahia, sindicato ACS ACE, saúde pública Bahia, trabalhadores da saúde Bahia, direitos dos agentes de saúde, sindicato saúde Bahia, categoria ACS ACE, luta sindical Bahia, representação sindical saúde, agentes comunitários Bahia, agentes endemias Bahia, sindicato dos agentes Bahia">
     <title>Sindacs Bahia</title>
-    <meta property="og:url" content="https://www.sindacsba.org.br">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Sindicato de agentes comunitários de saúde e agentes de combate as endemias da Bahia.">
-    <meta property="og:description" content="O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.">
-    <meta name="twitter:card" content=summary_large_image>
-    <meta name="twitter:url" content=https://www.sindacsba.org.br>
-    <meta name="twitter:title" content="Sindicato de agentes comunitários de saúde e agentes de combate as endemias da Bahia.">
-    <meta name="twitter:description" content="O Sindacs Bahia é o sindicato que representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos, valorização profissional e melhores condições de trabalho.">
-    <meta name="twitter:image" content=https://www.sindacsba.org.br/assets/images/logo.png>
+    @if(isset($blogInner))
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="{{ $blogInner->title }}">
+        <meta property="og:description" content="{{ Str::limit(strip_tags($blogInner->content), 150) }}">
+        <meta property="og:image" content="{{ asset('storage/' . $blogInner->path_image_thumbnail) }}">
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:url" content="{{ url()->current() }}">
+        <meta name="twitter:title" content="{{ $blogInner->title }}">
+        <meta name="twitter:description" content="{{ Str::limit(strip_tags($blogInner->content), 150) }}">
+        <meta name="twitter:image" content="{{ asset('storage/' . $blogInner->path_image_thumbnail) }}">
+    @else
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Sindacs Bahia - Sindicato dos ACS e ACE da Bahia">
+        <meta property="og:description" content="O Sindacs Bahia representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos e valorização.">
+        <meta property="og:image" content="{{asset('build/client/images/sindacsba.png')}}">
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:url" content="{{ url()->current() }}">
+        <meta name="twitter:title" content="Sindacs Bahia - Sindicato dos ACS e ACE da Bahia">
+        <meta name="twitter:description" content="O Sindacs Bahia representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos e valorização.">
+        <meta name="twitter:image" content="{{asset('build/client/images/sindacsba.png')}}">
+    @endif
+
+    
     <link rel="canonical" href="{{ url()->current() }}">
     <meta name="copyright" content="Direitos reservados WHI">
     <meta name="author" content="WHI">
@@ -177,7 +195,7 @@
                     <nav class="none site-navigation ul position-relative text-end width-75">
                         <ul class="d-flex flex-row justify-content-start align-items-center gap-4 mb-0 list-unstyled">
                             <li><a href="{{route('index')}}" class="nav-link montserrat-medium text-center font-18">Home</a></li>
-                           {{--<li class="nav-item dropdown">
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle montserrat-medium text-center font-18" 
                                 href="{{route('about')}}" 
                                 id="sobreNosDropdown" 
@@ -225,93 +243,16 @@
                                 </ul>
                             </li>
 
-                            <li><a href="{{route('regional')}}" class="nav-link montserrat-medium text-center font-18">Regionais</a></li> --}}
+                            <li><a href="{{route('regional')}}" class="nav-link montserrat-medium text-center font-18">Regionais</a></li>
                             <li><a href="{{route('blog')}}" class="nav-link montserrat-medium text-center font-18 {{ request()->routeIs('blog') ? 'active' : '' }} {{ request()->routeIs('blog-inner') ? 'active' : '' }}">Notícias</a></li>
                             <li><a href="{{route('noticies')}}" class="nav-link montserrat-medium text-center font-18 {{ request()->routeIs('noticies') ? 'active' : '' }}">Editais</a></li>
                             <li><a href="{{route('contact')}}" class="nav-link montserrat-medium text-center font-18 {{ request()->routeIs('contact') ? 'active' : '' }}">Contato</a></li>
                         </ul>                      
                     </nav>
-                    {{-- <nav class="none site-navigation position-relative text-end w-auto redes-sociais">
-                        <ul class="p-0 d-flex justify-content-start gap-4 flex-row mb-0">
-                            @if (isset($contact) && $contact->link_insta)
-                                <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                                    <a href="{{$contact->link_insta}}" rel="nofollow noopener noreferrer" target="_blank">
-                                        <img src="{{asset('build/client/images/insta.svg')}}" alt="Instagram">
-                                    </a>
-                                </li>
-                            @endif
-                            @if (isset($contact) && $contact->link_x)
-                                <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                                    <a href="{{$contact->link_x}}" rel="nofollow noopener noreferrer" target="_blank">
-                                        <img src="{{asset('build/client/images/x.svg')}}" alt="X">
-                                    </a>
-                                </li>
-                            @endif
-                            @if (isset($contact) && $contact->link_youtube)
-                                <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                                    <a href="{{$contact->link_youtube}}" rel="nofollow noopener noreferrer" target="_blank">
-                                        <img src="{{asset('build/client/images/youtube.svg')}}" alt="Youtube">
-                                    </a>
-                                </li>
-                            @endif
-                            @if (isset($contact) && $contact->link_face)
-                                <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                                    <a href="{{$contact->link_face}}" rel="nofollow noopener noreferrer" target="_blank">
-                                        <img src="{{asset('build/client/images/face.svg')}}" alt="Facebook">
-                                    </a>
-                                </li>
-                            @endif
-                            @if (isset($contact) && $contact->link_tik_tok)
-                                <li class="li d-flex justify-content-start align-items-center rounded-circle">
-                                    <a href="{{$contact->link_tik_tok}}a" rel="nofollow noopener noreferrer" target="_blank">
-                                        <img src="{{asset('build/client/images/tiktok.svg')}}" alt="Tiktok">
-                                    </a>
-                                </li>
-                            @endif
-                        </ul> 
-                    </nav> --}}
+                    
                     <div class="btn-filie-se">
                         <a href="" class="badge badge-primary montserrat-medium font-14 text-uppercase me-2 background-red rounded-4 font-weight-semi-bold py-2 px-5">Filie-se</a>
                     </div>
-                    {{-- <div class="w-auto d-flex justify-content-center align-items-center gap-2">
-                        <div class="login d-flex justify-content-start align-items-center gap-2 w-auto">                        
-                            @if (!Auth::guard('client')->check())                            
-                                <div class="d-flex justify-content-start align-items-center gap-2">
-                                    <svg width="20" height="20" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M46.793 8.62893C44.5547 8.62893 42.7344 6.81253 42.7344 4.57423C42.7344 2.33593 44.5547 0.519531 46.793 0.519531L80.57 0.503906C88.8044 0.503906 95.5 7.20311 95.5 15.4339V80.5789C95.5 88.8055 88.8008 95.5089 80.57 95.5089H46.793C44.5469 95.5089 42.7266 93.6847 42.7266 91.4386C42.7266 89.1886 44.5469 87.3683 46.793 87.3683H80.57C84.3083 87.3683 87.3591 84.3136 87.3591 80.5831V15.4311C87.3591 11.7006 84.3083 8.63031 80.57 8.63031L46.793 8.62893ZM49.6914 68.2459L66.5504 51.0619C67.398 50.3158 67.9332 49.2181 67.9332 47.9994C67.9332 46.7807 67.398 45.683 66.5504 44.9408L49.6914 27.7568C48.1133 26.1591 45.543 26.1357 43.9492 27.71C42.3515 29.2803 42.3281 31.8545 43.9062 33.4522L54.1792 43.9322L4.5742 43.9283C2.3281 43.9283 0.5 45.7525 0.5 47.9986C0.5 50.2486 2.3281 52.0689 4.5742 52.0689H54.1762L43.9032 62.5459C42.3251 64.1436 42.3524 66.7138 43.9462 68.288C45.5439 69.8583 48.1103 69.8389 49.6884 68.2412L49.6914 68.2459Z" fill="white"/>
-                                    </svg>
-    
-                                    <h2 class="off-login m-0 montserrat-medium font-14 text-start" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#loginModal">Login</h2>
-                                </div>
-                            @else
-                                @php
-                                    $user = Auth::guard('client')->user();
-                                    $defaultImage = $user && $user->path_image ? url($user->path_image) : '';
-                                @endphp
-                                <div class="image-profile">
-                                    <picture>
-                                        <source srcset="{{ isset($defaultImage) && $defaultImage <> null ?$defaultImage:asset('build/client/images/user.jpg') }}" type="image/svg+xml">
-                                        <img src="{{ isset($defaultImage) && $defaultImage <> null ?$defaultImage:asset('build/client/images/user.jpg') }}"
-                                            alt="Imagem de Login"
-                                            class="img-fluid rounded-circle">
-                                    </picture>
-                                </div>
-                                <div class="d-flex flex-column align-items-start gap-1">
-                                    <div class="d-flex justify-content-start align-items-center gap-2 lh-0">
-                                        <h2 class="loginOn m-0 montserrat-medium font-14 text-start">Bem vindo,</h2>   
-                                        <h3 class="m-0 montserrat-medium font-14 text-start">{{$names = collect(explode(' ', Auth::guard('client')->user()->name))->slice(0, 1)->implode(' ')}}!</h3>      
-                                        <a class="nav-link waves-effect waves-light" href="#" data-bs-toggle="modal" data-bs-target="#editClientModal-{{Auth::guard('client')->user()->id}}">
-                                            <i class="bi bi-gear font-18"></i>
-                                        </a>                 
-                                    </div>  
-                                    <a href="{{route('client.user.logout')}}" class="d-flex justify-content-start align-items-center gap-2 text-decoration-none lh-0">
-                                        <i class="bi bi-box-arrow-right font-18"></i>
-                                        <h4 class="montserrat-medium font-12 m-0">Sair</h4>
-                                    </a>                                               
-                                </div>
-                            @endif
-                        </div>
-                    </div> --}}
 
                     <!-- Botão menu sandwich -->
                     <button id="menu-toggle" class="d-lg-none btn btn-link p-0 ms-2" aria-label="Abrir menu" type="button">
