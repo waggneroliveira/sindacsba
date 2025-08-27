@@ -195,7 +195,7 @@
                     <nav class="none site-navigation ul position-relative text-end width-75">
                         <ul class="d-flex flex-row justify-content-start align-items-center gap-4 mb-0 list-unstyled">
                             <li><a href="{{route('index')}}" class="nav-link montserrat-medium text-center font-18">Home</a></li>
-                            {{-- <li class="nav-item dropdown">
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle montserrat-medium text-center font-18" 
                                 href="{{route('about')}}" 
                                 id="sobreNosDropdown" 
@@ -243,7 +243,7 @@
                                 </ul>
                             </li>
 
-                            <li><a href="{{route('regional')}}" class="nav-link montserrat-medium text-center font-18">Regionais</a></li> --}}
+                            <li><a href="{{route('regional')}}" class="nav-link montserrat-medium text-center font-18">Regionais</a></li>
                             <li><a href="{{route('blog')}}" class="nav-link montserrat-medium text-center font-18 {{ request()->routeIs('blog') ? 'active' : '' }} {{ request()->routeIs('blog-inner') ? 'active' : '' }}">Notícias</a></li>
                             <li><a href="{{route('noticies')}}" class="nav-link montserrat-medium text-center font-18 {{ request()->routeIs('noticies') ? 'active' : '' }}">Editais</a></li>
                             <li><a href="{{route('contact')}}" class="nav-link montserrat-medium text-center font-18 {{ request()->routeIs('contact') ? 'active' : '' }}">Contato</a></li>
