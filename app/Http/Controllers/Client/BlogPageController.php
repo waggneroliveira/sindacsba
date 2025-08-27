@@ -30,8 +30,8 @@ class BlogPageController extends Controller
         $blogAll = Blog::with('category')
         ->whereHas('category', function($active){
             $active->where('active', 1);
-        })
-        ->whereNotIn('id', $excludedIds);
+        });
+        // ->whereNotIn('id', $excludedIds);
 
         if ($category) {
             $blogAll = $blogAll->whereHas('category', function($query) use ($category) {
@@ -49,7 +49,7 @@ class BlogPageController extends Controller
         ->whereHas('category', function($active){
             $active->where('active', 1);
         })
-        ->whereNotIn('id', $excludedIds->merge($blogAll->pluck('id')))
+        // ->whereNotIn('id', $excludedIds->merge($blogAll->pluck('id')))
         ->active()
         ->inRandomOrder()
         ->limit(4)

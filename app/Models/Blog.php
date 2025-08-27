@@ -51,7 +51,7 @@ class Blog extends Model
     }
 
     public function scopeSorting($query){
-        return $query->orderby('sorting', 'ASC');
+        return $query->orderBy('date', 'DESC')->orderby('sorting', 'DESC');
     }
 
     public function getActivitylogOptions(): LogOptions
