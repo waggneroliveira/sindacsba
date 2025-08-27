@@ -27,13 +27,13 @@
         <meta property="og:type" content="website">
         <meta property="og:title" content="Sindacs Bahia - Sindicato dos ACS e ACE da Bahia">
         <meta property="og:description" content="O Sindacs Bahia representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos e valorização.">
-        <meta property="og:image" content="{{asset('build/client/images/logo.png')}}">
+        <meta property="og:image" content="{{asset('build/client/images/compartilhamento.png')}}">
 
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:url" content="{{ url()->current() }}">
         <meta name="twitter:title" content="Sindacs Bahia - Sindicato dos ACS e ACE da Bahia">
         <meta name="twitter:description" content="O Sindacs Bahia representa os Agentes Comunitários de Saúde (ACS) e Agentes de Combate às Endemias (ACE) da Bahia, lutando por direitos e valorização.">
-        <meta name="twitter:image" content="{{asset('build/client/images/logo.png')}}">
+        <meta name="twitter:image" content="{{asset('build/client/images/compartilhamento.png')}}">
     @endif
 
     
