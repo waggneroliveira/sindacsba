@@ -152,7 +152,7 @@
                               @endphp                     
                               <article>
                                  <div class="col-lg-12">
-                                    <div class="row news-lg mx-0 mb-3 border rounded-2 overflow-hidden bg-white">
+                                    <div class="row align-items-center news-lg mx-0 mb-3 border rounded-2 overflow-hidden bg-white">
                                        <div class="col-md-6 h-100 px-0 overflow-hidden d-flex justify-content-center align-items-center" style="aspect-ratio:1/1;">
                                              <img loading="lazy" class="img-fluid h-auto w-auto"
                                              src="{{ $blog->path_image_thumbnail ? asset('storage/'.$blog->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
@@ -175,7 +175,7 @@
                                                    </h2>
                                                 </a>
                                                 <p class="m-0 text-color montserrat-medium font-16">
-                                                   {!!substr(strip_tags($blog->text), 0, 450)!!}...
+                                                   {!!substr(strip_tags($blog->text), 0, 280)!!}...
                                                 </p>
                                              </div>
                                        </div>
