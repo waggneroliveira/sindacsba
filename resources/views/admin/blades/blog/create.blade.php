@@ -91,13 +91,13 @@
                                     </div>
                                 </div>
                                 
-                                <div class="col-12">
+                                {{-- <div class="col-12">
                                     <div class="mt-3">
                                         <label for="path_image" class="form-label">Imagem</label>
                                         <input type="file" name="path_image" data-plugins="dropify" />
                                         <p class="text-muted text-center mt-2 mb-0">{{__('dashboard.text_img_size')}} <b class="text-danger">2 MB</b>.</p>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>                            
                             
                             <div class="d-flex justify-content-end gap-2">
