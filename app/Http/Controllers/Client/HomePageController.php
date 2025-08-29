@@ -9,6 +9,7 @@ use App\Models\Announcement;
 use Illuminate\Http\Request;
 use App\Models\StackSessionTitle;
 use App\Http\Controllers\Controller;
+use App\Models\Topic;
 
 class HomePageController extends Controller
 {
@@ -22,7 +23,8 @@ class HomePageController extends Controller
             $active->where('active', 1);
         })->highlightOnly()->active()->sorting()->limit(4)->get();
         $announcements = Announcement::active()->sorting()->get();
+        $topics = Topic::sorting()->active()->get();
         
-        return view('client.blades.index', compact('slides', 'blogSuperHighlights', 'blogHighlights', 'announcements'));
+        return view('client.blades.index', compact('slides', 'blogSuperHighlights', 'blogHighlights', 'announcements', 'topics'));
     }
 }

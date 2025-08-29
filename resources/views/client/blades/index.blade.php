@@ -33,24 +33,28 @@
         </div>
     </section>
 @endif
-
-<section id="topic" class="topic">
-    <div class="container py-5">
-        <div class="row g-3 justify-content-center">
-            @for ($a = 0; $a < 5; $a++)                    
-                <div class="col-12 col-sm-4 col-md-2 d-flex justify-content-center">
-                    <div class="partner-card dark-background border rounded-2 d-flex flex-column justify-content-center align-items-start gap-3 p-3 w-100">
-                        <img src="{{ asset('build/client/images/call.svg') }}" 
-                            alt="Logo do parceiro" 
-                            class="img-fluid" 
-                            loading="lazy"/>
-                        <h2 class="montserrat-bold montserrat-bold font-18  mb-0 title-blue text-uppercase mb-0 text-white">Atendimento</h2>                            
+@if (isset($topics) && $topics <> null)
+    <section id="topic" class="topic">
+        <div class="container py-5">
+            <div class="row g-3 justify-content-center">
+                @foreach($topics as $topic)                
+                    <div class="col-12 col-sm-4 col-md-2 d-flex justify-content-center position-relative">
+                        @if (isset($topic->link) && $topic->link <> null)                            
+                            <a href="{{$topic->link}}" target="_blank" class="position-absolute top-0 left-0 w-100 h-100" rel="noopener noreferrer"></a>
+                        @endif
+                        <div class="partner-card {{isset($topics) ? $topic->color : 'dark-background'}} border rounded-2 d-flex flex-column justify-content-center align-items-start gap-3 p-3 w-100">
+                            <img src="{{ asset('storage/' . $topic->path_image) }}" 
+                                alt="Logo do parceiro" 
+                                class="img-fluid" 
+                                loading="lazy"/>
+                            <h2 class="montserrat-bold montserrat-bold font-18  mb-0 title-blue text-uppercase mb-0 text-white">{{$topic->title}}</h2>                            
+                        </div>                        
                     </div>
-                </div>
-            @endfor
+                @endforeach                   
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+@endif
 
 <section class="blog mb-5">
     <div class="container-fluid">

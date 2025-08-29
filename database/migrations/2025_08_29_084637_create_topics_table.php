@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('path_image')->nullable();
             $table->string('title')->nullable();
+            $table->text('link')->nullable();
             $table->integer('sorting')->default(0);
             $table->boolean('active')->default(0);
             $table->enum('color', ['dark-background', 'background-red'])->default('dark-background');

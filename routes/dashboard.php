@@ -30,6 +30,7 @@ use App\Http\Controllers\StackSessionTitleController;
 use App\Http\Controllers\Auth\PasswordEmailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\PopUpController;
+use App\Http\Controllers\TopicController;
 
 Route::get('painel/', function () {
     return redirect()->route('admin.dashboard.painel');
@@ -149,8 +150,15 @@ Route::prefix('painel/')->group(function () {
         ->parameters(['slides'=>'slide']);
         Route::post('slides/delete', [SlideController::class, 'destroySelected'])
         ->name('admin.dashboard.slide.destroySelected');
-        Route::post('slides/sorting', [SlideController::class, 'sorting'])
-        ->name('admin.dashboard.slide.sorting');
+        Route::post('slides/sorting', [SlideController::class, 'sorting']);
+        //TOPIC
+        Route::resource('topicos', TopicController::class)
+        ->names('admin.dashboard.topic')
+        ->parameters(['topicos'=>'topic']);
+        Route::post('topicos/delete', [TopicController::class, 'destroySelected'])
+        ->name('admin.dashboard.topic.destroySelected');
+        Route::post('topicos/sorting', [TopicController::class, 'sorting'])
+        ->name('admin.dashboard.topic.sorting');
         //E-MAIL CONFIG
         Route::resource('configuracao-de-email', SettingEmailController::class)
         ->names('admin.dashboard.settingEmail')
