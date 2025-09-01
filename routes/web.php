@@ -82,10 +82,6 @@ Route::get('/evento', function () {
 })->name('client.event');
 
 
-// Route::get('/servicos-aos-sindicalizados', function () {
-//     return view('client.blades.unionized');
-// })->name('unionized');
-
 Route::get('/regionais', function () {
     return view('client.blades.regional');
 })->name('regional');
