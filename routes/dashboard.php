@@ -33,6 +33,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PopUpController;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\VideoController;
 
 Route::get('painel/', function () {
     return redirect()->route('admin.dashboard.painel');
@@ -161,6 +162,14 @@ Route::prefix('painel/')->group(function () {
         ->name('admin.dashboard.partner.destroySelected');
         Route::post('parceiros/sorting', [PartnerController::class, 'sorting'])
         ->name('admin.dashboard.partner.sorting');
+        //VIDEO
+        Route::resource('videos', VideoController::class)
+        ->names('admin.dashboard.video')
+        ->parameters(['videos'=>'video']);
+        Route::post('videos/delete', [VideoController::class, 'destroySelected'])
+        ->name('admin.dashboard.video.destroySelected');
+        Route::post('videos/sorting', [VideoController::class, 'sorting'])
+        ->name('admin.dashboard.video.sorting');
         //ABOUT
         Route::resource('sobre', AboutController::class)
         ->names('admin.dashboard.about')

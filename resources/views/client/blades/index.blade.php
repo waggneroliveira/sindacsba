@@ -169,41 +169,49 @@
     </div>
 @endif
 
+@if (!empty($videos))
 <section class="video">
     <div class="container-fluid p-0">
         <div class="content-video d-flex justify-content-center align-items-center bg-black">
             <!-- Lista -->
-            <div class="left col-5 dark-background h-100 d-flex justify-content-center align-items-end flex-column position-relative">                
+            <div class="left col-5 dark-background h-100 d-flex justify-content-center align-items-end flex-column position-relative">
                 <div class="swiper mySwiper position-relative">
                     <div class="swiper-wrapper py-4 flex-column align-items-start justify-content-start m-auto position-relative">
-                        @for ($s = 0; $s < 10; $s++)                        
-                            <div class="swiper-slide align-items-center mb-3 justify-content-start" data-video="//www.youtube.com/embed/Z5CEq_8DLwQ?si=-wpVZgp7y6bdbIxI">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="external-icon" viewBox="0 0 28.57  20" focusable="false" style="pointer-events: none; display: block; width: 35px; height: auto;">
-                                <svg viewBox="0 0 28.57 20" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-                                    <g>
-                                    <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000"></path>
-                                    <path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white"></path>
-                                    </g>
+                        @foreach($videos as $video)
+                            <div class="swiper-slide align-items-center mb-3 justify-content-start"
+                                 data-video="{{ $video->link }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="external-icon" viewBox="0 0 28.57 20" focusable="false" style="pointer-events: none; display: block; width: 35px; height: auto;">
+                                    <svg viewBox="0 0 28.57 20" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                                        <g>
+                                            <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000"></path>
+                                            <path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white"></path>
+                                        </g>
+                                    </svg>
                                 </svg>
-                                </svg>
-                                <h4 class="title montserrat-medium font-16 mb-0">Protesto contra cortes na educação</h4>                        
+                                <h4 class="title montserrat-medium font-16 mb-0 col-10">
+                                    {{ $video->title ?? 'Vídeo' }}
+                                </h4>
                             </div>
-                        @endfor
+                        @endforeach
                     </div>
                 </div>
                 <div class="nav-video position-absolute d-flex flex-column align-items-end me-5">
                     <div class="swiper-button-up">▲</div>
                     <div class="swiper-button-down">▼</div>
                 </div>
-               
             </div>
+
             <!-- Player -->
             <div class="right col-7 bg-black d-flex justify-content-center align-items-center">
-                <iframe id="videoPlayer" class="w-100 h-100" src="//www.youtube.com/embed/Z5CEq_8DLwQ?si=-wpVZgp7y6bdbIxI" allowfullscreen></iframe>
+                <iframe id="videoPlayer" class="w-100 h-100"
+                        src=""
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
             </div>
         </div>
     </div>
 </section>
+@endif
 
 <section class="category-blog-home py-0 mt-5">
     <div class="container-fluid p-0">
@@ -344,16 +352,71 @@ if (section) {
     const slides  = Array.from(section.querySelectorAll(".mySwiper .swiper-slide"));
     const player  = section.querySelector("#videoPlayer");
 
-    let currentIndex = 0; // controla o slide ativo
-    let firstLoad = true;  // flag para controlar rolagem no carregamento
+    let currentIndex = 0;
+    let firstLoad = true;
 
-    // Normaliza URL
+    // Normaliza URL (adiciona protocolo se vier //)
     function norm(url) {
         if (!url) return "";
         return url.startsWith("//") ? window.location.protocol + url : url;
     }
 
-    // Marca ativo e troca vídeo
+    // Converte para URL de embed (YouTube / Vimeo)
+    function toEmbed(rawUrl) {
+        const urlStr = norm(rawUrl);
+        if (!urlStr) return "";
+
+        let u;
+        try { u = new URL(urlStr); } catch { return urlStr; }
+
+        const host = u.hostname.replace(/^www\./, "");
+
+        // YouTube
+        if (host.includes("youtube.com") || host.includes("youtu.be")) {
+            // Se já for /embed/ mantém
+            if (u.pathname.startsWith("/embed/")) return u.toString();
+
+            // youtu.be/<id>
+            if (host === "youtu.be" && u.pathname.length > 1) {
+                const id = u.pathname.split("/")[1];
+                return `https://www.youtube.com/embed/${id}`;
+            }
+
+            // shorts -> converte para embed
+            if (u.pathname.startsWith("/shorts/")) {
+                const id = u.pathname.split("/")[2] || u.pathname.split("/")[1];
+                return `https://www.youtube.com/embed/${id}`;
+            }
+
+            // watch?v=<id>
+            const v = u.searchParams.get("v");
+            if (v) return `https://www.youtube.com/embed/${v}`;
+
+            // /live/<id> ou /v/<id> etc.
+            const parts = u.pathname.split("/").filter(Boolean);
+            if (parts.length >= 2) {
+                const id = parts.pop();
+                return `https://www.youtube.com/embed/${id}`;
+            }
+        }
+
+        // Vimeo
+        if (host.includes("vimeo.com")) {
+            // Se já for player.vimeo.com
+            if (host === "player.vimeo.com") return u.toString();
+
+            // Extrai o último segmento numérico como ID
+            const parts = u.pathname.split("/").filter(Boolean);
+            const last = parts[parts.length - 1];
+            if (/^\d+$/.test(last)) {
+                return `https://player.vimeo.com/video/${last}`;
+            }
+        }
+
+        // Desconhecido: retorna original
+        return urlStr;
+    }
+
     function setActiveByIndex(index, userTriggered = false) {
         if (index < 0 || index >= slides.length) return;
 
@@ -361,46 +424,39 @@ if (section) {
         const slide = slides[index];
         slide.classList.add("active");
 
-        const url = norm(slide.getAttribute("data-video"));
-        if (url) player.src = url;
+        const raw = slide.getAttribute("data-video");
+        const embedUrl = toEmbed(raw);
+        if (embedUrl) player.src = embedUrl;
 
         currentIndex = index;
 
-        // Só rola se foi clique do usuário ou se não é o primeiro load
         if (!firstLoad || userTriggered) {
             slide.scrollIntoView({ behavior: "smooth", block: "nearest" });
         }
     }
 
-    // Clique direto em um item da lista
+    // Clique em um item
     slides.forEach((slide, idx) => {
         slide.addEventListener("click", () => setActiveByIndex(idx, true));
     });
 
-    // Inicializa no primeiro slide (sem rolagem)
+    // Inicia no primeiro (sem rolagem)
     if (slides.length > 0) setActiveByIndex(0);
 
-    // Depois do carregamento da página, libera rolagem para próximas interações
+    // Libera rolagem depois do load
     window.addEventListener("load", () => {
-        setTimeout(() => {
-            firstLoad = false;
-        }, 500);
+        setTimeout(() => { firstLoad = false; }, 500);
     });
 
-    // Navegação ↑ ↓ para trocar de vídeo
+    // Navegação ↑ ↓
     const btnUp = section.querySelector(".swiper-button-up");
     const btnDown = section.querySelector(".swiper-button-down");
 
     btnUp && btnUp.addEventListener("click", () => {
-        if (currentIndex > 0) {
-            setActiveByIndex(currentIndex - 1, true);
-        }
+        if (currentIndex > 0) setActiveByIndex(currentIndex - 1, true);
     });
-
     btnDown && btnDown.addEventListener("click", () => {
-        if (currentIndex < slides.length - 1) {
-            setActiveByIndex(currentIndex + 1, true);
-        }
+        if (currentIndex < slides.length - 1) setActiveByIndex(currentIndex + 1, true);
     });
 }
 </script>

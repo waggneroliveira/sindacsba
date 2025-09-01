@@ -7,11 +7,12 @@ use App\Models\About;
 use App\Models\Slide;
 use App\Models\Stack;
 use App\Models\Topic;
+use App\Models\Video;
+use App\Models\Partner;
 use App\Models\Announcement;
 use Illuminate\Http\Request;
 use App\Models\StackSessionTitle;
 use App\Http\Controllers\Controller;
-use App\Models\Partner;
 
 class HomePageController extends Controller
 {
@@ -28,7 +29,8 @@ class HomePageController extends Controller
         $topics = Topic::sorting()->active()->get();
         $about = About::active()->first();
         $partners = Partner::active()->sorting()->get();
+        $videos = Video::active()->sorting()->get();
         
-        return view('client.blades.index', compact('partners', 'about', 'slides', 'blogSuperHighlights', 'blogHighlights', 'announcements', 'topics'));
+        return view('client.blades.index', compact('videos', 'partners', 'about', 'slides', 'blogSuperHighlights', 'blogHighlights', 'announcements', 'topics'));
     }
 }
