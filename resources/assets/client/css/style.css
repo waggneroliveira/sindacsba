@@ -960,6 +960,10 @@
  .complaint a{
     color: var(--background-red);
  }
+ .partner-card{
+    max-height: 110px;
+    aspect-ratio: 1.91 / 1;
+ }
  .partner .container p, .benefit a, .row-down p{
     color: var(--background-blue);
  }

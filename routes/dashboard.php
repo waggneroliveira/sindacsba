@@ -30,6 +30,7 @@ use App\Http\Controllers\AuditActivityController;
 use App\Http\Controllers\StackSessionTitleController;
 use App\Http\Controllers\Auth\PasswordEmailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PopUpController;
 use App\Http\Controllers\TopicController;
 
@@ -152,6 +153,14 @@ Route::prefix('painel/')->group(function () {
         Route::post('slides/delete', [SlideController::class, 'destroySelected'])
         ->name('admin.dashboard.slide.destroySelected');
         Route::post('slides/sorting', [SlideController::class, 'sorting'])->name('admin.dashboard.slide.sorting');
+        //PARTNER
+        Route::resource('parceiros', PartnerController::class)
+        ->names('admin.dashboard.partner')
+        ->parameters(['parceiros'=>'partner']);
+        Route::post('parceiros/delete', [PartnerController::class, 'destroySelected'])
+        ->name('admin.dashboard.partner.destroySelected');
+        Route::post('parceiros/sorting', [PartnerController::class, 'sorting'])
+        ->name('admin.dashboard.partner.sorting');
         //ABOUT
         Route::resource('sobre', AboutController::class)
         ->names('admin.dashboard.about')
