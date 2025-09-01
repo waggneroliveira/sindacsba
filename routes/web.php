@@ -20,6 +20,7 @@ use App\Http\Controllers\Client\ContactPageController;
 use App\Http\Controllers\Client\NoticiesPageController;
 use App\Http\Controllers\Auth\PasswordEmailClientController;
 use App\Http\Controllers\Auth\ResetPasswordClientController;
+use App\Http\Controllers\Client\BenefitPageController;
 
 require __DIR__ . '/dashboard.php';
 
@@ -74,18 +75,16 @@ Route::post('send-newsletter', [NewsletterController::class, 'store'])->name('se
 Route::post('cliente/cadastro', [ClientController::class, 'store'])->name('register-client');
 Route::get('home', [HomePageController::class, 'index'])->name('index');
 Route::get('sobre', [AboutPageController::class, 'index'])->name('about');
+Route::get('servicos-aos-sindicalizados', [BenefitPageController::class, 'index'])->name('unionized');
 
 Route::get('/evento', function () {
     return view('client.blades.event');
 })->name('client.event');
 
-// Route::get('/sobre', function () {
-//     return view('client.blades.about');
-// })->name('about');
 
-Route::get('/servicos-aos-sindicalizados', function () {
-    return view('client.blades.unionized');
-})->name('unionized');
+// Route::get('/servicos-aos-sindicalizados', function () {
+//     return view('client.blades.unionized');
+// })->name('unionized');
 
 Route::get('/regionais', function () {
     return view('client.blades.regional');

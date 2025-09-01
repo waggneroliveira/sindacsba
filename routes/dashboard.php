@@ -33,6 +33,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PopUpController;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\UnionizedController;
 use App\Http\Controllers\VideoController;
 
 Route::get('painel/', function () {
@@ -154,6 +155,10 @@ Route::prefix('painel/')->group(function () {
         Route::post('slides/delete', [SlideController::class, 'destroySelected'])
         ->name('admin.dashboard.slide.destroySelected');
         Route::post('slides/sorting', [SlideController::class, 'sorting'])->name('admin.dashboard.slide.sorting');
+        //UNIONIZED
+        Route::resource('sindicalize-se', UnionizedController::class)
+        ->names('admin.dashboard.unionized')
+        ->parameters(['sindicalize-se'=>'unionized']);
         //PARTNER
         Route::resource('parceiros', PartnerController::class)
         ->names('admin.dashboard.partner')

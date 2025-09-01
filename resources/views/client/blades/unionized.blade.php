@@ -7,6 +7,7 @@
             display: none;
         }
     </style>
+    
     <div class="d-flex justify-content-start gap-2 align-items-start flex-nowrap my-5">
         <span class="firula-contact mt-2"></span>
         <div class="description">
