@@ -1,6 +1,7 @@
 <?php
 
 use Inertia\Inertia;
+use App\Models\About;
 use App\Models\Contact;
 use App\Models\Announcement;
 use App\Models\BlogCategory;
@@ -14,6 +15,7 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\Auth\AuthClientController;
 use App\Http\Controllers\Client\BlogPageController;
 use App\Http\Controllers\Client\HomePageController;
+use App\Http\Controllers\Client\AboutPageController;
 use App\Http\Controllers\Client\ContactPageController;
 use App\Http\Controllers\Client\NoticiesPageController;
 use App\Http\Controllers\Auth\PasswordEmailClientController;
@@ -71,14 +73,15 @@ Route::post('send-newsletter', [NewsletterController::class, 'store'])->name('se
 
 Route::post('cliente/cadastro', [ClientController::class, 'store'])->name('register-client');
 Route::get('home', [HomePageController::class, 'index'])->name('index');
+Route::get('sobre', [AboutPageController::class, 'index'])->name('about');
 
 Route::get('/evento', function () {
     return view('client.blades.event');
 })->name('client.event');
 
-Route::get('/sobre', function () {
-    return view('client.blades.about');
-})->name('about');
+// Route::get('/sobre', function () {
+//     return view('client.blades.about');
+// })->name('about');
 
 Route::get('/servicos-aos-sindicalizados', function () {
     return view('client.blades.unionized');
@@ -101,8 +104,10 @@ View::composer('client.core.client', function ($view) {
     ->get();
     $announcements = Announcement::active()->sorting()->get();
     $contact = Contact::first();
+    $abouts = About::active()->sorting()->get();
 
     return $view->with('blogCategories', $blogCategories)
     ->with('announcements', $announcements)
-    ->with('contact', $contact);
+    ->with('contact', $contact)
+    ->with('abouts', $abouts);
 });

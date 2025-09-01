@@ -205,8 +205,9 @@
                                     Sobre Nós <i class="bi bi-chevron-down"></i>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="sobreNosDropdown">
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#about-1">História</a></li>
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#about-2">Missão e Visão</a></li>
+                                    @foreach ($abouts as $about)                                        
+                                        <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#{{$about->slug}}">{{$about->title}}</a></li>
+                                    @endforeach
                                     <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#board">Equipe</a></li>
                                 </ul>
                             </li>

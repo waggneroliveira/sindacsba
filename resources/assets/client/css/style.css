@@ -1107,6 +1107,9 @@
     object-position: center;  
     width: 100%;
  }
+ .aboutt .description ul, .about .description ul{
+    padding: 0;
+ }
 .about .description ul li{
     list-style: none;
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -150,7 +151,17 @@ Route::prefix('painel/')->group(function () {
         ->parameters(['slides'=>'slide']);
         Route::post('slides/delete', [SlideController::class, 'destroySelected'])
         ->name('admin.dashboard.slide.destroySelected');
-        Route::post('slides/sorting', [SlideController::class, 'sorting']);
+        Route::post('slides/sorting', [SlideController::class, 'sorting'])->name('admin.dashboard.slide.sorting');
+        //ABOUT
+        Route::resource('sobre', AboutController::class)
+        ->names('admin.dashboard.about')
+        ->parameters(['sobre'=>'about']);
+        Route::post('sobre/delete', [AboutController::class, 'destroySelected'])
+        ->name('admin.dashboard.about.destroySelected');
+        Route::post('sobre/sorting', [AboutController::class, 'sorting'])
+        ->name('admin.dashboard.about.sorting');
+        Route::post('blog/uploadImageCkeditorAbout', [AboutController::class, 'uploadImageCkeditorAbout'])
+        ->name('admin.dashboard.about.uploadImageCkeditorAbout');
         //TOPIC
         Route::resource('topicos', TopicController::class)
         ->names('admin.dashboard.topic')

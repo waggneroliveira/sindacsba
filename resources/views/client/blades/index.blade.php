@@ -56,129 +56,125 @@
     </section>
 @endif
 
-<section class="blog mb-5">
-    <div class="container-fluid">
-       <div class="row">
-          <div class="col-lg-7 p-0">
-             <!-- Swiper Main Carousel -->
-             <div class="swiper main-swiper">
-                <div class="swiper-wrapper">
-                  @foreach($blogSuperHighlights as $blogSuperHighlight)
-                     @php
-                        \Carbon\Carbon::setLocale('pt_BR');
-                        $dataFormatada = \Carbon\Carbon::parse($blogSuperHighlight->date)->translatedFormat('d \d\e F \d\e Y');
-                     @endphp
-                     <div class="swiper-slide">
-                        <article>
-                           <div class="position-relative overflow-hidden" style="height: 500px;">
-                              <img class="img-fluid h-100 w-100"
-                              src="{{ $blogSuperHighlight->path_image_thumbnail ? asset('storage/'.$blogSuperHighlight->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
-                              alt="{{ $blogSuperHighlight->path_image_thumbnail ? 'Notícia super destaque' : 'Sem imagem'}}"
-                              style="object-fit: cover; aspect-ratio: 1.91/1;">
+@if (isset($blogSuperHighlights) && $blogSuperHighlights <> null)
+    <section class="blog mb-5">
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-7 p-0">
+                <!-- Swiper Main Carousel -->
+                <div class="swiper main-swiper">
+                    <div class="swiper-wrapper">
+                    @foreach($blogSuperHighlights as $blogSuperHighlight)
+                        @php
+                            \Carbon\Carbon::setLocale('pt_BR');
+                            $dataFormatada = \Carbon\Carbon::parse($blogSuperHighlight->date)->translatedFormat('d \d\e F \d\e Y');
+                        @endphp
+                        <div class="swiper-slide">
+                            <article>
+                            <div class="position-relative overflow-hidden" style="height: 500px;">
+                                <img class="img-fluid h-100 w-100"
+                                src="{{ $blogSuperHighlight->path_image_thumbnail ? asset('storage/'.$blogSuperHighlight->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
+                                alt="{{ $blogSuperHighlight->path_image_thumbnail ? 'Notícia super destaque' : 'Sem imagem'}}"
+                                style="object-fit: cover; aspect-ratio: 1.91/1;">
 
-                              <div class="overlay">
-                                 <div class="mb-2 d-flex justify-content-center align-items-center gap-1 flex-wrap">
-                                    <span class="badge background-red montserrat-semiBold font-12 text-uppercase py-2 px-2 me-2">{{$blogSuperHighlight->category->title}}</span>
-                                    <p class="text-white mb-0 montserrat-regular font-15">{{$dataFormatada}}</p>
-                                 </div>
-                                 <a href="{{route('blog-inner', ['slug' => $blogSuperHighlight->slug])}}">
-                                    <h1 class="h2 m-0 text-white text-uppercase montserrat-bold font-32 d-block">{{$blogSuperHighlight->title}}</h1>
-                                 </a>
-                              </div>
-                           </div>
-                        </article>
-                     </div>
-                  @endforeach                    
-                </div>
-                <!-- Swiper pagination & navigation (optional) -->
-                <div class="swiper-pagination news"></div>
-             </div>
-          </div>
-          @if ($blogHighlights->count())            
-            <div class="col-lg-5 p-0">
-               <div class="row g-0">
-                  <!-- Static small boxes as before -->
-                  @foreach($blogHighlights as $blogHighlight)
-                     @php
-                        \Carbon\Carbon::setLocale('pt_BR');
-                        $dataFormatada = \Carbon\Carbon::parse($blogHighlight->date)->translatedFormat('d \d\e F \d\e Y');
-                     @endphp
-                     <div class="col-md-6 box-small">
-                        <article>
-                           <div class="position-relative overflow-hidden" style="height: 250px;">
-                              <img class="img-fluid h-100 w-100"
-                              src="{{ $blogHighlight->path_image_thumbnail ? asset('storage/'.$blogHighlight->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
-                              alt="{{ $blogHighlight->title ? $blogHighlight->title : 'Sem imagem'}}"
-                              style="object-fit: cover; aspect-ratio: 1 / 1;">
-                              <div class="overlay">
-                                 <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
-                                    <span class="badge background-red text-uppercase montserrat-semiBold font-12 py-2 px-2 me-2">{{$blogHighlight->category->title}}</span>
-                                    <p class="text-white mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
-                                 </div>
-                                 <a href="{{route('blog-inner', ['slug' => $blogHighlight->slug])}}">                              
-                                    <h2 class="h6 m-0 text-white text-uppercase montserrat-bold font-16 d-block">{{$blogHighlight->title}}</h2>
-                                 </a>
-                              </div>
-                           </div>
-                        </article>
-                     </div>
-                  @endforeach
-               </div>
-            </div>
-          @endif
-         </div>
-      </div>
-</section>
-
-<section class="aboutt">
-    <div class="container">
-        <div id="about-1" class="d-flex justify-content-between align-items-start about flex-wrap w-100 pt-3 pb-3 pt-lg-5">
-            <div class="col-12 col-lg-7 animate-on-scroll" data-animation="animate__fadeInLeft">
-                <div class="border-bottom mb-0">
-                    <h2 class="section-title rounded-top-left d-table px-4 w-auto m-0 montserrat-bold font-18 title-blue">História</h2>
-                </div>
-        
-                <div class="description mt-4 text-blog-inner montserrat-medium font-16">
-                    <p>
-                        Nós, o Sindicato dos Trabalhadores em Educação do Terceiro Grau do Estado da Bahia (SINTEST-BA) somos a entidade representativa dos servidores técnicos 
-                        administrativos da Universidade do Estado da Bahia (UNEB) e Universidade Estadual de Feira de Santana (UEFS). 
-                        <br><br>
-                        Desde 09 de março de 1990, temos como propósito a conquista e defesa de direitos da categoria, bem como a valorização dos seus filiados com o intuito de lutar por melhorias no seu bem-estar.
-                        <br><br>                            
-                        Nosso sindicato se preocupa em assistir aos servidores espalhados por todo o Estado, representados nos 26 campus da UNEB e na UEFS, buscando a união 
-                        dos esforços em prol do crescimento e fortalecimento enquanto categoria dos técnicos administrativos das universidades públicas.
-                    </p>
-                </div>
-
-                <div class="btn-about my-4">
-                    <a href="{{route('about')}}" class="background-red montserrat-semiBold font-15 py-2 px-4 rounded-4">Saiba mais</a>
-                </div>
-            </div>
-            <div class="col-11 col-lg-4 animate-on-scroll mb-3" data-animation="animate__fadeInRight">
-                <div class="image d-flex justify-content-end">
-                    <img src="{{asset('build/client/images/aboutt.png')}}" loading="lazy" alt="About" class="w-100 h-100 about-image d-sm-block" loading="lazy">
-                </div>
-            </div>
-        </div>     
-        
-        <div class="partner-about">
-            <div class="container pt-3 pb-5">
-                <div class="row g-3 justify-content-center">
-                    @for ($a = 0; $a < 4; $a++)                    
-                        <div class="col-6 col-sm-4 col-md-2 d-flex justify-content-center">
-                            <div class="partner-card border rounded-2 d-flex justify-content-center align-items-center py-2 px-4 w-100">
-                                <img src="{{ asset('build/client/images/cut.png') }}" 
-                                    alt="Logo do parceiro" 
-                                    class="img-fluid" 
-                                    loading="lazy"/>                            
+                                <div class="overlay">
+                                    <div class="mb-2 d-flex justify-content-center align-items-center gap-1 flex-wrap">
+                                        <span class="badge background-red montserrat-semiBold font-12 text-uppercase py-2 px-2 me-2">{{$blogSuperHighlight->category->title}}</span>
+                                        <p class="text-white mb-0 montserrat-regular font-15">{{$dataFormatada}}</p>
+                                    </div>
+                                    <a href="{{route('blog-inner', ['slug' => $blogSuperHighlight->slug])}}">
+                                        <h1 class="h2 m-0 text-white text-uppercase montserrat-bold font-32 d-block">{{$blogSuperHighlight->title}}</h1>
+                                    </a>
+                                </div>
                             </div>
+                            </article>
                         </div>
-                    @endfor
+                    @endforeach                    
+                    </div>
+                    <!-- Swiper pagination & navigation (optional) -->
+                    <div class="swiper-pagination news"></div>
+                </div>
+            </div>
+            @if ($blogHighlights->count())            
+                <div class="col-lg-5 p-0">
+                <div class="row g-0">
+                    <!-- Static small boxes as before -->
+                    @foreach($blogHighlights as $blogHighlight)
+                        @php
+                            \Carbon\Carbon::setLocale('pt_BR');
+                            $dataFormatada = \Carbon\Carbon::parse($blogHighlight->date)->translatedFormat('d \d\e F \d\e Y');
+                        @endphp
+                        <div class="col-md-6 box-small">
+                            <article>
+                            <div class="position-relative overflow-hidden" style="height: 250px;">
+                                <img class="img-fluid h-100 w-100"
+                                src="{{ $blogHighlight->path_image_thumbnail ? asset('storage/'.$blogHighlight->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
+                                alt="{{ $blogHighlight->title ? $blogHighlight->title : 'Sem imagem'}}"
+                                style="object-fit: cover; aspect-ratio: 1 / 1;">
+                                <div class="overlay">
+                                    <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
+                                        <span class="badge background-red text-uppercase montserrat-semiBold font-12 py-2 px-2 me-2">{{$blogHighlight->category->title}}</span>
+                                        <p class="text-white mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
+                                    </div>
+                                    <a href="{{route('blog-inner', ['slug' => $blogHighlight->slug])}}">                              
+                                        <h2 class="h6 m-0 text-white text-uppercase montserrat-bold font-16 d-block">{{$blogHighlight->title}}</h2>
+                                    </a>
+                                </div>
+                            </div>
+                            </article>
+                        </div>
+                    @endforeach
+                </div>
+                </div>
+            @endif
+            </div>
+        </div>
+    </section>
+@endif
+
+@if (isset($about))
+    <section class="aboutt">
+        <div class="container">
+            <div id="about-1" class="d-flex justify-content-between align-items-start about flex-wrap w-100 pt-3 pb-3 pt-lg-5">
+                <div class="col-12 col-lg-7 animate-on-scroll" data-animation="animate__fadeInLeft">
+                    <div class="border-bottom mb-0">
+                        <h2 class="section-title rounded-top-left d-table px-4 w-auto m-0 montserrat-bold font-18 title-blue">{{$about->title}}</h2>
+                    </div>
+            
+                    <div class="description mt-4 text-blog-inner montserrat-medium font-16">
+                        {!! $about->text !!}
+                    </div>
+
+                    <div class="btn-about my-4">
+                        <a href="{{route('about')}}#{{$about->slug}}" class="background-red montserrat-semiBold font-15 py-2 px-4 rounded-4">Saiba mais</a>
+                    </div>
+                </div>
+                <div class="col-11 col-lg-4 animate-on-scroll mb-3" data-animation="animate__fadeInRight">
+                    <div class="image d-flex justify-content-end">
+                        <img src="{{asset('storage/' . $about->path_image)}}" loading="lazy" alt="About" class="w-100 h-100 about-image d-sm-block" loading="lazy">
+                    </div>
+                </div>
+            </div>     
+            
+            <div class="partner-about">
+                <div class="container pt-3 pb-5">
+                    <div class="row g-3 justify-content-center">
+                        @for ($a = 0; $a < 4; $a++)                    
+                            <div class="col-6 col-sm-4 col-md-2 d-flex justify-content-center">
+                                <div class="partner-card border rounded-2 d-flex justify-content-center align-items-center py-2 px-4 w-100">
+                                    <img src="{{ asset('build/client/images/cut.png') }}" 
+                                        alt="Logo do parceiro" 
+                                        class="img-fluid" 
+                                        loading="lazy"/>                            
+                                </div>
+                            </div>
+                        @endfor
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+@endif
 
 @include('client.includes.benefit')
 

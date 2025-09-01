@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Client;
 
 use App\Models\Blog;
+use App\Models\About;
 use App\Models\Slide;
 use App\Models\Stack;
+use App\Models\Topic;
 use App\Models\Announcement;
 use Illuminate\Http\Request;
 use App\Models\StackSessionTitle;
 use App\Http\Controllers\Controller;
-use App\Models\Topic;
 
 class HomePageController extends Controller
 {
@@ -24,7 +25,8 @@ class HomePageController extends Controller
         })->highlightOnly()->active()->sorting()->limit(4)->get();
         $announcements = Announcement::active()->sorting()->get();
         $topics = Topic::sorting()->active()->get();
+        $about = About::active()->first();
         
-        return view('client.blades.index', compact('slides', 'blogSuperHighlights', 'blogHighlights', 'announcements', 'topics'));
+        return view('client.blades.index', compact('about', 'slides', 'blogSuperHighlights', 'blogHighlights', 'announcements', 'topics'));
     }
 }

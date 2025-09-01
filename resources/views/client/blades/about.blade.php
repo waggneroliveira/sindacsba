@@ -13,92 +13,67 @@
         </div>
     </div>
 
-    <section id="about" class="position-relative mb-5">
-        <div class="container">
-            <div id="about-1" class="d-flex justify-content-between align-items-start about flex-wrap w-100 pt-4 pt-lg-5">
-                <div class="col-11 col-lg-4 animate-on-scroll mb-3" data-animation="animate__fadeInRight">
-                    <div class="image d-flex justify-content-end">
-                        <img src="{{asset('build/client/images/aboutt.png')}}" loading="lazy" alt="About" class="w-100 h-100 about-image d-sm-block" loading="lazy">
-                    </div>
-                </div>
-
-                <div class="col-11 col-lg-7 animate-on-scroll" data-animation="animate__fadeInLeft">
-                    <div class="border-bottom mb-0">
-                        <h2 class="section-title rounded-top-left d-table px-4 w-auto m-0 montserrat-bold font-18 title-blue">História</h2>
-                    </div>
-            
-                    <div class="description mt-4 text-blog-inner montserrat-medium font-16">
-                        <p>
-                            Nós, o Sindicato dos Trabalhadores em Educação do Terceiro Grau do Estado da Bahia (SINTEST-BA) somos a entidade representativa dos servidores técnicos 
-                            administrativos da Universidade do Estado da Bahia (UNEB) e Universidade Estadual de Feira de Santana (UEFS). 
-                            <br><br>
-                            Desde 09 de março de 1990, temos como propósito a conquista e defesa de direitos da categoria, bem como a valorização dos seus filiados com o intuito de lutar por melhorias no seu bem-estar.
-                            <br><br>                            
-                            Nosso sindicato se preocupa em assistir aos servidores espalhados por todo o Estado, representados nos 26 campus da UNEB e na UEFS, buscando a união 
-                            dos esforços em prol do crescimento e fortalecimento enquanto categoria dos técnicos administrativos das universidades públicas.
-                            <br><br>
-                            Sempre à frente, as atividades promovidas pelo Sindicato asseguram o crescimento e estabelecem novas perspectivas para a manutenção dos nossos direitos, 
-                        </p>
-                    </div>
-                </div>
-                
-            </div>
-
-            <div id="about-2" class="d-flex justify-content-between align-items-start about flex-wrap w-100 pt-4 pt-lg-5">
-                <div class="col-11 col-lg-4 animate-on-scroll mb-3" data-animation="animate__fadeInRight">
-                    <div class="image d-flex justify-content-end">
-                        <img src="{{asset('build/client/images/aboutt-1.png')}}" loading="lazy" alt="About" class="w-100 h-100 about-image d-sm-block" loading="lazy">
-                    </div>
-                </div>
-
-                <div class="col-11 col-lg-7 animate-on-scroll" data-animation="animate__fadeInLeft">
-                    <div class="border-bottom mb-0">
-                        <h2 class="section-title rounded-top-left d-table px-4 w-auto m-0 montserrat-bold font-18 title-blue">Missão, Visão e Valores</h2>
-                    </div>
-            
-                    <div class="description mt-4 text-blog-inner montserrat-medium font-16">
-                        <ul>
-                            <li>
-                                MISSÃO
-                                <br>
-                                Organizar os trabalhadores para garantir e conquistar direitos e justiça social. Além de trabalhar constantemente pelo desenvolvimento e fortalecimento da engenharia e da Soberania Nacional.
-                            </li>
-                            <br>
-                            <li>
-                                VISÃO
-                                <br>
-                                Organizar os trabalhadores para garantir e conquistar direitos e justiça social. Além de trabalhar constantemente pelo desenvolvimento e fortalecimento da engenharia e da Soberania Nacional.
-                            </li>
-                            <br>
-                            <li>
-                                VALORES
-                                <br>
-                                Organizar os trabalhadores para garantir e conquistar direitos e justiça social. Além de trabalhar constantemente pelo desenvolvimento e fortalecimento da engenharia e da Soberania Nacional.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-
-        <div class="partner-about">
-            <div class="container py-5">
-                <div class="row g-3 justify-content-center">
-                    @for ($a = 0; $a < 4; $a++)                    
-                        <div class="col-6 col-sm-4 col-md-2 d-flex justify-content-center">
-                            <div class="partner-card border rounded-2 d-flex justify-content-center align-items-center py-2 px-4 w-100">
-                                <img src="{{ asset('build/client/images/cut.png') }}" 
-                                    alt="Logo do parceiro" 
-                                    class="img-fluid" 
-                                    loading="lazy"/>                            
+    @if (isset($abouts) && $abouts <> null)        
+        <section id="about" class="position-relative mb-5">
+            <div class="container">
+                @foreach ($abouts as $about)
+                    <div id="{{$about->slug}}" class="d-flex justify-content-between align-items-start about flex-wrap w-100 pt-4 pt-lg-5">
+                        @if ($about->path_image)
+                            <div class="col-11 col-lg-4 animate-on-scroll mb-3" data-animation="animate__fadeInRight">
+                                <div class="image d-flex justify-content-end">
+                                    <img src="{{asset('storage/' . $about->path_image)}}" alt="About"
+                                        class="w-100 h-100 about-image d-sm-block" loading="lazy">
+                                </div>
                             </div>
-                        </div>
-                    @endfor
+
+                            <div class="col-11 col-lg-7 animate-on-scroll" data-animation="animate__fadeInLeft">
+                                <div class="border-bottom mb-0">
+                                    <h2 class="section-title rounded-top-left d-table px-4 w-auto m-0 montserrat-bold font-18 title-blue">
+                                        {{$about->title}}
+                                    </h2>
+                                </div>
+                        
+                                <div class="description mt-4 text-blog-inner montserrat-medium font-16">
+                                    {!! $about->text !!}
+                                </div>
+                            </div>
+                        @else
+                            <div class="col-12 animate-on-scroll w-100" data-animation="animate__fadeInLeft">
+                                <div class="border-bottom mb-0">
+                                    <h2 class="section-title rounded-top-left d-table px-4 w-auto m-0 montserrat-bold font-18 title-blue">
+                                        {{$about->title}}
+                                    </h2>
+                                </div>
+                        
+                                <div class="description mt-4 text-blog-inner montserrat-medium font-16">
+                                    {!! $about->text !!}
+                                </div>
+                            </div>
+                        @endif
+
+                    </div>
+                @endforeach
+
+            </div>
+
+            <div class="partner-about">
+                <div class="container py-5">
+                    <div class="row g-3 justify-content-center">
+                        @for ($a = 0; $a < 4; $a++)                    
+                            <div class="col-6 col-sm-4 col-md-2 d-flex justify-content-center">
+                                <div class="partner-card border rounded-2 d-flex justify-content-center align-items-center py-2 px-4 w-100">
+                                    <img src="{{ asset('build/client/images/cut.png') }}" 
+                                        alt="Logo do parceiro" 
+                                        class="img-fluid" 
+                                        loading="lazy"/>                            
+                                </div>
+                            </div>
+                        @endfor
+                    </div>
                 </div>
             </div>
-        </div>
-</section>
+        </section>        
+    @endif
 
 <!-- Diretoria -->
 <section id="board" class="board container my-5">
