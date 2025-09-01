@@ -57,7 +57,7 @@
 @endif
 
 @if (isset($blogSuperHighlights) && $blogSuperHighlights <> null)
-    <section class="blog mb-5">
+    <section class="blog mb-0">
         <div class="container-fluid">
         <div class="row">
             <div class="col-lg-7 p-0">

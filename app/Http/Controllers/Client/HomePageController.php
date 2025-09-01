@@ -11,6 +11,7 @@ use App\Models\Video;
 use App\Models\Partner;
 use App\Models\Unionized;
 use App\Models\Announcement;
+use App\Models\BenefitTopic;
 use Illuminate\Http\Request;
 use App\Models\StackSessionTitle;
 use App\Http\Controllers\Controller;
@@ -32,8 +33,9 @@ class HomePageController extends Controller
         $partners = Partner::active()->sorting()->get();
         $videos = Video::active()->sorting()->get();
         $unionized = Unionized::active()->first();
+        $benefitTopics = BenefitTopic::active()->sorting()->get();
 
-        return view('client.blades.index', compact('unionized', 'videos', 'partners', 'about', 'slides', 'blogSuperHighlights', 'blogHighlights', 'announcements', 'topics'));
+        return view('client.blades.index', compact('benefitTopics', 'unionized', 'videos', 'partners', 'about', 'slides', 'blogSuperHighlights', 'blogHighlights', 'announcements', 'topics'));
     }
     
 }

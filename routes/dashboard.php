@@ -30,6 +30,7 @@ use App\Http\Controllers\AuditActivityController;
 use App\Http\Controllers\StackSessionTitleController;
 use App\Http\Controllers\Auth\PasswordEmailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\BenefitTopicController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PopUpController;
 use App\Http\Controllers\TopicController;
@@ -159,6 +160,14 @@ Route::prefix('painel/')->group(function () {
         Route::resource('sindicalize-se', UnionizedController::class)
         ->names('admin.dashboard.unionized')
         ->parameters(['sindicalize-se'=>'unionized']);
+        //BENEFITtOPIC
+        Route::resource('beneficios', BenefitTopicController::class)
+        ->names('admin.dashboard.benefitTopic')
+        ->parameters(['beneficios'=>'benefitTopic']);
+        Route::post('beneficios/delete', [BenefitTopicController::class, 'destroySelected'])
+        ->name('admin.dashboard.benefitTopic.destroySelected');
+        Route::post('beneficios/sorting', [BenefitTopicController::class, 'sorting'])
+        ->name('admin.dashboard.benefitTopic.sorting');
         //PARTNER
         Route::resource('parceiros', PartnerController::class)
         ->names('admin.dashboard.partner')
