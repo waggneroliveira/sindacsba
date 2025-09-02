@@ -966,6 +966,12 @@
     object-fit:contain;
     aspect-ratio:1/1;
  }
+ .partner img{
+    width:143px; 
+    height:94px;
+    object-fit:contain;
+    aspect-ratio:1/1;
+ }
  .partner-card{
     max-height: 110px;
     aspect-ratio: 1.91 / 1;

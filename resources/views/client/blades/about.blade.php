@@ -159,4 +159,6 @@
    </div>
 </section>
 
+@include('client.includes.social')
+
 @endsection

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AgreementController;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -165,6 +166,10 @@ Route::prefix('painel/')->group(function () {
         Route::resource('denuncie', ReportController::class)
         ->names('admin.dashboard.report')
         ->parameters(['denuncie'=>'report']);
+        //Agreement
+        Route::resource('convenios', AgreementController::class)
+        ->names('admin.dashboard.agreement')
+        ->parameters(['convenios'=>'agreement']);
         //BENEFITtOPIC
         Route::resource('beneficios', BenefitTopicController::class)
         ->names('admin.dashboard.benefitTopic')

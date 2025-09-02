@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Models\Report;
+use App\Models\Agreement;
 use App\Models\Unionized;
 use App\Models\BenefitTopic;
 use Illuminate\Http\Request;
@@ -14,7 +15,8 @@ class BenefitPageController extends Controller
         $unionized = Unionized::active()->first();
         $benefitTopics = BenefitTopic::active()->sorting()->get();
         $report = Report::active()->first();
+        $agreement = Agreement::active()->first();
 
-        return view('client.blades.unionized', compact('report', 'unionized', 'benefitTopics'));
+        return view('client.blades.unionized', compact('agreement', 'report', 'unionized', 'benefitTopics'));
     }
 }
