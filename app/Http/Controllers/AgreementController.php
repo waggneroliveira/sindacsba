@@ -133,6 +133,15 @@ class AgreementController extends Controller
             $data['path_file'] = $this->pathUpload . $filename;
         }
 
+                // Se o usuário pediu para remover via Dropify
+        if ($request->has('delete_path_file')) {
+            if (!empty($agreement->path_file) && Storage::exists($agreement->path_file)) {
+                Storage::delete($agreement->path_file);
+            }
+            $data['path_file'] = null;
+        }
+
+
         $data['active'] = $request->active ? 1 : 0;
 
         try {

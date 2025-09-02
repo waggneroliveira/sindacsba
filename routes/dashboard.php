@@ -35,6 +35,7 @@ use App\Http\Controllers\BenefitTopicController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PopUpController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\StatuteController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\UnionizedController;
 use App\Http\Controllers\VideoController;
@@ -170,6 +171,10 @@ Route::prefix('painel/')->group(function () {
         Route::resource('convenios', AgreementController::class)
         ->names('admin.dashboard.agreement')
         ->parameters(['convenios'=>'agreement']);
+        //STATUTE
+        Route::resource('estatuto', StatuteController::class)
+        ->names('admin.dashboard.statute')
+        ->parameters(['estatuto'=>'statute']);
         //BENEFITtOPIC
         Route::resource('beneficios', BenefitTopicController::class)
         ->names('admin.dashboard.benefitTopic')

@@ -11,10 +11,10 @@
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Convênios</li>
+                                    <li class="breadcrumb-item active">Estatuto</li>
                                 </ol>
                             </div>
-                            <h4 class="page-title">Convênios</h4>
+                            <h4 class="page-title">Estatuto</h4>
                         </div>
                     </div>
                 </div>
@@ -31,11 +31,11 @@
                                             Auth::user()->can('editais.criar') ||
                                             Auth::user()->can('usuario.tornar usuario master') || 
                                             Auth::user()->hasRole('Super'))
-                                                @if (!isset($agreement))                                                
-                                                    <button type="button" class="btn btn-primary text-black waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#agreement-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
+                                                @if (!isset($statute))                                                
+                                                    <button type="button" class="btn btn-primary text-black waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#statute-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
                                                 @endif
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="agreement-create" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal fade" id="statute-create" tabindex="-1" role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" style="max-width: 980px;">
                                                         <div class="modal-content">
                                                             <div class="modal-header bg-light">
@@ -43,9 +43,9 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                             </div>
                                                             <div class="modal-body p-2 px-3 px-md-4">
-                                                                <form action="{{ route('admin.dashboard.agreement.store') }}" method="POST" enctype="multipart/form-data">
+                                                                <form action="{{ route('admin.dashboard.statute.store') }}" method="POST" enctype="multipart/form-data">
                                                                     @csrf
-                                                                    @include('admin.blades.agreement.form')  
+                                                                    @include('admin.blades.statute.form')  
                                                                     <div class="d-flex justify-content-end gap-2">
                                                                         <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
                                                                         <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
@@ -60,7 +60,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if (isset($agreement))                                    
+                                @if (isset($statute))                                    
                                     <div class="table-responsive">
                                         <table class="table-sortable table table-centered table-nowrap table-striped">
                                             <thead>
@@ -83,16 +83,16 @@
                                                     <td class="bs-checkbox">
                                                         <label><input data-index="" name="btnSelectItem" class="btnSelectItem" type="checkbox" value=""></label>
                                                     </td>
-                                                    <td>{{$agreement->title}}</td>
+                                                    <td>{{$statute->title}}</td>
                                                     <td class="table-user">
-                                                        @if ($agreement->path_file)                                                            
-                                                            <a href="{{ asset('storage/'.$agreement->path_file) }}" target="_blank" rel="noopener noreferrer" download="arquivo">
+                                                        @if ($statute->path_file)                                                            
+                                                            <a href="{{ asset('storage/'.$statute->path_file) }}" target="_blank" rel="noopener noreferrer" download="arquivo">
                                                                 <span class="mdi mdi-file-download-outline"></span>
                                                             </a>
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        @switch($agreement->active)
+                                                        @switch($statute->active)
                                                             @case(0) <span class="badge bg-danger">Inativo</span> @break
                                                             @case(1) <span class="badge bg-success">Ativo</span> @break
                                                         @endswitch
@@ -102,19 +102,19 @@
                                                         Auth::user()->can('editais.editar') ||
                                                         Auth::user()->can('usuario.tornar usuario master') || 
                                                         Auth::user()->hasRole('Super'))
-                                                            <button class="table-edit-button btn btn-primary text-black" data-bs-toggle="modal" data-bs-target="#modal-group-edit-{{$agreement->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
-                                                            <div class="modal fade" id="modal-group-edit-{{$agreement->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                            <button class="table-edit-button btn btn-primary text-black" data-bs-toggle="modal" data-bs-target="#modal-group-edit-{{$statute->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
+                                                            <div class="modal fade" id="modal-group-edit-{{$statute->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered" style="max-width: 980px;">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header bg-light">
-                                                                            <h4 class="modal-title" id="myCenterModalLabel">Convênios</h4>
+                                                                            <h4 class="modal-title" id="myCenterModalLabel">Estatuto</h4>
                                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                                         </div>
                                                                         <div class="modal-body  p-2 px-3 px-md-4">
-                                                                            <form action="{{ route('admin.dashboard.agreement.update', ['agreement' => $agreement->id]) }}" method="POST" enctype="multipart/form-data">
+                                                                            <form action="{{ route('admin.dashboard.statute.update', ['statute' => $statute->id]) }}" method="POST" enctype="multipart/form-data">
                                                                                 @csrf
                                                                                 @method('PUT')
-                                                                                @include('admin.blades.agreement.form')    
+                                                                                @include('admin.blades.statute.form')    
                                                                                 <div class="d-flex justify-content-end gap-2">
                                                                                     <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
                                                                                     <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_save')}}</button>
@@ -130,7 +130,7 @@
                                                         Auth::user()->can('editais.remover') ||
                                                         Auth::user()->can('usuario.tornar usuario master') || 
                                                         Auth::user()->hasRole('Super'))
-                                                            <form action="{{route('admin.dashboard.agreement.destroy',['agreement' => $agreement->id])}}" style="width: 30px" method="POST">
+                                                            <form action="{{route('admin.dashboard.statute.destroy',['statute' => $statute->id])}}" style="width: 30px" method="POST">
                                                                 @method('DELETE') @csrf        
                                                                 
                                                                 <button type="button" style="width: 30px"class="demo-delete-row btn btn-danger btn-xs btn-icon btSubmitDeleteItem"><i class="fa fa-times"></i></button>
@@ -145,7 +145,7 @@
 
                                 {{-- PAGINATION --}}
                                 <div class="mt-3 float-end">
-                                   {{-- {{$agreement->links()}} --}}
+                                   {{-- {{$statute->links()}} --}}
                                 </div>
                             </div>
                         </div> <!-- end card-->

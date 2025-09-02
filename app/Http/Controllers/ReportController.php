@@ -134,6 +134,14 @@ class ReportController extends Controller
             $data['path_file'] = $this->pathUpload . $filename;
         }
 
+        if ($request->has('delete_path_file')) {
+            if (!empty($report->path_file) && Storage::exists($report->path_file)) {
+                Storage::delete($report->path_file);
+            }
+            $data['path_file'] = null;
+        }
+
+
         $data['active'] = $request->active ? 1 : 0;
 
         try {

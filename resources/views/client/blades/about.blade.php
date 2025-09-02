@@ -134,30 +134,45 @@
         </div>
     </div>
 </section>
+@if (!empty($statute))
+    <section id="statute" class="dark-background py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            @if ($statute->path_file)
+                <!-- Texto -->
+                <div class="col-lg-8 col-md-7 col-12 mb-4 mb-md-0">
+                    <h4 class="font-25 mb-4 montserrat-medium">
+                    {{$statute->title}}
+                    </h4>
+                    <p class="montserrat-regular font-16 text-white">
+                    {{$statute->description}}
+                    </p>
+                </div>
+                            <!-- Botão -->
+                @if ($statute <> null)
+                    <div class="col-lg-4 col-md-5 col-12 text-md-end text-center">
+                        <a href="{{asset('storage/' . $statute->path_file)}}" target="_blank" rel="noopener noreferrer" 
+                        class="background-red montserrat-bold font-15 rounded-5 py-2 px-5 text-uppercase d-inline-block">
+                        Baixar PDF do estatuto
+                        </a>
+                    </div>
+                @endif
+                @else
+                <!-- Texto -->
+                <div class="col-12 mb-4 mb-md-0">
+                    <h4 class="font-25 mb-4 montserrat-medium">
+                    {{$statute->title}}
+                    </h4>
+                    <p class="montserrat-regular font-16 text-white">
+                    {{$statute->description}}
+                    </p>
+                </div>
+            @endif
 
-<section id="statute" class="dark-background py-5">
-   <div class="container">
-      <div class="row align-items-center">
-         <!-- Texto -->
-         <div class="col-lg-8 col-md-7 col-12 mb-4 mb-md-0">
-            <h4 class="font-25 mb-4 montserrat-medium">
-               Conheça o Estatuto 2025 do SINDACS e entenda de forma clara os direitos, deveres e regras que orientam a categoria em Salvador
-            </h4>
-            <p class="montserrat-regular font-16 text-white">
-               O Estatuto do SINDACS é o documento que garante transparência, define direitos, deveres e fortalece a organização sindical. 
-               Aqui você encontra todas as normas que regem a atuação dos agentes comunitários de saúde e de combate às endemias em Salvador.
-            </p>
-         </div>
-         <!-- Botão -->
-         <div class="col-lg-4 col-md-5 col-12 text-md-end text-center">
-            <a href="http://" target="_blank" rel="noopener noreferrer" 
-               class="background-red montserrat-bold font-15 rounded-5 py-2 px-5 text-uppercase d-inline-block">
-            Baixar PDF do estatuto
-            </a>
-         </div>
-      </div>
-   </div>
-</section>
+        </div>
+    </div>
+    </section>
+@endif
 
 @include('client.includes.social')
 
