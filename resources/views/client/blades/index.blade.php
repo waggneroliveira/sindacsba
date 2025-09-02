@@ -345,6 +345,8 @@
 
 @include('client.includes.complaint')
 
+@include('client.includes.social')
+
 <script>
 const section = document.querySelector('section.video');
 if (section) {

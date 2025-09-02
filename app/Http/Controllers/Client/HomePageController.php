@@ -8,6 +8,8 @@ use App\Models\Slide;
 use App\Models\Stack;
 use App\Models\Topic;
 use App\Models\Video;
+use App\Models\Report;
+use App\Models\Contact;
 use App\Models\Partner;
 use App\Models\Unionized;
 use App\Models\Announcement;
@@ -15,7 +17,6 @@ use App\Models\BenefitTopic;
 use Illuminate\Http\Request;
 use App\Models\StackSessionTitle;
 use App\Http\Controllers\Controller;
-use App\Models\Report;
 
 class HomePageController extends Controller
 {
@@ -36,8 +37,9 @@ class HomePageController extends Controller
         $unionized = Unionized::active()->first();
         $benefitTopics = BenefitTopic::active()->sorting()->get();
         $report = Report::active()->first();
+        $contact = Contact::first();
 
-        return view('client.blades.index', compact('report','benefitTopics', 'unionized', 'videos', 'partners', 'about', 'slides', 'blogSuperHighlights', 'blogHighlights', 'announcements', 'topics'));
+        return view('client.blades.index', compact('contact', 'report','benefitTopics', 'unionized', 'videos', 'partners', 'about', 'slides', 'blogSuperHighlights', 'blogHighlights', 'announcements', 'topics'));
     }
     
 }

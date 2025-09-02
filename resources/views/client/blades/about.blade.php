@@ -60,80 +60,36 @@
         </section>        
     @endif
 
-<!-- Diretoria -->
-<section id="board" class="board container my-5">
-    <div class="border-bottom mb-0">
-        <h2 class="section-title rounded-top-left d-table px-4 w-auto m-0 montserrat-bold font-18 title-blue">Diretoria</h2>
-    </div>
-    <div class="row g-4 mt-4">
-        <div class="col-md-4 col-sm-12">
-            <div class="d-flex justify-content-start gap-3 align-items-center">
-                <div class="image">
-                    <img src="{{asset('build/client/images/user.png')}}" loading="lazy" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
-                </div>
-                <div class="description d-flex flex-column justify-content-center">
-                    <h5 class="mb-1 montserrat-bold font-18 title-blue">Clayton Ferreira da Silva</h5>
-                    <p class="function montserrat-regular font-16 mb-0">Diretora Geral do Sindicato Baiano</p>
-                </div>
-            </div>
+@if (!empty($directions))
+    <!-- Diretoria -->
+    <section id="board" class="board container my-5">
+        <div class="border-bottom mb-0">
+            <h2 class="section-title rounded-top-left d-table px-4 w-auto m-0 montserrat-bold font-18 title-blue">Diretoria</h2>
         </div>
-        <div class="col-md-4 col-sm-12">
-            <div class="d-flex justify-content-start gap-3 align-items-center">
-                <div class="image">
-                    <img src="{{asset('build/client/images/user.png')}}" loading="lazy" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
+        <div class="row g-4 mt-4">
+            @foreach ($directions as $direction)
+                <div class="col-md-4 col-sm-12">
+                    <div class="d-flex justify-content-start gap-3 align-items-center">
+                        @if ($direction->path_image <> null)
+                            <div class="image">
+                                <img src="{{asset('storage/' . $direction->path_image)}}" loading="lazy" class="rounded-circle h-100" alt="Clayton Ferreira da Silva">
+                            </div>
+                            <div class="description d-flex flex-column justify-content-center">
+                                <h5 class="mb-1 montserrat-bold font-18 title-blue">{{$direction->title}}</h5>
+                                <p class="function montserrat-regular font-16 mb-0">{{$direction->description}}</p>
+                            </div>
+                        @else
+                            <div class="description d-flex flex-column justify-content-center">
+                                <h5 class="mb-1 montserrat-bold font-18 title-blue">{{$direction->title}}</h5>
+                                <p class="function montserrat-regular font-16 mb-0">{{$direction->description}}</p>
+                            </div>
+                        @endif
+                    </div>
                 </div>
-                <div class="description d-flex flex-column justify-content-center">
-                    <h5 class="mb-1 montserrat-bold font-18 title-blue">Clayton Ferreira da Silva</h5>
-                    <p class="function montserrat-regular font-16 mb-0">Diretora Geral do Sindicato Baiano</p>
-                </div>
-            </div>
+            @endforeach
         </div>
-        <div class="col-md-4 col-sm-12">
-            <div class="d-flex justify-content-start gap-3 align-items-center">
-                <div class="image">
-                    <img src="{{asset('build/client/images/user.png')}}" loading="lazy" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
-                </div>
-                <div class="description d-flex flex-column justify-content-center">
-                    <h5 class="mb-1 montserrat-bold font-18 title-blue">Clayton Ferreira da Silva</h5>
-                    <p class="function montserrat-regular font-16 mb-0">Diretora Geral do Sindicato Baiano</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12">
-            <div class="d-flex justify-content-start gap-3 align-items-center">
-                <div class="image">
-                    <img src="{{asset('build/client/images/user.png')}}" loading="lazy" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
-                </div>
-                <div class="description d-flex flex-column justify-content-center">
-                    <h5 class="mb-1 montserrat-bold font-18 title-blue">Clayton Ferreira da Silva</h5>
-                    <p class="function montserrat-regular font-16 mb-0">Diretora Geral do Sindicato Baiano</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12">
-            <div class="d-flex justify-content-start gap-3 align-items-center">
-                <div class="image">
-                    <img src="{{asset('build/client/images/user.png')}}" loading="lazy" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
-                </div>
-                <div class="description d-flex flex-column justify-content-center">
-                    <h5 class="mb-1 montserrat-bold font-18 title-blue">Clayton Ferreira da Silva</h5>
-                    <p class="function montserrat-regular font-16 mb-0">Diretora Geral do Sindicato Baiano</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12">
-            <div class="d-flex justify-content-start gap-3 align-items-center">
-                <div class="image">
-                    <img src="{{asset('build/client/images/user.png')}}" loading="lazy" class="rounded-circle" width="100" height="100" alt="Clayton Ferreira da Silva">
-                </div>
-                <div class="description d-flex flex-column justify-content-center">
-                    <h5 class="mb-1 montserrat-bold font-18 title-blue">Clayton Ferreira da Silva</h5>
-                    <p class="function montserrat-regular font-16 mb-0">Diretora Geral do Sindicato Baiano</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
+@endif
 @if (!empty($statute))
     <section id="statute" class="dark-background py-5">
     <div class="container">

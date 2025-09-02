@@ -6,6 +6,7 @@ use App\Models\About;
 use App\Models\Contact;
 use App\Models\Partner;
 use App\Models\Statute;
+use App\Models\Direction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +17,8 @@ class AboutPageController extends Controller
         $partners = Partner::active()->sorting()->get();
         $contact = Contact::first();
         $statute = Statute::first();
+        $directions = Direction::active()->sorting()->get();
 
-        return view('client.blades.about', compact('statute', 'contact', 'partners', 'abouts'));
+        return view('client.blades.about', compact('directions', 'statute', 'contact', 'partners', 'abouts'));
     }
 }

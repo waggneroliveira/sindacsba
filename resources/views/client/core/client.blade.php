@@ -209,6 +209,7 @@
                                         <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#{{$about->slug}}">{{$about->title}}</a></li>
                                     @endforeach
                                     <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#board">Equipe</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#statute">Estatuto</a></li>
                                 </ul>
                             </li>
 

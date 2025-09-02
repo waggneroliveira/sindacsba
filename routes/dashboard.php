@@ -32,6 +32,7 @@ use App\Http\Controllers\StackSessionTitleController;
 use App\Http\Controllers\Auth\PasswordEmailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BenefitTopicController;
+use App\Http\Controllers\DirectionController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PopUpController;
 use App\Http\Controllers\ReportController;
@@ -175,7 +176,7 @@ Route::prefix('painel/')->group(function () {
         Route::resource('estatuto', StatuteController::class)
         ->names('admin.dashboard.statute')
         ->parameters(['estatuto'=>'statute']);
-        //BENEFITtOPIC
+        //BENEFITTOPIC
         Route::resource('beneficios', BenefitTopicController::class)
         ->names('admin.dashboard.benefitTopic')
         ->parameters(['beneficios'=>'benefitTopic']);
@@ -191,6 +192,14 @@ Route::prefix('painel/')->group(function () {
         ->name('admin.dashboard.partner.destroySelected');
         Route::post('parceiros/sorting', [PartnerController::class, 'sorting'])
         ->name('admin.dashboard.partner.sorting');
+        //BLOG
+        Route::resource('a-direcao', DirectionController::class)
+        ->parameters(['a-direcao' => 'direction'])
+        ->names('admin.dashboard.direction');
+        Route::post('a-direcao/delete', [DirectionController::class, 'destroySelected'])
+        ->name('admin.dashboard.direction.destroySelected');
+        Route::post('a-direcao/sorting', [DirectionController::class, 'sorting'])
+        ->name('admin.dashboard.direction.sorting');
         //VIDEO
         Route::resource('videos', VideoController::class)
         ->names('admin.dashboard.video')
