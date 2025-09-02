@@ -40,7 +40,7 @@
                 @foreach($topics as $topic)                
                     <div class="col-12 col-sm-4 col-md-2 d-flex justify-content-center position-relative">
                         @if (isset($topic->link) && $topic->link <> null)                            
-                            <a href="{{$topic->link}}" target="_blank" class="position-absolute top-0 left-0 w-100 h-100" rel="noopener noreferrer"></a>
+                            <a href="{{$topic->link}}" class="position-absolute top-0 left-0 w-100 h-100" rel="noopener noreferrer"></a>
                         @endif
                         <div class="partner-card {{isset($topics) ? $topic->color : 'dark-background'}} border rounded-2 d-flex flex-column justify-content-center align-items-start gap-3 p-3 w-100">
                             <img src="{{ asset('storage/' . $topic->path_image) }}" 

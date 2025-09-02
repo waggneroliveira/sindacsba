@@ -960,6 +960,12 @@
  .complaint a{
     color: var(--background-red);
  }
+ .complaint img{
+    width:209px; 
+    height:205px;
+    object-fit:contain;
+    aspect-ratio:1/1;
+ }
  .partner-card{
     max-height: 110px;
     aspect-ratio: 1.91 / 1;

@@ -15,6 +15,7 @@ use App\Models\BenefitTopic;
 use Illuminate\Http\Request;
 use App\Models\StackSessionTitle;
 use App\Http\Controllers\Controller;
+use App\Models\Report;
 
 class HomePageController extends Controller
 {
@@ -34,8 +35,9 @@ class HomePageController extends Controller
         $videos = Video::active()->sorting()->get();
         $unionized = Unionized::active()->first();
         $benefitTopics = BenefitTopic::active()->sorting()->get();
+        $report = Report::active()->first();
 
-        return view('client.blades.index', compact('benefitTopics', 'unionized', 'videos', 'partners', 'about', 'slides', 'blogSuperHighlights', 'blogHighlights', 'announcements', 'topics'));
+        return view('client.blades.index', compact('report','benefitTopics', 'unionized', 'videos', 'partners', 'about', 'slides', 'blogSuperHighlights', 'blogHighlights', 'announcements', 'topics'));
     }
     
 }

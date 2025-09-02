@@ -33,6 +33,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BenefitTopicController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PopUpController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\UnionizedController;
 use App\Http\Controllers\VideoController;
@@ -160,6 +161,10 @@ Route::prefix('painel/')->group(function () {
         Route::resource('sindicalize-se', UnionizedController::class)
         ->names('admin.dashboard.unionized')
         ->parameters(['sindicalize-se'=>'unionized']);
+        //REPORT
+        Route::resource('denuncie', ReportController::class)
+        ->names('admin.dashboard.report')
+        ->parameters(['denuncie'=>'report']);
         //BENEFITtOPIC
         Route::resource('beneficios', BenefitTopicController::class)
         ->names('admin.dashboard.benefitTopic')
