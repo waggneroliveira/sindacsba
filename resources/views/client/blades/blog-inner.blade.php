@@ -277,7 +277,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 url: "{{ route('blog.comment') }}",
-                method: "blogInner",
+                // method: "blogInner",
+                method: "post",
                 data: formData,
                 success: function (response) {
                     showMessage(response.message, 'success');
