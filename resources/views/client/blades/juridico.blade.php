@@ -62,88 +62,63 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    // $(document).ready(function () {
-    //     // Evita reload ao enviar o form
-    //     $('#juridicoForm').on('submit', function(e) {
-    //         e.preventDefault();
-    //     });
+    let search = '';
+    let legal = 'leis'; // default
+    let region = 'nacional'; // default
 
-    //     // Captura digitação no campo de busca
-    //     $('#searchJuridico').on('keyup', function() {
-    //         let search = $(this).val();
-
-    //         $.ajax({
-    //             url: "{{ route('search-juridico') }}",
-    //             type: "GET",
-    //             data: { search: search },
-    //             success: function (html) {
-    //                 $('#juridicoResults').html(html);
-    //             },
-    //             error: function (xhr) {
-    //                 console.error(xhr);
-    //             }
-    //         });
-    //     });
-    // });
-
-let search = '';
-let legal = 'leis'; // default
-let region = 'nacional'; // default
-
-function loadResults() {
-    $.ajax({
-        url: "{{ route('search-juridico') }}",
-        type: "GET",
-        data: { search, legal, region },
-        success: function (response) {
-            $("#juridicoResults").html(response); // Certifique-se que o ID está correto
-        },
-        error: function () {
-            $("#juridicoResults").html('<p class="text-danger montserrat-bold font-16 text-center">Erro ao carregar resultados.</p>');
-        }
-    });
-}
-
-$(document).ready(function () {
-    // Lê parâmetro 'legal' da URL (ex: /juridico?legal=decretos)
-    const urlParams = new URLSearchParams(window.location.search);
-    const legalParam = urlParams.get('legal');
-    if (legalParam) {
-        legal = legalParam.toLowerCase();
+    function loadResults() {
+        $.ajax({
+            url: "{{ route('search-juridico') }}",
+            type: "GET",
+            data: { search, legal, region },
+            success: function (response) {
+                $("#juridicoResults").html(response); // Certifique-se que o ID está correto
+            },
+            error: function () {
+                $("#juridicoResults").html('<p class="text-danger montserrat-bold font-16 text-center">Erro ao carregar resultados.</p>');
+            }
+        });
     }
 
-    // Ativa o botão correspondente
-    $('.filter-esq .btn-juridico').removeClass('active');
-    $('.filter-esq .btn-juridico').each(function() {
-        if ($(this).text().toLowerCase() === legal) {
-            $(this).addClass('active');
+    $(document).ready(function () {
+        // Lê parâmetro 'legal' da URL (ex: /juridico?legal=decretos)
+        const urlParams = new URLSearchParams(window.location.search);
+        const legalParam = urlParams.get('legal');
+        if (legalParam) {
+            legal = legalParam.toLowerCase();
         }
-    });
 
-    // filtros
-    $(document).on('click', '.filter-esq .btn-juridico', function () {
+        // Ativa o botão correspondente
         $('.filter-esq .btn-juridico').removeClass('active');
-        $(this).addClass('active');
-        legal = $(this).text().toLowerCase();
+        $('.filter-esq .btn-juridico').each(function() {
+            if ($(this).text().toLowerCase() === legal) {
+                $(this).addClass('active');
+            }
+        });
+
+        // filtros
+        $(document).on('click', '.filter-esq .btn-juridico', function () {
+            $('.filter-esq .btn-juridico').removeClass('active');
+            $(this).addClass('active');
+            legal = $(this).text().toLowerCase();
+            loadResults();
+        });
+
+        $(document).on('click', '.filter-dir .btn-title-filter', function () {
+            $('.filter-dir .btn-title-filter').removeClass('active');
+            $(this).addClass('active');
+            region = $(this).text().toLowerCase();
+            loadResults();
+        });
+
+        // busca
+        $(document).on('keyup', '#searchJuridico', function () {
+            search = $(this).val();
+            loadResults();
+        });
+
+        // carrega resultados iniciais
         loadResults();
     });
-
-    $(document).on('click', '.filter-dir .btn-title-filter', function () {
-        $('.filter-dir .btn-title-filter').removeClass('active');
-        $(this).addClass('active');
-        region = $(this).text().toLowerCase();
-        loadResults();
-    });
-
-    // busca
-    $(document).on('keyup', '#searchJuridico', function () {
-        search = $(this).val();
-        loadResults();
-    });
-
-    // carrega resultados iniciais
-    loadResults();
-});
-
 </script>
 @endsection
