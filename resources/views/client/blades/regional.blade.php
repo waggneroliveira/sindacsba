@@ -79,4 +79,6 @@
     </section>
 
     @include('client.includes.complaint')
+
+    @include('client.includes.social')
 @endsection

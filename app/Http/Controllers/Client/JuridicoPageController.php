@@ -23,17 +23,19 @@ class JuridicoPageController extends Controller
         $region = $request->input('region');
   
         $juridicos = Juridico::when($search, function ($query, $search) {
-                $query->where('title', 'LIKE', "%{$search}%")
-                    ->orWhere('description', 'LIKE', "%{$search}%");
-            })
-            ->when($legal, function ($query, $legal) {
-                $query->where('legal', $legal);
-            })
-            ->when($region, function ($query, $region) {
-                $query->where('region', $region);
-            })
-            ->get();
-            
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'LIKE', "%{$search}%")
+                ->orWhere('description', 'LIKE', "%{$search}%");
+            });
+        })
+        ->when($legal, function ($query, $legal) {
+            $query->where('legal', $legal);
+        })
+        ->when($region, function ($query, $region) {
+            $query->where('region', $region);
+        })
+        ->get();
+        
         return view('client.ajax.juridico-ajax', compact('juridicos'));
     }
 }
