@@ -78,19 +78,15 @@ Route::get('home', [HomePageController::class, 'index'])->name('index');
 Route::get('sobre', [AboutPageController::class, 'index'])->name('about');
 Route::get('servicos-aos-sindicalizados', [BenefitPageController::class, 'index'])->name('unionized');
 Route::get('juridico', [JuridicoPageController::class, 'index'])->name('juridico');
+Route::get('juridico/search', [JuridicoPageController::class, 'searchJuridico'])->name('search-juridico');
 
 Route::get('/evento', function () {
     return view('client.blades.event');
 })->name('client.event');
-
-
 Route::get('/regionais', function () {
     return view('client.blades.regional');
 })->name('regional');
 
-// Route::get('/juridico', function () {
-//     return view('client.blades.juridico');
-// })->name('juridico');
 
 
 View::composer('client.core.client', function ($view) {
