@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
-use App\Models\Noticies;
+use App\Models\Juridico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -11,14 +11,12 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 use RealRashid\SweetAlert\Facades\Alert;
-use App\Http\Requests\NoticiesRequestStore;
-use App\Http\Requests\NoticiesRequestUpdate;
 use App\Repositories\SettingThemeRepository;
 use App\Http\Controllers\Helpers\HelperArchive;
 
-class NoticiesController extends Controller
+class JuridicoController extends Controller
 {
-    protected $pathUpload = 'admin/uploads/files/noticies/';
+    protected $pathUpload = 'admin/uploads/files/juridico/';
     public function index()
     {
         $settingTheme = (new SettingThemeRepository())->settingTheme();
@@ -27,12 +25,12 @@ class NoticiesController extends Controller
           !Auth::user()->hasPermissionTo('editais.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
-        $noticies = Noticies::sorting()->get();
+        $juridicos = Juridico::sorting()->get();
        
-        return view('admin.blades.noticies.index', compact('noticies'));
+        return view('admin.blades.juridico.index', compact('juridicos'));
     }
 
-    public function store(NoticiesRequestStore $request)
+    public function store(Request $request)
     {
         $data = $request->all();
         $data['active'] = $request->active?1:0;
@@ -48,7 +46,7 @@ class NoticiesController extends Controller
 
         try {
             DB::beginTransaction();
-                if(!Noticies::create($data)){                    
+                if(!Juridico::create($data)){                    
                     Storage::delete($this->pathUpload . $path_file);
                     throw new Exception();
                 }
@@ -56,13 +54,14 @@ class NoticiesController extends Controller
             session()->flash('success', __('dashboard.response_item_create'));
             return redirect()->back();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollback();
             Alert::error('error', __('dashboard.response_item_error_create'));
             return redirect()->back();
         }
     }
 
-    public function update(NoticiesRequestUpdate $request, Noticies $noticies)
+    public function update(Request $request, Juridico $juridico)
     {
         $data = $request->all();
         $data['active'] = $request->active?1:0;
@@ -74,17 +73,17 @@ class NoticiesController extends Controller
         }
         if ($path_file) {
             $request->file('path_file')->storeAs($this->pathUpload, $path_file);
-            Storage::delete($noticies->path_file);
+            Storage::delete($juridico->path_file);
         }
         if(isset($request->delete_path_file) && !$path_file){
             $inputFile = $request->delete_path_file;
-            Storage::delete($noticies->$inputFile);
+            Storage::delete($juridico->$inputFile);
             $data['path_file'] = null;
         }
 
         try {
             DB::beginTransaction();
-                $noticies->fill($data)->save();
+                $juridico->fill($data)->save();
                 if ($path_file) {
                     Storage::delete($this->pathUpload . $path_file);
                 }
@@ -101,42 +100,45 @@ class NoticiesController extends Controller
         }
     }
 
-    public function destroy(Noticies $noticies)
+    public function destroy(Juridico $juridico)
     {
-        Storage::delete(isset($noticies->path_file)??$noticies->path_file);
-        $noticies->delete();
+        Storage::delete(isset($juridico->path_file)??$juridico->path_file);
+        $juridico->delete();
         Session::flash('success',__('dashboard.response_item_delete'));
         return redirect()->back();
     }
 
-    public function destroySelected(Request $request)
+        public function destroySelected(Request $request)
     {    
-        foreach ($request->deleteAll as $noticiesId) {
-            $noticies = Noticies::find($noticiesId);
+        foreach ($request->deleteAll as $juridicoId) {
+            $juridico = Juridico::find($juridicoId);
     
-            if ($noticies) {
+            if ($juridico) {
                 activity()
                     ->causedBy(Auth::user())
-                    ->performedOn($noticies)
+                    ->performedOn($juridico)
                     ->event('multiple_deleted')
                     ->withProperties([
                         'attributes' => [
-                            'id' => $noticiesId,
-                            'title' => $noticies->title,
-                            'data' => $noticies->date,
-                            'path_file' => $noticies->path_file,
-                            'sorting' => $noticies->sorting,
-                            'active' => $noticies->active,
+                            'id' => $juridicoId,
+                            'title' => $juridico->title,
+                            'link' => $juridico->link,
+                            'legal' => $juridico->legal,
+                            'region' => $juridico->region,
+                            'description' => $juridico->description,
+                            'path_file' => $juridico->path_file,
+                            'sorting' => $juridico->sorting,
+                            'active' => $juridico->active,
                             'event' => 'multiple_deleted',
                         ]
                     ])
                     ->log('multiple_deleted');
             } else {
-                \Log::warning("Item com ID $noticiesId não encontrado.");
+                \Log::warning("Item com ID $juridicoId não encontrado.");
             }
         }
     
-        $deleted = Noticies::whereIn('id', $request->deleteAll)->delete();
+        $deleted = Juridico::whereIn('id', $request->deleteAll)->delete();
     
         if ($deleted) {
             return Response::json(['status' => 'success', 'message' => $deleted . ' '.__('dashboard.response_item_delete')]);
@@ -148,28 +150,31 @@ class NoticiesController extends Controller
     public function sorting(Request $request)
     {
         foreach($request->arrId as $sorting => $id) {
-            $noticies = Noticies::find($id);
+            $juridico = Juridico::find($id);
     
-            if ($noticies) {
-                $noticies->sorting = $sorting;
-                $noticies->save();
+            if ($juridico) {
+                $juridico->sorting = $sorting;
+                $juridico->save();
             } else {
                 Log::warning("Item com ID $id não encontrado.");
             }
 
-            if($noticies) {
+            if($juridico) {
                 activity()
                     ->causedBy(Auth::user())
-                    ->performedOn($noticies)
+                    ->performedOn($juridico)
                     ->event('order_updated')
                     ->withProperties([
                         'attributes' => [
                             'id' => $id,
-                            'title' => $noticies->title,
-                            'data' => $noticies->date,
-                            'path_file' => $noticies->path_file,
-                            'sorting' => $noticies->sorting,
-                            'active' => $noticies->active,
+                            'title' => $juridico->title,
+                            'link' => $juridico->link,
+                            'legal' => $juridico->legal,
+                            'region' => $juridico->region,
+                            'description' => $juridico->description,
+                            'path_file' => $juridico->path_file,
+                            'sorting' => $juridico->sorting,
+                            'active' => $juridico->active,
                             'event' => 'order_updated',
                         ]
                     ])

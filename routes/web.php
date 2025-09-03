@@ -16,11 +16,12 @@ use App\Http\Controllers\Auth\AuthClientController;
 use App\Http\Controllers\Client\BlogPageController;
 use App\Http\Controllers\Client\HomePageController;
 use App\Http\Controllers\Client\AboutPageController;
+use App\Http\Controllers\Client\BenefitPageController;
 use App\Http\Controllers\Client\ContactPageController;
+use App\Http\Controllers\Client\JuridicoPageController;
 use App\Http\Controllers\Client\NoticiesPageController;
 use App\Http\Controllers\Auth\PasswordEmailClientController;
 use App\Http\Controllers\Auth\ResetPasswordClientController;
-use App\Http\Controllers\Client\BenefitPageController;
 
 require __DIR__ . '/dashboard.php';
 
@@ -76,6 +77,7 @@ Route::post('cliente/cadastro', [ClientController::class, 'store'])->name('regis
 Route::get('home', [HomePageController::class, 'index'])->name('index');
 Route::get('sobre', [AboutPageController::class, 'index'])->name('about');
 Route::get('servicos-aos-sindicalizados', [BenefitPageController::class, 'index'])->name('unionized');
+Route::get('juridico', [JuridicoPageController::class, 'index'])->name('juridico');
 
 Route::get('/evento', function () {
     return view('client.blades.event');
@@ -86,9 +88,9 @@ Route::get('/regionais', function () {
     return view('client.blades.regional');
 })->name('regional');
 
-Route::get('/juridico', function () {
-    return view('client.blades.juridico');
-})->name('juridico');
+// Route::get('/juridico', function () {
+//     return view('client.blades.juridico');
+// })->name('juridico');
 
 
 View::composer('client.core.client', function ($view) {

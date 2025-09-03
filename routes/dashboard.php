@@ -33,6 +33,7 @@ use App\Http\Controllers\Auth\PasswordEmailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BenefitTopicController;
 use App\Http\Controllers\DirectionController;
+use App\Http\Controllers\JuridicoController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PopUpController;
 use App\Http\Controllers\ReportController;
@@ -192,6 +193,14 @@ Route::prefix('painel/')->group(function () {
         ->name('admin.dashboard.partner.destroySelected');
         Route::post('parceiros/sorting', [PartnerController::class, 'sorting'])
         ->name('admin.dashboard.partner.sorting');
+        //JURIDICO
+        Route::resource('juridico', JuridicoController::class)
+        ->names('admin.dashboard.juridico')
+        ->parameters(['juridico'=>'juridico']);
+        Route::post('juridico/delete', [JuridicoController::class, 'destroySelected'])
+        ->name('admin.dashboard.juridico.destroySelected');
+        Route::post('juridico/sorting', [JuridicoController::class, 'sorting'])
+        ->name('admin.dashboard.juridico.sorting');
         //BLOG
         Route::resource('a-direcao', DirectionController::class)
         ->parameters(['a-direcao' => 'direction'])
