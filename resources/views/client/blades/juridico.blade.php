@@ -86,9 +86,9 @@
     //     });
     // });
 
-    let search = '';
-let legal = 'leis';
-let region = 'nacional';
+let search = '';
+let legal = 'leis'; // default
+let region = 'nacional'; // default
 
 function loadResults() {
     $.ajax({
@@ -96,15 +96,30 @@ function loadResults() {
         type: "GET",
         data: { search, legal, region },
         success: function (response) {
-            $("#juridicoResults").html(response); // Note: #juridicoResults, não #juridico-results
+            $("#juridicoResults").html(response); // Certifique-se que o ID está correto
         },
         error: function () {
-            $("#juridicoResults").html('<p class="text-danger text-center">Erro ao carregar resultados.</p>');
+            $("#juridicoResults").html('<p class="text-danger montserrat-bold font-16 text-center">Erro ao carregar resultados.</p>');
         }
     });
 }
 
 $(document).ready(function () {
+    // Lê parâmetro 'legal' da URL (ex: /juridico?legal=decretos)
+    const urlParams = new URLSearchParams(window.location.search);
+    const legalParam = urlParams.get('legal');
+    if (legalParam) {
+        legal = legalParam.toLowerCase();
+    }
+
+    // Ativa o botão correspondente
+    $('.filter-esq .btn-juridico').removeClass('active');
+    $('.filter-esq .btn-juridico').each(function() {
+        if ($(this).text().toLowerCase() === legal) {
+            $(this).addClass('active');
+        }
+    });
+
     // filtros
     $(document).on('click', '.filter-esq .btn-juridico', function () {
         $('.filter-esq .btn-juridico').removeClass('active');
@@ -126,8 +141,9 @@ $(document).ready(function () {
         loadResults();
     });
 
-    // carrega inicial
+    // carrega resultados iniciais
     loadResults();
 });
+
 </script>
 @endsection

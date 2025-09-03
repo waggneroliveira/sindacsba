@@ -239,10 +239,11 @@
                                     Jurídico <i class="bi bi-chevron-down"></i>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="juridicoDropdown">
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('juridico')}}">Consultas</a></li>
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('juridico')}}">Processos</a></li>
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('juridico')}}">Orientações</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{ route('juridico', ['legal' => 'leis']) }}">Leis</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{ route('juridico', ['legal' => 'decretos']) }}">Decretos</a></li>
+                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{ route('juridico', ['legal' => 'portaria']) }}">Portaria</a></li>
                                 </ul>
+
                             </li>
 
                             <li><a href="{{route('regional')}}" class="nav-link montserrat-medium text-center font-18">Regionais</a></li>
