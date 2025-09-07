@@ -36,6 +36,7 @@ use App\Http\Controllers\DirectionController;
 use App\Http\Controllers\JuridicoController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PopUpController;
+use App\Http\Controllers\RegionalController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StatuteController;
 use App\Http\Controllers\TopicController;
@@ -154,6 +155,14 @@ Route::prefix('painel/')->group(function () {
         ->name('admin.dashboard.blogCategory.destroySelected');
         Route::post('categoria-do-blog/sorting', [BlogCategoryController::class, 'sorting'])
         ->name('admin.dashboard.blogCategory.sorting');
+        //CATEGORIA BLOG
+        Route::resource('regionais', RegionalController::class)
+        ->parameters(['regionais' => 'regional'])
+        ->names('admin.dashboard.regional');
+        Route::post('regionais/delete', [RegionalController::class, 'destroySelected'])
+        ->name('admin.dashboard.regional.destroySelected');
+        Route::post('regionais/sorting', [RegionalController::class, 'sorting'])
+        ->name('admin.dashboard.regional.sorting');
         //SLIDES
         Route::resource('slides', SlideController::class)
         ->names('admin.dashboard.slide')
