@@ -669,8 +669,8 @@
                 <div class="copyright">
                     <p id="footer-text" class="montserrat-regular font-16 text-start text-white mb-0"></p>  
                     <script defer>
-                        const currentYear = (new Date).getFullYear();
-                        document.getElementById("footer-text").innerHTML = `Copyright© ${currentYear} <span> SINDAC todos os direitos reservados.</span>`
+                        const currentYeaar = (new Date).getFullYear();
+                        document.getElementById("footer-text").innerHTML = `Copyright© ${currentYeaar} <span> SINDAC todos os direitos reservados.</span>`
                     </script>
                 </div>
                 <div class=credits>

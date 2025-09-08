@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\AboutController;
-use App\Http\Controllers\AgreementController;
 use App\Models\User;
+use App\Models\Event;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -11,38 +10,41 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\PopUpController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\StackController;
+use App\Http\Controllers\TopicController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\ReportController;
 use App\Repositories\AuditCountRepository;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\StatuteController;
+use App\Http\Controllers\JuridicoController;
 use App\Http\Controllers\NoticiesController;
+use App\Http\Controllers\RegionalController;
 use App\Repositories\SettingThemeRepository;
+use App\Http\Controllers\AgreementController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DirectionController;
 use App\Http\Controllers\FormIndexController;
+use App\Http\Controllers\UnionizedController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\BenefitTopicController;
 use App\Http\Controllers\BlogCategoryController;
+use App\Http\Controllers\MunicipalityController;
 use App\Http\Controllers\SettingEmailController;
 use App\Http\Controllers\SettingThemeController;
 use App\Http\Controllers\AuditActivityController;
 use App\Http\Controllers\StackSessionTitleController;
 use App\Http\Controllers\Auth\PasswordEmailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\BenefitTopicController;
-use App\Http\Controllers\DirectionController;
-use App\Http\Controllers\JuridicoController;
-use App\Http\Controllers\MunicipalityController;
-use App\Http\Controllers\PartnerController;
-use App\Http\Controllers\PopUpController;
-use App\Http\Controllers\RegionalController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\StatuteController;
-use App\Http\Controllers\TopicController;
-use App\Http\Controllers\UnionizedController;
-use App\Http\Controllers\VideoController;
 
 Route::get('painel/', function () {
     return redirect()->route('admin.dashboard.painel');
@@ -219,7 +221,7 @@ Route::prefix('painel/')->group(function () {
         ->name('admin.dashboard.juridico.destroySelected');
         Route::post('juridico/sorting', [JuridicoController::class, 'sorting'])
         ->name('admin.dashboard.juridico.sorting');
-        //BLOG
+        //DIRECTION
         Route::resource('a-direcao', DirectionController::class)
         ->parameters(['a-direcao' => 'direction'])
         ->names('admin.dashboard.direction');
@@ -245,6 +247,14 @@ Route::prefix('painel/')->group(function () {
         ->name('admin.dashboard.about.sorting');
         Route::post('blog/uploadImageCkeditorAbout', [AboutController::class, 'uploadImageCkeditorAbout'])
         ->name('admin.dashboard.about.uploadImageCkeditorAbout');
+        //EVENT
+        Route::resource('eventos', EventController::class)
+        ->names('admin.dashboard.event')
+        ->parameters(['eventos'=>'event']);
+        Route::post('eventos/delete', [EventController::class, 'destroySelected'])
+        ->name('admin.dashboard.event.destroySelected');
+        Route::post('eventos/sorting', [EventController::class, 'sorting'])
+        ->name('admin.dashboard.event.sorting');
         //TOPIC
         Route::resource('topicos', TopicController::class)
         ->names('admin.dashboard.topic')

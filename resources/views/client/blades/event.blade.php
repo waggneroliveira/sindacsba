@@ -40,6 +40,14 @@
         flex-direction: row;
         flex-wrap: wrap;
     }
+    
+    /* Estilo para evento destacado */
+    .event-item.highlighted {
+        background-color: #E6E8F8 !important;
+        border-left: 4px solid #2F368B !important;
+        padding-left: 10px;
+        transition: all 0.3s ease;
+    }
 }
 </style>
 
@@ -56,25 +64,97 @@
 </div>
 
 <script>
-    const events = [
-        { date: '2025-08-10', title: 'Reunião com Cliente na semana que vem', hours: '18:30', description: 'Discussão do projeto X', link: '#' },
-        { date: '2025-08-10', title: 'Justiça nomeia perita contábil em processo de insalubridade dos Agentes de Combate às Endemias do município de Salvador', hours: '18:30', description: 'Discussão do projeto X', link: '#' },
-        { date: '2025-08-13', title: 'Revisão do Contrato', hours: '18:30', description: 'Revisão de termos com equipe jurídica', link: '#' },
-        { date: '2025-08-15', title: 'Entrega do Relatório', hours: '18:30', description: 'Finalização do relatório mensal', link: '#' },
-        { date: '2025-08-19', title: 'Reunião com Cliente na semana que vem 01', hours: '18:30', description: 'Discussão do projeto X', link: '#' },
-        { date: '2025-08-20', title: 'Workshop', hours: '18:30', description: 'Treinamento interno', link: '#' }
-    ];
-
-    const holidays = [
-        { date: '2025-08-07', name: 'Dia da Independência' },
-        { date: '2025-09-21', name: 'Feriado Municipal' }
-    ];
+    document.addEventListener('DOMContentLoaded', function() {
+    // Dados passados pelo controller
+    const events = @json($events);
+    const holidays = @json($holidays);
 
     let currentMonth = new Date().getMonth();
     let currentYear = new Date().getFullYear();
 
     const calendarEl = document.getElementById('calendar');
     const eventsListEl = document.getElementById('events-list');
+
+    // Verificar se há parâmetros na URL
+    const urlParams = new URLSearchParams(window.location.search);
+    // const eventId = urlParams.get('event_id');
+    const eventId = @json($eventId);
+    const shouldScroll = urlParams.get('scroll') === 'true';
+
+    // Adicione esta função após a definição das variáveis
+function navigateToEventMonth(eventId) {
+    const event = events.find(e => e.id == eventId);
+    if (event) {
+        const eventDate = new Date(event.date);
+        currentMonth = eventDate.getMonth();
+        currentYear = eventDate.getFullYear();
+        renderCalendar(currentMonth, currentYear);
+        
+        // Destacar o dia do evento
+        setTimeout(() => {
+            const dayElements = document.querySelectorAll('.day');
+            dayElements.forEach(dayEl => {
+                const dayNumber = dayEl.querySelector('.day-number').textContent;
+                const fullDate = `${currentYear}-${String(currentMonth+1).padStart(2,'0')}-${String(dayNumber).padStart(2,'0')}`;
+                
+                if (fullDate === event.date) {
+                    // Simular clique no dia do evento
+                    dayEl.click();
+                }
+            });
+        }, 500);
+    }
+}
+
+// Modifique a inicialização para usar esta função
+document.addEventListener('DOMContentLoaded', function() {
+    // ... resto do código ...
+    
+    // Inicializar o calendário
+    renderCalendar(currentMonth, currentYear);
+    
+    // Se há um event_id, navegar para o mês do evento
+    if (eventId && shouldScroll) {
+        navigateToEventMonth(eventId);
+    }
+});
+
+    // Função para rolar até um evento específico
+    function scrollToEvent(eventId) {
+        console.log('Tentando rolar para o evento:', eventId);
+        const elementId = `event-${eventId}`;
+        console.log('Procurando elemento com ID:', elementId);
+        
+        const eventElement = document.getElementById(elementId);
+        
+        if (eventElement) {
+            console.log('Elemento do evento encontrado:', eventElement);
+            // Destacar o evento
+            eventElement.classList.add('highlighted');
+            
+            // Rolar até o elemento
+            eventElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Remover o destaque após 5 segundos
+            setTimeout(() => {
+                eventElement.classList.remove('highlighted');
+            }, 5000);
+            
+            // Limpar o parâmetro scroll da URL para evitar repetição
+            if (history.replaceState && shouldScroll) {
+                const newUrl = window.location.protocol + "//" + window.location.host + 
+                            window.location.pathname + 
+                            window.location.search.replace(/&scroll=true|scroll=true/, '');
+                history.replaceState({}, document.title, newUrl);
+            }
+        } else {
+            console.log('Elemento do evento não encontrado com ID:', elementId);
+            console.log('Todos os elementos de evento na página:');
+            document.querySelectorAll('.event-item').forEach(item => {
+                console.log('Elemento:', item, 'ID:', item.id);
+            });
+        }
+    }
 
     function renderCalendar(month, year) {
         calendarEl.innerHTML = '';
@@ -180,7 +260,6 @@
             });
 
             calendarEl.appendChild(dayEl);
-
         }
 
         // Render feriados do mês vigente
@@ -188,6 +267,17 @@
 
         // Lista eventos do mês
         renderEventsMonth(month, year);
+
+        // Adicionar botão "Ver todos os eventos" se estiver filtrado por um evento
+        if (eventId) {
+            const backButton = document.createElement('button');
+            backButton.textContent = 'Ver todos os eventos';
+            backButton.className = 'btn background-red montserrat-semiBold font-15 text-white mt-3';
+            backButton.onclick = () => {
+                window.location.href = window.location.pathname; // Remove parâmetros da URL
+            };
+            eventsListEl.appendChild(backButton);
+        }
     }
 
     function renderHolidays(month, year) {
@@ -195,9 +285,13 @@
         const oldBlock = document.getElementById('holidays-block');
         if (oldBlock) oldBlock.remove();
 
+        // Corrigido: usar UTC para evitar problemas de fuso horário
         const monthHolidays = holidays.filter(h => {
-            const date = new Date(h.date);
-            return date.getMonth() === month && date.getFullYear() === year;
+            const dateParts = h.date.split('-');
+            const holidayMonth = parseInt(dateParts[1]) - 1; // Mês é 0-indexed no JS
+            const holidayYear = parseInt(dateParts[0]);
+            
+            return holidayMonth === month && holidayYear === year;
         });
 
         if (monthHolidays.length > 0) {
@@ -215,23 +309,44 @@
             // insere antes da lista de eventos
             eventsListEl.parentNode.insertBefore(block, eventsListEl);
         }
-
     }
 
     function renderEventsMonth(month, year) {
         eventsListEl.innerHTML = '';
-        const monthEvents = events.filter(e => {
-            const date = new Date(e.date);
-            return date.getMonth() === month && date.getFullYear() === year;
-        });
+        
+        // Filtrar eventos - se há um event_id, mostrar apenas esse evento
+        let monthEvents;
+        if (eventId) {
+            monthEvents = events.filter(e => {
+                const eventIdValue = parseInt(e.id) || e.id;
+                return eventIdValue == eventId;
+            });
+        } else {
+            // Mostrar todos os eventos do mês
+            monthEvents = events.filter(e => {
+                const dateParts = e.date.split('-');
+                const eventMonth = parseInt(dateParts[1]) - 1;
+                const eventYear = parseInt(dateParts[0]);
+                
+                return eventMonth === month && eventYear === year;
+            });
+        }
 
         monthEvents.forEach(e => {
             const div = document.createElement('div');
             div.className = 'event-item';
+            
+            // Usar o ID do evento corretamente
+            const eventIdValue = parseInt(e.id) || e.id;
+            div.id = `event-${eventIdValue}`;
+            
+            const linkHtml = e.link ? `<a href="${e.link}">Acessar</a>` : '';
+            
             div.innerHTML = `
-                <strong>${formatDateLocal(e.date)}</strong> - <span>${e.hours}</span> <br> <h4>${e.title}</h4>
+                <strong>${formatDateLocal(e.date)}</strong> - <span style="color:#6c757d;">${e.hours}</span> <br> 
+                <h4>${e.title}</h4>
                 <div class="description">${e.description}</div> <br>
-                <a href="${e.link}">Acessar</a>
+                ${linkHtml}
             `;
             eventsListEl.appendChild(div);
         });
@@ -239,7 +354,13 @@
         if (monthEvents.length === 0) {
             eventsListEl.innerHTML = '<p>Nenhum evento neste mês.</p>';
         }
+        
+        // Se há um event_id, rolar até o evento
+        if (eventId && shouldScroll) {
+            setTimeout(() => scrollToEvent(eventId), 1000);
+        }
     }
+
 
     function formatDateLocal(dateStr) {
         const parts = dateStr.split('-'); // "2025-08-15" => ["2025","08","15"]
@@ -248,7 +369,17 @@
     }
 
     function renderEvents(date) {
-        const dayEvents = events.filter(e => e.date === date);
+        // Filtrar eventos - se há um event_id, mostrar apenas esse evento
+        let dayEvents;
+        if (eventId) {
+            dayEvents = events.filter(e => {
+                const eventIdValue = parseInt(e.id) || e.id;
+                return eventIdValue == eventId && e.date === date;
+            });
+        } else {
+            dayEvents = events.filter(e => e.date === date);
+        }
+        
         eventsListEl.innerHTML = '';
 
         if(dayEvents.length === 0) {
@@ -259,16 +390,29 @@
         dayEvents.forEach(e => {
             const div = document.createElement('div');
             div.className = 'event-item';
+            
+            const eventIdValue = parseInt(e.id) || e.id;
+            div.id = `event-${eventIdValue}`;
+            
+            const linkHtml = e.link ? `<a href="${e.link}">Acessar</a>` : '';
+            
             div.innerHTML = `
-                <strong>${formatDateLocal(e.date)}</strong> - <span>${e.hours}</span> <br> <h4>${e.title}</h4>
+                <strong>${formatDateLocal(e.date)}</strong> - <span style="color:#6c757d;">${e.hours}</span> <br> 
+                <h4>${e.title}</h4>
                 <div class="description">${e.description}</div> <br>
-                <a href="${e.link}">Acessar</a>
+                ${linkHtml}
             `;
+            
             eventsListEl.appendChild(div);
         });
+        
+        // Se há um event_id, rolar até o evento
+        if (eventId && shouldScroll) {
+            setTimeout(() => scrollToEvent(eventId), 1000);
+        }
     }
 
-    function prevMonth() {
+    window.prevMonth = function() {
         currentMonth--;
         if(currentMonth < 0) {
             currentMonth = 11;
@@ -277,7 +421,7 @@
         renderCalendar(currentMonth, currentYear);
     }
 
-    function nextMonth() {
+    window.nextMonth = function() {
         currentMonth++;
         if(currentMonth > 11) {
             currentMonth = 0;
@@ -286,6 +430,8 @@
         renderCalendar(currentMonth, currentYear);
     }
 
+    // Inicializar o calendário
     renderCalendar(currentMonth, currentYear);
+});
 </script>
 @endsection

@@ -22,6 +22,7 @@ use App\Http\Controllers\Client\JuridicoPageController;
 use App\Http\Controllers\Client\NoticiesPageController;
 use App\Http\Controllers\Auth\PasswordEmailClientController;
 use App\Http\Controllers\Auth\ResetPasswordClientController;
+use App\Http\Controllers\Client\EventPageController;
 use App\Http\Controllers\Client\RegionPageController;
 
 require __DIR__ . '/dashboard.php';
@@ -83,10 +84,11 @@ Route::get('juridico/search', [JuridicoPageController::class, 'searchJuridico'])
 Route::get('regionais', [RegionPageController::class, 'index'])->name('regional');
 Route::post('regionais/filter-municipalities', [RegionPageController::class, 'filterMunicipalities'])
 ->name('client.filter.municipalities');
+Route::get('eventos', [EventPageController::class, 'index'])->name('client.event');
 
-Route::get('/evento', function () {
-    return view('client.blades.event');
-})->name('client.event');
+// Route::get('/evento', function () {
+//     return view('client.blades.event');
+// })->name('client.event');
 
 
 View::composer('client.core.client', function ($view) {

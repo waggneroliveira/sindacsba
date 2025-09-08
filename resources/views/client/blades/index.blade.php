@@ -319,23 +319,33 @@
                 </div>
 
                 <div class="bg-white p-3">      
-                    @for ($art = 0; $art < 5; $art++)                        
+                    @foreach($events as $event)                        
                         <article>
                             <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 80px;">
                                 <div class="date col-4 h-100 d-flex justify-content-center align-items-center flex-column border border-right-1">
-                                    <span class="montserrat-bold w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue">02</span>
-                                    <span class="montserrat-medium w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue background-red text-white">Dezembro</span>
+                                    <span class="montserrat-bold w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue">
+                                        {{ \Carbon\Carbon::parse($event->date)->format('d') }}
+                                    </span>
+                                    <span class="montserrat-medium w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue background-red text-white">
+                                        {{ ucfirst(\Carbon\Carbon::parse($event->date)->translatedFormat('F')) }}
+                                    </span>
                                 </div>
                                 <div class="col-8 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                    <a href="" class="underline">
-                                    <h3 class="h6 m-0 montserrat-bold font-14 title-blue">Eleição Sindacs BA novo presidente 2025</h3>
+                                    @if($event->link)
+                                        <a href="{{ $event->link }}" class="underline">
+                                    @else
+                                        <a href="{{ route('client.event') }}?event_id={{ $event->id }}&scroll=true" class="underline">
+                                    @endif
+                                        <h3 class="h6 m-0 montserrat-bold font-14 title-blue" title="{{$event->title}}">
+                                            {{ substr(strip_tags($event->title), 0, 50) }}...
+                                        </h3>
                                     </a>
                                 </div>
                             </div>
                         </article>
-                    @endfor  
+                    @endforeach              
                     <div class="btn-about d-table m-auto mt-5">
-                        <a href="{{route('about')}}" class="background-red montserrat-semiBold font-18 py-2 px-4 rounded-5">Ver todos</a>
+                        <a href="{{route('client.event')}}" class="background-red montserrat-semiBold font-18 py-2 px-4 rounded-5">Ver todos</a>
                     </div>                      
                 </div>
             </div>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Client;
 
+use Carbon\Carbon;
 use App\Models\Blog;
 use App\Models\About;
+use App\Models\Event;
 use App\Models\Slide;
 use App\Models\Stack;
 use App\Models\Topic;
@@ -38,8 +40,15 @@ class HomePageController extends Controller
         $benefitTopics = BenefitTopic::active()->sorting()->get();
         $report = Report::active()->first();
         $contact = Contact::first();
+        $startOfWeek = Carbon::now()->startOfWeek(Carbon::SUNDAY); // começa no domingo
+        $endOfWeek   = Carbon::now()->endOfWeek(Carbon::SATURDAY); // termina no sábado
 
-        return view('client.blades.index', compact('contact', 'report','benefitTopics', 'unionized', 'videos', 'partners', 'about', 'slides', 'blogSuperHighlights', 'blogHighlights', 'announcements', 'topics'));
+        $events = Event::active()
+        ->whereBetween('date', [$startOfWeek, $endOfWeek])
+        ->orderBy('date', 'asc')
+        ->get();
+
+        return view('client.blades.index', compact('events', 'contact', 'report','benefitTopics', 'unionized', 'videos', 'partners', 'about', 'slides', 'blogSuperHighlights', 'blogHighlights', 'announcements', 'topics'));
     }
     
 }
