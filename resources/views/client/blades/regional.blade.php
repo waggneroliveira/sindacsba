@@ -17,13 +17,9 @@
         <div class="bg-light py-5">
             <div class="container">
                 <div class="col-11 col-lg-12 d-flex flex-wrap gap-3 justify-content-center">
-                    <button class="px-3 montserrat-bold text-uppercase font-18 btn btn-region active">REGIONAL RECÔNCAVO</button>
-                    <button class="px-3 montserrat-bold text-uppercase font-18 btn btn-region">REGIONAL NORTE</button>
-                    <button class="px-3 montserrat-bold text-uppercase font-18 btn btn-region">REGIONAL SEMI ÁRIDO</button>
-                    <button class="px-3 montserrat-bold text-uppercase font-18 btn btn-region">REGIONAL NORDESTE</button>
-                    <button class="px-3 montserrat-bold text-uppercase font-18 btn btn-region">REGIONAL LESTE</button>
-                    <button class="px-3 montserrat-bold text-uppercase font-18 btn btn-region">REGIONAL SUDOESTE</button>
-                    <button class="px-3 montserrat-bold text-uppercase font-18 btn btn-region">REGIONAL LOREM</button>
+                    @foreach ($regionais as $regional)                        
+                        <button class="px-3 montserrat-bold text-uppercase font-18 btn btn-region active">{{$regional->title}}</button>
+                    @endforeach
                 </div>            
             </div>
         </div>
