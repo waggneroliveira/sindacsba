@@ -1113,6 +1113,14 @@
      color: var(--heading-color);
      font-family: var(--heading-font)
  }
+ .loading-spinner {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+ .text-blue{
+    color: var(--background-blue);
+ }
  .board .image{
     aspect-ratio: 1/1;
     width: 90px;

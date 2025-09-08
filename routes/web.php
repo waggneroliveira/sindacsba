@@ -81,6 +81,8 @@ Route::get('servicos-aos-sindicalizados', [BenefitPageController::class, 'index'
 Route::get('juridico', [JuridicoPageController::class, 'index'])->name('juridico');
 Route::get('juridico/search', [JuridicoPageController::class, 'searchJuridico'])->name('search-juridico');
 Route::get('regionais', [RegionPageController::class, 'index'])->name('regional');
+Route::post('regionais/filter-municipalities', [RegionPageController::class, 'filterMunicipalities'])
+->name('client.filter.municipalities');
 
 Route::get('/evento', function () {
     return view('client.blades.event');

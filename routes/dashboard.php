@@ -34,6 +34,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BenefitTopicController;
 use App\Http\Controllers\DirectionController;
 use App\Http\Controllers\JuridicoController;
+use App\Http\Controllers\MunicipalityController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PopUpController;
 use App\Http\Controllers\RegionalController;
@@ -155,7 +156,7 @@ Route::prefix('painel/')->group(function () {
         ->name('admin.dashboard.blogCategory.destroySelected');
         Route::post('categoria-do-blog/sorting', [BlogCategoryController::class, 'sorting'])
         ->name('admin.dashboard.blogCategory.sorting');
-        //CATEGORIA BLOG
+        //REGIONAIS
         Route::resource('regionais', RegionalController::class)
         ->parameters(['regionais' => 'regional'])
         ->names('admin.dashboard.regional');
@@ -163,6 +164,14 @@ Route::prefix('painel/')->group(function () {
         ->name('admin.dashboard.regional.destroySelected');
         Route::post('regionais/sorting', [RegionalController::class, 'sorting'])
         ->name('admin.dashboard.regional.sorting');
+        //MUNICIPALITY
+        Route::resource('municipios', MunicipalityController::class)
+        ->parameters(['municipios' => 'municipality'])
+        ->names('admin.dashboard.municipality');
+        Route::post('municipios/delete', [MunicipalityController::class, 'destroySelected'])
+        ->name('admin.dashboard.municipality.destroySelected');
+        Route::post('municipios/sorting', [MunicipalityController::class, 'sorting'])
+        ->name('admin.dashboard.municipality.sorting');
         //SLIDES
         Route::resource('slides', SlideController::class)
         ->names('admin.dashboard.slide')
