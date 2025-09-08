@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Report;
+use App\Models\Contact;
 use App\Models\Holidays;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class EventPageController extends Controller
 {
     public function index(Request $request){
+        $report = Report::active()->first();
+        $contact = Contact::first();
         $eventId = $request->query('event_id');
         
         // Consulta base
@@ -49,6 +53,6 @@ class EventPageController extends Controller
             ];
         });
 
-        return view('client.blades.event', compact('events', 'holidays', 'eventId'));
+        return view('client.blades.event', compact('contact', 'report', 'events', 'holidays', 'eventId'));
     }
 }

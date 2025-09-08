@@ -434,4 +434,8 @@ document.addEventListener('DOMContentLoaded', function() {
     renderCalendar(currentMonth, currentYear);
 });
 </script>
+
+@include('client.includes.complaint')
+
+@include('client.includes.social')
 @endsection
