@@ -17,6 +17,7 @@ class BlogCategory extends Model
         'title',
         'slug',
         'active',
+        'path_image',
         'sorting',
     ];
 
