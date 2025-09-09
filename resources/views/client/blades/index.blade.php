@@ -244,73 +244,29 @@
 
                         <nav class="mt-3 mt-md-0">
                             <ul class="list-unstyled d-flex flex-row flex-wrap gap-2 gap-md-3 justify-content-start justify-content-md-center mb-0">
-                                <li class="py-2 px-3 text-uppercase montserrat-semiBold text-white background-red font-14 active">
-                                    <a href="#" class="text-decoration-none text-white">Jurídico</a>
+                                <li class="py-2 px-3 text-uppercase montserrat-semiBold font-14 text-white background-red active">
+                                    <a href="javascript:void(0)" class="text-decoration-none text-white category-filter" data-category="todas">
+                                        Todas
+                                    </a>
                                 </li>
-                                <li class="py-2 px-3 text-uppercase montserrat-semiBold text-black font-14">
-                                    <a href="#" class="text-decoration-none text-black">Política</a>
-                                </li>
-                                <li class="py-2 px-3 text-uppercase montserrat-semiBold text-black font-14">
-                                    <a href="#" class="text-decoration-none text-black">Educação</a>
-                                </li>
+                                
+                                @foreach($recentCategories as $index => $category)
+                                    <li class="py-2 px-3 text-uppercase montserrat-semiBold font-14 text-black">
+                                        <a href="javascript:void(0)" class="text-decoration-none text-black category-filter" data-category="{{ $category->slug }}">
+                                            {{ $category->title }}
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </nav>
                     </div>
                 </div>
 
-                <article>
-                    <div class="col-12">
-                        <div class="row news-lg mx-0 mb-3 border rounded-2 align-items-center overflow-hidden bg-white flex-column flex-md-row">
-                            <div class="col-12 col-md-6 h-auto px-0 d-flex justify-content-center align-items-center" style="aspect-ratio:1.91/1;">
-                                <img loading="lazy" class="img-fluid w-100 h-auto"
-                                    src="{{ asset('build/client/images/news-800x500-1.jpg') }}"
-                                    alt="Sem imagem"
-                                    style="object-fit: cover;">
-                            </div>
-                            <div class="col-12 col-md-6 d-flex flex-column bg-white px-3 px-md-0">
-                                <div class="p-3 p-md-4">
-                                    <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
-                                        <span class="badge badge-primary montserrat-semiBold font-12 me-2 background-red text-uppercase p-2">
-                                            Política
-                                        </span>
-                                        <p class="text-color mb-0 montserrat-regular font-14">
-                                            11 de Janeiro de 2025
-                                        </p>
-                                    </div>
-                                    <a href="" class="underline">
-                                        <h2 class="h5 h-md4 mb-3 text-uppercase montserrat-semiBold font-18 font-md-20 title-blue">
-                                            PARTICIPE DA REELEIÇÃO DA SINCADS BA! AS ELEIÇÕES CONTecem NO DIA....
-                                        </h2>
-                                    </a>
-                                    <p class="m-0 text-color montserrat-medium font-14 font-md-16">
-                                        Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna rebum clita rebum dolor stet amet justo Dolor lorem eos dolor duo et eirmod sea.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <div class="row">
-                    @for ($rel = 0; $rel < 10; $rel++)
-                        <article class="col-12 col-sm-12 col-md-6">
-                            <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
-                                <img loading="lazy" class="img-fluid col-3"
-                                src="{{asset('build/client/images/news-110x110-3.jpg')}}"
-                                alt="Sem imagem"
-                                style="height: 110px;aspect-ratio:1/1;">
-                                <div class="col-9 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                    <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
-                                    <span class="badge badge-primary montserrat-semiBold font-10 text-uppercase py-1 px-2 mr-2 background-red">Política</span>
-                                    <p class="text-color mb-0 montserrat-regular font-12">11 de Janeiro de 2025</p>
-                                    </div>
-                                    <a href="" class="underline">
-                                    <h3 class="h6 m-0 text-uppercase montserrat-bold font-14 title-blue">exclusivo, ELEIÇÃO DA SINCADS BAhia, ainda hoje, não...</h3>
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-                    @endfor
+                <div id="news-container">
+                    @include('client.ajax.filter-blog-homePage', [
+                        'featuredNews' => $featuredNews,
+                        'latestNews' => $latestNews
+                    ])
                 </div>
             </div>
             <div class="col-lg-3" data-aos="fade-left" data-aos-delay="100">
@@ -358,119 +314,181 @@
 @include('client.includes.social')
 
 <script>
-const section = document.querySelector('section.video');
-if (section) {
-    const wrapper = section.querySelector('.mySwiper .swiper-wrapper');
-    const slides  = Array.from(section.querySelectorAll(".mySwiper .swiper-slide"));
-    const player  = section.querySelector("#videoPlayer");
+    const section = document.querySelector('section.video');
+    if (section) {
+        const wrapper = section.querySelector('.mySwiper .swiper-wrapper');
+        const slides  = Array.from(section.querySelectorAll(".mySwiper .swiper-slide"));
+        const player  = section.querySelector("#videoPlayer");
 
-    let currentIndex = 0;
-    let firstLoad = true;
+        let currentIndex = 0;
+        let firstLoad = true;
 
-    // Normaliza URL (adiciona protocolo se vier //)
-    function norm(url) {
-        if (!url) return "";
-        return url.startsWith("//") ? window.location.protocol + url : url;
-    }
+        // Normaliza URL (adiciona protocolo se vier //)
+        function norm(url) {
+            if (!url) return "";
+            return url.startsWith("//") ? window.location.protocol + url : url;
+        }
 
-    // Converte para URL de embed (YouTube / Vimeo)
-    function toEmbed(rawUrl) {
-        const urlStr = norm(rawUrl);
-        if (!urlStr) return "";
+        // Converte para URL de embed (YouTube / Vimeo)
+        function toEmbed(rawUrl) {
+            const urlStr = norm(rawUrl);
+            if (!urlStr) return "";
 
-        let u;
-        try { u = new URL(urlStr); } catch { return urlStr; }
+            let u;
+            try { u = new URL(urlStr); } catch { return urlStr; }
 
-        const host = u.hostname.replace(/^www\./, "");
+            const host = u.hostname.replace(/^www\./, "");
 
-        // YouTube
-        if (host.includes("youtube.com") || host.includes("youtu.be")) {
-            // Se já for /embed/ mantém
-            if (u.pathname.startsWith("/embed/")) return u.toString();
+            // YouTube
+            if (host.includes("youtube.com") || host.includes("youtu.be")) {
+                // Se já for /embed/ mantém
+                if (u.pathname.startsWith("/embed/")) return u.toString();
 
-            // youtu.be/<id>
-            if (host === "youtu.be" && u.pathname.length > 1) {
-                const id = u.pathname.split("/")[1];
-                return `https://www.youtube.com/embed/${id}`;
+                // youtu.be/<id>
+                if (host === "youtu.be" && u.pathname.length > 1) {
+                    const id = u.pathname.split("/")[1];
+                    return `https://www.youtube.com/embed/${id}`;
+                }
+
+                // shorts -> converte para embed
+                if (u.pathname.startsWith("/shorts/")) {
+                    const id = u.pathname.split("/")[2] || u.pathname.split("/")[1];
+                    return `https://www.youtube.com/embed/${id}`;
+                }
+
+                // watch?v=<id>
+                const v = u.searchParams.get("v");
+                if (v) return `https://www.youtube.com/embed/${v}`;
+
+                // /live/<id> ou /v/<id> etc.
+                const parts = u.pathname.split("/").filter(Boolean);
+                if (parts.length >= 2) {
+                    const id = parts.pop();
+                    return `https://www.youtube.com/embed/${id}`;
+                }
             }
 
-            // shorts -> converte para embed
-            if (u.pathname.startsWith("/shorts/")) {
-                const id = u.pathname.split("/")[2] || u.pathname.split("/")[1];
-                return `https://www.youtube.com/embed/${id}`;
+            // Vimeo
+            if (host.includes("vimeo.com")) {
+                // Se já for player.vimeo.com
+                if (host === "player.vimeo.com") return u.toString();
+
+                // Extrai o último segmento numérico como ID
+                const parts = u.pathname.split("/").filter(Boolean);
+                const last = parts[parts.length - 1];
+                if (/^\d+$/.test(last)) {
+                    return `https://player.vimeo.com/video/${last}`;
+                }
             }
 
-            // watch?v=<id>
-            const v = u.searchParams.get("v");
-            if (v) return `https://www.youtube.com/embed/${v}`;
+            // Desconhecido: retorna original
+            return urlStr;
+        }
 
-            // /live/<id> ou /v/<id> etc.
-            const parts = u.pathname.split("/").filter(Boolean);
-            if (parts.length >= 2) {
-                const id = parts.pop();
-                return `https://www.youtube.com/embed/${id}`;
+        function setActiveByIndex(index, userTriggered = false) {
+            if (index < 0 || index >= slides.length) return;
+
+            slides.forEach(s => s.classList.remove("active"));
+            const slide = slides[index];
+            slide.classList.add("active");
+
+            const raw = slide.getAttribute("data-video");
+            const embedUrl = toEmbed(raw);
+            if (embedUrl) player.src = embedUrl;
+
+            currentIndex = index;
+
+            if (!firstLoad || userTriggered) {
+                slide.scrollIntoView({ behavior: "smooth", block: "nearest" });
             }
         }
 
-        // Vimeo
-        if (host.includes("vimeo.com")) {
-            // Se já for player.vimeo.com
-            if (host === "player.vimeo.com") return u.toString();
+        // Clique em um item
+        slides.forEach((slide, idx) => {
+            slide.addEventListener("click", () => setActiveByIndex(idx, true));
+        });
 
-            // Extrai o último segmento numérico como ID
-            const parts = u.pathname.split("/").filter(Boolean);
-            const last = parts[parts.length - 1];
-            if (/^\d+$/.test(last)) {
-                return `https://player.vimeo.com/video/${last}`;
-            }
-        }
+        // Inicia no primeiro (sem rolagem)
+        if (slides.length > 0) setActiveByIndex(0);
 
-        // Desconhecido: retorna original
-        return urlStr;
+        // Libera rolagem depois do load
+        window.addEventListener("load", () => {
+            setTimeout(() => { firstLoad = false; }, 500);
+        });
+
+        // Navegação ↑ ↓
+        const btnUp = section.querySelector(".swiper-button-up");
+        const btnDown = section.querySelector(".swiper-button-down");
+
+        btnUp && btnUp.addEventListener("click", () => {
+            if (currentIndex > 0) setActiveByIndex(currentIndex - 1, true);
+        });
+        btnDown && btnDown.addEventListener("click", () => {
+            if (currentIndex < slides.length - 1) setActiveByIndex(currentIndex + 1, true);
+        });
     }
-
-    function setActiveByIndex(index, userTriggered = false) {
-        if (index < 0 || index >= slides.length) return;
-
-        slides.forEach(s => s.classList.remove("active"));
-        const slide = slides[index];
-        slide.classList.add("active");
-
-        const raw = slide.getAttribute("data-video");
-        const embedUrl = toEmbed(raw);
-        if (embedUrl) player.src = embedUrl;
-
-        currentIndex = index;
-
-        if (!firstLoad || userTriggered) {
-            slide.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        }
-    }
-
-    // Clique em um item
-    slides.forEach((slide, idx) => {
-        slide.addEventListener("click", () => setActiveByIndex(idx, true));
-    });
-
-    // Inicia no primeiro (sem rolagem)
-    if (slides.length > 0) setActiveByIndex(0);
-
-    // Libera rolagem depois do load
-    window.addEventListener("load", () => {
-        setTimeout(() => { firstLoad = false; }, 500);
-    });
-
-    // Navegação ↑ ↓
-    const btnUp = section.querySelector(".swiper-button-up");
-    const btnDown = section.querySelector(".swiper-button-down");
-
-    btnUp && btnUp.addEventListener("click", () => {
-        if (currentIndex > 0) setActiveByIndex(currentIndex - 1, true);
-    });
-    btnDown && btnDown.addEventListener("click", () => {
-        if (currentIndex < slides.length - 1) setActiveByIndex(currentIndex + 1, true);
-    });
-}
 </script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const categoryLinks = document.querySelectorAll('.category-filter');
+        const newsContainer = document.getElementById('news-container');
+
+        categoryLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Ativar/desativar classes visuais
+                categoryLinks.forEach(l => {
+                    l.parentElement.classList.remove('active', 'text-white', 'background-red');
+                    l.parentElement.classList.add('text-black');
+                    l.classList.remove('text-white');
+                    l.classList.add('text-black');
+                });
+
+                this.parentElement.classList.add('active', 'text-white', 'background-red');
+                this.parentElement.classList.remove('text-black');
+                this.classList.add('text-white');
+                this.classList.remove('text-black');
+
+                const categorySlug = this.getAttribute('data-category');
+                
+                // Loading indicator
+                newsContainer.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <div class="spinner-border text-blue" role="status">
+                            <span class="visually-hidden montserrat-semiBold font-15">Carregando...</span>
+                        </div>
+                        <p class="mt-2 montserrat-semiBold font-15">Carregando notícias...</p>
+                    </div>
+                `;
+
+                // Fazer requisição AJAX
+                fetch(`home/blog/filter/${categorySlug}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erro na rede');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            newsContainer.innerHTML = data.html;
+                        } else {
+                            throw new Error(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        newsContainer.innerHTML = `
+                            <div class="col-12 text-center py-5">
+                                <p class="text-danger montserrat-semiBold font-15">Erro ao carregar notícias: ${error.message}</p>
+                            </div>
+                        `;
+                    });
+            });
+        });
+    });
+</script>
 @endsection

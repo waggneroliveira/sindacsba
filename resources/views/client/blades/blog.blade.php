@@ -157,7 +157,7 @@
                                              <img loading="lazy" class="img-fluid h-auto w-auto"
                                              src="{{ $blog->path_image_thumbnail ? asset('storage/'.$blog->path_image_thumbnail) : 'https://placehold.co/600x400?text=Sem+imagem&font=montserrat' }}"
                                              alt="{{ $blog->title ? $blog->title : 'Sem imagem'}}"
-                                             >
+                                             style="aspect-ratio: 1 / 1;object-fit: cover;">
                                        </div>
                                        <div class="col-md-6 d-flex flex-column bg-white h-100 px-0">
                                              <div class="mt-auto p-4">

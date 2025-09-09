@@ -85,6 +85,8 @@ Route::get('regionais', [RegionPageController::class, 'index'])->name('regional'
 Route::post('regionais/filter-municipalities', [RegionPageController::class, 'filterMunicipalities'])
 ->name('client.filter.municipalities');
 Route::get('eventos', [EventPageController::class, 'index'])->name('client.event');
+Route::get('home/blog/filter/{category?}', [HomePageController::class, 'filterByCategory'])
+    ->name('blog.filter');
 
 // Route::get('/evento', function () {
 //     return view('client.blades.event');

@@ -784,7 +784,7 @@
         transition: all 0.4s ease;
     }
     .news-home nav ul li:hover a{
-        color: #FFF;
+        color: #FFF !important;
         transition: all 0.4s ease;
     }
     .news-home nav ul li{
