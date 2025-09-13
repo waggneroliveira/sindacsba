@@ -17,9 +17,9 @@
         <div class="bg-light py-5">
             <div class="container">
                 <div class="col-11 col-lg-12 d-flex flex-wrap gap-3 justify-content-center">
-                    <button class="px-3 montserrat-bold text-uppercase font-18 btn btn-region active" data-regional-id="all">Todas</button>
+                    <button class="px-2 px-sm-3 montserrat-bold text-uppercase font-18 btn btn-region active" data-regional-id="all">Todas</button>
                     @foreach ($regionais as $regional)                        
-                        <button class="px-3 montserrat-bold text-uppercase font-18 btn btn-region" data-regional-id="{{$regional->id}}">{{$regional->title}}</button>
+                        <button class="px-2 px-sm-3 montserrat-bold text-uppercase font-18 btn btn-region" data-regional-id="{{$regional->id}}">{{$regional->title}}</button>
                     @endforeach
                 </div>            
             </div>

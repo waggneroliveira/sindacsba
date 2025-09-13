@@ -1464,7 +1464,7 @@
  }
 
  @media (max-width: 991.98px) {
-        .content-video {
+    .content-video {
         flex-direction: column; /* lista em cima, player embaixo */
         height: auto !important;
     }
@@ -1660,9 +1660,35 @@
      .mySwiper .swiper-wrapper{
         width: 90% !important;
      }
+     .montserrat-semiBold.font-25.font-md-20.m-0{
+        font-size: 0.938rem;
+     }
+     .montserrat-bold.font-30.mb-0.title-blue.text-uppercase{
+        font-size: 1.125rem;
+     }
+     .regional .btn-region{
+        font-size: 0.75rem;
+     }
  }
 
  @media (max-width:476px) {
+    .municipios li{
+        font-size: 0.75rem;
+    }
+    .partner a{
+        font-size: 0.75rem;
+    }
+    .partner img{
+        width: 95px;
+        height: 70px;
+    }
+    .montserrat-bold.font-30.mb-0.title-blue.text-uppercase{
+        font-size: 0.938rem;        
+     }
+    .firula-contact{
+        width: 40px;
+        margin-top: 0 !important;
+    }
     #statute h4{
         font-size: 1.125rem;
     }
@@ -1879,6 +1905,9 @@
      }
      .d-flex.align-items-center.bg-white.mb-3.overflow-hidden{
         height: 90px !important;
+     }
+     .juridico .btn-juridico{
+        font-size: 0.75rem !important;
      }
  }
 
