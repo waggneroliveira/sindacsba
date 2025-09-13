@@ -146,13 +146,13 @@
     <header id="header" class="w-100 d-flex flex-column position p-0">   
         <div class="w-100 py-2 py-sm-2 header-color">
             <div class="container m-auto d-flex align-items-center justify-content-between flex-column">
-                <div class="d-flex col-12 col-lg-11 justify-content-end align-items-start">
+                <div class="d-flex col-12 col-lg-11 justify-content-end align-items-start wrap-logo-and-login">
                     <div class="logo-img px-0 py-2 rounded-2 d-flex justify-content-start align-items-center w-auto">
                         <a href="{{route('index')}}">
                             <img src="{{asset('build/client/images/sindacsba.png')}}" alt="Instituto Baiano de Medicina Desportivao" title="Instituto Baiano de Medicina Desportivao" class="img-fluid">
                         </a>
                     </div>
-                    <div class="d-flex justify-content-center align-items-center gap-2 mt-3" style="width: 23%;">                        
+                    <div class="d-flex justify-content-center align-items-center gap-2 mt-3 login-desktop" style="width: 23%;">                        
                         @if (!Auth::guard('client')->check())                            
                             <div class="d-flex justify-content-start align-items-center gap-2">
                                 <svg width="20" height="20" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -254,7 +254,7 @@
                     </nav>
                     
                     <div class="btn-filie-se">
-                        <a href="" class="badge badge-primary montserrat-medium font-14 text-uppercase me-2 background-red rounded-4 font-weight-semi-bold py-2 px-5">Filie-se</a>
+                        <a href="" class="badge badge-primary montserrat-medium font-14 text-uppercase me-2 background-red rounded-4 font-weight-semi-bold py-2 px-3 px-sm-5">Filie-se</a>
                     </div>
 
                     <!-- Botão menu sandwich -->
@@ -265,6 +265,43 @@
                             <span class="d-block w-100 rounded-1" style="height:4px;background:#FFF;margin:6px 0;"></span>
                         </span>
                     </button>
+                    <div class="d-none justify-content-center align-items-center gap-2 mt-0 login-middle-mobile">                        
+                        @if (!Auth::guard('client')->check())                            
+                            <div class="d-flex justify-content-start align-items-center gap-2">
+                                <svg width="20" height="20" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M46.793 8.62893C44.5547 8.62893 42.7344 6.81253 42.7344 4.57423C42.7344 2.33593 44.5547 0.519531 46.793 0.519531L80.57 0.503906C88.8044 0.503906 95.5 7.20311 95.5 15.4339V80.5789C95.5 88.8055 88.8008 95.5089 80.57 95.5089H46.793C44.5469 95.5089 42.7266 93.6847 42.7266 91.4386C42.7266 89.1886 44.5469 87.3683 46.793 87.3683H80.57C84.3083 87.3683 87.3591 84.3136 87.3591 80.5831V15.4311C87.3591 11.7006 84.3083 8.63031 80.57 8.63031L46.793 8.62893ZM49.6914 68.2459L66.5504 51.0619C67.398 50.3158 67.9332 49.2181 67.9332 47.9994C67.9332 46.7807 67.398 45.683 66.5504 44.9408L49.6914 27.7568C48.1133 26.1591 45.543 26.1357 43.9492 27.71C42.3515 29.2803 42.3281 31.8545 43.9062 33.4522L54.1792 43.9322L4.5742 43.9283C2.3281 43.9283 0.5 45.7525 0.5 47.9986C0.5 50.2486 2.3281 52.0689 4.5742 52.0689H54.1762L43.9032 62.5459C42.3251 64.1436 42.3524 66.7138 43.9462 68.288C45.5439 69.8583 48.1103 69.8389 49.6884 68.2412L49.6914 68.2459Z" fill="white"/>
+                                </svg>
+
+                                <h2 class="off-login m-0 montserrat-medium font-14 text-start" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#loginModal">Login</h2>
+                            </div>
+                        @else
+                            @php
+                                $user = Auth::guard('client')->user();
+                                $defaultImage = $user && $user->path_image ? url($user->path_image) : '';
+                            @endphp
+                            <div class="image-profile">
+                                <picture>
+                                    <source srcset="{{ isset($defaultImage) && $defaultImage <> null ?$defaultImage:asset('build/client/images/user.jpg') }}" type="image/svg+xml">
+                                    <img src="{{ isset($defaultImage) && $defaultImage <> null ?$defaultImage:asset('build/client/images/user.jpg') }}"
+                                        alt="Imagem de Login"
+                                        class="img-fluid rounded-circle">
+                                </picture>
+                            </div>
+                            <div class="d-flex flex-column align-items-start gap-1">
+                                <div class="d-flex justify-content-start align-items-center gap-2 lh-0">
+                                    <h2 class="loginOn m-0 montserrat-medium font-14 text-start">Bem vindo,</h2>   
+                                    <h3 class="m-0 montserrat-medium font-14 text-start">{{$names = collect(explode(' ', Auth::guard('client')->user()->name))->slice(0, 1)->implode(' ')}}!</h3>      
+                                    <a class="nav-link waves-effect waves-light" href="#" data-bs-toggle="modal" data-bs-target="#editClientModal-{{Auth::guard('client')->user()->id}}">
+                                        <i class="bi bi-gear font-18"></i>
+                                    </a>                 
+                                </div>  
+                                <a href="{{route('client.user.logout')}}" class="d-flex justify-content-start align-items-center gap-2 text-decoration-none lh-0">
+                                    <i class="bi bi-box-arrow-right font-18"></i>
+                                    <h4 class="montserrat-medium font-12 m-0">Sair</h4>
+                                </a>                                               
+                            </div>
+                        @endif
+                    </div>
                 </div>         
             </div>
         </div>     
@@ -552,6 +589,59 @@
         <div class="row justify-content-center gap-5">
             <nav class="mt-5">
                 <ul class="list-unstyled text-center">
+                    <li><a href="{{route('index')}}" class="nav-link text-white montserrat-regular text-center font-18">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white montserrat-regular text-center font-18" 
+                        href="{{route('about')}}" 
+                        id="sobreNosDropdown" 
+                        role="button" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false">
+                            Sobre Nós <i class="bi bi-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="sobreNosDropdown">
+                            @foreach ($abouts as $about)                                        
+                                <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#{{$about->slug}}">{{$about->title}}</a></li>
+                            @endforeach
+                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#board">Equipe</a></li>
+                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#statute">Estatuto</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white montserrat-regular text-center font-18" 
+                        href="{{route('unionized')}}" 
+                        id="servicosDropdown" 
+                        role="button" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false">
+                            Serviços ao sindicalizados <i class="bi bi-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicosDropdown">
+                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('unionized')}}#partnes">Convênios</a></li>
+                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('unionized')}}#benefit">Benefícios</a></li>
+                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('unionized')}}#complaint">Denuncias</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white montserrat-regular text-center font-18" 
+                        href="{{route('juridico')}}" 
+                        id="juridicoDropdown" 
+                        role="button" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false">
+                            Jurídico <i class="bi bi-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="juridicoDropdown">
+                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{ route('juridico', ['legal' => 'leis']) }}">Leis</a></li>
+                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{ route('juridico', ['legal' => 'decretos']) }}">Decretos</a></li>
+                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{ route('juridico', ['legal' => 'portaria']) }}">Portaria</a></li>
+                        </ul>
+
+                    </li>
+
+                    <li><a href="{{route('regional')}}" class="nav-link text-white montserrat-regular text-center font-18">Regionais</a></li>
                     <li><a href="{{route('blog')}}" class=" text-white nav-link montserrat-regular font-18">Notícias</a></li>
                     <li><a href="{{route('noticies')}}" class=" text-white nav-link montserrat-regular font-18">Editais</a></li>
                     <li><a href="{{route('contact')}}" class=" text-white nav-link montserrat-regular font-18">Contato</a></li>

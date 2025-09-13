@@ -248,14 +248,14 @@
 
                         <nav class="mt-3 mt-md-0">
                             <ul class="list-unstyled d-flex flex-row flex-wrap gap-2 gap-md-3 justify-content-start justify-content-md-center mb-0">
-                                <li class="py-2 px-3 text-uppercase montserrat-semiBold font-14 text-white background-red active">
+                                <li class="py-1 py-sm-2 px-2 px-sm-3 text-uppercase montserrat-semiBold font-14 text-white background-red active">
                                     <a href="javascript:void(0)" class="text-decoration-none text-white category-filter" data-category="todas">
                                         Todas
                                     </a>
                                 </li>
                                 
                                 @foreach($recentCategories as $index => $category)
-                                    <li class="py-2 px-3 text-uppercase montserrat-semiBold font-14 text-black">
+                                    <li class="py-2 px-1 px-sm-3 text-uppercase montserrat-semiBold font-14 text-black">
                                         <a href="javascript:void(0)" class="text-decoration-none text-black category-filter" data-category="{{ $category->slug }}">
                                             {{ $category->title }}
                                         </a>

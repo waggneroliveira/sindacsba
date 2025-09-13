@@ -23,7 +23,7 @@
                             </p>
                         </div>
                         <a href="{{ route('blog-inner', $featuredNews->slug) }}" class="underline">
-                            <h2 class="h5 h-md4 mb-3 text-uppercase montserrat-semiBold font-18 font-md-20 title-blue">
+                            <h2 class="h5 mb-3 text-uppercase montserrat-semiBold font-18 font-md-20 title-blue">
                                 {{ Str::limit($featuredNews->title, 80) }}
                             </h2>
                         </a>

@@ -989,7 +989,16 @@
  .text-blog-inner {
      color: var(--text-color-blog-inner);
  }
-
+ .text-blog-inner p{
+    overflow: hidden;
+ }
+.text-blog-inner img{
+    object-fit: contain;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 475px;
+    margin-right: 15px;
+}
  .text-blog-inner.montserrat-regular.font-16 p {
      color: var(--text-color-blog-inner);
      font-family: "Montserrat", sans-serif;
@@ -1487,6 +1496,15 @@
  }
 
  @media (max-width:885px) {
+    .login-desktop{
+        display: none !important;
+    }
+    .login-middle-mobile{
+        display: flex !important;
+    }
+    .wrap-logo-and-login{
+        flex-direction: column !important;
+    }
      .hero {
          height: 100%;
      }
@@ -1538,6 +1556,22 @@
  }
 
  @media (max-width:576px) {
+    .complaint img{
+        width: 120px;
+        height: 120px;
+    }
+    .montserrat-regular.font-18.mb-0.text-start.text-white.mb-4{
+        text-align: center !important;
+    }
+    .dropdown-toggle::after{
+        display: none !important;
+    }
+    .row.justify-content-center.gap-5{
+        gap: 20px !important;
+    }
+     .menu-mobile nav ul li a{
+        font-size: 0.938rem !important;
+     }
     .nav-video{
         position:  relative !important;
         bottom: inherit;
@@ -1547,7 +1581,10 @@
         .mySwiper .swiper-wrapper {
         width: 100% !important; 
     }
-
+    .d-flex.justify-content-between.align-items-start.about.flex-wrap.w-100.pt-4.pt-lg-5{
+        justify-content: center !important;
+        width: 100% !important;
+    }
     .mySwiper .swiper-slide {
         padding: 10px;
         gap: 8px;
@@ -1563,13 +1600,16 @@
      .announcement .image img {
          object-fit: contain;
      }
+     .text-blog-inner p{
+        font-size: 0.938rem;
+     }
      .rounded-top-left {
-         margin-bottom: 30px !important;
+         /* margin-bottom: 30px !important; */
      }
      .col-12.col-lg-9.mb-5.pb-4.d-flex.justify-content-between.gap-3.flex-wrap.align-items-center {
          margin-bottom: 10px !important;
      }
-     .menu-mobile .text-white.nav-link.montserrat-regular.font-18 {
+     .menu-mobile .text-white.nav-link.montserrat-regular.font-18, .title.montserrat-medium.font-16.mb-0.col-10 {
          font-size: 0.938rem;
      }
      .modal-dialog.modal-dialog-centered {
@@ -1611,14 +1651,36 @@
          font-weight: 800;
      }
      .about .image{
-        max-width: 320px;
+        max-width: inherit;
+        aspect-ratio: inherit;
      }
      .benefit svg{
         width: 100%;
      }
+     .mySwiper .swiper-wrapper{
+        width: 90% !important;
+     }
  }
 
  @media (max-width:476px) {
+    #statute h4{
+        font-size: 1.125rem;
+    }
+    #statute p{
+        font-size: 0.938rem;
+    }
+    .news-home nav ul li{
+        font-size: 0.625rem;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+    .title.montserrat-medium.font-16.mb-0.col-10{
+        font-size: 0.75rem;
+    }
+    .section-title.rounded-top-left.d-table.px-4.w-auto.m-0.montserrat-bold.font-18.title-blue{
+        font-size: 0.938rem;
+    }
      .d-flex.flex-column.col-10.comment {
          width: 80%;
      }
@@ -1802,9 +1864,7 @@
          max-width: 90px
      }
      .social-links a {
-         width: 30px;
-         height: 30px;
-         font-size: .938rem
+         font-size: 0.625rem
      }
      .logo-img {
          padding: 0 !important;
@@ -1817,13 +1877,24 @@
      .hero p {
          margin-bottom: 20px !important
      }
+     .d-flex.align-items-center.bg-white.mb-3.overflow-hidden{
+        height: 90px !important;
+     }
  }
 
  @media (max-width:414px) {
+    .news-home nav ul li{
+        font-size: 0.563rem;
+    }
      .h6.m-0.text-uppercase.montserrat-bold.font-14.title-blue {
          font-size: 0.625rem;
      }
      .badge.badge-primary.montserrat-semiBold.font-10.text-uppercase.py-1.px-2.background-red {
          font-size: 0.5rem;
      }
+ }
+  @media (max-width:376px) {
+    .news-home nav ul li{
+        font-size: 0.5rem;
+    }
  }
