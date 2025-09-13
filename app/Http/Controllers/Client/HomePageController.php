@@ -85,8 +85,17 @@ class HomePageController extends Controller
         ->take(3)
         ->get();
 
+        $trendingCategories  = BlogCategory::whereHas('blogs')
+        ->active()
+        ->withCount('blogs')
+        ->orderBy('blogs_count', 'DESC')
+        ->sorting()
+        ->limit(5)
+        ->get();
+
         return view('client.blades.index', compact(
             'featuredNews',
+            'trendingCategories',
             'latestNews', 
             'recentCategories', 
             'events', 

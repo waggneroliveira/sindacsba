@@ -216,18 +216,22 @@
 <section class="category-blog-home py-0 mt-5">
     <div class="container-fluid p-0">
         <div class="row g-3 justify-content-center">
-            @for ($cat = 0; $cat < 5; $cat++)
+            @foreach($trendingCategories as $trendingCategory)                
                 <div class="col-6 col-sm-4 col-md-2 col-lg d-flex justify-content-center p-0 mt-0">
                     <div class="box-category text-center w-100 position-relative overflow-hidden">
-                        <img src="{{asset('build/client/images/blg.png')}}" alt="" class="w-100 img-fluid mx-auto">
+                        @if (isset($trendingCategory->path_image) && $trendingCategory->path_image <> null)
+                            <img src="{{asset('storage/' . $trendingCategory->path_image)}}" alt="" class="w-100 img-fluid mx-auto">
+                            @else
+                            <img src="{{asset('build/client/images/category-blog.png')}}" alt="" class="w-100 img-fluid mx-auto">
+                        @endif
                         <div class="overlay">
-                            <a href="" class="w-100 text-center">
-                                <h4 class="title montserrat-semiBold font-18 text-white mt-2">Saúde</h4>
+                            <a href="{{ route('blog', ['category' => $trendingCategory->slug]) }}#news" class="w-100 text-center">
+                                <h4 class="title montserrat-semiBold font-18 text-white mt-2">{{$trendingCategory->title}}</h4>
                             </a>
                         </div>
                     </div>
                 </div>
-            @endfor
+            @endforeach
         </div>
     </div>
 </section>
