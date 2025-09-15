@@ -37,34 +37,36 @@
     </article>
 @endif
 
-<div class="row" id="news-grid">
-    @foreach($latestNews as $news)
-        @php
-            \Carbon\Carbon::setLocale('pt_BR');
-            $dataFormatada = \Carbon\Carbon::parse($news->date)->translatedFormat('d \d\e F \d\e Y');
-        @endphp
-        <article class="col-12 col-sm-12 col-md-6">
-            <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
-                <img loading="lazy" class="img-fluid col-3"
-                src="{{ $news->path_image_thumbnail ? asset('storage/' . $news->path_image_thumbnail) : asset('build/client/images/news-110x110-3.jpg') }}"
-                alt="{{ $news->title }}"
-                style="height: 110px;aspect-ratio:1/1;object-fit: cover;">
-                <div class="col-9 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                    <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
-                        <span class="badge badge-primary montserrat-semiBold font-10 text-uppercase py-1 px-2 mr-2 background-red">
-                            {{ $news->category->title }}
-                        </span>
-                        <p class="text-color mb-0 montserrat-regular font-12">
-                            {{ $dataFormatada }}
-                        </p>
+@if ($latestNews->count() > 0)  
+    <div class="row" id="news-grid">
+        @foreach($latestNews as $news)
+            @php
+                \Carbon\Carbon::setLocale('pt_BR');
+                $dataFormatada = \Carbon\Carbon::parse($news->date)->translatedFormat('d \d\e F \d\e Y');
+            @endphp
+            <article class="col-12 col-sm-12 col-md-6">
+                <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 110px;">
+                    <img loading="lazy" class="img-fluid col-3"
+                    src="{{ $news->path_image_thumbnail ? asset('storage/' . $news->path_image_thumbnail) : asset('build/client/images/news-110x110-3.jpg') }}"
+                    alt="{{ $news->title }}"
+                    style="height: 110px;aspect-ratio:1/1;object-fit: cover;">
+                    <div class="col-9 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                        <div class="mb-2 d-flex justify-content-start align-items-center gap-1 flex-wrap">
+                            <span class="badge badge-primary montserrat-semiBold font-10 text-uppercase py-1 px-2 mr-2 background-red">
+                                {{ $news->category->title }}
+                            </span>
+                            <p class="text-color mb-0 montserrat-regular font-12">
+                                {{ $dataFormatada }}
+                            </p>
+                        </div>
+                        <a href="{{ route('blog-inner', $news->slug) }}" class="underline">
+                            <h3 class="h6 m-0 text-uppercase montserrat-bold font-14 title-blue">
+                                {{ Str::limit($news->title, 60) }}
+                            </h3>
+                        </a>
                     </div>
-                    <a href="{{ route('blog-inner', $news->slug) }}" class="underline">
-                        <h3 class="h6 m-0 text-uppercase montserrat-bold font-14 title-blue">
-                            {{ Str::limit($news->title, 60) }}
-                        </h3>
-                    </a>
                 </div>
-            </div>
-        </article>
-    @endforeach
-</div>
+            </article>
+        @endforeach
+    </div>
+@endif

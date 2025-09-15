@@ -242,80 +242,84 @@
     </section>
 @endif
 
-@if (isset($recentCategories) && $recentCategories->count() > 0 || isset($events))
+@if (isset($recentCategories) || isset($events))
     <section class="news-home py-5">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-9 animate-on-scroll mb-3" data-animation="animate__fadeInLeft">
-                    <div class="border-bottom news mb-4">
-                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-end">
-                            <h2 class="section-title d-table px-4 py-2 w-auto m-0 montserrat-bold font-18 title-blue text-uppercase rounded-top-left">
-                                Últimas notícias
-                            </h2>
+                @if ($recentCategories->count() > 0)                    
+                    <div class="col-12 col-lg-9 animate-on-scroll mb-3" data-animation="animate__fadeInLeft">
+                        <div class="border-bottom news mb-4">
+                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-end">
+                                <h2 class="section-title d-table px-4 py-2 w-auto m-0 montserrat-bold font-18 title-blue text-uppercase rounded-top-left">
+                                    Últimas notícias
+                                </h2>
 
-                            <nav class="mt-3 mt-md-0">
-                                <ul class="list-unstyled d-flex flex-row flex-wrap gap-2 gap-md-3 justify-content-start justify-content-md-center mb-0">
-                                    <li class="py-1 py-sm-2 px-2 px-sm-3 text-uppercase montserrat-semiBold font-14 text-white background-red active">
-                                        <a href="javascript:void(0)" class="text-decoration-none text-white category-filter" data-category="todas">
-                                            Todas
-                                        </a>
-                                    </li>
-                                    
-                                    @foreach($recentCategories as $index => $category)
-                                        <li class="py-2 px-1 px-sm-3 text-uppercase montserrat-semiBold font-14 text-black">
-                                            <a href="javascript:void(0)" class="text-decoration-none text-black category-filter" data-category="{{ $category->slug }}">
-                                                {{ $category->title }}
+                                <nav class="mt-3 mt-md-0">
+                                    <ul class="list-unstyled d-flex flex-row flex-wrap gap-2 gap-md-3 justify-content-start justify-content-md-center mb-0">
+                                        <li class="py-1 py-sm-2 px-2 px-sm-3 text-uppercase montserrat-semiBold font-14 text-white background-red active">
+                                            <a href="javascript:void(0)" class="text-decoration-none text-white category-filter" data-category="todas">
+                                                Todas
                                             </a>
                                         </li>
-                                    @endforeach
-                                </ul>
-                            </nav>
+                                        
+                                        @foreach($recentCategories as $index => $category)
+                                            <li class="py-2 px-1 px-sm-3 text-uppercase montserrat-semiBold font-14 text-black">
+                                                <a href="javascript:void(0)" class="text-decoration-none text-black category-filter" data-category="{{ $category->slug }}">
+                                                    {{ $category->title }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <div id="news-container">
+                            @include('client.ajax.filter-blog-homePage', [
+                                'featuredNews' => $featuredNews,
+                                'latestNews' => $latestNews
+                            ])
                         </div>
                     </div>
+                @endif
+                @if ($events->count() > 0)                    
+                    <div class="col-lg-3" data-aos="fade-left" data-aos-delay="100">
+                        <div class="section-title mb-0 rounded-top-left">
+                            <h3 class="m-0 text-uppercase montserrat-bold font-18 title-blue">Agenda</h3>
+                        </div>
 
-                    <div id="news-container">
-                        @include('client.ajax.filter-blog-homePage', [
-                            'featuredNews' => $featuredNews,
-                            'latestNews' => $latestNews
-                        ])
-                    </div>
-                </div>
-                <div class="col-lg-3" data-aos="fade-left" data-aos-delay="100">
-                    <div class="section-title mb-0 rounded-top-left">
-                        <h3 class="m-0 text-uppercase montserrat-bold font-18 title-blue">Agenda</h3>
-                    </div>
-
-                    <div class="bg-white p-3">      
-                        @foreach($events as $event)                        
-                            <article>
-                                <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 80px;">
-                                    <div class="date col-4 h-100 d-flex justify-content-center align-items-center flex-column border border-right-1">
-                                        <span class="montserrat-bold w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue">
-                                            {{ \Carbon\Carbon::parse($event->date)->format('d') }}
-                                        </span>
-                                        <span class="montserrat-medium w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue background-red text-white">
-                                            {{ ucfirst(\Carbon\Carbon::parse($event->date)->translatedFormat('F')) }}
-                                        </span>
+                        <div class="bg-white p-3">      
+                            @foreach($events as $event)                        
+                                <article>
+                                    <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 80px;">
+                                        <div class="date col-4 h-100 d-flex justify-content-center align-items-center flex-column border border-right-1">
+                                            <span class="montserrat-bold w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue">
+                                                {{ \Carbon\Carbon::parse($event->date)->format('d') }}
+                                            </span>
+                                            <span class="montserrat-medium w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue background-red text-white">
+                                                {{ ucfirst(\Carbon\Carbon::parse($event->date)->translatedFormat('F')) }}
+                                            </span>
+                                        </div>
+                                        <div class="col-8 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                                            @if($event->link)
+                                                <a href="{{ $event->link }}" class="underline">
+                                            @else
+                                                <a href="{{ route('client.event') }}?event_id={{ $event->id }}&scroll=true" class="underline">
+                                            @endif
+                                                <h3 class="h6 m-0 montserrat-bold font-14 title-blue" title="{{$event->title}}">
+                                                    {{ substr(strip_tags($event->title), 0, 50) }}...
+                                                </h3>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div class="col-8 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                        @if($event->link)
-                                            <a href="{{ $event->link }}" class="underline">
-                                        @else
-                                            <a href="{{ route('client.event') }}?event_id={{ $event->id }}&scroll=true" class="underline">
-                                        @endif
-                                            <h3 class="h6 m-0 montserrat-bold font-14 title-blue" title="{{$event->title}}">
-                                                {{ substr(strip_tags($event->title), 0, 50) }}...
-                                            </h3>
-                                        </a>
-                                    </div>
-                                </div>
-                            </article>
-                        @endforeach              
-                        <div class="btn-about d-table m-auto mt-5">
-                            <a href="{{route('client.event')}}" class="background-red montserrat-semiBold font-18 py-2 px-4 rounded-5">Ver todos</a>
-                        </div>                      
+                                </article>
+                            @endforeach              
+                            <div class="btn-about d-table m-auto mt-5">
+                                <a href="{{route('client.event')}}" class="background-red montserrat-semiBold font-18 py-2 px-4 rounded-5">Ver todos</a>
+                            </div>                      
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </section>
