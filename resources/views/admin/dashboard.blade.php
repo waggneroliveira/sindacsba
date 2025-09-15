@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <h4 class="page-title "><i class="mdi mdi-newspaper-variant"></i> Home</h4>
+                    <h4 class="page-title "><i class="mdi mdi-home"></i> Home</h4>
                 </div>
             </div>
             @if (Auth::user()->hasRole('Super') || 
@@ -133,7 +133,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <h4 class="page-title "><i class="mdi mdi-newspaper-variant"></i> Sobre Nós</h4>
+                    <h4 class="page-title "><i class="mdi mdi-help-circle"></i> Sobre Nós</h4>
                 </div>
             </div>
             @if (Auth::user()->hasRole('Super') || 
@@ -214,7 +214,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <h4 class="page-title "><i class="mdi mdi-newspaper-variant"></i> Serviços aos sindicalizados</h4>
+                    <h4 class="page-title "><i class="mdi mdi-toolbox"></i> Serviços aos sindicalizados</h4>
                 </div>
             </div>
 
@@ -318,7 +318,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <h4 class="page-title "><i class="mdi mdi-newspaper-variant"></i> Jurídico</h4>
+                    <h4 class="page-title "><i class="mdi mdi-scale-balance"></i> Jurídico</h4>
                 </div>
             </div>
 
@@ -349,7 +349,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <h4 class="page-title "><i class="mdi mdi-newspaper-variant"></i> Regionais</h4>
+                    <h4 class="page-title "><i class="mdi mdi-map-marker-radius"></i> Regionais</h4>
                 </div>
             </div>
             @if (Auth::user()->hasRole('Super') || 
@@ -405,7 +405,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <h4 class="page-title "><i class="mdi mdi-newspaper-variant"></i> Agenda</h4>
+                    <h4 class="page-title "><i class="mdi mdi-calendar-outline"></i> Agenda</h4>
                 </div>
             </div>
             <div class="col-md-5 col-xl-3">
@@ -758,7 +758,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    <div><a href="" target="_blank" style="color:#94a0ad;"><script>document.write(new Date().getFullYear())</script> © WHI - Web de Alta Inspiração</a></div>
+                    <div><a href="https://www.whi.dev.br/" target="_blank" style="color:#94a0ad;"><script>document.write(new Date().getFullYear())</script> © WHI - Web de Alta Inspiração</a></div>
                 </div>
                 <div class="col-md-6">
                     <div class="d-none d-md-flex gap-4 align-item-center justify-content-md-end footer-links">

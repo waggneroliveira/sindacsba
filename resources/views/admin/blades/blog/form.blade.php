@@ -17,18 +17,18 @@
         </div>
         
         <div class="mb-3 col-12 col-lg-6">
-            <label for="date" class="form-label">Data de publicação</label>
-            <input type="date" name="date" class="form-control" id="date{{isset($blog->id)?$blog->id:''}}" value="{{isset($blog)?$blog->date:''}}">
+            <label for="date" class="form-label">Data de publicação <span class="text-danger">*</span></label>
+            <input type="date" name="date" class="form-control" id="date{{isset($blog->id)?$blog->id:''}}" value="{{isset($blog)?$blog->date:''}}" required>
         </div>
     </div>
     
     <div class="mb-3 col-12">
-        <label for="title" class="form-label">Título</label>
-        <input type="text" name="title" class="form-control" id="title{{isset($blog->id)?$blog->id:''}}" value="{{isset($blog)?$blog->title:''}}" placeholder="Digite seu nome">
+        <label for="title" class="form-label">Título <span class="text-danger">*</span></label>
+        <input type="text" name="title" class="form-control" id="title{{isset($blog->id)?$blog->id:''}}" value="{{isset($blog)?$blog->title:''}}" required placeholder="Digite seu nome">
     </div>
     
     <div class="mb-3 col-12 d-flex align-items-start flex-column">
-        <label for="textarea-edit" class="form-label">Texto</label>
+        <label for="textarea-edit" class="form-label">Texto </label>
         <textarea name="text" class="form-control col-12" id="textarea-edit" rows="5">
             {!!isset($blog)?$blog->text:''!!}
         </textarea>

@@ -220,9 +220,9 @@
 @if (isset($trendingCategories) && $trendingCategories->count() > 0)
     <section class="category-blog-home py-0 mt-5">
         <div class="container-fluid p-0">
-            <div class="row g-3 justify-content-center">
+            <div class="row g-3 justify-content-start">
                 @foreach($trendingCategories as $trendingCategory)                
-                    <div class="col-6 col-sm-4 col-md-2 col-lg d-flex justify-content-center p-0 mt-0">
+                    <div class="col-6 col-sm-4 col-md-2 d-flex justify-content-center p-0 mt-0">
                         <div class="box-category text-center w-100 position-relative overflow-hidden">
                             @if (isset($trendingCategory->path_image) && $trendingCategory->path_image <> null)
                                 <img src="{{asset('storage/' . $trendingCategory->path_image)}}" alt="" class="w-100 img-fluid mx-auto">

@@ -42,14 +42,14 @@
                                     </select>
                                 </div>
                                 <div class="mb-3 col-6">
-                                    <label for="date" class="form-label">Data de publicação</label>
-                                    <input type="date" name="date" class="form-control">
+                                    <label for="date" class="form-label">Data de publicação <span class="text-danger">*</span></label>
+                                    <input type="date" name="date" class="form-control" required>
                                 </div>
                             </div>
         
                             <div class="mb-3">
-                                <label for="title" class="form-label">Título</label>
-                                <input type="text" name="title" class="form-control" id="title" placeholder="Digite seu nome">
+                                <label for="title" class="form-label">Título <span class="text-danger">*</span></label>
+                                <input type="text" name="title" class="form-control" id="title" placeholder="Digite seu nome" required>
                             </div>
                             
                             <div class="mb-3 col-12 d-flex align-items-start flex-column">
