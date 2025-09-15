@@ -19,6 +19,12 @@
     </div>
     <!-- end page title -->
     <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title "><i class="mdi mdi-newspaper-variant"></i> Home</h4>
+            </div>
+        </div>
+
         <div class="col-md-5 col-xl-3">
             <div class="card borda-cx ratio ratio-4x3 border-whi">
                 <div class="d-flex align-items-center justify-content-center">
@@ -37,7 +43,7 @@
                 </div>
             </div> <!-- end card-->
         </div> <!-- end col -->
-    
+
         <div class="col-md-5 col-xl-3">
             <div class="card borda-cx ratio ratio-4x3 border-whi">
                 <div class="d-flex align-items-center justify-content-center">
@@ -56,24 +62,7 @@
                 </div>
             </div> <!-- end card-->
         </div> <!-- end col -->
-        <div class="col-md-5 col-xl-3">
-            <div class="card borda-cx ratio ratio-4x3 border-whi">
-                <div class="d-flex align-items-center justify-content-center">
-                    <a href="{{route('admin.dashboard.about.index')}}">
-                        <div class="row">
-                            <div class="col-12 d-flex align-items-center justify-content-center">
-                                <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                    <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3 col-12 text-center">
-                            <h5 class="text-uppercase text-muted">Sobre Nós</h5>
-                        </div>
-                    </a>
-                </div>
-            </div> <!-- end card-->
-        </div> <!-- end col -->
+
         <div class="col-md-5 col-xl-3">
             <div class="card borda-cx ratio ratio-4x3 border-whi">
                 <div class="d-flex align-items-center justify-content-center">
@@ -92,6 +81,7 @@
                 </div>
             </div> <!-- end card-->
         </div> <!-- end col -->
+
         <div class="col-md-5 col-xl-3">
             <div class="card borda-cx ratio ratio-4x3 border-whi">
                 <div class="d-flex align-items-center justify-content-center">
@@ -110,10 +100,19 @@
                 </div>
             </div> <!-- end card-->
         </div> <!-- end col -->
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title "><i class="mdi mdi-newspaper-variant"></i> Sobre Nós</h4>
+            </div>
+        </div>
+
         <div class="col-md-5 col-xl-3">
             <div class="card borda-cx ratio ratio-4x3 border-whi">
                 <div class="d-flex align-items-center justify-content-center">
-                    <a href="{{route('admin.dashboard.unionized.index')}}">
+                    <a href="{{route('admin.dashboard.about.index')}}">
                         <div class="row">
                             <div class="col-12 d-flex align-items-center justify-content-center">
                                 <div class="avatar-xl bg-hoom rounded-circle text-center">
@@ -122,84 +121,13 @@
                             </div>
                         </div>
                         <div class="mt-3 col-12 text-center">
-                            <h5 class="text-uppercase text-muted">Sindicalize-se</h5>
+                            <h5 class="text-uppercase text-muted">Sobre Nós</h5>
                         </div>
                     </a>
                 </div>
             </div> <!-- end card-->
         </div> <!-- end col -->
-        <div class="col-md-5 col-xl-3">
-            <div class="card borda-cx ratio ratio-4x3 border-whi">
-                <div class="d-flex align-items-center justify-content-center">
-                    <a href="{{route('admin.dashboard.benefitTopic.index')}}">
-                        <div class="row">
-                            <div class="col-12 d-flex align-items-center justify-content-center">
-                                <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                    <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3 col-12 text-center">
-                            <h5 class="text-uppercase text-muted">Benefícios</h5>
-                        </div>
-                    </a>
-                </div>
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-        <div class="col-md-5 col-xl-3">
-            <div class="card borda-cx ratio ratio-4x3 border-whi">
-                <div class="d-flex align-items-center justify-content-center">
-                    <a href="{{route('admin.dashboard.report.index')}}">
-                        <div class="row">
-                            <div class="col-12 d-flex align-items-center justify-content-center">
-                                <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                    <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3 col-12 text-center">
-                            <h5 class="text-uppercase text-muted">Denuncie</h5>
-                        </div>
-                    </a>
-                </div>
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-        <div class="col-md-5 col-xl-3">
-            <div class="card borda-cx ratio ratio-4x3 border-whi">
-                <div class="d-flex align-items-center justify-content-center">
-                    <a href="{{route('admin.dashboard.agreement.index')}}">
-                        <div class="row">
-                            <div class="col-12 d-flex align-items-center justify-content-center">
-                                <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                    <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3 col-12 text-center">
-                            <h5 class="text-uppercase text-muted">Convênios</h5>
-                        </div>
-                    </a>
-                </div>
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-        <div class="col-md-5 col-xl-3">
-            <div class="card borda-cx ratio ratio-4x3 border-whi">
-                <div class="d-flex align-items-center justify-content-center">
-                    <a href="{{route('admin.dashboard.statute.index')}}">
-                        <div class="row">
-                            <div class="col-12 d-flex align-items-center justify-content-center">
-                                <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                    <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3 col-12 text-center">
-                            <h5 class="text-uppercase text-muted">Estatuto</h5>
-                        </div>
-                    </a>
-                </div>
-            </div> <!-- end card-->
-        </div> <!-- end col -->
+
         <div class="col-md-5 col-xl-3">
             <div class="card borda-cx ratio ratio-4x3 border-whi">
                 <div class="d-flex align-items-center justify-content-center">
@@ -218,6 +146,118 @@
                 </div>
             </div> <!-- end card-->
         </div> <!-- end col -->
+
+        <div class="col-md-5 col-xl-3">
+            <div class="card borda-cx ratio ratio-4x3 border-whi">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="{{route('admin.dashboard.statute.index')}}">
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <div class="avatar-xl bg-hoom rounded-circle text-center">
+                                    <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 col-12 text-center">
+                            <h5 class="text-uppercase text-muted">Estatuto</h5>
+                        </div>
+                    </a>
+                </div>
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title "><i class="mdi mdi-newspaper-variant"></i> Serviços aos sindicalizados</h4>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-xl-3">
+            <div class="card borda-cx ratio ratio-4x3 border-whi">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="{{route('admin.dashboard.agreement.index')}}">
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <div class="avatar-xl bg-hoom rounded-circle text-center">
+                                    <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 col-12 text-center">
+                            <h5 class="text-uppercase text-muted">Convênios</h5>
+                        </div>
+                    </a>
+                </div>
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+
+        <div class="col-md-5 col-xl-3">
+            <div class="card borda-cx ratio ratio-4x3 border-whi">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="{{route('admin.dashboard.unionized.index')}}">
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <div class="avatar-xl bg-hoom rounded-circle text-center">
+                                    <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 col-12 text-center">
+                            <h5 class="text-uppercase text-muted">Sindicalize-se</h5>
+                        </div>
+                    </a>
+                </div>
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+
+        <div class="col-md-5 col-xl-3">
+            <div class="card borda-cx ratio ratio-4x3 border-whi">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="{{route('admin.dashboard.benefitTopic.index')}}">
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <div class="avatar-xl bg-hoom rounded-circle text-center">
+                                    <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 col-12 text-center">
+                            <h5 class="text-uppercase text-muted">Benefícios</h5>
+                        </div>
+                    </a>
+                </div>
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+
+        <div class="col-md-5 col-xl-3">
+            <div class="card borda-cx ratio ratio-4x3 border-whi">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="{{route('admin.dashboard.report.index')}}">
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <div class="avatar-xl bg-hoom rounded-circle text-center">
+                                    <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 col-12 text-center">
+                            <h5 class="text-uppercase text-muted">Denuncie</h5>
+                        </div>
+                    </a>
+                </div>
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title "><i class="mdi mdi-newspaper-variant"></i> Jurídico</h4>
+            </div>
+        </div>
+
         <div class="col-md-5 col-xl-3">
             <div class="card borda-cx ratio ratio-4x3 border-whi">
                 <div class="d-flex align-items-center justify-content-center">
@@ -236,6 +276,14 @@
                 </div>
             </div> <!-- end card-->
         </div> <!-- end col -->
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title "><i class="mdi mdi-newspaper-variant"></i> Regionais</h4>
+            </div>
+        </div>
+
         <div class="col-md-5 col-xl-3">
             <div class="card borda-cx ratio ratio-4x3 border-whi">
                 <div class="d-flex align-items-center justify-content-center">
@@ -254,6 +302,7 @@
                 </div>
             </div> <!-- end card-->
         </div> <!-- end col -->
+
         <div class="col-md-5 col-xl-3">
             <div class="card borda-cx ratio ratio-4x3 border-whi">
                 <div class="d-flex align-items-center justify-content-center">
@@ -272,6 +321,13 @@
                 </div>
             </div> <!-- end card-->
         </div> <!-- end col -->
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title "><i class="mdi mdi-newspaper-variant"></i> Agenda</h4>
+            </div>
+        </div>
         <div class="col-md-5 col-xl-3">
             <div class="card borda-cx ratio ratio-4x3 border-whi">
                 <div class="d-flex align-items-center justify-content-center">
@@ -284,13 +340,14 @@
                             </div>
                         </div>
                         <div class="mt-3 col-12 text-center">
-                            <h5 class="text-uppercase text-muted">Eventos</h5>
+                            <h5 class="text-uppercase text-muted">Agenda</h5>
                         </div>
                     </a>
                 </div>
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
+
     @if (Auth::user()->hasRole('Super') || 
     Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
     Auth::user()->hasPermissionTo('noticias.visualizar') || 

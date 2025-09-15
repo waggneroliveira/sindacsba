@@ -27,16 +27,16 @@
                                 <div class="row mb-2">
                                     <div class="col-12 d-flex justify-between">
                                         <div class="col-6">
-                                            @if (Auth::user()->can('categorias do noticias.visualizar') &&
-                                            Auth::user()->can('categorias do noticias.remover') ||
+                                            @if (Auth::user()->can('parceiros.visualizar') &&
+                                            Auth::user()->can('parceiros.remover') ||
                                             Auth::user()->can('usuario.tornar usuario master') || 
                                             Auth::user()->hasRole('Super'))
                                                 <button id="btSubmitDelete" data-route="{{route('admin.dashboard.partner.destroySelected')}}" type="button" class="btSubmitDelete btn btn-danger" style="display: none;">{{__('dashboard.btn_delete_all')}}</button>
                                             @endif
                                         </div>
                                         <div class="col-6 d-flex justify-content-end">
-                                            @if (Auth::user()->can('categorias do noticias.visualizar') &&
-                                            Auth::user()->can('categorias do noticias.criar') ||
+                                            @if (Auth::user()->can('parceiros.visualizar') &&
+                                            Auth::user()->can('parceiros.criar') ||
                                             Auth::user()->can('usuario.tornar usuario master') || 
                                             Auth::user()->hasRole('Super'))
                                                 <button type="button" class="btn btn-primary text-black waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#partner-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
@@ -99,8 +99,8 @@
                                                         @endswitch
                                                     </td>
                                                     <td class="d-flex gap-lg-1 justify-center">
-                                                        @if (Auth::user()->can('categorias do noticias.visualizar') &&
-                                                        Auth::user()->can('categorias do noticias.editar') ||
+                                                        @if (Auth::user()->can('parceiros.visualizar') &&
+                                                        Auth::user()->can('parceiros.editar') ||
                                                         Auth::user()->can('usuario.tornar usuario master') || 
                                                         Auth::user()->hasRole('Super'))
                                                             <button class="table-edit-button btn btn-primary text-black" data-bs-toggle="modal" data-bs-target="#modal-group-edit-{{$partner->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
@@ -127,8 +127,8 @@
                                                             </div><!-- /.modal -->                                                        
                                                         @endif
 
-                                                        @if (Auth::user()->can('categorias do noticias.visualizar') &&
-                                                        Auth::user()->can('categorias do noticias.remover') ||
+                                                        @if (Auth::user()->can('parceiros.visualizar') &&
+                                                        Auth::user()->can('parceiros.remover') ||
                                                         Auth::user()->can('usuario.tornar usuario master') || 
                                                         Auth::user()->hasRole('Super'))
                                                             <form action="{{route('admin.dashboard.partner.destroy',['partner' => $partner->id])}}" style="width: 30px" method="POST">

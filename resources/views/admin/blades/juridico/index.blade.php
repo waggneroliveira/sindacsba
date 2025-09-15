@@ -11,10 +11,10 @@
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Editais</li>
+                                    <li class="breadcrumb-item active">Jurídico</li>
                                 </ol>
                             </div>
-                            <h4 class="page-title">Editais</h4>
+                            <h4 class="page-title">Jurídico</h4>
                         </div>
                     </div>
                 </div>
@@ -27,16 +27,16 @@
                                 <div class="row mb-2">
                                     <div class="col-12 d-flex justify-between">
                                         <div class="col-6">
-                                            @if (Auth::user()->can('editais.visualizar') &&
-                                            Auth::user()->can('editais.remover') ||
+                                            @if (Auth::user()->can('juridico.visualizar') &&
+                                            Auth::user()->can('juridico.remover') ||
                                             Auth::user()->can('usuario.tornar usuario master') || 
                                             Auth::user()->hasRole('Super'))
                                                 <button id="btSubmitDelete" data-route="{{route('admin.dashboard.juridico.destroySelected')}}" type="button" class="btSubmitDelete btn btn-danger" style="display: none;">{{__('dashboard.btn_delete_all')}}</button>
                                             @endif
                                         </div>
                                         <div class="col-6 d-flex justify-content-end">
-                                            @if (Auth::user()->can('editais.visualizar') &&
-                                            Auth::user()->can('editais.criar') ||
+                                            @if (Auth::user()->can('juridico.visualizar') &&
+                                            Auth::user()->can('juridico.criar') ||
                                             Auth::user()->can('usuario.tornar usuario master') || 
                                             Auth::user()->hasRole('Super'))
                                                 <button type="button" class="btn btn-primary text-black waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#juridicos-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
@@ -114,8 +114,8 @@
                                                         @endswitch
                                                     </td>
                                                     <td class="d-flex gap-lg-1 justify-center">
-                                                        @if (Auth::user()->can('editais.visualizar') &&
-                                                        Auth::user()->can('editais.editar') ||
+                                                        @if (Auth::user()->can('juridico.visualizar') &&
+                                                        Auth::user()->can('juridico.editar') ||
                                                         Auth::user()->can('usuario.tornar usuario master') || 
                                                         Auth::user()->hasRole('Super'))
                                                             <button class="table-edit-button btn btn-primary text-black" data-bs-toggle="modal" data-bs-target="#modal-group-edit-{{$juridico->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
@@ -142,8 +142,8 @@
                                                             </div><!-- /.modal -->                                                        
                                                         @endif
 
-                                                        @if (Auth::user()->can('editais.visualizar') &&
-                                                        Auth::user()->can('editais.remover') ||
+                                                        @if (Auth::user()->can('juridico.visualizar') &&
+                                                        Auth::user()->can('juridico.remover') ||
                                                         Auth::user()->can('usuario.tornar usuario master') || 
                                                         Auth::user()->hasRole('Super'))
                                                             <form action="{{route('admin.dashboard.juridico.destroy',['juridico' => $juridico->id])}}" style="width: 30px" method="POST">

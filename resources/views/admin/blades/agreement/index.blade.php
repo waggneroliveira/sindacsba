@@ -27,8 +27,8 @@
                                 <div class="row mb-2">
                                     <div class="col-12 d-flex justify-end">
                                         <div class="col-12 d-flex justify-content-end">
-                                            @if (Auth::user()->can('editais.visualizar') &&
-                                            Auth::user()->can('editais.criar') ||
+                                            @if (Auth::user()->can('convenios.visualizar') &&
+                                            Auth::user()->can('convenios.criar') ||
                                             Auth::user()->can('usuario.tornar usuario master') || 
                                             Auth::user()->hasRole('Super'))
                                                 @if (!isset($agreement))                                                
@@ -98,8 +98,8 @@
                                                         @endswitch
                                                     </td>
                                                     <td class="d-flex gap-lg-1 justify-center">
-                                                        @if (Auth::user()->can('editais.visualizar') &&
-                                                        Auth::user()->can('editais.editar') ||
+                                                        @if (Auth::user()->can('convenios.visualizar') &&
+                                                        Auth::user()->can('convenios.editar') ||
                                                         Auth::user()->can('usuario.tornar usuario master') || 
                                                         Auth::user()->hasRole('Super'))
                                                             <button class="table-edit-button btn btn-primary text-black" data-bs-toggle="modal" data-bs-target="#modal-group-edit-{{$agreement->id}}" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
@@ -126,8 +126,8 @@
                                                             </div><!-- /.modal -->                                                        
                                                         @endif
 
-                                                        @if (Auth::user()->can('editais.visualizar') &&
-                                                        Auth::user()->can('editais.remover') ||
+                                                        @if (Auth::user()->can('convenios.visualizar') &&
+                                                        Auth::user()->can('convenios.remover') ||
                                                         Auth::user()->can('usuario.tornar usuario master') || 
                                                         Auth::user()->hasRole('Super'))
                                                             <form action="{{route('admin.dashboard.agreement.destroy',['agreement' => $agreement->id])}}" style="width: 30px" method="POST">

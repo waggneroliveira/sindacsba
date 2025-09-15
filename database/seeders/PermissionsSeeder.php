@@ -14,21 +14,11 @@ class PermissionsSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-            'auditoria'=>[
-                'Visualizar',
-            ],
-            'newsletter'=>[
-                'Visualizar',
-                'Remover'
-            ],
-            'lead contato'=>[
+            'a direcao'=>[
+                'Criar',
+                'Editar',                
                 'Visualizar',
                 'Remover'
-            ],
-            'email'=>[
-                'Visualizar',
-                'configurar smtp',
-                'testar conexao smtp'
             ],
             'anuncio'=>[
                 'Criar',
@@ -36,13 +26,10 @@ class PermissionsSeeder extends Seeder
                 'Visualizar',
                 'Remover'
             ],
-            'editais'=>[
-                'Criar',
-                'Editar',                
+            'auditoria'=>[
                 'Visualizar',
-                'Remover'
             ],
-            'contato'=>[
+            'beneficios'=>[
                 'Criar',
                 'Editar',                
                 'Visualizar',
@@ -54,11 +41,100 @@ class PermissionsSeeder extends Seeder
                 'Visualizar',
                 'Remover'
             ],
+            'convenios'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
+            'contato'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
+            'denuncie'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
+            'editais'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
+            'email'=>[
+                'Visualizar',
+                'configurar smtp',
+                'testar conexao smtp'
+            ],
+            'estatuto'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
+            'eventos'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
+            'grupo'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
+            'juridico'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
+            'lead contato'=>[
+                'Visualizar',
+                'Remover'
+            ],
+            'municipios'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
+            'newsletter'=>[
+                'Visualizar',
+                'Remover'
+            ],
             'noticias'=>[
                 'Criar',
                 'Editar',                
                 'Visualizar',
                 'Aprovar, Reprovar ou Remover Comentário',
+                'Remover'
+            ],
+            'notificacao'=>[               
+                'Visualizar',
+                'Notificacao de auditoria',
+            ],
+            'parceiros'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
+            'regionais'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
+            ],
+            'sindicalize-se'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
                 'Remover'
             ],
             'slide'=>[
@@ -73,15 +149,11 @@ class PermissionsSeeder extends Seeder
                 'Visualizar',
                 'Remover'
             ],
-            'grupo'=>[
+            'topicos'=>[
                 'Criar',
                 'Editar',                
                 'Visualizar',
                 'Remover'
-            ],
-            'notificacao'=>[               
-                'Visualizar',
-                'Notificacao de auditoria',
             ],
             'usuario'=>[
                 'Criar',
@@ -91,6 +163,12 @@ class PermissionsSeeder extends Seeder
                 'Visualizar outros usuarios',
                 'Atribuir grupos',
                 'Tornar usuario master'
+            ],
+            'videos'=>[
+                'Criar',
+                'Editar',                
+                'Visualizar',
+                'Remover'
             ],
         ];
 
