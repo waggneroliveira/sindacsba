@@ -76,7 +76,7 @@ class PermissionsSeeder extends Seeder
                 'Visualizar',
                 'Remover'
             ],
-            'eventos'=>[
+            'agenda'=>[
                 'Criar',
                 'Editar',                
                 'Visualizar',

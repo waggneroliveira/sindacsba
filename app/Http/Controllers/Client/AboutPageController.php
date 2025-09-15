@@ -16,7 +16,7 @@ class AboutPageController extends Controller
         $abouts = About::active()->sorting()->get();
         $partners = Partner::active()->sorting()->get();
         $contact = Contact::first();
-        $statute = Statute::first();
+        $statute = Statute::active()->first();
         $directions = Direction::active()->sorting()->get();
 
         return view('client.blades.about', compact('directions', 'statute', 'contact', 'partners', 'abouts'));

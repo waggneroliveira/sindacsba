@@ -20,7 +20,7 @@ class EventController extends Controller
         $settingTheme = (new SettingThemeRepository())->settingTheme();
         if(!Auth::user()->hasRole('Super') && 
           !Auth::user()->can('usuario.tornar usuario master') && 
-          !Auth::user()->hasPermissionTo('categorias do noticias.visualizar')){
+          !Auth::user()->hasPermissionTo('agenda.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
 
@@ -81,7 +81,7 @@ class EventController extends Controller
         return redirect()->back();
     }
 
-        public function destroySelected(Request $request)
+    public function destroySelected(Request $request)
     {    
         foreach ($request->deleteAll as $eventId) {
             $event = Event::find($eventId);

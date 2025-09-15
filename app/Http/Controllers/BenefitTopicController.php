@@ -18,6 +18,12 @@ class BenefitTopicController extends Controller
     protected $pathUpload = 'admin/uploads/images/benefitTopic/';
     public function index()
     {
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
+        if(!Auth::user()->hasRole('Super') && 
+            !Auth::user()->can('usuario.tornar usuario master') && 
+            !Auth::user()->hasPermissionTo('beneficios.visualizar')){
+            return view('admin.error.403', compact('settingTheme'));
+        }
         $benefitTopics = BenefitTopic::get();
 
         return view('admin.blades.benefitTopic.index', compact('benefitTopics'));

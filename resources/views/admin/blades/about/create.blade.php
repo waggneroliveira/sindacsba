@@ -55,11 +55,12 @@
                                     </div>
                                 </div>
                             </div>                            
-                            
-                            <div class="d-flex justify-content-end gap-2">
-                                <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
-                                <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
-                            </div>                                                 
+                            @if(Auth::user()->hasPermissionTo('sobre nos.visualizar') && Auth::user()->hasPermissionTo('sobre nos.criar'))
+                                <div class="d-flex justify-content-end gap-2">
+                                    <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
+                                    <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_create')}}</button>
+                                </div>  
+                            @endif                                               
                         </div>
                     </div>
                 </form> 

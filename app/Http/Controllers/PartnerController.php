@@ -22,11 +22,11 @@ class PartnerController extends Controller
         $settingTheme = (new SettingThemeRepository())->settingTheme();
         if(!Auth::user()->hasRole('Super') && 
           !Auth::user()->can('usuario.tornar usuario master') && 
-          !Auth::user()->hasPermissionTo('sobre nos.visualizar')){
+          !Auth::user()->hasPermissionTo('parceiros.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
 
-        $partners = Partner::get();
+        $partners = Partner::sorting()->get();
 
         return view('admin.blades.partner.index', compact('partners'));
     }
@@ -139,7 +139,7 @@ class PartnerController extends Controller
         return redirect()->back();
     }
 
-     public function destroySelected(Request $request)
+    public function destroySelected(Request $request)
     {    
         foreach ($request->deleteAll as $partnerId) {
             $partner = Partner::find($partnerId);

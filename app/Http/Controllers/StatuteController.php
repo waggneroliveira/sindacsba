@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Statute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Repositories\SettingThemeRepository;
 
 class StatuteController extends Controller
 {
@@ -15,6 +17,12 @@ class StatuteController extends Controller
     protected $pathUpload = 'admin/uploads/images/statute/';
     public function index()
     {
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
+        if(!Auth::user()->hasRole('Super') && 
+          !Auth::user()->can('usuario.tornar usuario master') && 
+          !Auth::user()->hasPermissionTo('estatuto.visualizar')){
+            return view('admin.error.403', compact('settingTheme'));
+        }
        $statute = Statute::first();
 
         return view('admin.blades.statute.index', compact('statute'));

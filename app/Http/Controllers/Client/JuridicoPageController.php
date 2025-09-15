@@ -34,6 +34,7 @@ class JuridicoPageController extends Controller
         ->when($region, function ($query, $region) {
             $query->where('region', $region);
         })
+        ->active()
         ->get();
         
         return view('client.ajax.juridico-ajax', compact('juridicos'));

@@ -194,7 +194,7 @@
                 <div class="social-links d-flex justify-content-center align-items-center gap-4 mb-2 mt-3 text-center col-12">
                     <nav class="none site-navigation ul position-relative text-end width-75">
                         <ul class="d-flex flex-row justify-content-start align-items-center gap-4 mb-0 list-unstyled">
-                            <li><a href="{{route('index')}}" class="nav-link montserrat-medium text-center font-18">Home</a></li>
+                            <li><a href="{{route('index')}}" class="nav-link montserrat-medium text-center font-18">Home</a></li>                                                   
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle montserrat-medium text-center font-18" 
                                 href="{{route('about')}}" 
@@ -205,9 +205,11 @@
                                     Sobre Nós <i class="bi bi-chevron-down"></i>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="sobreNosDropdown">
-                                    @foreach ($abouts as $about)                                        
-                                        <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#{{$about->slug}}">{{$about->title}}</a></li>
-                                    @endforeach
+                                    @if (isset($abouts) && $abouts <> null) 
+                                        @foreach ($abouts as $about)                                        
+                                            <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#{{$about->slug}}">{{$about->title}}</a></li>
+                                        @endforeach
+                                    @endif
                                     <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#board">Equipe</a></li>
                                     <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#statute">Estatuto</a></li>
                                 </ul>
@@ -590,23 +592,26 @@
             <nav class="mt-5">
                 <ul class="list-unstyled text-center">
                     <li><a href="{{route('index')}}" class="nav-link text-white montserrat-regular text-center font-18">Home</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white montserrat-regular text-center font-18" 
-                        href="{{route('about')}}" 
-                        id="sobreNosDropdown" 
-                        role="button" 
-                        data-bs-toggle="dropdown" 
-                        aria-expanded="false">
-                            Sobre Nós <i class="bi bi-chevron-down"></i>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="sobreNosDropdown">
-                            @foreach ($abouts as $about)                                        
-                                <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#{{$about->slug}}">{{$about->title}}</a></li>
-                            @endforeach
-                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#board">Equipe</a></li>
-                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#statute">Estatuto</a></li>
-                        </ul>
-                    </li>
+                                           
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white montserrat-regular text-center font-18" 
+                            href="{{route('about')}}" 
+                            id="sobreNosDropdown" 
+                            role="button" 
+                            data-bs-toggle="dropdown" 
+                            aria-expanded="false">
+                                Sobre Nós <i class="bi bi-chevron-down"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="sobreNosDropdown">
+                                @if (isset($abouts) && $abouts <> null) 
+                                    @foreach ($abouts as $about)                                        
+                                        <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#{{$about->slug}}">{{$about->title}}</a></li>
+                                    @endforeach
+                                @endif
+                                <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#board">Equipe</a></li>
+                                <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#statute">Estatuto</a></li>
+                            </ul>
+                        </li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white montserrat-regular text-center font-18" 

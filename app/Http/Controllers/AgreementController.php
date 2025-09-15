@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Agreement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
-use Intervention\Image\ImageManager;
+use App\Repositories\SettingThemeRepository;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 
 class AgreementController extends Controller
@@ -16,6 +18,12 @@ class AgreementController extends Controller
     protected $pathUpload = 'admin/uploads/images/agreement/';
     public function index()
     {
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
+        if(!Auth::user()->hasRole('Super') && 
+            !Auth::user()->can('usuario.tornar usuario master') && 
+            !Auth::user()->hasPermissionTo('convenios.visualizar')){
+            return view('admin.error.403', compact('settingTheme'));
+        }
         $agreement = Agreement::first();
 
         return view('admin.blades.agreement.index', compact('agreement'));

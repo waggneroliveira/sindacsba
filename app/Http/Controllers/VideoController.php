@@ -9,13 +9,21 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Repositories\SettingThemeRepository;
 
 class VideoController extends Controller
 {
 
     public function index()
     {
-        $videos = Video::get();
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
+        if(!Auth::user()->hasRole('Super') && 
+          !Auth::user()->can('usuario.tornar usuario master') && 
+          !Auth::user()->hasPermissionTo('videos.visualizar')){
+            return view('admin.error.403', compact('settingTheme'));
+        }
+
+        $videos = Video::sorting()->get();
 
         return view('admin.blades.video.index', compact('videos'));
     }

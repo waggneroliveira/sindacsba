@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Repositories\SettingThemeRepository;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 
 class TopicController extends Controller
@@ -19,6 +20,13 @@ class TopicController extends Controller
     protected $pathUpload = 'admin/uploads/project/image/';
     public function index()
     {
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
+        if(!Auth::user()->hasRole('Super') && 
+          !Auth::user()->can('usuario.tornar usuario master') && 
+          !Auth::user()->hasPermissionTo('topicos.visualizar')){
+            return view('admin.error.403', compact('settingTheme'));
+        }
+
         $topics = Topic::select(
             'id',
             'title',
@@ -26,7 +34,7 @@ class TopicController extends Controller
             'color',
             'sorting',
             'path_image',
-        )->get();
+        )->sorting()->get();
 
         return view('admin.blades.topic.index', compact('topics'));
     }

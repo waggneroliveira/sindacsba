@@ -22,7 +22,7 @@ class JuridicoController extends Controller
         $settingTheme = (new SettingThemeRepository())->settingTheme();
         if(!Auth::user()->hasRole('Super') && 
           !Auth::user()->can('usuario.tornar usuario master') &&
-          !Auth::user()->hasPermissionTo('editais.visualizar')){
+          !Auth::user()->hasPermissionTo('juridico.visualizar')){
             return view('admin.error.403', compact('settingTheme'));
         }
         $juridicos = Juridico::sorting()->get();
@@ -73,7 +73,7 @@ class JuridicoController extends Controller
         }
         if ($path_file) {
             $request->file('path_file')->storeAs($this->pathUpload, $path_file);
-            Storage::delete($juridico->path_file);
+            Storage::delete($juridico->path_file?$juridico->path_file:'');
         }
         if(isset($request->delete_path_file) && !$path_file){
             $inputFile = $request->delete_path_file;

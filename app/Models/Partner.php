@@ -25,7 +25,7 @@ class Partner extends Model
     }
 
     public function scopeSorting($query){
-        return $query->orderby('sorting', 'DESC');
+        return $query->orderBy('created_at', 'DESC')->orderBy('sorting', 'ASC');
     }
 
     public function getActivitylogOptions(): LogOptions

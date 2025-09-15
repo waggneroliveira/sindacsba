@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Repositories\SettingThemeRepository;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 
 class ReportController extends Controller
@@ -16,7 +18,13 @@ class ReportController extends Controller
     protected $pathUpload = 'admin/uploads/images/report/';
     public function index()
     {
-       $report = Report::first();
+        $settingTheme = (new SettingThemeRepository())->settingTheme();
+        if(!Auth::user()->hasRole('Super') && 
+            !Auth::user()->can('usuario.tornar usuario master') && 
+            !Auth::user()->hasPermissionTo('denuncie.visualizar')){
+            return view('admin.error.403', compact('settingTheme'));
+        }
+        $report = Report::first();
 
        return view('admin.blades.report.index', compact('report'));
     }

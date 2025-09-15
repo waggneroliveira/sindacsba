@@ -1,7 +1,7 @@
 @extends('client.core.client')
 @section('content')
 
-@if (!empty($slides))
+@if (!empty($slides) && $slides->count() > 0)
     <section id="hero" class="hero position-relative d-flex flex-column section dark-background overflow-hidden">
         <div class="swiper hero-swiper">
             <div class="swiper-wrapper">
@@ -33,7 +33,7 @@
         </div>
     </section>
 @endif
-@if (isset($topics) && $topics <> null)
+@if (isset($topics) && $topics->count() > 0)
     <section id="topic" class="topic">
         <div class="container py-5">
             <div class="row g-3 justify-content-center">
@@ -43,10 +43,12 @@
                             <a href="{{$topic->link}}" class="position-absolute top-0 left-0 w-100 h-100" rel="noopener noreferrer"></a>
                         @endif
                         <div class="partner-card {{isset($topics) ? $topic->color : 'dark-background'}} border rounded-2 d-flex flex-column justify-content-center align-items-start gap-3 p-3 w-100">
-                            <img src="{{ asset('storage/' . $topic->path_image) }}" 
-                                alt="Logo do parceiro" 
-                                class="img-fluid" 
-                                loading="lazy"/>
+                            @if ($topic->path_image <> null)                                
+                                <img src="{{ asset('storage/' . $topic->path_image) }}" 
+                                    alt="Logo do parceiro" 
+                                    class="img-fluid" 
+                                    loading="lazy"/>
+                            @endif
                             <h2 class="montserrat-bold montserrat-bold font-18  mb-0 title-blue text-uppercase mb-0 text-white">{{$topic->title}}</h2>                            
                         </div>                        
                     </div>
@@ -132,29 +134,31 @@
     </section>
 @endif
 
-@if (isset($about) || isset($partners))
+@if (isset($about) && $about <> null || isset($partners) && $partners->count() > 0)
     <section class="aboutt">
         <div class="container">
-            <div id="about-1" class="d-flex justify-content-between align-items-start about flex-wrap w-100 pt-3 pb-3 pt-lg-5">
-                <div class="col-12 col-lg-7 animate-on-scroll" data-animation="animate__fadeInLeft">
-                    <div class="border-bottom mb-0">
-                        <h2 class="section-title rounded-top-left d-table px-4 w-auto m-0 montserrat-bold font-18 title-blue">{{$about->title}}</h2>
-                    </div>
-            
-                    <div class="description mt-4 text-blog-inner montserrat-medium font-16">
-                        {!! $about->text !!}
-                    </div>
+            @if ($about <> null)                
+                <div id="about-1" class="d-flex justify-content-between align-items-start about flex-wrap w-100 pt-3 pb-3 pt-lg-5">
+                    <div class="col-12 col-lg-7 animate-on-scroll" data-animation="animate__fadeInLeft">
+                        <div class="border-bottom mb-0">
+                            <h2 class="section-title rounded-top-left d-table px-4 w-auto m-0 montserrat-bold font-18 title-blue">{{$about->title}}</h2>
+                        </div>
+                
+                        <div class="description mt-4 text-blog-inner montserrat-medium font-16">
+                            {!! $about->text !!}
+                        </div>
 
-                    <div class="btn-about my-4">
-                        <a href="{{route('about')}}#{{$about->slug}}" class="background-red montserrat-semiBold font-15 py-2 px-4 rounded-4">Saiba mais</a>
+                        <div class="btn-about my-4">
+                            <a href="{{route('about')}}#{{$about->slug}}" class="background-red montserrat-semiBold font-15 py-2 px-4 rounded-4">Saiba mais</a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-11 col-lg-4 animate-on-scroll mb-3" data-animation="animate__fadeInRight">
-                    <div class="image d-flex justify-content-end">
-                        <img src="{{asset('storage/' . $about->path_image)}}" loading="lazy" alt="About" class="w-100 h-100 about-image d-sm-block" loading="lazy">
+                    <div class="col-11 col-lg-4 animate-on-scroll mb-3" data-animation="animate__fadeInRight">
+                        <div class="image d-flex justify-content-end">
+                            <img src="{{asset('storage/' . $about->path_image)}}" loading="lazy" alt="About" class="w-100 h-100 about-image d-sm-block" loading="lazy">
+                        </div>
                     </div>
-                </div>
-            </div>     
+                </div>     
+            @endif
             
             @include('client.includes.partner')
         </div>
@@ -169,149 +173,153 @@
     </div>
 @endif
 
-@if (!empty($videos))
-<section class="video">
-    <div class="container-fluid p-0">
-        <div class="content-video d-flex justify-content-center align-items-center bg-black">
-            <!-- Lista -->
-            <div class="left col-5 dark-background h-100 d-flex justify-content-center align-items-end flex-column position-relative">
-                <div class="swiper mySwiper position-relative">
-                    <div class="swiper-wrapper py-4 flex-column align-items-start justify-content-start m-auto position-relative">
-                        @foreach($videos as $video)
-                            <div class="swiper-slide align-items-center mb-3 justify-content-start"
-                                 data-video="{{ $video->link }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="external-icon" viewBox="0 0 28.57 20" focusable="false" style="pointer-events: none; display: block; width: 35px; height: auto;">
-                                    <svg viewBox="0 0 28.57 20" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-                                        <g>
-                                            <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000"></path>
-                                            <path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white"></path>
-                                        </g>
+@if (!empty($videos) && $videos->count() > 0)
+    <section class="video">
+        <div class="container-fluid p-0">
+            <div class="content-video d-flex justify-content-center align-items-center bg-black">
+                <!-- Lista -->
+                <div class="left col-5 dark-background h-100 d-flex justify-content-center align-items-end flex-column position-relative">
+                    <div class="swiper mySwiper position-relative">
+                        <div class="swiper-wrapper py-4 flex-column align-items-start justify-content-start m-auto position-relative">
+                            @foreach($videos as $video)
+                                <div class="swiper-slide align-items-center mb-3 justify-content-start"
+                                    data-video="{{ $video->link }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="external-icon" viewBox="0 0 28.57 20" focusable="false" style="pointer-events: none; display: block; width: 35px; height: auto;">
+                                        <svg viewBox="0 0 28.57 20" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                                            <g>
+                                                <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000"></path>
+                                                <path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white"></path>
+                                            </g>
+                                        </svg>
                                     </svg>
-                                </svg>
-                                <h4 class="title montserrat-medium font-16 mb-0 col-10">
-                                    {{ $video->title ?? 'Vídeo' }}
-                                </h4>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-                <div class="nav-video position-absolute d-flex flex-column align-items-end me-5">
-                    <div class="swiper-button-up">▲</div>
-                    <div class="swiper-button-down">▼</div>
-                </div>
-            </div>
-
-            <!-- Player -->
-            <div class="right col-7 bg-black d-flex justify-content-center align-items-center">
-                <iframe id="videoPlayer" class="w-100 h-100"
-                        src=""
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-</section>
-@endif
-
-<section class="category-blog-home py-0 mt-5">
-    <div class="container-fluid p-0">
-        <div class="row g-3 justify-content-center">
-            @foreach($trendingCategories as $trendingCategory)                
-                <div class="col-6 col-sm-4 col-md-2 col-lg d-flex justify-content-center p-0 mt-0">
-                    <div class="box-category text-center w-100 position-relative overflow-hidden">
-                        @if (isset($trendingCategory->path_image) && $trendingCategory->path_image <> null)
-                            <img src="{{asset('storage/' . $trendingCategory->path_image)}}" alt="" class="w-100 img-fluid mx-auto">
-                            @else
-                            <img src="{{asset('build/client/images/category-blog.png')}}" alt="" class="w-100 img-fluid mx-auto">
-                        @endif
-                        <div class="overlay">
-                            <a href="{{ route('blog', ['category' => $trendingCategory->slug]) }}#news" class="w-100 text-center">
-                                <h4 class="title montserrat-semiBold font-18 text-white mt-2">{{$trendingCategory->title}}</h4>
-                            </a>
+                                    <h4 class="title montserrat-medium font-16 mb-0 col-10">
+                                        {{ $video->title ?? 'Vídeo' }}
+                                    </h4>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-<section class="news-home py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-lg-9 animate-on-scroll mb-3" data-animation="animate__fadeInLeft">
-                <div class="border-bottom news mb-4">
-                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-end">
-                        <h2 class="section-title d-table px-4 py-2 w-auto m-0 montserrat-bold font-18 title-blue text-uppercase rounded-top-left">
-                            Últimas notícias
-                        </h2>
-
-                        <nav class="mt-3 mt-md-0">
-                            <ul class="list-unstyled d-flex flex-row flex-wrap gap-2 gap-md-3 justify-content-start justify-content-md-center mb-0">
-                                <li class="py-1 py-sm-2 px-2 px-sm-3 text-uppercase montserrat-semiBold font-14 text-white background-red active">
-                                    <a href="javascript:void(0)" class="text-decoration-none text-white category-filter" data-category="todas">
-                                        Todas
-                                    </a>
-                                </li>
-                                
-                                @foreach($recentCategories as $index => $category)
-                                    <li class="py-2 px-1 px-sm-3 text-uppercase montserrat-semiBold font-14 text-black">
-                                        <a href="javascript:void(0)" class="text-decoration-none text-black category-filter" data-category="{{ $category->slug }}">
-                                            {{ $category->title }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </nav>
+                    <div class="nav-video position-absolute d-flex flex-column align-items-end me-5">
+                        <div class="swiper-button-up">▲</div>
+                        <div class="swiper-button-down">▼</div>
                     </div>
                 </div>
 
-                <div id="news-container">
-                    @include('client.ajax.filter-blog-homePage', [
-                        'featuredNews' => $featuredNews,
-                        'latestNews' => $latestNews
-                    ])
-                </div>
-            </div>
-            <div class="col-lg-3" data-aos="fade-left" data-aos-delay="100">
-                <div class="section-title mb-0 rounded-top-left">
-                    <h3 class="m-0 text-uppercase montserrat-bold font-18 title-blue">Agenda</h3>
-                </div>
-
-                <div class="bg-white p-3">      
-                    @foreach($events as $event)                        
-                        <article>
-                            <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 80px;">
-                                <div class="date col-4 h-100 d-flex justify-content-center align-items-center flex-column border border-right-1">
-                                    <span class="montserrat-bold w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue">
-                                        {{ \Carbon\Carbon::parse($event->date)->format('d') }}
-                                    </span>
-                                    <span class="montserrat-medium w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue background-red text-white">
-                                        {{ ucfirst(\Carbon\Carbon::parse($event->date)->translatedFormat('F')) }}
-                                    </span>
-                                </div>
-                                <div class="col-8 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                    @if($event->link)
-                                        <a href="{{ $event->link }}" class="underline">
-                                    @else
-                                        <a href="{{ route('client.event') }}?event_id={{ $event->id }}&scroll=true" class="underline">
-                                    @endif
-                                        <h3 class="h6 m-0 montserrat-bold font-14 title-blue" title="{{$event->title}}">
-                                            {{ substr(strip_tags($event->title), 0, 50) }}...
-                                        </h3>
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-                    @endforeach              
-                    <div class="btn-about d-table m-auto mt-5">
-                        <a href="{{route('client.event')}}" class="background-red montserrat-semiBold font-18 py-2 px-4 rounded-5">Ver todos</a>
-                    </div>                      
+                <!-- Player -->
+                <div class="right col-7 bg-black d-flex justify-content-center align-items-center">
+                    <iframe id="videoPlayer" class="w-100 h-100"
+                            src=""
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+@endif
+
+@if (isset($trendingCategories) && $trendingCategories->count() > 0)
+    <section class="category-blog-home py-0 mt-5">
+        <div class="container-fluid p-0">
+            <div class="row g-3 justify-content-center">
+                @foreach($trendingCategories as $trendingCategory)                
+                    <div class="col-6 col-sm-4 col-md-2 col-lg d-flex justify-content-center p-0 mt-0">
+                        <div class="box-category text-center w-100 position-relative overflow-hidden">
+                            @if (isset($trendingCategory->path_image) && $trendingCategory->path_image <> null)
+                                <img src="{{asset('storage/' . $trendingCategory->path_image)}}" alt="" class="w-100 img-fluid mx-auto">
+                                @else
+                                <img src="{{asset('build/client/images/category-blog.png')}}" alt="" class="w-100 img-fluid mx-auto">
+                            @endif
+                            <div class="overlay">
+                                <a href="{{ route('blog', ['category' => $trendingCategory->slug]) }}#news" class="w-100 text-center">
+                                    <h4 class="title montserrat-semiBold font-18 text-white mt-2">{{$trendingCategory->title}}</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+@endif
+
+@if (isset($recentCategories) && $recentCategories->count() > 0 || isset($events))
+    <section class="news-home py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-9 animate-on-scroll mb-3" data-animation="animate__fadeInLeft">
+                    <div class="border-bottom news mb-4">
+                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-end">
+                            <h2 class="section-title d-table px-4 py-2 w-auto m-0 montserrat-bold font-18 title-blue text-uppercase rounded-top-left">
+                                Últimas notícias
+                            </h2>
+
+                            <nav class="mt-3 mt-md-0">
+                                <ul class="list-unstyled d-flex flex-row flex-wrap gap-2 gap-md-3 justify-content-start justify-content-md-center mb-0">
+                                    <li class="py-1 py-sm-2 px-2 px-sm-3 text-uppercase montserrat-semiBold font-14 text-white background-red active">
+                                        <a href="javascript:void(0)" class="text-decoration-none text-white category-filter" data-category="todas">
+                                            Todas
+                                        </a>
+                                    </li>
+                                    
+                                    @foreach($recentCategories as $index => $category)
+                                        <li class="py-2 px-1 px-sm-3 text-uppercase montserrat-semiBold font-14 text-black">
+                                            <a href="javascript:void(0)" class="text-decoration-none text-black category-filter" data-category="{{ $category->slug }}">
+                                                {{ $category->title }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div id="news-container">
+                        @include('client.ajax.filter-blog-homePage', [
+                            'featuredNews' => $featuredNews,
+                            'latestNews' => $latestNews
+                        ])
+                    </div>
+                </div>
+                <div class="col-lg-3" data-aos="fade-left" data-aos-delay="100">
+                    <div class="section-title mb-0 rounded-top-left">
+                        <h3 class="m-0 text-uppercase montserrat-bold font-18 title-blue">Agenda</h3>
+                    </div>
+
+                    <div class="bg-white p-3">      
+                        @foreach($events as $event)                        
+                            <article>
+                                <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 80px;">
+                                    <div class="date col-4 h-100 d-flex justify-content-center align-items-center flex-column border border-right-1">
+                                        <span class="montserrat-bold w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue">
+                                            {{ \Carbon\Carbon::parse($event->date)->format('d') }}
+                                        </span>
+                                        <span class="montserrat-medium w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue background-red text-white">
+                                            {{ ucfirst(\Carbon\Carbon::parse($event->date)->translatedFormat('F')) }}
+                                        </span>
+                                    </div>
+                                    <div class="col-8 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                                        @if($event->link)
+                                            <a href="{{ $event->link }}" class="underline">
+                                        @else
+                                            <a href="{{ route('client.event') }}?event_id={{ $event->id }}&scroll=true" class="underline">
+                                        @endif
+                                            <h3 class="h6 m-0 montserrat-bold font-14 title-blue" title="{{$event->title}}">
+                                                {{ substr(strip_tags($event->title), 0, 50) }}...
+                                            </h3>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        @endforeach              
+                        <div class="btn-about d-table m-auto mt-5">
+                            <a href="{{route('client.event')}}" class="background-red montserrat-semiBold font-18 py-2 px-4 rounded-5">Ver todos</a>
+                        </div>                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endif
 
 @include('client.includes.complaint')
 

@@ -27,16 +27,16 @@
                                 <div class="row mb-2">
                                     <div class="col-12 d-flex justify-between">
                                         <div class="col-6">
-                                            @if (Auth::user()->hasPermissionTo('sobre nos.visualizar') &&
-                                            Auth::user()->hasPermissionTo('sobre nos.remover') ||
+                                            @if (Auth::user()->hasPermissionTo('agenda.visualizar') &&
+                                            Auth::user()->hasPermissionTo('agenda.remover') ||
                                             Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                             Auth::user()->hasRole('Super'))
                                                 <button id="btSubmitDelete" data-route="{{route('admin.dashboard.event.destroySelected')}}" type="button" class="btSubmitDelete btn btn-danger" style="display: none;">{{__('dashboard.btn_delete_all')}}</button>
                                             @endif
                                         </div>
                                         <div class="col-6 d-flex justify-content-end">
-                                            @if (Auth::user()->hasPermissionTo('sobre nos.visualizar') &&
-                                            Auth::user()->hasPermissionTo('sobre nos.criar') ||
+                                            @if (Auth::user()->hasPermissionTo('agenda.visualizar') &&
+                                            Auth::user()->hasPermissionTo('agenda.criar') ||
                                             Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                             Auth::user()->hasRole('Super'))
                                                 <a href="{{route('admin.dashboard.event.create')}}" class="mdi mdi-plus-circle me-1 btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_create')}}</a>
@@ -80,15 +80,15 @@
                                                         @endswitch
                                                     </td>
                                                     <td class="d-flex gap-lg-1 justify-center">
-                                                        @if (Auth::user()->hasPermissionTo('sobre nos.visualizar') &&
-                                                        Auth::user()->hasPermissionTo('sobre nos.editar') ||
+                                                        @if (Auth::user()->hasPermissionTo('agenda.visualizar') &&
+                                                        Auth::user()->hasPermissionTo('agenda.editar') ||
                                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                                         Auth::user()->hasRole('Super'))
                                                             <a href="{{route('admin.dashboard.event.edit', ['event' => $event->id])}}" class="mdi mdi-pencil table-edit-button btn btn-primary text-black" style="padding: 2px 8px;width: 30px"></a>
                                                         @endif
 
-                                                        @if (Auth::user()->hasPermissionTo('sobre nos.visualizar') &&
-                                                        Auth::user()->hasPermissionTo('sobre nos.remover') ||
+                                                        @if (Auth::user()->hasPermissionTo('agenda.visualizar') &&
+                                                        Auth::user()->hasPermissionTo('agenda.remover') ||
                                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                                         Auth::user()->hasRole('Super'))
                                                             <form action="{{route('admin.dashboard.event.destroy',['event' => $event->id])}}" style="width: 30px" method="POST">

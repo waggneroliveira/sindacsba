@@ -26,7 +26,7 @@ class Video extends Model
     }
 
     public function scopeSorting($query){
-        return $query->orderBy('sorting', 'ASC');
+        return $query->orderBy('sorting', 'ASC')->orderBy('created_at', 'DESC');
     }
 
     public function getActivitylogOptions(): LogOptions

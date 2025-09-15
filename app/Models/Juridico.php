@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Juridico extends Model
 {
-     use Notifiable, HasFactory, LogsActivity;
+    use Notifiable, HasFactory, LogsActivity;
     
     protected $fillable = [
         'title',
@@ -29,7 +29,7 @@ class Juridico extends Model
     }
 
     public function scopeSorting($query){
-        return $query->orderBy('created_at', 'DESC');
+        return $query->orderBy('created_at', 'DESC')->orderBy('sorting', 'ASC');
     }
 
     public function getActivitylogOptions(): LogOptions

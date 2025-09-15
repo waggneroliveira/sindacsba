@@ -33,7 +33,7 @@ class HomePageController extends Controller
             $active->where('active', 1);
         })->highlightOnly()->active()->sorting()->limit(4)->get();
         $announcements = Announcement::active()->sorting()->get();
-        $topics = Topic::sorting()->active()->get();
+        $topics = Topic::active()->sorting()->get();
         $about = About::active()->first();
         $partners = Partner::active()->sorting()->get();
         $videos = Video::active()->sorting()->get();

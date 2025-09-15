@@ -15,7 +15,7 @@
     </div>
     <div class="mb-3 col-12">
         <label for="link" class="form-label">Link</label>
-        <input type="text" name="link" class="form-control" id="link{{isset($event->id)?$event->id:''}}" value="{{isset($event)?$event->link:''}}" placeholder="DLink">
+        <input type="text" name="link" class="form-control" id="link{{isset($event->id)?$event->id:''}}" value="{{isset($event)?$event->link:''}}" placeholder="Link">
     </div>
     
     <div class="mb-3">
