@@ -40,7 +40,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-center justify-content-center">
                                         <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                            <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                            <i class="avatar-md mdi mdi-image font-48 text-muted"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-center justify-content-center">
                                         <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                            <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                            <i class="avatar-md mdi mdi-format-list-bulleted font-48 text-muted"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-center justify-content-center">
                                         <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                            <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                            <i class="avatar-md mdi mdi-handshake font-48 text-muted"></i>
                                         </div>
                                     </div>
                                 </div>
