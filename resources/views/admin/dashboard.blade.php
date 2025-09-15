@@ -109,7 +109,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-center justify-content-center">
                                         <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                            <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                            <i class="avatar-md mdi mdi-play-circle font-48 text-muted"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -146,7 +146,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-center justify-content-center">
                                         <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                            <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                            <i class="avatar-md mdi mdi-help-circle font-48 text-muted"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -168,7 +168,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-center justify-content-center">
                                         <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                            <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                            <i class="avatar-md mdi mdi-account-group font-48 text-muted"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -190,7 +190,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-center justify-content-center">
                                         <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                            <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                            <i class="avatar-md mdi mdi-file-document font-48 text-muted"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -228,7 +228,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-center justify-content-center">
                                         <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                            <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                            <i class="avatar-md mdi mdi-hand-heart font-48 text-muted"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -251,7 +251,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-center justify-content-center">
                                         <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                            <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                            <i class="avatar-md mdi mdi-account-box font-48 text-muted"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -274,7 +274,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-center justify-content-center">
                                         <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                            <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                            <i class="avatar-md mdi mdi-star font-48 text-muted"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -297,7 +297,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-center justify-content-center">
                                         <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                            <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                            <i class="avatar-md mdi mdi-alert-circle font-48 text-muted"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -329,7 +329,7 @@
                             <div class="row">
                                 <div class="col-12 d-flex align-items-center justify-content-center">
                                     <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                        <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                        <i class="avatar-md mdi mdi-scale-balance font-48 text-muted"></i>
                                     </div>
                                 </div>
                             </div>
@@ -362,7 +362,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-center justify-content-center">
                                         <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                            <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                            <i class="avatar-md mdi mdi-map-marker-radius font-48 text-muted"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -384,7 +384,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-center justify-content-center">
                                         <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                            <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                            <i class="avatar-md mdi mdi-map-marker font-48 text-muted"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -415,7 +415,7 @@
                             <div class="row">
                                 <div class="col-12 d-flex align-items-center justify-content-center">
                                     <div class="avatar-xl bg-hoom rounded-circle text-center">
-                                        <i class="avatar-md mdi mdi-tag-multiple font-48 text-muted"></i>
+                                        <i class="avatar-md mdi mdi-calendar-outline font-48 text-muted"></i>
                                     </div>
                                 </div>
                             </div>
