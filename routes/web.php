@@ -109,7 +109,7 @@ View::composer('client.core.client', function ($view) {
     $directions = Direction::active()->sorting()->count();
     $benefitTopics = BenefitTopic::active()->sorting()->count();
     $report = Report::active()->count();
-    $agreement = Agreement::active()->first();
+    $agreement = Agreement::active()->count();
 
     return $view->with('blogCategories', $blogCategories)
     ->with('announcements', $announcements)
