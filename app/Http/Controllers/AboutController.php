@@ -200,7 +200,7 @@ class AboutController extends Controller
             Alert::error('Erro', __('dashboard.response_item_error_update'));
         }
 
-        return redirect()->back();
+        return redirect()->route('admin.dashboard.about.index');
     }
 
     public function destroy(About $about)

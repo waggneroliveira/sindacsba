@@ -74,7 +74,8 @@
                                                     <label><input name="btnSelectAll" type="checkbox"></label>
                                                 </th>
                                                 {{-- <th>Link</th> --}}
-                                                <th>Título</th>
+                                                <th>Regional</th>
+                                                <th>Município</th>
                                                 <th>Status</th>
                                                 <th style="width: 85px;">Ações</th>
                                             </tr>
@@ -87,6 +88,7 @@
                                                     <td class="bs-checkbox">
                                                         <label><input data-index="{{$key}}" name="btnSelectItem" class="btnSelectItem" type="checkbox" value="{{$municipality->id}}"></label>
                                                     </td>
+                                                    <td>{{$municipality->regional->title}}</td>
                                                     <td>{{$municipality->title}}</td>
                                                     <td>
                                                         @switch($municipality->active)

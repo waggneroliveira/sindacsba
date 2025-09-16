@@ -8,9 +8,9 @@
         <div class="mb-3">
             <label for="title" class="form-label">Título </label>
             <input type="text" name="title" class="form-control" id="{{$titleInputId}}" value="{{isset($slide)?$slide->title:''}}" placeholder="Título">
-            <div class="mt-2">
+            {{-- <div class="mt-2">
                 <button type="button" class="btn btn-sm btn-outline-secondary" onclick="boldSelectionTitle()"><b>B</b></button>
-            </div>
+            </div> --}}
         </div>
         
         <div class="mb-3">

@@ -11,16 +11,15 @@
                             <source srcset="{{ asset('storage/' . $slide->path_image_mobile) }}" media="(max-width: 885px)">
                             <img src="{{ asset('storage/' . $slide->path_image) }}" alt="Banner Hero" title="Banner Hero" class="image-hero w-100">
                         </picture>
-                        <div class="w-100 d-flex justify-content-center flex-column align-items-center position-absolute description">
+                        <div class="w-100 d-flex justify-content-center flex-column align-items-center position-absolute description" style="z-index: 6;">
                             <div class="max-width container">
-                                <h1 class="text-white mb-5 rethink-sans-bold">{!!$slide->title!!}</h1>
-                                <p class="text-white mb-5 rethink-sans-regular d-flex no-wrap align-items-center">
+                                <h1 class="text-white mb-2 rethink-sans-bold">{!!$slide->title!!}</h1>
+                                <div class="description text-white mb-5 montserrat-regular d-flex no-wrap align-items-center">
                                     {!!$slide->description!!}
-                                </p>
+                                </div>
                                 @if (!empty($slide->link))
-                                    <a href="{{$slide->link}}" target=_blank rel="noopener noreferrer" class="rethink-sans-regular ps-5 text-white call-to-action d-flex justify-content-between align-items-center">
-                                    Fale com a gente!
-                                    <i class="bi bi-whatsapp rounded-circle d-flex justify-content-center align-items-center"></i>
+                                    <a href="{{$slide->link}}" target=_blank rel="noopener noreferrer" class="montserrat-medium font-15 px-3 rounded-5 col-12 col-lg-2 py-2 text-white background-red d-flex justify-content-center align-items-center">
+                                    Saiba mais
                                     </a>
                                 @endif
                             </div>
@@ -29,10 +28,37 @@
                 @endforeach
             </div>
             <!-- Paginação opcional -->
-            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div> 
         </div>
     </section>
 @endif
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const heroSwiper = new Swiper('.hero-swiper', {
+            loop: false, // Loop infinito
+            autoplay: false,
+            // autoplay: {
+            //     delay: 5000, // Troca de slide a cada 5s
+            //     disableOnInteraction: false, // Continua autoplay após interação
+            // },
+            speed: 800, // Velocidade da transição
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            slidesPerView: 1,
+            spaceBetween: 0,
+            effect: 'slide',
+            breakpoints: {
+                0: { slidesPerView: 1 },
+                885: { slidesPerView: 1 }
+            }
+        });
+    });
+</script>
+
 @if (isset($topics) && $topics->count() > 0)
     <section id="topic" class="topic">
         <div class="container py-5">
@@ -51,8 +77,8 @@
                             @endif
                             <h2 class="montserrat-bold montserrat-bold font-18  mb-0 title-blue text-uppercase mb-0 text-white">{{$topic->title}}</h2>                            
                         </div>                        
-                    </div>
-                @endforeach                   
+                    </div>                                      
+                @endforeach
             </div>
         </div>
     </section>

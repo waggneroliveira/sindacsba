@@ -57,86 +57,146 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Elementos DOM
             const regionalButtons = document.querySelectorAll('.btn-region');
             const searchInput = document.getElementById('searchInput');
             const searchButton = document.getElementById('searchButton');
             const resultsContainer = document.getElementById('municipalityResults');
             const loadingSpinner = document.getElementById('loadingSpinner');
-            
-            // Variáveis para controle do estado
+
             let currentRegionalId = 'all';
             let currentSearchTerm = '';
+            let currentPage = 1;
 
-            // Adicionar eventos aos botões de regional
-            regionalButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remover a classe active de todos os botões
-                    regionalButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Adicionar a classe active ao botão clicado
-                    this.classList.add('active');
-                    
-                    // Atualizar o ID da regional atual
-                    currentRegionalId = this.getAttribute('data-regional-id');
-                    
-                    // Executar o filtro
-                    filterMunicipalities();
-                });
-            });
-
-            // Adicionar evento ao botão de pesquisa
-            searchButton.addEventListener('click', function() {
-                currentSearchTerm = searchInput.value;
-                filterMunicipalities();
-            });
-
-            // Adicionar evento de tecla Enter no campo de pesquisa
-            searchInput.addEventListener('keyup', function(event) {
-                if (event.key === 'Enter') {
-                    currentSearchTerm = searchInput.value;
-                    filterMunicipalities();
+            // Normaliza links de paginação: adiciona data-page e evita navegação real.
+            function normalizePaginationLinks() {
+                const links = resultsContainer.querySelectorAll('.pagination a');
+                links.forEach(link => {
+                const href = link.getAttribute('href') || '';
+                let page = '1';
+                try {
+                    const parsed = new URL(href, window.location.origin);
+                    page = parsed.searchParams.get('page') || '1';
+                } catch (err) {
+                    const m = href.match(/page=(\d+)/);
+                    if (m) page = m[1];
                 }
-            });
+                link.setAttribute('data-page', page);
+                // evita navegação real (acessibilidade mínima preservada)
+                link.setAttribute('href', '#page-' + page);
+                link.setAttribute('role', 'button');
+                });
+            }
 
-            // Função para filtrar os municípios via AJAX
-            function filterMunicipalities() {
-                // Mostrar o spinner de carregamento
+            // Faz o POST via AJAX e injeta o partial
+            function loadMunicipalities(page = 1, updateUrl = true) {
+                currentPage = parseInt(page, 10) || 1;
+
                 loadingSpinner.style.display = 'block';
                 resultsContainer.style.opacity = '0.5';
-                
-                // Preparar os dados para a requisição
+
                 const formData = new FormData();
                 formData.append('regional_id', currentRegionalId);
                 formData.append('search', currentSearchTerm);
+                formData.append('page', currentPage);
                 formData.append('_token', '{{ csrf_token() }}');
-                
-                // Fazer a requisição AJAX
+
+                // Atualiza a URL sem reload (remove ?page quando page = 1)
+                if (updateUrl) {
+                const params = new URLSearchParams();
+                if (currentRegionalId && currentRegionalId !== 'all') params.append('regional_id', currentRegionalId);
+                if (currentSearchTerm) params.append('search', currentSearchTerm);
+                if (currentPage && currentPage > 1) params.append('page', currentPage);
+                const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+                window.history.replaceState({}, document.title, newUrl);
+                }
+
                 fetch('{{ route("client.filter.municipalities") }}', {
-                    method: 'POST',
-                    body: formData
+                method: 'POST',
+                body: formData,
+                headers: {'X-Requested-With': 'XMLHttpRequest'}
                 })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro na requisição');
-                    }
-                    return response.text();
+                .then(res => {
+                if(!res.ok) throw new Error('Erro na requisição');
+                return res.text();
                 })
-                .then(data => {
-                    // Atualizar o container com os resultados
-                    resultsContainer.innerHTML = data;
-                    
-                    // Esconder o spinner de carregamento
-                    loadingSpinner.style.display = 'none';
-                    resultsContainer.style.opacity = '1';
+                .then(html => {
+                resultsContainer.innerHTML = html;
+                // Normaliza os links injetados
+                normalizePaginationLinks();
+                loadingSpinner.style.display = 'none';
+                resultsContainer.style.opacity = '1';
+                // debug opcional: console.log('AJAX carregado - página', currentPage);
                 })
-                .catch(error => {
-                    console.error('Erro:', error);
-                    loadingSpinner.style.display = 'none';
-                    resultsContainer.style.opacity = '1';
-                    resultsContainer.innerHTML = '<div class="alert alert-danger">Erro ao carregar os dados. Tente novamente.</div>';
+                .catch(err => {
+                console.error('Erro AJAX:', err);
+                loadingSpinner.style.display = 'none';
+                resultsContainer.style.opacity = '1';
+                resultsContainer.innerHTML = '<div class="alert alert-danger">Erro ao carregar os dados. Tente novamente.</div>';
                 });
             }
+
+            // Intercepta cliques (fase de captura para prevenir navegação antes do handler)
+            document.addEventListener('click', function(e) {
+                // 1) Paginação dentro do container
+                const pagLink = e.target.closest('#municipalityResults .pagination a');
+                if (pagLink) {
+                e.preventDefault();
+                const page = pagLink.getAttribute('data-page') || (new URL(pagLink.href, window.location.origin).searchParams.get('page')) || 1;
+                loadMunicipalities(page);
+                return;
+                }
+
+                // 2) Botões de regional que sejam anchors (se forem <a href="...">)
+                const reg = e.target.closest('.btn-region');
+                if (reg && reg.tagName === 'A') {
+                e.preventDefault();
+                // o listener abaixo cuidará de ativar a regional e recarregar
+                reg.click();
+                return;
+                }
+            }, true); // observe: true -> captura
+
+            // Botões de regional (se forem botões normais ou elementos não-anchor)
+            regionalButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                // se for anchor, evitar navegação redundante
+                if (this.tagName === 'A') e.preventDefault();
+
+                regionalButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                currentRegionalId = this.getAttribute('data-regional-id') || 'all';
+                currentSearchTerm = (searchInput && searchInput.value) ? searchInput.value.trim() : '';
+                currentPage = 1; // reset
+
+                loadMunicipalities(currentPage);
+                });
+            });
+
+            // Busca
+            if (searchButton) {
+                searchButton.addEventListener('click', function(e) {
+                if (this.tagName === 'A') e.preventDefault();
+                currentSearchTerm = searchInput.value.trim();
+                currentPage = 1;
+                loadMunicipalities(currentPage);
+                });
+            }
+            if (searchInput) {
+                searchInput.addEventListener('keyup', function(ev) {
+                if (ev.key === 'Enter') {
+                    currentSearchTerm = searchInput.value.trim();
+                    currentPage = 1;
+                    loadMunicipalities(currentPage);
+                }
+                });
+            }
+
+            // Normaliza links já renderizados no carregamento inicial
+            normalizePaginationLinks();
+
+            // opcional: se quiser carregar via AJAX na primeira visita, descomente
+            // loadMunicipalities(currentPage, false);
         });
     </script>
 @endsection

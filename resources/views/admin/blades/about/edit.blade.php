@@ -28,7 +28,8 @@
                     <div class="row">
                         @include('admin.blades.about.form')    
                     </div>
-                    @if(Auth::user()->hasPermissionTo('sobre nos.visualizar') && Auth::user()->hasPermissionTo('sobre nos.editar'))
+                    @if(Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                        Auth::user()->hasRole('Super') || Auth::user()->hasPermissionTo('sobre nos.visualizar') && Auth::user()->hasPermissionTo('sobre nos.editar'))
                         <div class="d-flex justify-content-end gap-2">
                             <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">{{__('dashboard.btn_cancel')}}</button>
                             <button type="submit" class="btn btn-primary text-black waves-effect waves-light">{{__('dashboard.btn_save')}}</button>

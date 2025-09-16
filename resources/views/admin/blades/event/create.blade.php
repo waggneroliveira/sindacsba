@@ -11,10 +11,10 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Eventos</li>
+                                <li class="breadcrumb-item active">Agenda</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Eventos</h4>
+                        <h4 class="page-title">Agenda</h4>
                     </div>
                 </div>
             </div>

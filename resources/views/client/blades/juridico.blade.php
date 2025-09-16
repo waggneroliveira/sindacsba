@@ -17,24 +17,6 @@
         <div class="container">
             <div class="filter">
                 <div class="row  d-flex flex-wrap gap-3 justify-content-center">
-                    {{-- <div class="col-11 col-lg-12 d-flex flex-wrap justify-content-between align-items-center">
-                        <div class="filter-esq col-8">
-                            <button class="px-5 w-auto rounded-0 border btn-title montserrat-bold text-uppercase font-15 btn btn-juridico active">Leis</button>
-                            <button class="px-5 w-auto rounded-0 border btn-title montserrat-bold text-uppercase font-15 btn btn-juridico">Decretos</button>
-                            <button class="px-5 w-auto rounded-0 border btn-title montserrat-bold text-uppercase font-15 btn btn-juridico">Portaria</button>
-                        </div>
-    
-                        <div class="filter-dir col-4 d-flex justify-content-end align-items-center gap-3">
-                            <svg width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.44 2.6C10.92 1.04 9.49 0 7.8 0C6.11 0 4.68 1.04 4.16 2.6H0V5.2H4.16C4.68 6.76 6.11 7.8 7.8 7.8C9.49 7.8 10.92 6.76 11.44 5.2H26V2.6H11.44ZM7.8 5.2C7.02 5.2 6.5 4.68 6.5 3.9C6.5 3.12 7.02 2.6 7.8 2.6C8.58 2.6 9.1 3.12 9.1 3.9C9.1 4.68 8.58 5.2 7.8 5.2Z" fill="#2F368B"/>
-                            <path d="M7.8 15.6001C6.11 15.6001 4.68 16.6401 4.16 18.2001H0V20.8001H4.16C4.68 22.3601 6.11 23.4001 7.8 23.4001C9.49 23.4001 10.92 22.3601 11.44 20.8001H26V18.2001H11.44C10.92 16.6401 9.49 15.6001 7.8 15.6001ZM7.8 20.8001C7.02 20.8001 6.5 20.2801 6.5 19.5001C6.5 18.7201 7.02 18.2001 7.8 18.2001C8.58 18.2001 9.1 18.7201 9.1 19.5001C9.1 20.2801 8.58 20.8001 7.8 20.8001Z" fill="#2F368B"/>
-                            <path d="M18.2 7.80005C16.51 7.80005 15.08 8.84005 14.56 10.4H0V13H14.56C15.08 14.56 16.51 15.6 18.2 15.6C19.89 15.6 21.32 14.56 21.84 13H26V10.4H21.84C21.32 8.84005 19.89 7.80005 18.2 7.80005ZM18.2 13C17.42 13 16.9 12.48 16.9 11.7C16.9 10.92 17.42 10.4 18.2 10.4C18.98 10.4 19.5 10.92 19.5 11.7C19.5 12.48 18.98 13 18.2 13Z" fill="#2F368B"/>
-                            </svg>
-
-                            <button class="px-4 rounded-0 montserrat-bold text-uppercase font-15 btn btn-juridico btn-title-filter active">NACIONAL</button>
-                            <button class="px-4 rounded-0 montserrat-bold text-uppercase font-15 btn btn-juridico btn-title-filter">Municipal</button>
-                        </div>
-                    </div> --}}
                     <div class="row align-items-center">
                         <div class="filter-esq col-12 col-md-8 d-flex flex-wrap justify-content-center justify-content-md-start gap-2 mb-3 mb-md-0">
                             <button class="px-5 w-auto rounded-0 border btn-title montserrat-bold text-uppercase font-15 btn btn-juridico active">Leis</button>
@@ -90,7 +72,7 @@
             type: "GET",
             data: { search, legal, region },
             success: function (response) {
-                $("#juridicoResults").html(response); // Certifique-se que o ID está correto
+                $("#juridicoResults").html(response);
             },
             error: function () {
                 $("#juridicoResults").html('<p class="text-danger montserrat-bold font-16 text-center">Erro ao carregar resultados.</p>');
@@ -99,7 +81,7 @@
     }
 
     $(document).ready(function () {
-        // Lê parâmetro 'legal' da URL (ex: /juridico?legal=decretos)
+        // Lê parâmetro 'legal' da URL
         const urlParams = new URLSearchParams(window.location.search);
         const legalParam = urlParams.get('legal');
         if (legalParam) {
@@ -129,14 +111,31 @@
             loadResults();
         });
 
-        // busca
-        $(document).on('keyup', '#searchJuridico', function () {
-            search = $(this).val();
-            loadResults();
-        });
+        // ======= BUSCA: prevenir submit e disparar só no ENTER =======
+        const $form = $('#juridicoForm');
+        const $input = $('#searchJuridico');
+
+        if ($form.length && $input.length) {
+            // Previna submit padrão do form (refresh)
+            $form.on('submit', function(e){
+                e.preventDefault();
+                search = $input.val();
+                loadResults();
+            });
+
+            // Captura o ENTER no input
+            $input.on('keydown', function(e){
+                if (e.key === "Enter" || e.keyCode === 13) {
+                    e.preventDefault(); // impede o refresh
+                    search = $(this).val();
+                    loadResults();
+                }
+            });
+        }
 
         // carrega resultados iniciais
         loadResults();
     });
 </script>
+
 @endsection

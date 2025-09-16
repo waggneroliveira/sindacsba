@@ -164,12 +164,12 @@ public function update(Request $request, Slide $slide)
             Storage::put($this->pathUpload . $filenameMobile, $imageMobile);
         }
 
-        Storage::delete($slide->path_image_mobile);
+        Storage::delete($slide->path_image_mobile?$slide->path_image_mobile:'');
         $data['path_image_mobile'] = $this->pathUpload . $filenameMobile;
     }
 
     if (isset($request->delete_path_image_mobile)) {
-        Storage::delete($slide->path_image_mobile);
+        Storage::delete($slide->path_image_mobile?$slide->path_image_mobile:'');
         $data['path_image_mobile'] = null;
     }
 
