@@ -319,7 +319,7 @@
                                 <article>
                                     <div class="d-flex align-items-center bg-white mb-3 overflow-hidden" style="height: 80px;">
                                         <div class="date col-4 h-100 d-flex justify-content-center align-items-center flex-column border border-right-1">
-                                            <span class="montserrat-bold w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue">
+                                            <span class="montserrat-bold w-100 h-50 d-flex justify-content-center align-items-center font-20 title-blue">
                                                 {{ \Carbon\Carbon::parse($event->date)->format('d') }}
                                             </span>
                                             <span class="montserrat-medium w-100 h-50 d-flex justify-content-center align-items-center font-14 title-blue background-red text-white">
