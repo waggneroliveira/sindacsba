@@ -17,7 +17,7 @@ class RegionPageController extends Controller
         $regionais = Regional::active()->sorting()->get();
         $municipalities = Municipality::with([
             'regional',
-        ])->active()->sorting()->get();
+        ])->active()->sorting()->paginate(50);
 
         return view('client.blades.regional', compact('municipalities', 'contact', 'report', 'regionais'));
     }

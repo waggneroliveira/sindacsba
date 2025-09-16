@@ -28,7 +28,7 @@ class MunicipalityController extends Controller
         $regionais = Regional::active()->sorting()->get();
         $municipalities = Municipality::with([
             'regional',
-        ])->get();
+        ])->sorting()->paginate(50);
 
         $regionalCategory = [];
 

@@ -142,7 +142,7 @@
 
                                 {{-- PAGINATION --}}
                                 <div class="mt-3 float-end">
-                                   {{-- {{$categorias do blog->links()}} --}}
+                                   {{$municipalities->links()}}
                                 </div>
                             </div>
                         </div> <!-- end card-->

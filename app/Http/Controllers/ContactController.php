@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,14 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $maps = $request->input('maps');
+
+        // Se o usuário colar o iframe inteiro
+        if (Str::contains($maps, '<iframe')) {
+            preg_match('/src="([^"]+)"/', $maps, $matches);
+            $maps = $matches[1] ?? null;
+        }
+        $data['maps'] = $maps;
 
         try {
             DB::beginTransaction();
@@ -44,7 +53,15 @@ class ContactController extends Controller
     public function update(Request $request, Contact $contact)
     {
         $data = $request->all();
+        $maps = $request->input('maps');
 
+        // Se o usuário colar o iframe inteiro
+        if (Str::contains($maps, '<iframe')) {
+            preg_match('/src="([^"]+)"/', $maps, $matches);
+            $maps = $matches[1] ?? null;
+        }
+        $data['maps'] = $maps;
+        
         try {
             DB::beginTransaction();
                 $contact->fill($data)->save();

@@ -22,7 +22,16 @@
                     <div class="col-12">
                         <label for="maps" class="form-label">Link mapa</label>
                         <input type="text" name="maps" class="form-control" id="maps"
-                            value="{{ $contact->maps ?? '' }}" placeholder="Mapa">
+                        value="{{ $contact->maps ?? '' }}" placeholder="Mapa">
+                        <div class="instructions">
+                            <h5>Como usar:</h5>
+                            <ol>
+                                <li>Vá ao Google Maps e encontre o local desejado</li>
+                                <li>Clique no botão "Compartilhar" e depois em "Incorporar um mapa"</li>
+                                <li>Selecione e copie todo o código iframe</li>
+                                <li>Cole o código no campo abaixo - o link será extraído automaticamente</li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -79,7 +88,7 @@
         <div class="col-12 mb-4">
             <h4 class="page-title">Informações das Filiais</h4>
             <div class="row g-4">
-                @foreach ([1, 2, 3] as $i)
+                @foreach (['one', 'two', 'three'] as $i)
                     <div class="col-12 col-lg-4">
                         <div class="card card-body h-100">
                             <div class="mb-3">
@@ -101,7 +110,7 @@
                             </div>
                             <div>
                                 <label for="address_{{ $i }}" class="form-label">Endereço</label>
-                                <textarea name="address_{{ $i }}" id="address_{{ $i }}" placeholder="Texto" class="form-control" rows="5">{!! $contact->{'address_'.$i} ?? '' !!}</textarea>
+                                <textarea name="address_{{ $i }}" id="address_{{ $i }}" placeholder="Texto" class="form-control ckeditor" rows="5">{!! $contact->{'address_'.$i} ?? '' !!}</textarea>
                             </div>
                         </div>
                     </div>
@@ -113,11 +122,60 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const editors = ["address_one", "address_two", "address_three"];
-        editors.forEach(function (id) {
-            if (document.getElementById(id)) {
-                CKEDITOR.replace(id);
+
+        function simpleConfig() {
+            return {
+                // forçar apenas estes botões
+                toolbar: [
+                    ['Bold', 'Italic', 'Underline']
+                ],
+                // remover plugins que adicionam elementos extras
+                removePlugins: 'elementspath,resize,about,toolbar',
+                resize_enabled: false,
+                // definir grupos mínimos (ajuda a evitar presets sendo mesclados)
+                toolbarGroups: [
+                    { name: 'basicstyles', groups: ['basicstyles'] }
+                ],
+                height: 120
+            };
+        }
+
+        function initCKEditorOnElement(el) {
+            if (!el) return;
+            // garante id (CKEDITOR.replace aceita elemento, mas ter id facilita controle)
+            if (!el.id) el.id = 'tmp-' + Math.random().toString(36).substr(2,9);
+
+            // destrói qualquer instância existente com esse id (evita herdar config antiga)
+            if (CKEDITOR.instances[el.id]) {
+                try { CKEDITOR.instances[el.id].destroy(true); }
+                catch (e) { /* ignore */ }
             }
+
+            // passa o elemento DOM diretamente para garantir aplicação do config
+            CKEDITOR.replace(el, simpleConfig());
+        }
+
+        // ao abrir qualquer modal, inicializa textareas .ckeditor dentro dele
+        $(document).on('shown.bs.modal', function (e) {
+            $(e.target).find('textarea.ckeditor').each(function () {
+                initCKEditorOnElement(this);
+            });
         });
+
+        // ao fechar, destrói as instâncias para sempre re-criar limpas na próxima abertura
+        $(document).on('hidden.bs.modal', function (e) {
+            $(e.target).find('textarea.ckeditor').each(function () {
+                var id = this.id;
+                if (id && CKEDITOR.instances[id]) {
+                    try { CKEDITOR.instances[id].destroy(true); }
+                    catch (err) { /* ignore */ }
+                }
+            });
+        });
+
     });
 </script>
+
+
+
+

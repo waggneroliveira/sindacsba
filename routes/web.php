@@ -2,8 +2,13 @@
 
 use Inertia\Inertia;
 use App\Models\About;
+use App\Models\Report;
 use App\Models\Contact;
+use App\Models\Statute;
+use App\Models\Agreement;
+use App\Models\Direction;
 use App\Models\Announcement;
+use App\Models\BenefitTopic;
 use App\Models\BlogCategory;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
@@ -16,14 +21,14 @@ use App\Http\Controllers\Auth\AuthClientController;
 use App\Http\Controllers\Client\BlogPageController;
 use App\Http\Controllers\Client\HomePageController;
 use App\Http\Controllers\Client\AboutPageController;
+use App\Http\Controllers\Client\EventPageController;
+use App\Http\Controllers\Client\RegionPageController;
 use App\Http\Controllers\Client\BenefitPageController;
 use App\Http\Controllers\Client\ContactPageController;
 use App\Http\Controllers\Client\JuridicoPageController;
 use App\Http\Controllers\Client\NoticiesPageController;
 use App\Http\Controllers\Auth\PasswordEmailClientController;
 use App\Http\Controllers\Auth\ResetPasswordClientController;
-use App\Http\Controllers\Client\EventPageController;
-use App\Http\Controllers\Client\RegionPageController;
 
 require __DIR__ . '/dashboard.php';
 
@@ -84,13 +89,9 @@ Route::get('juridico/search', [JuridicoPageController::class, 'searchJuridico'])
 Route::get('regionais', [RegionPageController::class, 'index'])->name('regional');
 Route::post('regionais/filter-municipalities', [RegionPageController::class, 'filterMunicipalities'])
 ->name('client.filter.municipalities');
-Route::get('eventos', [EventPageController::class, 'index'])->name('client.event');
+Route::get('agenda', [EventPageController::class, 'index'])->name('client.event');
 Route::get('home/blog/filter/{category?}', [HomePageController::class, 'filterByCategory'])
     ->name('blog.filter');
-
-// Route::get('/evento', function () {
-//     return view('client.blades.event');
-// })->name('client.event');
 
 
 View::composer('client.core.client', function ($view) {
@@ -102,9 +103,19 @@ View::composer('client.core.client', function ($view) {
     $announcements = Announcement::active()->sorting()->get();
     $contact = Contact::first();
     $abouts = About::active()->sorting()->get();
+    $statute = Statute::active()->count();
+    $directions = Direction::active()->sorting()->count();
+    $benefitTopics = BenefitTopic::active()->sorting()->count();
+    $report = Report::active()->count();
+    $agreement = Agreement::active()->first();
 
     return $view->with('blogCategories', $blogCategories)
     ->with('announcements', $announcements)
     ->with('contact', $contact)
+    ->with('statute', $statute)
+    ->with('directions', $directions)
+    ->with('benefitTopics', $benefitTopics)
+    ->with('report', $report)
+    ->with('agreement', $agreement)
     ->with('abouts', $abouts);
 });

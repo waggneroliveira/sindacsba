@@ -205,13 +205,17 @@
                                     Sobre Nós <i class="bi bi-chevron-down"></i>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="sobreNosDropdown">
-                                    @if (isset($abouts) && $abouts <> null) 
+                                    @if (isset($abouts) && $abouts->count() > 0) 
                                         @foreach ($abouts as $about)                                        
                                             <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#{{$about->slug}}">{{$about->title}}</a></li>
                                         @endforeach
                                     @endif
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#board">Equipe</a></li>
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#statute">Estatuto</a></li>
+                                    @if (isset($directions) && $directions > 0)                                        
+                                        <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#board">Equipe</a></li>
+                                    @endif
+                                    @if (isset($statute) && $statute > 0)                                        
+                                        <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('about')}}#statute">Estatuto</a></li>
+                                    @endif
                                 </ul>
                             </li>
 
@@ -225,9 +229,15 @@
                                     Serviços ao sindicalizados <i class="bi bi-chevron-down"></i>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="servicosDropdown">
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('unionized')}}#partnes">Convênios</a></li>
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('unionized')}}#benefit">Benefícios</a></li>
-                                    <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('unionized')}}#complaint">Denuncias</a></li>
+                                    @if (isset($agreement) && $agreement > 0)                                
+                                        <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('unionized')}}#partnes">Convênios</a></li>
+                                    @endif
+                                    @if (isset($directions) && $directions > 0)                                
+                                        <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('unionized')}}#benefit">Benefícios</a></li>
+                                    @endif
+                                    @if (isset($report) && $report > 0)                                
+                                        <li><a class="dropdown-item montserrat-medium text-start font-15" href="{{route('unionized')}}#complaint">Denuncias</a></li>
+                                    @endif
                                 </ul>
                             </li>
 
@@ -593,25 +603,29 @@
                 <ul class="list-unstyled text-center">
                     <li><a href="{{route('index')}}" class="nav-link text-white montserrat-regular text-center font-18">Home</a></li>
                                            
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white montserrat-regular text-center font-18" 
-                            href="{{route('about')}}" 
-                            id="sobreNosDropdown" 
-                            role="button" 
-                            data-bs-toggle="dropdown" 
-                            aria-expanded="false">
-                                Sobre Nós <i class="bi bi-chevron-down"></i>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="sobreNosDropdown">
-                                @if (isset($abouts) && $abouts <> null) 
-                                    @foreach ($abouts as $about)                                        
-                                        <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#{{$about->slug}}">{{$about->title}}</a></li>
-                                    @endforeach
-                                @endif
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white montserrat-regular text-center font-18" 
+                        href="{{route('about')}}" 
+                        id="sobreNosDropdown" 
+                        role="button" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false">
+                            Sobre Nós <i class="bi bi-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="sobreNosDropdown">
+                            @if (isset($abouts) && $abouts->count() > 0) 
+                                @foreach ($abouts as $about)                                        
+                                    <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#{{$about->slug}}">{{$about->title}}</a></li>
+                                @endforeach
+                            @endif                                
+                            @if (isset($directions) && $directions > 0)                                        
                                 <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#board">Equipe</a></li>
+                            @endif
+                            @if (isset($statute) && $statute > 0)                                        
                                 <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#statute">Estatuto</a></li>
-                            </ul>
-                        </li>
+                            @endif
+                        </ul>
+                    </li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white montserrat-regular text-center font-18" 
@@ -623,9 +637,15 @@
                             Serviços ao sindicalizados <i class="bi bi-chevron-down"></i>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="servicosDropdown">
-                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('unionized')}}#partnes">Convênios</a></li>
-                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('unionized')}}#benefit">Benefícios</a></li>
-                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('unionized')}}#complaint">Denuncias</a></li>
+                            @if (isset($agreement) && $agreement > 0)                                
+                                <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('unionized')}}#partnes">Convênios</a></li>
+                            @endif
+                            @if (isset($directions) && $directions > 0)                                
+                                <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('unionized')}}#benefit">Benefícios</a></li>
+                            @endif
+                            @if (isset($report) && $report > 0)                                
+                                <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('unionized')}}#complaint">Denuncias</a></li>
+                            @endif
                         </ul>
                     </li>
 
@@ -717,7 +737,75 @@
                     <img src="{{asset('build/client/images/logo-footer.svg')}}" alt="WHI - Web de Alta Inovação" title="WHI - Web de Alta Inovação" loading=lazy>
                 </div>
                 <ul class="list-unstyled text-start">
-                    <li class="montserrat-regular font-16 mb-3"><a href="{{route('blog')}}">Blog</a></li>
+                        <li class="montserrat-regular font-16 mb-3"><a href="{{route('index')}}">Home</a></li>
+                                           
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle montserrat-regular font-16 mb-3" 
+                            href="{{route('about')}}" 
+                            id="sobreNosDropdown" 
+                            role="button" 
+                            data-bs-toggle="dropdown" 
+                            aria-expanded="false">
+                                Sobre Nós <i class="bi bi-chevron-down"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="sobreNosDropdown">
+                                @if (isset($abouts) && $abouts->count() > 0) 
+                                    @foreach ($abouts as $about)                                        
+                                        <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#{{$about->slug}}">{{$about->title}}</a></li>
+                                    @endforeach
+                                @endif                                
+                                @if (isset($directions) && $directions > 0)                                        
+                                    <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#board">Equipe</a></li>
+                                @endif
+                                @if (isset($statute) && $statute > 0)                                        
+                                    <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('about')}}#statute">Estatuto</a></li>
+                                @endif
+                            </ul>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle montserrat-regular font-16 mb-3" 
+                        href="{{route('unionized')}}" 
+                        id="servicosDropdown" 
+                        role="button" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false">
+                            Serviços ao sindicalizados <i class="bi bi-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicosDropdown">
+                            @if (isset($agreement) && $agreement > 0)                                
+                                <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('unionized')}}#partnes">Convênios</a></li>
+                            @endif
+                            @if (isset($directions) && $directions > 0)                                
+                                <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('unionized')}}#benefit">Benefícios</a></li>
+                            @endif
+                            @if (isset($report) && $report > 0)                                
+                                <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{route('unionized')}}#complaint">Denuncias</a></li>
+                            @endif
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle montserrat-regular font-16 mb-3" 
+                        href="{{route('juridico')}}" 
+                        id="juridicoDropdown" 
+                        role="button" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false">
+                            Jurídico <i class="bi bi-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="juridicoDropdown">
+                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{ route('juridico', ['legal' => 'leis']) }}">Leis</a></li>
+                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{ route('juridico', ['legal' => 'decretos']) }}">Decretos</a></li>
+                            <li><a class="dropdown-item montserrat-regular text-start font-15" href="{{ route('juridico', ['legal' => 'portaria']) }}">Portaria</a></li>
+                        </ul>
+
+                    </li>
+
+                </ul>
+                <ul class="list-unstyled text-start">
+                    <li class="montserrat-regular font-16 mb-3"><a href="{{route('regional')}}">Regionais</a></li>
+                    <li class="montserrat-regular font-16 mb-3"><a href="{{route('blog')}}">Notícias</a></li>
                     <li class="montserrat-regular font-16 mb-3"><a href="{{route('noticies')}}">Editais</a></li>
                     <li class="montserrat-regular font-16 mb-3"><a href="{{route('contact')}}">Contato</a></li>
                 </ul>

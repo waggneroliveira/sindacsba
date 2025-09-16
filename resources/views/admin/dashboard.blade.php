@@ -763,7 +763,7 @@
                 <div class="col-md-6">
                     <div class="d-none d-md-flex gap-4 align-item-center justify-content-md-end footer-links">
                         <a href="https://www.whi.dev.br/" target="_blank" rel="noopener noreferrer">Sobre a WHI</a>
-                        <a href="https://wa.me/5571996483853" target="_blank" rel="noopener noreferrer">Fale conosco</a>
+                        <a href="https://wa.me/5571992768360" target="_blank" rel="noopener noreferrer">Fale conosco</a>
                     </div>
                 </div>
             </div>
