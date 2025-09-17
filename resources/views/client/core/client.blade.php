@@ -265,9 +265,11 @@
                         </ul>                      
                     </nav>
                     
-                    <div class="btn-filie-se">
-                        <a href="" class="badge badge-primary montserrat-medium font-14 text-uppercase me-2 background-red rounded-4 font-weight-semi-bold py-2 px-3 px-sm-5">Filie-se</a>
-                    </div>
+                    @if (isset($benefitTopics) && $benefitTopics > 0)                        
+                        <div class="btn-filie-se">
+                            <a href="{{route('unionized')}}#benefit" class="badge badge-primary montserrat-medium font-14 text-uppercase me-2 background-red rounded-4 font-weight-semi-bold py-2 px-3 px-sm-5">Filie-se</a>
+                        </div>
+                    @endif
 
                     <!-- Botão menu sandwich -->
                     <button id="menu-toggle" class="d-lg-none btn btn-link p-0 ms-2" aria-label="Abrir menu" type="button">
@@ -875,7 +877,7 @@
                     <p id="footer-text" class="montserrat-regular font-16 text-start text-white mb-0"></p>  
                     <script defer>
                         const currentYeaar = (new Date).getFullYear();
-                        document.getElementById("footer-text").innerHTML = `Copyright© ${currentYeaar} <span> SINDAC todos os direitos reservados.</span>`
+                        document.getElementById("footer-text").innerHTML = `Copyright© ${currentYeaar} <span> SINDACS todos os direitos reservados.</span>`
                     </script>
                 </div>
                 <div class=credits>

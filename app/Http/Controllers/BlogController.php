@@ -21,33 +21,62 @@ use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 class BlogController extends Controller
 {
     protected $pathUpload = 'admin/uploads/images/blog/';
-    public function index()
+
+    public function index(Request $request)
     {
         $settingTheme = (new SettingThemeRepository())->settingTheme();
-        if(!Auth::user()->hasRole('Super') && 
-          !Auth::user()->can('usuario.tornar usuario master') && 
-          !Auth::user()->hasPermissionTo('noticias.visualizar')){
+
+        if(
+            !Auth::user()->hasRole('Super') && 
+            !Auth::user()->can('usuario.tornar usuario master') && 
+            !Auth::user()->hasPermissionTo('noticias.visualizar')
+        ){
             return view('admin.error.403', compact('settingTheme'));
         }
 
         $categories = BlogCategory::active()->sorting()->get();
-        $blogs = Blog::with([
+
+        // Query base
+        $blogsQuery = Blog::with([
             'category',
             'comments' => function ($query) {
                 $query->orderBy('created_at', 'desc')->with('client');
             }
-        ])->get();
+        ]);
+
+        // 🔎 Aplicar filtros
+        if ($request->filled('title')) {
+            $blogsQuery->where('title', 'like', '%' . $request->title . '%');
+        }
+
+        if ($request->filled('date')) {
+            $blogsQuery->whereDate('created_at', $request->date);
+        }
+
+        if ($request->filled('blog_category_id')) {
+            $blogsQuery->where('blog_category_id', $request->blog_category_id);
+        }
+
+        // Paginação
+        $blogs = $blogsQuery->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
+
+        // Contagem de comentários pendentes
         $commentCount = Blog::with(['comments' => function ($query) {
             $query->where('active', 0);
         }])->get();
 
+        // Array simples de categorias [id => title]
         $blogCategory = [];
-
         foreach ($categories as $category) {
             $blogCategory[$category->id] = $category->title;
         }
 
-        return view('admin.blades.blog.index', compact('blogs', 'categories', 'blogCategory'));
+        return view('admin.blades.blog.index', compact(
+            'blogs', 
+            'categories', 
+            'blogCategory',
+            'settingTheme'
+        ));
     }
 
     public function create(){

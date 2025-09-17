@@ -25,6 +25,46 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row mb-2">
+                                    <div class="col-12">
+                                        <form action="{{ route('admin.dashboard.municipality.index') }}" method="GET" class="mb-4">
+                                            <div class="row g-3 align-items-end">
+
+                                                <!-- Título -->
+                                                <div class="col-md-6">
+                                                    <label for="title" class="form-label">Título</label>
+                                                    <input type="text" name="title" id="title" value="{{ request('title') }}" 
+                                                        class="form-control" placeholder="Pesquisar por título">
+                                                </div>
+
+                                                <!-- Regionais -->
+                                                <div class="col-md-3">
+                                                    <label for="regional_id" class="form-label">Regionais</label>
+                                                    <select name="regional_id" id="regional_id" class="form-select">
+                                                        <option value="">Todas</option>
+                                                        @foreach($regionais as $regional)
+                                                            <option value="{{ $regional->id }}" 
+                                                                {{ request('regional_id') == $regional->id ? 'selected' : '' }}>
+                                                                {{ $regional->title }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <!-- Botões -->
+                                                <div class="col-md-3 d-flex gap-2">
+                                                    <button type="submit" class="btn btn-primary w-100 text-black">
+                                                        <i class="bi bi-search text-black"></i> Filtrar
+                                                    </button>
+
+                                                    @if (request()->has('title') || request()->has('regional_id'))
+                                                        <a href="{{ route('admin.dashboard.municipality.index') }}" class="btn btn-outline-secondary w-100">
+                                                            <i class="bi bi-x-circle"></i> Limpar
+                                                        </a>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                                     <div class="col-12 d-flex justify-between">
                                         <div class="col-6">
                                             @if (Auth::user()->can('municipios.visualizar') &&

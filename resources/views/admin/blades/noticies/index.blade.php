@@ -25,6 +25,47 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row mb-2">
+                                    <div class="col-12">
+                                        <form action="{{ route('admin.dashboard.noticies.index') }}" method="GET" class="mb-4">
+                                            <div class="row g-3 align-items-end">
+
+                                                <!-- Título -->
+                                                <div class="col-md-6">
+                                                    <label for="title" class="form-label">Título</label>
+                                                    <input type="text" name="title" id="title" value="{{ request('title') }}" 
+                                                        class="form-control" placeholder="Pesquisar por título">
+                                                </div>
+
+                                                <!-- Ano -->
+                                                <div class="col-md-3">
+                                                    <label for="date" class="form-label">Ano</label>
+                                                    <select name="date" id="date" class="form-select">
+                                                        <option value="">Todas</option>
+                                                        @foreach($groupedNoticies as $year => $notice)
+                                                            <option value="{{ $year }}" 
+                                                                {{ request('date') == $year ? 'selected' : '' }}>
+                                                                {{ $year }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <!-- Botões -->
+                                                <div class="col-md-3 d-flex gap-2">
+                                                    <button type="submit" class="btn btn-primary w-100 text-black">
+                                                        <i class="bi bi-search text-black"></i> Filtrar
+                                                    </button>
+
+                                                    @if (request()->has('title') || request()->has('date'))
+                                                        <a href="{{ route('admin.dashboard.noticies.index') }}" class="btn btn-outline-secondary w-100">
+                                                            <i class="bi bi-x-circle"></i> Limpar
+                                                        </a>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
                                     <div class="col-12 d-flex justify-between">
                                         <div class="col-6">
                                             @if (Auth::user()->can('editais.visualizar') &&

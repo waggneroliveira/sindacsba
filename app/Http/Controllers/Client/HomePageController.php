@@ -54,7 +54,7 @@ class HomePageController extends Controller
         ->with(['category' => function($query) {
             $query->select('id', 'title', 'slug');
         }])
-        ->orderBy('created_at', 'DESC')
+        ->orderBy('date', 'DESC')
         ->active()
         ->first();
 

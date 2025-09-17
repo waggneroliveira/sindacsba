@@ -1,7 +1,7 @@
 @if (!empty($report))
     <section id="complaint" class="complaint my-5">
         <div class="container">
-            <div class="background-red m-auto col-12 col-md-9 text-white rounded-4 py-3 py-lg-4 px-3 px-lg-5 d-flex flex-column flex-md-row align-items-center align-items-md-start gap-5 shadow-sm">
+            <div class="background-red m-auto col-12 col-md-9 text-white rounded-4 py-4 px-3 px-lg-5 d-flex flex-column flex-md-row align-items-center align-items-md-start gap-5 shadow-sm">
                 @if ($report->path_image <> null)
                     <div class="flex-shrink-0">
                         <img src="{{asset('storage/' . $report->path_image)}}" alt="Denuncie">

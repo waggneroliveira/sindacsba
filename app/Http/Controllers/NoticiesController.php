@@ -19,17 +19,42 @@ use App\Http\Controllers\Helpers\HelperArchive;
 class NoticiesController extends Controller
 {
     protected $pathUpload = 'admin/uploads/files/noticies/';
+  
     public function index()
     {
         $settingTheme = (new SettingThemeRepository())->settingTheme();
-        if(!Auth::user()->hasRole('Super') && 
-          !Auth::user()->can('usuario.tornar usuario master') &&
-          !Auth::user()->hasPermissionTo('editais.visualizar')){
+
+        // Verificação de permissões
+        if (!Auth::user()->hasRole('Super') && 
+            !Auth::user()->can('usuario.tornar usuario master') &&
+            !Auth::user()->hasPermissionTo('editais.visualizar')) {
             return view('admin.error.403', compact('settingTheme'));
         }
-        $noticies = Noticies::sorting()->get();
-       
-        return view('admin.blades.noticies.index', compact('noticies'));
+
+        // Início da query
+        $query = Noticies::query();
+
+        // Ordenação padrão
+        $query->sorting();
+
+        // Filtros
+        if ($title = request('title')) {
+            $query->where('title', 'like', "%{$title}%");
+        }
+
+        if ($year = request('date')) {
+            $query->whereYear('date', $year);
+        }
+
+        // Obter os resultados
+        $noticies = $query->get();
+
+        // Agrupar por ano para o select
+        $groupedNoticies = Noticies::all()->groupBy(function($item) {
+            return \Carbon\Carbon::parse($item->date)->format('Y');
+        });
+
+        return view('admin.blades.noticies.index', compact('noticies', 'groupedNoticies'));
     }
 
     public function store(NoticiesRequestStore $request)

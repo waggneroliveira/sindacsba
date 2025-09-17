@@ -16,28 +16,62 @@ use App\Repositories\SettingThemeRepository;
 class MunicipalityController extends Controller
 {
 
-    public function index()
-    {
-        $settingTheme = (new SettingThemeRepository())->settingTheme();
-        if(!Auth::user()->hasRole('Super') && 
-          !Auth::user()->can('usuario.tornar usuario master') && 
-          !Auth::user()->hasPermissionTo('municipios.visualizar')){
-            return view('admin.error.403', compact('settingTheme'));
-        }
+    // public function index()
+    // {
+    //     $settingTheme = (new SettingThemeRepository())->settingTheme();
+    //     if(!Auth::user()->hasRole('Super') && 
+    //       !Auth::user()->can('usuario.tornar usuario master') && 
+    //       !Auth::user()->hasPermissionTo('municipios.visualizar')){
+    //         return view('admin.error.403', compact('settingTheme'));
+    //     }
 
-        $regionais = Regional::active()->sorting()->get();
-        $municipalities = Municipality::with([
-            'regional',
-        ])->sorting()->paginate(50);
+    //     $regionais = Regional::active()->sorting()->get();
+    //     $municipalities = Municipality::with([
+    //         'regional',
+    //     ])->sorting()->paginate(50);
 
-        $regionalCategory = [];
+    //     $regionalCategory = [];
 
-        foreach ($regionais as $regional) {
-            $regionalCategory[$regional->id] = $regional->title;
-        }
+    //     foreach ($regionais as $regional) {
+    //         $regionalCategory[$regional->id] = $regional->title;
+    //     }
 
-        return view('admin.blades.municipality.index', compact('municipalities', 'regionais', 'regionalCategory'));
+    //     return view('admin.blades.municipality.index', compact('municipalities', 'regionais', 'regionalCategory'));
+    // }
+public function index()
+{
+    $settingTheme = (new SettingThemeRepository())->settingTheme();
+
+    // Verificação de permissões
+    if (!Auth::user()->hasRole('Super') && 
+        !Auth::user()->can('usuario.tornar usuario master') && 
+        !Auth::user()->hasPermissionTo('municipios.visualizar')) {
+        return view('admin.error.403', compact('settingTheme'));
     }
+
+    // Buscar regionais ativas
+    $regionais = Regional::active()->sorting()->get();
+
+    // Início da query dos municípios
+    $query = Municipality::with(['regional'])->sorting();
+
+    // Aplicar filtros
+    if ($title = request('title')) {
+        $query->where('title', 'like', "%{$title}%");
+    }
+
+    if ($regionalId = request('regional_id')) {
+        $query->where('regional_id', $regionalId);
+    }
+
+    // Paginar resultados
+    $municipalities = $query->paginate(50)->withQueryString();
+
+    // Array de regionais para select
+    $regionalCategory = $regionais->pluck('title', 'id')->toArray();
+
+    return view('admin.blades.municipality.index', compact('municipalities', 'regionais', 'regionalCategory'));
+}
 
 
     public function store(Request $request)
