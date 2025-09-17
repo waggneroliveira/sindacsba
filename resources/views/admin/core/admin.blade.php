@@ -912,7 +912,7 @@
                                 showConfirmButton: false // Oculta o botão para fechar automaticamente
                             });
                         }
-                    }, 1300); // Exibe o alert 1,3 segundos após a página carregar
+                    }, 1000); // Exibe o alert 1,3 segundos após a página carregar
                 }
             });
         </script>
@@ -942,6 +942,27 @@
                     }, 1300);
                 });
             </script>        
+        @endif
+
+        @if (Session::has('reopenModal'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    @if (session('reopenModal'))
+                        setTimeout(function() {
+                            var modalId = '{{ session('reopenModal') }}';
+                            var modalElement = document.getElementById(modalId);
+                            if (modalElement) {
+                                var myModal = new bootstrap.Modal(modalElement, {
+                                    keyboard: false
+                                });
+                                myModal.show();
+                            } else {
+                                console.error('O elemento modal não existe: ' + modalId);
+                            }
+                        }, 2800);
+                    @endif
+                });
+            </script>
         @endif
 
         <script>

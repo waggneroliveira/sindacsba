@@ -146,11 +146,12 @@ class BlogController extends Controller
 
         try {
             DB::beginTransaction();
-                Blog::create($data);
+                $blog = Blog::create($data);
             DB::commit();
 
             session()->flash('success', __('dashboard.response_item_create'));
-            return redirect()->route('admin.dashboard.blog.index');
+            session()->put('blogTitle', $blog->title);
+            return redirect()->back()->with('reopenModal', 'agenda-alert');
         } catch (\Exception $e) {
             DB::rollback();
             Alert::error('error', __('dashboard.response_item_error_create'));

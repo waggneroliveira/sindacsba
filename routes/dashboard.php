@@ -255,6 +255,8 @@ Route::prefix('painel/')->group(function () {
         ->name('admin.dashboard.event.destroySelected');
         Route::post('agenda/sorting', [EventController::class, 'sorting'])
         ->name('admin.dashboard.event.sorting');
+        Route::post('agenda/store', [EventController::class, 'storeTheBlog'])
+        ->name('admin.dashboard.event.storeTheBlog');
         //TOPIC
         Route::resource('topicos', TopicController::class)
         ->names('admin.dashboard.topic')

@@ -52,6 +52,25 @@ class EventController extends Controller
         }
     }
 
+    public function storeTheBlog(Request $request)
+    {
+        $data = $request->all();
+        $data['active'] = $request->active?1:0;
+        $data['slug'] = Str::slug($request->title);
+
+        try {
+            DB::beginTransaction();
+                event::create($data);
+            DB::commit();
+            session()->flash('success', __('dashboard.response_item_create'));
+            return redirect()->route('admin.dashboard.blog.index');
+        } catch (\Exception $e) {
+            DB::rollback();            
+            Alert::error('error', __('dashboard.response_item_error_create'));
+            return redirect()->back();
+        }
+    }
+
     public function edit(Event $event){
 
         return view('admin.blades.event.edit', compact('event'));
