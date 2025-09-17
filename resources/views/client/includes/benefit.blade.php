@@ -16,7 +16,7 @@
                         </svg>    
                     </div>
                     <div class="col-lg-4 col-md-5 col-11 p-0">
-                        <div class="col-10">
+                        <div class="col-12 col-lg-10">
                             <h2 class="montserrat-semiBold mb-4 font-20 font-md-25 m-0 text-white">{{$unionized->title}}</h2>
                             <p class="montserrat-medium font-16 font-md-18 mb-4 text-white">{{$unionized->description}}</p>
                             @if ($unionized->path_file <> null)

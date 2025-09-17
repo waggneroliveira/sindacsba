@@ -110,7 +110,7 @@
                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                         Auth::user()->hasPermissionTo('slide.visualizar'))
                                             <li class="menu-item">
-                                                <a href="index.html" class="menu-link">
+                                                <a href="{{route('admin.dashboard.slide.index')}}" class="menu-link">
                                                     <span class="menu-text">Slides</span>
                                                 </a>
                                             </li>
@@ -119,7 +119,7 @@
                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                         Auth::user()->hasPermissionTo('topicos.visualizar'))
                                             <li class="menu-item">
-                                                <a href="dashboard-2.html" class="menu-link">
+                                                <a href="{{route('admin.dashboard.topic.index')}}" class="menu-link">
                                                     <span class="menu-text">Tópicos</span>
                                                 </a>
                                             </li>
@@ -128,7 +128,7 @@
                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                         Auth::user()->hasPermissionTo('parceiros.visualizar'))
                                             <li class="menu-item">
-                                                <a href="dashboard-3.html" class="menu-link">
+                                                <a href="{{route('admin.dashboard.partner.index')}}" class="menu-link">
                                                     <span class="menu-text">Parceiros</span>
                                                 </a>
                                             </li>
@@ -137,7 +137,7 @@
                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                         Auth::user()->hasPermissionTo('videos.visualizar'))
                                             <li class="menu-item">
-                                                <a href="dashboard-4.html" class="menu-link">
+                                                <a href="{{route('admin.dashboard.video.index')}}" class="menu-link">
                                                     <span class="menu-text">Vídeos</span>
                                                 </a>
                                             </li>
@@ -164,7 +164,7 @@
                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                         Auth::user()->hasPermissionTo('sobre nos.visualizar'))
                                             <li class="menu-item">
-                                                <a href="index.html" class="menu-link">
+                                                <a href="{{route('admin.dashboard.about.index')}}" class="menu-link">
                                                     <span class="menu-text">Sobre Nós</span>
                                                 </a>
                                             </li>
@@ -173,7 +173,7 @@
                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                         Auth::user()->hasPermissionTo('a direcao.visualizar'))
                                             <li class="menu-item">
-                                                <a href="dashboard-2.html" class="menu-link">
+                                                <a href="{{route('admin.dashboard.direction.index')}}" class="menu-link">
                                                     <span class="menu-text">A direção</span>
                                                 </a>
                                             </li>
@@ -182,7 +182,7 @@
                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                         Auth::user()->hasPermissionTo('estatuto.visualizar'))
                                             <li class="menu-item">
-                                                <a href="dashboard-3.html" class="menu-link">
+                                                <a href="{{route('admin.dashboard.statute.index')}}" class="menu-link">
                                                     <span class="menu-text">Estatuto</span>
                                                 </a>
                                             </li>
@@ -209,7 +209,7 @@
                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') ||
                                         Auth::user()->hasPermissionTo('convenios.visualizar'))
                                             <li class="menu-item">
-                                                <a href="index.html" class="menu-link">
+                                                <a href="{{route('admin.dashboard.agreement.index')}}" class="menu-link">
                                                     <span class="menu-text">Convênios</span>
                                                 </a>
                                             </li>
@@ -218,7 +218,7 @@
                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                                         Auth::user()->hasPermissionTo('sindicalize-se.visualizar'))
                                             <li class="menu-item">
-                                                <a href="dashboard-2.html" class="menu-link">
+                                                <a href="{{route('admin.dashboard.unionized.index')}}" class="menu-link">
                                                     <span class="menu-text">Sindicalize-se</span>
                                                 </a>
                                             </li>
@@ -227,7 +227,7 @@
                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') ||
                                         Auth::user()->hasPermissionTo('beneficios.visualizar'))
                                             <li class="menu-item">
-                                                <a href="dashboard-3.html" class="menu-link">
+                                                <a href="{{route('admin.dashboard.benefitTopic.index')}}" class="menu-link">
                                                     <span class="menu-text">Benefícios</span>
                                                 </a>
                                             </li>
@@ -236,7 +236,7 @@
                                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') ||
                                         Auth::user()->hasPermissionTo('denuncie.visualizar'))
                                             <li class="menu-item">
-                                                <a href="dashboard-4.html" class="menu-link">
+                                                <a href="{{route('admin.dashboard.report.index')}}" class="menu-link">
                                                     <span class="menu-text">Denuncie</span>
                                                 </a>
                                             </li>
@@ -249,7 +249,7 @@
                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                         Auth::user()->hasPermissionTo('juridico.visualizar'))
                             <li class="menu-item">
-                                <a href="{{route('admin.dashboard.blogCategory.index')}}" class="menu-link">
+                                <a href="{{route('admin.dashboard.juridico.index')}}" class="menu-link">
                                     <span class="menu-icon"><i class="mdi mdi-scale-balance"></i></span>
                                     <span class="menu-text"> Jurídico</span>
                                 </a>
@@ -259,7 +259,7 @@
                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                         Auth::user()->hasPermissionTo('regionais.visualizar'))                            
                             <li class="menu-item">
-                                <a href="{{route('admin.dashboard.blogCategory.index')}}" class="menu-link">
+                                <a href="{{route('admin.dashboard.regional.index')}}" class="menu-link">
                                     <span class="menu-icon"><i class="mdi mdi-map-marker-radius"></i></span>
                                     <span class="menu-text"> Regionais</span>
                                 </a>
@@ -269,7 +269,7 @@
                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') ||
                         Auth::user()->hasPermissionTo('municipios.visualizar'))
                             <li class="menu-item">
-                                <a href="{{route('admin.dashboard.blogCategory.index')}}" class="menu-link">
+                                <a href="{{route('admin.dashboard.municipality.index')}}" class="menu-link">
                                     <span class="menu-icon"><i class="mdi mdi-map-marker"></i></span>
                                     <span class="menu-text"> Municípios</span>
                                 </a>
@@ -279,7 +279,7 @@
                         Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
                         Auth::user()->hasPermissionTo('agenda.visualizar'))
                             <li class="menu-item">
-                                <a href="{{route('admin.dashboard.blogCategory.index')}}" class="menu-link">
+                                <a href="{{route('admin.dashboard.event.index')}}" class="menu-link">
                                     <span class="menu-icon"><i class="mdi mdi-calendar-outline"></i></span>
                                     <span class="menu-text"> Agenda</span>
                                 </a>

@@ -248,12 +248,12 @@ Route::prefix('painel/')->group(function () {
         Route::post('blog/uploadImageCkeditorAbout', [AboutController::class, 'uploadImageCkeditorAbout'])
         ->name('admin.dashboard.about.uploadImageCkeditorAbout');
         //EVENT
-        Route::resource('eventos', EventController::class)
+        Route::resource('agenda', EventController::class)
         ->names('admin.dashboard.event')
-        ->parameters(['eventos'=>'event']);
-        Route::post('eventos/delete', [EventController::class, 'destroySelected'])
+        ->parameters(['agenda'=>'event']);
+        Route::post('agenda/delete', [EventController::class, 'destroySelected'])
         ->name('admin.dashboard.event.destroySelected');
-        Route::post('eventos/sorting', [EventController::class, 'sorting'])
+        Route::post('agenda/sorting', [EventController::class, 'sorting'])
         ->name('admin.dashboard.event.sorting');
         //TOPIC
         Route::resource('topicos', TopicController::class)
