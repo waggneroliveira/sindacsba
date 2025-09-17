@@ -1618,6 +1618,9 @@
  }
 
  @media (max-width:576px) {
+    .col-11.col-lg-12.d-flex.flex-wrap.gap-3.justify-content-center{
+        gap: 6px !important;
+    }
     .complaint img{
         width: 120px;
         height: 120px;
@@ -1745,7 +1748,7 @@
         font-size: 0.938rem;
     }
     #calendar .header span, .montserrat-bold.font-30.mb-0.title-blue {
-        font-size: 1.125rem !important;
+        font-size: 1.125rem;
     }
     #calendar .header button{
         padding: 0;
@@ -1757,6 +1760,7 @@
  @media (max-width:476px) {
     .municipios li{
         font-size: 0.75rem;
+        min-height: auto;
     }
     .partner a{
         font-size: 0.75rem;
