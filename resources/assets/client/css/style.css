@@ -1,3 +1,26 @@
+.whatsapp-float svg {
+    width: 29px;
+    height: 29px;
+    fill: #fff;
+    display: block;
+}
+.whatsapp-float {
+    position: fixed;
+    bottom: 37%;
+    right: 10px;
+    transform: translateY(-30%);
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    background: #25D366;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
+    z-index: 9999;
+    transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+}
 /* Calendário básico */
 .day-number {
     font-weight: bold;
@@ -1710,6 +1733,20 @@
 
     .hero p {
         font-size: 0.938rem;
+    }
+    .dropdown-menu.show{
+        transform: translate3d(85px, 26px, 0px) !important;
+    }
+    .event-item h4, .event-item strong, .event-item span{
+        font-size: 0.938rem;
+    }
+    #calendar .header span, .montserrat-bold.font-30.mb-0.title-blue {
+        font-size: 1.125rem !important;
+    }
+    #calendar .header button{
+        padding: 0;
+        width: 30px;
+        height: 30px;
     }
  }
 

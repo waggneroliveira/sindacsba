@@ -17,6 +17,7 @@ class Contact extends Model
         'mention',
         'name_section_social_media',
         'name_section',
+        'whatsapp',
         'text',
         'name_one',
         'name_two',

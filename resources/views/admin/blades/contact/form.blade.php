@@ -47,10 +47,15 @@
                         <input type="text" name="name_section_social_media" class="form-control" id="name_section_social_media"
                             value="{{ $contact->name_section_social_media ?? '' }}" placeholder="Nome da sessão">
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-2">
                         <label for="mention" class="form-label">Menção</label>
                         <input type="text" name="mention" class="form-control" id="mention"
                             value="{{ $contact->mention ?? '' }}" placeholder="Menção">
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <label for="whatsapp" class="form-label">Whatsapp</label>
+                        <input type="text" name="whatsapp" class="form-control" id="whatsapp"
+                            value="{{ $contact->whatsapp ?? '' }}" placeholder="Whatsapp">
                     </div>
 
                     <div class="col-12 col-md-6">
@@ -174,7 +179,37 @@
         });
 
     });
+
+    //Mascara de telefone
+document.addEventListener("shown.bs.modal", function (event) {
+    // procura o input dentro do modal que abriu
+    const phoneInput = event.target.querySelector("#whatsapp");
+
+    if (phoneInput && !phoneInput.dataset.masked) {
+        phoneInput.addEventListener("input", function (e) {
+            let t = e.target.value.replace(/\D/g, ""); // só dígitos
+
+            // força prefixo 71
+            if (!t.startsWith("71")) {
+                t = "71" + t;
+            }
+            if (t.length > 11) t = t.slice(0, 11);
+
+            // aplica máscara (71) 9 9999-9999
+            let formatado = "(" + t.slice(0, 2) + ")";
+            if (t.length > 2) formatado += " " + t.slice(2, 3);
+            if (t.length > 3) formatado += " " + t.slice(3, 7);
+            if (t.length > 7) formatado += "-" + t.slice(7);
+
+            e.target.value = formatado;
+        });
+
+        // marca como inicializado para não duplicar listeners
+        phoneInput.dataset.masked = "true";
+    }
+});
 </script>
+
 
 
 
