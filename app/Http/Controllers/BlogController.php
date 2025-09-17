@@ -50,7 +50,7 @@ class BlogController extends Controller
         }
 
         if ($request->filled('date')) {
-            $blogsQuery->whereDate('created_at', $request->date);
+            $blogsQuery->whereDate('date', $request->date);
         }
 
         if ($request->filled('blog_category_id')) {
@@ -58,7 +58,7 @@ class BlogController extends Controller
         }
 
         // Paginação
-        $blogs = $blogsQuery->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
+        $blogs = $blogsQuery->orderBy('date', 'desc')->paginate(10)->withQueryString();
 
         // Contagem de comentários pendentes
         $commentCount = Blog::with(['comments' => function ($query) {
