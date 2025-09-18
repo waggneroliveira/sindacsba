@@ -38,11 +38,10 @@
     document.addEventListener("DOMContentLoaded", function() {
         const heroSwiper = new Swiper('.hero-swiper', {
             loop: false, // Loop infinito
-            autoplay: false,
-            // autoplay: {
-            //     delay: 5000, // Troca de slide a cada 5s
-            //     disableOnInteraction: false, // Continua autoplay após interação
-            // },
+            autoplay: {
+                delay: 5000, // Troca de slide a cada 5s
+                disableOnInteraction: false, // Continua autoplay após interação
+            },
             speed: 800, // Velocidade da transição
             navigation: {
                 nextEl: '.swiper-button-next',

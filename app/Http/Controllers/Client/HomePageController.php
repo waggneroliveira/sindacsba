@@ -102,7 +102,7 @@ class HomePageController extends Controller
         ->withCount('blogs')
         ->orderBy('blogs_count', 'DESC')
         ->sorting()
-        ->limit(5)
+        ->limit(6)
         ->get();
 
         return view('client.blades.index', compact(
