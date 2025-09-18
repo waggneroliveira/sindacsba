@@ -1,36 +1,41 @@
-<div class="col-12">
-    <div class="swiper announcement w-75">
+{{-- Carrossel para MOBILE --}}
+<div class="col-12 d-block d-sm-none">
+    <div class="swiper announcement-mobile w-75">
         <div class="swiper-wrapper">
-            @foreach ($announcements as $announcement)
+            @foreach ($announcements->where('exhibition', 'mobile') as $announcement)
                 <div class="swiper-slide py-5">
                     <div class="image rounded-3 overflow-hidden">
-                        @php
-                            $hasImage = !empty($announcement->path_image);
-                            $hasMobileImage = !empty($announcement->path_image_mobile);
-                            $hasVerticalImage = !empty($announcement->path_image_vertical);
-                        @endphp
-
-                        {{-- Seu código de exibição de imagens aqui --}}
                         @if (!empty($announcement->link))
                             <a href="{{ $announcement->link }}" target="_blank" rel="nofollow noopener noreferrer">
-                                <picture>
-                                    @if ($hasMobileImage)
-                                        <source media="(max-width: 576px)" srcset="{{ asset('storage/' . $announcement->path_image_mobile) }}">
-                                    @endif
-                                    @if ($hasImage)                                            
-                                        <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100">
-                                    @endif
-                                </picture>
+                                <img src="{{ asset('storage/' . $announcement->path_image) }}"
+                                     alt="Anuncio-{{ $announcement->id }}" class="w-100">
                             </a>
                         @else
-                            <picture>
-                                @if ($hasMobileImage)
-                                    <source media="(max-width: 576px)" srcset="{{ asset('storage/' . $announcement->path_image_mobile) }}">
-                                @endif
-                                @if ($hasImage)                                        
-                                    <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100">
-                                @endif
-                            </picture>
+                            <img src="{{ asset('storage/' . $announcement->path_image) }}"
+                                 alt="Anuncio-{{ $announcement->id }}" class="w-100">
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+
+{{-- Carrossel para DESKTOP --}}
+<div class="col-12 d-none d-sm-block">
+    <div class="swiper announcement-desktop w-75">
+        <div class="swiper-wrapper">
+            @foreach ($announcements->where('exhibition', 'horizontal') as $announcement)
+                <div class="swiper-slide py-5">
+                    <div class="image rounded-3 overflow-hidden">
+                        @if (!empty($announcement->link))
+                            <a href="{{ $announcement->link }}" target="_blank" rel="nofollow noopener noreferrer">
+                                <img src="{{ asset('storage/' . $announcement->path_image) }}"
+                                     alt="Anuncio-{{ $announcement->id }}" class="w-100">
+                            </a>
+                        @else
+                            <img src="{{ asset('storage/' . $announcement->path_image) }}"
+                                 alt="Anuncio-{{ $announcement->id }}" class="w-100">
                         @endif
                     </div>
                 </div>

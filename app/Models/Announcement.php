@@ -15,6 +15,7 @@ class Announcement extends Model
     
     protected $fillable = [
         'link',
+        'exhibition',
         'path_image',
         'path_image_mobile',
         'path_image_vertical',

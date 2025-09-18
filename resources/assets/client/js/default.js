@@ -129,7 +129,7 @@
         }))
 
     document.addEventListener('DOMContentLoaded', function() {
-        const swiperAnuncio = new Swiper('.announcement', {
+        const swiperAnuncio = new Swiper('.announcement-mobile', {
             loop: true,
             speed: 1200,
                 effect: 'fade',
@@ -141,6 +141,19 @@
                 disableOnInteraction: false,
             },
         });
+        const swiperAnuncioDesk = new Swiper('.announcement-desktop', {
+            loop: true,
+            speed: 1200,
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true,
+                },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+        });
+
         const swiperAnuncioVertical = new Swiper('.announcementVertical', {
             loop: true,
             speed: 1200,

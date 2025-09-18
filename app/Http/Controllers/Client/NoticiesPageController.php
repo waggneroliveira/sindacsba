@@ -11,13 +11,18 @@ class NoticiesPageController extends Controller
 {
     public function index(){
         $noticies = Noticies::active()->sorting()->get();
-        $announcements = Announcement::active()
+        $announcements = Announcement::select(
+            'exhibition',
+            'link',
+            'exhibition',
+            'path_image',
+            'active',
+            'sorting',
+        )
+        ->where('exhibition', '=', 'mobile')
+        ->orWhere('exhibition', '=', 'horizontal')
+        ->active()
         ->sorting()
-        ->where(function($query) {
-            $query->whereNotNull('path_image')
-                ->orWhereNotNull('path_image_mobile')
-                ->orWhereNotNull('path_image_vertical');
-        })
         ->get();
         $groupedNoticies = $noticies->groupBy(function($item) {
             return \Carbon\Carbon::parse($item->date)->format('Y');

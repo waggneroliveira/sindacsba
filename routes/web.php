@@ -102,7 +102,19 @@ View::composer('client.core.client', function ($view) {
     ->sorting()
     ->limit(10)
     ->get();
-    $announcements = Announcement::active()->sorting()->get();
+    $announcements = Announcement::select(
+        'exhibition',
+        'link',
+        'exhibition',
+        'path_image',
+        'active',
+        'sorting',
+    )
+    ->where('exhibition', '=', 'mobile')
+    ->orWhere('exhibition', '=', 'horizontal')
+    ->active()
+    ->sorting()
+    ->get();
     $contact = Contact::first();
     $abouts = About::active()->sorting()->get();
     $statute = Statute::active()->count();

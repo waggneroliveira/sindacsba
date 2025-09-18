@@ -1271,7 +1271,6 @@
  .announcement .image img {
      height: auto;
      object-fit: cover;
-     display: block;
  }
 
  .bg-light {
@@ -1438,8 +1437,11 @@
  .hero h1 b {
      color: var(--emphasis-color);
  }
-.swiper-button-next, .swiper-button-prev{
-    color: var(--background-color-white) !important;
+.hero-swiper .swiper-button-next, .swiper-button-prev{
+    color: var(--background-color-white);
+}
+.category-swiper .swiper-button-next, .swiper-button-prev{
+    color: var(--title-color-blue);
 }
  .image-hero {
     width: 100%;
@@ -1618,6 +1620,9 @@
  }
 
  @media (max-width:576px) {
+    #lgpd-banner{
+        bottom: 60px;
+    }
     .col-11.col-lg-12.d-flex.flex-wrap.gap-3.justify-content-center{
         gap: 6px !important;
     }
@@ -1715,6 +1720,16 @@
          font-size: 18px;
          font-weight: 800;
      }
+     .hero-swiper .max-width.container{
+        width: 95%;
+        margin: 0 auto;
+     }
+    .category-swiper .swiper-button-next, .swiper-button-prev {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+
      .about .image{
         max-width: inherit;
         aspect-ratio: inherit;

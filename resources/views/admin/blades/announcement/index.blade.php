@@ -47,7 +47,7 @@
                                             <button type="button" class="btn btn-primary text-black waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#announcement-create"><i class="mdi mdi-plus-circle me-1"></i> {{__('dashboard.btn_create')}}</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="announcement-create" tabindex="-1" role="dialog" aria-hidden="true">
-                                                <div class="announcement modal-dialog modal-dialog-centered" style="max-width: 980px;">
+                                                <div class="announcement modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header bg-light">
                                                             <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.btn_create')}}</h4>
@@ -79,8 +79,8 @@
                                             <th class="bs-checkbox">
                                                 <label><input name="btnSelectAll" type="checkbox"></label>
                                             </th>
+                                            <th class="text-center">Exibição</th>
                                             <th class="text-center">Imagem Desktop</th>
-                                            <th class="text-center">Imagem Mobile</th>
                                             <th>{{__('dashboard.created_at')}}</th>
                                             <th>{{__('dashboard.status')}}</th>
                                             <th style="width: 85px;">{{__('dashboard.action')}}</th>
@@ -93,20 +93,16 @@
                                                 <td class="bs-checkbox">
                                                     <label><input data-index="{{$key}}" name="btnSelectItem" class="btnSelectItem" type="checkbox" value="{{$announcement->id}}"></label>
                                                 </td>
+                                                <td class="text-center text-capitalize">
+                                                    {{$announcement->exhibition}}
+                                                </td>
                                                 <td class="table-announcement text-center">
                                                     @if ($announcement->path_image)
                                                         <img src="{{ asset('storage/'.$announcement->path_image) }}" alt="table-announcement" class="me-2 rounded-circle" style="width: 40px; height: 40px;">
                                                         @else      
                                                         <img src="{{asset('build/admin/images/announcements/announcement-3.jpg')}}" alt="table-announcement" class="me-2 rounded-circle">
                                                     @endif
-                                                </td>                                                
-                                                <td class="table-announcement text-center">
-                                                    @if ($announcement->path_image_vertical)
-                                                        <img src="{{ asset('storage/'.$announcement->path_image_vertical) }}" alt="table-announcement" class="me-2 rounded-circle" style="width: 40px; height: 40px;">
-                                                        @else      
-                                                        <img src="{{asset('build/admin/images/announcements/announcement-3.jpg')}}" alt="table-announcement" class="me-2 rounded-circle">
-                                                    @endif
-                                                </td>                                                
+                                                </td>                                                   
                                                 <td>
                                                     @php
                                                         $locales = [
@@ -141,7 +137,7 @@
                                                     Auth::user()->can('anuncio.editar')) 
                                                         <button data-bs-toggle="modal" data-bs-target="#announcement-edit-{{$announcement->id}}" class="tabledit-edit-button btn btn-primary text-black" style="padding: 2px 8px;width: 30px"><span class="mdi mdi-pencil"></span></button>
                                                         <div class="modal fade" id="announcement-edit-{{$announcement->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-                                                            <div class="announcement modal-dialog modal-dialog-centered" style="max-width: 980px;">
+                                                            <div class="announcement modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header bg-light">
                                                                         <h4 class="modal-title" id="myCenterModalLabel">{{__('dashboard.btn_edit')}}</h4>

@@ -54,24 +54,32 @@ class BlogPageController extends Controller
         ->inRandomOrder()
         ->limit(4)
         ->get();
-$announcements = Announcement::active()
-    ->sorting()
-    ->where(function($query) {
-        $query->where(function($q) {
-                $q->whereNotNull('path_image')
-                  ->where('path_image', '!=', '');
-            })
-            ->orWhere(function($q) {
-                $q->whereNotNull('path_image_mobile')
-                  ->where('path_image_mobile', '!=', '');
-            })
-            ->orWhere(function($q) {
-                $q->whereNotNull('path_image_vertical')
-                  ->where('path_image_vertical', '!=', '');
-            });
-    })
-    ->get();
+        $announcements = Announcement::select(
+            'exhibition',
+            'link',
+            'exhibition',
+            'path_image',
+            'active',
+            'sorting',
+        )
+        ->where('exhibition', '=', 'mobile')
+        ->orWhere('exhibition', '=', 'horizontal')
+        ->active()
+        ->sorting()
+        ->get();
 
+        $announcementVerticals = Announcement::select(
+            'exhibition',
+            'link',
+            'exhibition',
+            'path_image',
+            'active',
+            'sorting',
+        )
+        ->where('exhibition', '=', 'vertical')
+        ->active()
+        ->sorting()
+        ->get();
         $popUp = PopUp::active()->first();
 
         return view('client.blades.blog', compact(
@@ -81,6 +89,7 @@ $announcements = Announcement::active()
             'blogAll',
             'blogSeeAlso',
             'announcements',
+            'announcementVerticals',
             'popUp',
         ));
     }
@@ -118,19 +127,35 @@ $announcements = Announcement::active()
         ->get();
 
         $blogCategories = BlogCategory::whereHas('blogs')->active()->sorting()->get();
-        $announcements = Announcement::active()
+        $announcements = Announcement::select(
+            'exhibition',
+            'link',
+            'exhibition',
+            'path_image',
+            'active',
+            'sorting',
+        )
+        ->where('exhibition', '=', 'mobile')
+        ->orWhere('exhibition', '=', 'horizontal')
+        ->active()
         ->sorting()
-        ->where(function($query) {
-            $query->whereNotNull('path_image')
-                ->orWhereNotNull('path_image_mobile')
-                ->orWhereNotNull('path_image_vertical');
-        })
         ->get();
-
+        $announcementVerticals = Announcement::select(
+            'exhibition',
+            'link',
+            'exhibition',
+            'path_image',
+            'active',
+            'sorting',
+        )
+        ->where('exhibition', '=', 'vertical')
+        ->active()
+        ->sorting()
+        ->get();
         // Compartilha a variável globalmente (para menu/header)
         view()->share('blogInner', $blogInner);
 
-        return view('client.blades.blog-inner', compact('announcements','blogInner', 'slug', 'blogCategories', 'blogRelacionados'));
+        return view('client.blades.blog-inner', compact('announcementVerticals', 'announcements','blogInner', 'slug', 'blogCategories', 'blogRelacionados'));
     }
 
 }

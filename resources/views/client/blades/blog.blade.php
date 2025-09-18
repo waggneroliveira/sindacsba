@@ -266,7 +266,7 @@
                       <!-- Newsletter End -->
    
                       <!-- Ads Start -->
-                      @if ($announcements->count())                        
+                      @if ($announcementVerticals->count())                        
                         <div class="mb-3">
                            @include('client.includes.announcementVertical')
                         </div>
