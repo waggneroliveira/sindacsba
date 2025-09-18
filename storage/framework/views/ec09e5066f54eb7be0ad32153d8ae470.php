@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="<?php echo e(config('app.locale')); ?>" 
+    data-layout-mode="<?php echo e(isset($settingTheme) ? $settingTheme->data_layout_mode : 'detached'); ?>" 
+    data-topbar-color="<?php echo e(isset($settingTheme) ? $settingTheme->data_topbar_color : 'light'); ?>"
+    data-bs-theme="<?php echo e(isset($settingTheme) ? $settingTheme->data_bs_theme : 'dark'); ?>" 
+    data-two-column-color="<?php echo e(isset($settingTheme) ? $settingTheme->data_two_column_color : 'light'); ?>" 
+    data-layout-width="<?php echo e(isset($settingTheme) ? $settingTheme->data_layout_width : 'default'); ?>" 
+    data-menu-color="<?php echo e(isset($settingTheme) ? $settingTheme->data_menu_color : 'light'); ?>" 
+    data-menu-icon="<?php echo e(isset($settingTheme) ? $settingTheme->data_menu_icon : 'default'); ?>" 
+    data-sidenav-size="<?php echo e(isset($settingTheme) ? $settingTheme->data_sidenav_size : 'condensed'); ?>" 
+    data-sidenav-user="true">
+  
+    <head>
+        <meta charset="utf-8" />
+        <title>WHI - Painel Gerenciador</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta name="author" content="WHI - Web de Alta Inspiração">
+        <meta name="description" content="Painel gerenciador de conteúdo WHI">
+        <meta name="copyright" content="© 2024 WHI - Web de Alta Inspiração." />
+        <meta name="robots" content="none">
+        <meta name="googlebot" content="noarchive">
+        
+        <link href="<?php echo e(asset('build/admin/css/custom.css')); ?>" rel="stylesheet" type="text/css" />
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                document.body.classList.add('loaded');
+            });
+        </script>
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="<?php echo e(asset('build/admin/images/favicon.png')); ?>">
+
+        <!-- Load da pagina -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="<?php echo e(asset('build/admin/js/load.js')); ?>"></script>
+
+        <!-- plugin css -->
+        <link rel="stylesheet" href="<?php echo e(asset('build/admin/js/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css')); ?>">
+
+        <!-- Bootstrap css -->
+        <link href="<?php echo e(asset('build/admin/css/bootstrap.min.css')); ?>" rel="stylesheet" type="text/css" id="app-style" />
+
+        <!-- App css -->
+        <link href="<?php echo e(asset('build/admin/css/app.min.css')); ?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo e(asset('build/admin/js/libs/dropzone/min/dropzone.min.css')); ?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo e(asset('build/admin/js/libs/dropify/css/dropify.min.css')); ?>" rel="stylesheet" type="text/css" />
+        <!-- Icons css -->
+        <link href="<?php echo e(asset('build/admin/css/icons.min.css')); ?>" rel="stylesheet" type="text/css" />
+        
+        <link href="<?php echo e(asset('build/admin/js/libs/sweetalert2/sweetalert2.min.css')); ?>" rel="stylesheet" type="text/css" />
+
+        <!-- Theme Config Js -->
+        <script src="<?php echo e(asset('build/admin/js/head.js')); ?>"></script>
+        <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+
+        <script>
+            $url = "<?php echo e(url('')); ?>";
+        </script>
+    </head>
+
+    <body class="loading">
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            
+            <!-- ========== Menu ========== -->
+            <div class="app-menu">  
+
+                <!-- Brand Logo -->
+                <div class="logo-box">
+                    <!-- Brand Logo Light -->
+                    <a href="<?php echo e(route('admin.dashboard')); ?>" class="logo-light">
+                        <img src="<?php echo e(asset('build/admin/images/whi-green-horizontal.png')); ?>" alt="logo" class="logo-lg">
+                        <img src="<?php echo e(asset('build/admin/images/whi.png')); ?>" alt="small logo" class="logo-sm">
+                    </a>
+
+                    <!-- Brand Logo Dark -->
+                    <a href="<?php echo e(route('admin.dashboard')); ?>" class="logo-dark">
+                        <img src="<?php echo e(asset('build/admin/images/whi-black-horizontal.png')); ?>" alt="dark logo" class="logo-lg">
+                        <img src="<?php echo e(asset('build/admin/images/whi-black.png')); ?>" alt="small logo" class="logo-sm">
+                    </a>
+                </div>
+
+                <!-- menu-left -->
+                <div class="scrollbar">
+
+                    <!--- Menu -->
+                    <ul class="menu">
+
+                        <li class="menu-title">Listagem</li>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                        Auth::user()->hasPermissionTo('slide.visualizar') || 
+                        Auth::user()->hasPermissionTo('parceiros.visualizar') || 
+                        Auth::user()->hasPermissionTo('videos.visualizar') || 
+                        Auth::user()->hasPermissionTo('topicos.visualizar')): ?>
+                            <li class="menu-item">
+                                <a href="#menuDashboards" data-bs-toggle="collapse" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-home"></i></span>
+                                    <span class="menu-text"> Home </span>
+                                    <span class="badge bg-success rounded-pill ms-auto">4</span>
+                                </a>
+                                <div class="collapse" id="menuDashboards">
+                                    <ul class="sub-menu">
+                                        <?php if(Auth::user()->hasRole('Super') || 
+                                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                                        Auth::user()->hasPermissionTo('slide.visualizar')): ?>
+                                            <li class="menu-item">
+                                                <a href="<?php echo e(route('admin.dashboard.slide.index')); ?>" class="menu-link">
+                                                    <span class="menu-text">Slides</span>
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
+                                        <?php if(Auth::user()->hasRole('Super') || 
+                                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                                        Auth::user()->hasPermissionTo('topicos.visualizar')): ?>
+                                            <li class="menu-item">
+                                                <a href="<?php echo e(route('admin.dashboard.topic.index')); ?>" class="menu-link">
+                                                    <span class="menu-text">Tópicos</span>
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
+                                        <?php if(Auth::user()->hasRole('Super') || 
+                                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                                        Auth::user()->hasPermissionTo('parceiros.visualizar')): ?>
+                                            <li class="menu-item">
+                                                <a href="<?php echo e(route('admin.dashboard.partner.index')); ?>" class="menu-link">
+                                                    <span class="menu-text">Parceiros</span>
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
+                                        <?php if(Auth::user()->hasRole('Super') || 
+                                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                                        Auth::user()->hasPermissionTo('videos.visualizar')): ?>
+                                            <li class="menu-item">
+                                                <a href="<?php echo e(route('admin.dashboard.video.index')); ?>" class="menu-link">
+                                                    <span class="menu-text">Vídeos</span>
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
+                                    </ul>
+                                </div>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                        Auth::user()->hasPermissionTo('sobre nos.visualizar') || 
+                        Auth::user()->hasPermissionTo('a direcao.visualizar') || 
+                        Auth::user()->hasPermissionTo('videos.visualizar') || 
+                        Auth::user()->hasPermissionTo('topicos.visualizar')): ?>
+                            <li class="menu-item">
+                                <a href="#about" data-bs-toggle="collapse" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-help-circle"></i></span>
+                                    <span class="menu-text"> Sobre Nós </span>
+                                    <span class="badge bg-success rounded-pill ms-auto">3</span>
+                                </a>
+                                <div class="collapse" id="about">
+                                    <ul class="sub-menu">
+                                        <?php if(Auth::user()->hasRole('Super') || 
+                                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                                        Auth::user()->hasPermissionTo('sobre nos.visualizar')): ?>
+                                            <li class="menu-item">
+                                                <a href="<?php echo e(route('admin.dashboard.about.index')); ?>" class="menu-link">
+                                                    <span class="menu-text">Sobre Nós</span>
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
+                                        <?php if(Auth::user()->hasRole('Super') || 
+                                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                                        Auth::user()->hasPermissionTo('a direcao.visualizar')): ?>
+                                            <li class="menu-item">
+                                                <a href="<?php echo e(route('admin.dashboard.direction.index')); ?>" class="menu-link">
+                                                    <span class="menu-text">A direção</span>
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
+                                        <?php if(Auth::user()->hasRole('Super') || 
+                                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                                        Auth::user()->hasPermissionTo('estatuto.visualizar')): ?>
+                                            <li class="menu-item">
+                                                <a href="<?php echo e(route('admin.dashboard.statute.index')); ?>" class="menu-link">
+                                                    <span class="menu-text">Estatuto</span>
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
+                                    </ul>
+                                </div>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                        Auth::user()->hasPermissionTo('sindicalize-se.visualizar') || 
+                        Auth::user()->hasPermissionTo('beneficios.visualizar') || 
+                        Auth::user()->hasPermissionTo('denuncie.visualizar') || 
+                        Auth::user()->hasPermissionTo('convenios.visualizar')): ?>
+                            <li class="menu-item">
+                                <a href="#servicos" data-bs-toggle="collapse" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-toolbox"></i></span>
+                                    <span class="menu-text"> Serviços aos <br> sindicalizados </span>
+                                    <span class="badge bg-success rounded-pill ms-auto">4</span>
+                                </a>
+                                <div class="collapse" id="servicos">
+                                    <ul class="sub-menu">
+                                        <?php if(Auth::user()->hasRole('Super') || 
+                                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') ||
+                                        Auth::user()->hasPermissionTo('convenios.visualizar')): ?>
+                                            <li class="menu-item">
+                                                <a href="<?php echo e(route('admin.dashboard.agreement.index')); ?>" class="menu-link">
+                                                    <span class="menu-text">Convênios</span>
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
+                                        <?php if(Auth::user()->hasRole('Super') || 
+                                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                                        Auth::user()->hasPermissionTo('sindicalize-se.visualizar')): ?>
+                                            <li class="menu-item">
+                                                <a href="<?php echo e(route('admin.dashboard.unionized.index')); ?>" class="menu-link">
+                                                    <span class="menu-text">Sindicalize-se</span>
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
+                                        <?php if(Auth::user()->hasRole('Super') || 
+                                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') ||
+                                        Auth::user()->hasPermissionTo('beneficios.visualizar')): ?>
+                                            <li class="menu-item">
+                                                <a href="<?php echo e(route('admin.dashboard.benefitTopic.index')); ?>" class="menu-link">
+                                                    <span class="menu-text">Benefícios</span>
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
+                                        <?php if(Auth::user()->hasRole('Super') || 
+                                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') ||
+                                        Auth::user()->hasPermissionTo('denuncie.visualizar')): ?>
+                                            <li class="menu-item">
+                                                <a href="<?php echo e(route('admin.dashboard.report.index')); ?>" class="menu-link">
+                                                    <span class="menu-text">Denuncie</span>
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
+                                    </ul>
+                                </div>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                        Auth::user()->hasPermissionTo('juridico.visualizar')): ?>
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.juridico.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-scale-balance"></i></span>
+                                    <span class="menu-text"> Jurídico</span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                        Auth::user()->hasPermissionTo('regionais.visualizar')): ?>                            
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.regional.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-map-marker-radius"></i></span>
+                                    <span class="menu-text"> Regionais</span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') ||
+                        Auth::user()->hasPermissionTo('municipios.visualizar')): ?>
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.municipality.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-map-marker"></i></span>
+                                    <span class="menu-text"> Municípios</span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->hasPermissionTo('usuario.tornar usuario master') || 
+                        Auth::user()->hasPermissionTo('agenda.visualizar')): ?>
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.event.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-calendar-outline"></i></span>
+                                    <span class="menu-text"> Agenda</span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('categorias de noticias.visualizar')): ?>
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.blogCategory.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-tag-multiple "></i></span>
+                                    <span class="menu-text"> Categoria de notícias </span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('noticias.visualizar')): ?>
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.blog.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-newspaper-variant"></i></span>
+                                    <span class="menu-text"> Notícias </span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('newsletter.visualizar')): ?>
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.newsletter.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-email-outline"></i></span>
+                                    <span class="menu-text"> Newsletter </span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('lead contato.visualizar')): ?>
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.formIndex.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-account-box-outline"></i></span>
+                                    <span class="menu-text"> Lead Contato </span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('contato.visualizar')): ?>
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.contact.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-card-account-mail-outline"></i></span>
+                                    <span class="menu-text"> Contato </span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('anuncio.visualizar')): ?>
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.announcement.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-bullhorn-outline"></i></span>
+                                    <span class="menu-text"> Anuncios </span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.popUp.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-window-maximize"></i></span>
+                                    <span class="menu-text"> Pop-up </span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('editais.visualizar')): ?>
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.noticies.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-file-document"></i></span>
+                                    <span class="menu-text"> Editais </span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('auditoria.visualizar')): ?>
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.audit.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-clipboard-text"></i></span>
+                                    <span class="menu-text"> <?php echo e(__('dashboard.audit')); ?> </span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('email.visualizar')): ?>                            
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.settingEmail.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-email"></i></span>
+                                    <span class="menu-text"> <?php echo e(__('dashboard.setting_smtp')); ?> </span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('grupo.visualizar')): ?>                            
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.group.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-account-group"></i></span>
+                                    <span class="menu-text"> <?php echo e(__('dashboard.group_and_permission')); ?></span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->hasRole('Super') || 
+                        Auth::user()->can('usuario.tornar usuario master') || 
+                        Auth::user()->can('usuario.visualizar')): ?>                            
+                            <li class="menu-item">
+                                <a href="<?php echo e(route('admin.dashboard.user.index')); ?>" class="menu-link">
+                                    <span class="menu-icon"><i class="mdi mdi-account-multiple"></i></span>
+                                    <span class="menu-text"> <?php echo e(__('dashboard.users')); ?> </span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                    <!--- End Menu -->
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- ========== Left menu End ========== -->
+
+            
+
+            
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+
+                <!-- ========== Topbar Start ========== -->
+                <div class="navbar-custom">
+                    <div class="topbar">
+                        <div class="topbar-menu d-flex align-items-center gap-1">
+
+                            <!-- Topbar Brand Logo -->
+                            <div class="logo-box">
+                                <!-- Brand Logo Light -->
+                                <a href="<?php echo e(route('admin.dashboard')); ?>" class="logo-light">
+                                    <img src="<?php echo e(asset('build/admin/images/whi.png')); ?>" alt="logo" class="logo-lg">
+                                    <img src="<?php echo e(asset('build/admin/images/whi.png')); ?>" alt="small logo" class="logo-sm">
+                                </a>
+
+                                <!-- Brand Logo Dark -->
+                                <a href="<?php echo e(route('admin.dashboard')); ?>" class="logo-dark">
+                                    <img src="<?php echo e(asset('build/admin/images/whi.png')); ?>" alt="dark logo" class="logo-lg">
+                                    <img src="<?php echo e(asset('build/admin/images/whi.png')); ?>" alt="small logo" class="logo-sm">
+                                </a>
+                            </div>
+
+                            <!-- Sidebar Menu Toggle Button -->
+                            <button class="button-toggle-menu">
+                                <i class="mdi mdi-menu"></i>
+                            </button>
+                        </div>
+
+                        <ul class="topbar-menu d-flex align-items-center">
+                            <!-- Fullscreen Button -->
+                            <li class="d-none d-md-inline-block">
+                                <a class="nav-link waves-effect waves-light" href="" data-toggle="fullscreen">
+                                    <i class="fe-maximize font-22"></i>
+                                </a>
+                            </li>
+
+                            <!-- Search Dropdown (for Mobile/Tablet) -->
+                            <li class="dropdown d-lg-none">
+                                <a class="nav-link dropdown-toggle waves-effect waves-light arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                    <i class="ri-search-line font-22"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-animated dropdown-lg p-0">
+                                    <form class="p-3">
+                                        <input type="search" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                                    </form>
+                                </div>
+                            </li>
+                            <!-- Language flag dropdown  -->
+                            <li class="dropdown d-none d-md-inline-block">
+                                <a class="nav-link dropdown-toggle waves-effect waves-light arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                    
+                                    <img src="<?php echo e(asset('build/admin/images/flags/br.jpg')); ?>" alt="user-image" class="me-0 me-sm-1" height="18">
+                                </a>
+                                
+                            </li>
+                            <?php if(Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can('notificacao.visualizar')): ?>
+                                <!-- Notofication dropdown -->
+                                <li class="dropdown notification-list">
+                                    <a class="nav-link dropdown-toggle waves-effect waves-light arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                        <i class="fe-bell font-22"></i>
+                                        <?php if(Auth::user()->hasRole('Super') || 
+                                            Auth::user()->can('usuario.tornar usuario master') || 
+                                            Auth::user()->can('notificacao.visualizar') &&  Auth::user()->can('notificacao.notificacao de auditoria')): ?>
+                                            <span class="badge btn-green-whi text-black rounded-circle noti-icon-badge"><?php echo e(isset($auditCount) ? $auditCount : "0"); ?></span>
+                                        <?php endif; ?>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
+                                        <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
+                                            <div class="row align-items-center">
+                                                <div class="col">
+                                                    <h6 class="m-0 font-16 fw-semibold"> <?php echo e(__('dashboard.notification')); ?></h6>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <a href="javascript: void(0);" class="text-dark text-decoration-underline" id="clear-all-notifications">
+                                                        <small><?php echo e(__('dashboard.all_clear')); ?></small>
+                                                    </a>
+                                                </div>                                                                                       
+                                            </div>
+                                        </div>
+
+                                        <div class="px-1" style="max-height: 300px;" data-simplebar>
+                                            <?php if(Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can('notificacao.notificacao de auditoria')): ?>
+                                                <?php if(isset($auditorias) && $auditorias->count() > 0): ?>
+                                                    <h5 class="text-muted font-13 fw-normal mt-2"><?php echo e(__('dashboard.day_notification')); ?></h5>
+                                                    <!-- item-->
+                                                    <?php $__currentLoopData = $auditorias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $auditoria): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <div id="notificacao-<?php echo e($auditoria->id); ?>" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-1">
+                                                            <div class="card-body" title="<?php echo e(__('dashboard.notification_message_one') . ' ' . ($modelName = \App\Models\AuditActivity::getModelName($auditoria->subject_type)). ' ' . __('dashboard.notification_message_thwo') . ' ' . ($auditoria->causer->name ?? __('dashboard.notification_message_three'))); ?>">
+                                                                <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close" onclick="marcarComoLida(<?php echo e($auditoria->id); ?>)"></i></span>
+                                                                <a href="<?php echo e(route('admin.dashboard.audit.show', $auditoria->id)); ?>">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="flex-shrink-0">
+                                                                            <div class="notify-icon bg-primary">
+                                                                                <i class="mdi mdi-comment-account-outline"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="flex-grow-1 text-truncate ms-2">
+                                                                            <h5 class="noti-item-title fw-semibold font-14"><?php echo e(isset($auditoria->causer->name)?$auditoria->causer->name:'Não encontrado'); ?> <small class="fw-normal text-muted ms-1"><?php echo e($auditoria->created_at->format("F j, Y, H:i:s")); ?></small></h5>
+                                                                            <small class="noti-item-subtitle text-muted">
+                                                                                <?php echo e('Modificações foram realizadas em ' . ($modelName = \App\Models\AuditActivity::getModelName($auditoria->subject_type)) . ' pelo usuário ' . ($auditoria->causer->name ?? 'Não encontrado')); ?>
+
+                                                                            </small>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php else: ?>
+                                                    <h5 class="m-0 p-2 ps-1 font-11 fw-semibold">Nenhuma notificação disponível no momento.</h5>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </li>
+                            <?php endif; ?>
+
+                            <!-- Light/Dark Mode Toggle Button -->
+                            <li class="d-none d-sm-inline-block">
+                                <div class="nav-link waves-effect waves-light" id="light-dark-mode">
+                                    <form action="<?php echo e(route('admin.dashboard.settingThemeUpdate')); ?>" method="POST">
+                                        <?php echo csrf_field(); ?>
+                                        <i class="ri-moon-line font-22"></i>
+                                        <input type="hidden" name="user_id" value="<?php echo e(Auth::user()->id); ?>">
+                                        <input type="hidden" name="data-bs-theme" value="<?php echo e(isset($settingTheme) ? $settingTheme->data_bs_theme : 'light'); ?>">
+                                        <input type="hidden" name="data-layout-width" value="<?php echo e(isset($settingTheme) ? $settingTheme->data_layout_width : 'default'); ?>">
+                                        <input type="hidden" name="data-layout-mode" value="<?php echo e(isset($settingTheme) ? $settingTheme->data_layout_mode : 'detached'); ?>">
+                                        <input type="hidden" name="data-topbar-color" value="<?php echo e(isset($settingTheme) ? $settingTheme->data_topbar_color : 'light'); ?>">
+                                        <input type="hidden" name="data-menu-color" value="<?php echo e(isset($settingTheme) ? $settingTheme->data_menu_color : 'light'); ?>">
+                                        <input type="hidden" name="data-two-column-color" value="<?php echo e(isset($settingTheme) ? $settingTheme->data_two_column_color : 'light'); ?>">
+                                        <input type="hidden" name="data-menu-icon" value="<?php echo e(isset($settingTheme) ? $settingTheme->data_menu_icon : 'default'); ?>">
+                                        <input type="hidden" name="data-sidenav-size" value="<?php echo e(isset($settingTheme) ? $settingTheme->data_sidenav_size : 'condensed'); ?>">
+                                    </form>
+                                </div>
+                            </li>
+
+                            <!-- User Dropdown -->
+                            <li class="dropdown">
+                                <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                    <?php if(Auth::user()->path_image): ?>
+                                        <img src="<?php echo e(asset('storage/'.Auth::user()->path_image)); ?>" alt="user-image" class="rounded-circle">
+                                        <?php else: ?>
+                                        <img src="<?php echo e(asset('build/admin/images/users/user-3.jpg')); ?>" alt="user-image" class="rounded-circle">
+                                    <?php endif; ?>
+                                    <span class="ms-1 d-none d-md-inline-block">
+                                        <?php echo e($names = collect(explode(' ', Auth::user()->name))->slice(0, 2)->implode(' ')); ?> <i class="mdi mdi-chevron-down"></i>
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
+                                    <!-- item-->
+                                    <div class="dropdown-header noti-title">
+                                        <h6 class="text-overflow m-0"><?php echo e(__('dashboard.welcome')); ?>!</h6>
+                                    </div>                            
+                                    
+                                    <?php if(Auth::user()->hasRole('Super') || Auth::user()->can('usuario.tornar usuario master') || Auth::user()->can(['usuario.visualizar', 'usuario.editar'])): ?>
+                                        <!-- item-->
+                                        <a href="<?php echo e(route('admin.dashboard.user.edit', ['user' => $user->id])); ?>" class="dropdown-item notify-item">
+                                            <i class="fe-user"></i>
+                                            <span><?php echo e(__('dashboard.profile')); ?></span>
+                                        </a>                                    
+                                    <?php endif; ?>
+
+                                    <!-- item-->
+                                    <a href="#theme-settings-offcanvas" class="dropdown-item notify-item"  data-bs-toggle="offcanvas" >
+                                        <i class="fe-settings"></i>
+                                        <span><?php echo e(__('dashboard.setting')); ?></span>
+                                    </a>
+
+                                    <div class="dropdown-divider"></div>
+
+                                    <!-- item-->
+                                    <a href="<?php echo e(route('admin.dashboard.user.logout')); ?>" class="dropdown-item notify-item">
+                                        <i class="fe-log-out"></i>
+                                        <span><?php echo e(__('dashboard.logout')); ?></span>
+                                    </a>
+
+                                </div>
+                            </li>
+
+                            <!-- Right Bar offcanvas button (Theme Customization Panel) -->
+                            <li>
+                                <a class="nav-link waves-effect waves-light" data-bs-toggle="offcanvas" href="#theme-settings-offcanvas">
+                                    <i class="fe-settings font-22"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- ========== Topbar End ========== -->
+
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+                        <?php echo $__env->yieldContent('content'); ?>                        
+
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Theme Settings -->
+        <div class="offcanvas offcanvas-end right-bar" tabindex="-1" id="theme-settings-offcanvas">
+            <div class="d-flex align-items-center w-100 p-0 offcanvas-header">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs nav-bordered nav-justified w-100" role="tablist">
+
+                    <li class="nav-item">
+                        <a class="nav-link py-2 active" data-bs-toggle="tab" href="#settingTheme" role="tab">
+                            <i class="mdi mdi-cog-outline d-block font-22 my-1"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="offcanvas-body p-3 h-100" data-simplebar>
+                <!-- Tab panes -->
+                <div class="tab-content pt-0">
+                    <div class="tab-pane active" id="settingTheme" role="tabpanel">
+                        <form action="<?php echo e(route('admin.dashboard.settingTheme')); ?>" method="POST">
+                            <?php echo csrf_field(); ?>
+                            <?php echo method_field('POST'); ?>
+                            <input type="hidden" name="user_id" value="<?php echo e(Auth::user()->id); ?>">
+
+                            <div class="mt-n3">
+                                <h6 class="fw-medium py-2 px-3 font-13 text-uppercase bg-light mx-n3 mt-n3 mb-3">
+                                    <span class="d-block py-1"><?php echo e(__('dashboard.setting_theme')); ?></span>
+                                </h6>
+                            </div>
+
+                            <div class="alert alert-warning" role="alert">
+                               <strong><?php echo e(__('dashboard.text_title_description_theme')); ?></strong> <?php echo e(__('dashboard.text_description_theme')); ?>
+
+                            </div>
+
+                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1"><?php echo e(__('dashboard.color_scheme')); ?></h5>
+
+                            <div class="colorscheme-cardradio">
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-bs-theme" 
+                                            <?php echo e(isset($settingTheme) && $settingTheme->data_bs_theme == 'light' ? 'checked' : ''); ?>
+
+                                            id="layout-color-light" value="light">
+                                        <label class="form-check-label" for="layout-color-light"><?php echo e(__('dashboard.color_light')); ?></label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-bs-theme" 
+                                            <?php echo e(isset($settingTheme) && $settingTheme->data_bs_theme == 'dark' ? 'checked' : ''); ?>
+
+                                            id="layout-color-dark" value="dark">
+                                        <label class="form-check-label" for="layout-color-dark"><?php echo e(__('dashboard.color_dark')); ?></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1"><?php echo e(__('dashboard.content_width')); ?></h5>
+                            <div class="d-flex flex-column gap-2">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="radio" name="data-layout-width" <?php echo e(isset($settingTheme) && $settingTheme->data_layout_width=='default'?'checked':''); ?> id="layout-width-default" value="default">
+                                    <label class="form-check-label" for="layout-width-default"><?php echo e(__('dashboard.content_width_default')); ?></label>
+                                </div>
+
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="radio" name="data-layout-width" <?php echo e(isset($settingTheme) && $settingTheme->data_layout_width=='boxed'?'checked':''); ?> id="layout-width-boxed" value="boxed">
+                                    <label class="form-check-label" for="layout-width-boxed"><?php echo e(__('dashboard.content_width_boxed')); ?></label>
+                                </div>
+                            </div>
+
+                            <div id="layout-mode">
+                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1"><?php echo e(__('dashboard.layout_mode')); ?></h5>
+
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-layout-mode" <?php echo e(isset($settingTheme) && $settingTheme->data_layout_mode=='default'?'checked':''); ?> id="layout-mode-default" value="default">
+                                        <label class="form-check-label" for="layout-mode-default"><?php echo e(__('dashboard.layout_mode_default')); ?></label>
+                                    </div>
+
+
+                                    <div id="layout-detached">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="radio" name="data-layout-mode" <?php echo e(isset($settingTheme) && $settingTheme->data_layout_mode=='detached'?'checked':''); ?> id="layout-mode-detached" value="detached">
+                                            <label class="form-check-label" for="layout-mode-detached"><?php echo e(__('dashboard.layout_mode_detached')); ?></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1"><?php echo e(__('dashboard.topbar_color')); ?></h5>
+
+                            <div class="d-flex flex-column gap-2">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="radio" name="data-topbar-color" <?php echo e(isset($settingTheme) && $settingTheme->data_topbar_color=='light'?'checked':''); ?> id="topbar-color-light" value="light">
+                                    <label class="form-check-label" for="topbar-color-light"><?php echo e(__('dashboard.topbar_color_light')); ?></label>
+                                </div>
+
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="radio" name="data-topbar-color" <?php echo e(isset($settingTheme) && $settingTheme->data_topbar_color=='dark'?'checked':''); ?> id="topbar-color-dark" value="dark">
+                                    <label class="form-check-label" for="topbar-color-dark"><?php echo e(__('dashboard.topbar_color_dark')); ?></label>
+                                </div>
+
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="radio" name="data-topbar-color" <?php echo e(isset($settingTheme) && $settingTheme->data_topbar_color=='brand'?'checked':''); ?> id="topbar-color-brand" value="brand">
+                                    <label class="form-check-label" for="topbar-color-brand"><?php echo e(__('dashboard.topbar_color_brand')); ?></label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1"><?php echo e(__('dashboard.menu_color')); ?></h5>
+
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-menu-color" <?php echo e(isset($settingTheme) && $settingTheme->data_menu_color=='light'?'checked':''); ?> id="leftbar-color-light" value="light">
+                                        <label class="form-check-label" for="leftbar-color-light"><?php echo e(__('dashboard.menu_color_light')); ?></label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-menu-color" <?php echo e(isset($settingTheme) && $settingTheme->data_menu_color=='dark'?'checked':''); ?> id="leftbar-color-dark" value="dark">
+                                        <label class="form-check-label" for="leftbar-color-dark"><?php echo e(__('dashboard.menu_color_dark')); ?></label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-menu-color" <?php echo e(isset($settingTheme) && $settingTheme->data_menu_color=='brand'?'checked':''); ?> id="leftbar-color-brand" value="brand">
+                                        <label class="form-check-label" for="leftbar-color-brand"><?php echo e(__('dashboard.menu_color_brand')); ?></label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-menu-color" <?php echo e(isset($settingTheme) && $settingTheme->data_menu_color=='gradient'?'checked':''); ?> id="leftbar-color-gradient" value="gradient">
+                                        <label class="form-check-label" for="leftbar-color-gradient"><?php echo e(__('dashboard.menu_color_gradient')); ?></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="menu-icon-color">
+                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Cor do ícone do menu</h5>
+
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-two-column-color" <?php echo e(isset($settingTheme) && $settingTheme->data_two_column_color=='light'?'checked':''); ?> id="twocolumn-menu-color-light" value="light">
+                                        <label class="form-check-label" for="twocolumn-menu-color-light">Claro</label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-two-column-color" <?php echo e(isset($settingTheme) && $settingTheme->data_two_column_color=='dark'?'checked':''); ?> id="twocolumn-menu-color-dark" value="dark">
+                                        <label class="form-check-label" for="twocolumn-menu-color-dark">Escuro</label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-two-column-color" <?php echo e(isset($settingTheme) && $settingTheme->data_two_column_color=='brand'?'checked':''); ?> id="twocolumn-menu-color-brand" value="brand">
+                                        <label class="form-check-label" for="twocolumn-menu-color-brand">Brand</label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-two-column-color" <?php echo e(isset($settingTheme) && $settingTheme->data_two_column_color=='gradient'?'checked':''); ?> id="twocolumn-menu-color-gradient" value="gradient">
+                                        <label class="form-check-label" for="twocolumn-menu-color-gradient">Gradiente</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1"><?php echo e(__('dashboard.menu_icon_tone')); ?></h5>
+
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-menu-icon" <?php echo e(isset($settingTheme) && $settingTheme->data_menu_icon=='default'?'checked':''); ?> id="menu-icon-default" value="default">
+                                        <label class="form-check-label" for="menu-icon-default"><?php echo e(__('dashboard.menu_icon_default')); ?></label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-menu-icon" <?php echo e(isset($settingTheme) && $settingTheme->data_menu_icon=='twotones'?'checked':''); ?> id="menu-icon-twotone" value="twotones">
+                                        <label class="form-check-label" for="menu-icon-twotone"><?php echo e(__('dashboard.menu_icon_twotone')); ?></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="sidebar-size">
+                                <h5 class="fw-medium font-14 mt-4 mb-2 pb-1"><?php echo e(__('dashboard.sidebar_size')); ?></h5>
+
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" <?php echo e(isset($settingTheme) && $settingTheme->data_sidenav_size=='default'?'checked':''); ?> id="leftbar-size-default" value="default">
+                                        <label class="form-check-label" for="leftbar-size-default"><?php echo e(__('dashboard.sidebar_size_default')); ?></label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" <?php echo e(isset($settingTheme) && $settingTheme->data_sidenav_size=='compact'?'checked':''); ?> id="leftbar-size-compact" value="compact">
+                                        <label class="form-check-label" for="leftbar-size-compact"><?php echo e(__('dashboard.sidebar_size_compact')); ?></label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" <?php echo e(isset($settingTheme) && $settingTheme->data_sidenav_size=='condensed'?'checked':''); ?> id="leftbar-size-small" value="condensed">
+                                        <label class="form-check-label" for="leftbar-size-small"><?php echo e(__('dashboard.sidebar_size_condensed')); ?></label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" <?php echo e(isset($settingTheme) && $settingTheme->data_sidenav_size=='full'?'checked':''); ?> id="leftbar-size-full" value="full">
+                                        <label class="form-check-label" for="leftbar-size-full"><?php echo e(__('dashboard.sidebar_size_full_layout')); ?></label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" <?php echo e(isset($settingTheme) && $settingTheme->data_sidenav_size=='fullscreen'?'checked':''); ?> id="leftbar-size-fullscreen" value="fullscreen">
+                                        <label class="form-check-label" for="leftbar-size-fullscreen"><?php echo e(__('dashboard.sidebar_size_full_screen')); ?></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vendor js -->
+        <script src="<?php echo e(asset('build/admin/js/vendor.min.js')); ?>"></script>
+
+        <!-- App js -->
+        <script src="<?php echo e(asset('build/admin/js/app.min.js')); ?>"></script>
+
+        <script>
+            // Passa a tradução para uma variável JavaScript
+            const responseDeleted = <?php echo json_encode(__('dashboard.deleted'), 15, 512) ?>;
+            const responseAreYouSure = <?php echo json_encode(__('dashboard.are_you_sure'), 15, 512) ?>;
+            const responseTextSweetAlert = <?php echo json_encode(__('dashboard.text_sweet_alert'), 15, 512) ?>;
+            const responseConfirmAction = <?php echo json_encode(__('dashboard.confirm_action'), 15, 512) ?>;
+            const responseCancelAction = <?php echo json_encode(__('dashboard.cancel_action'), 15, 512) ?>;
+            const responseSuccessName = <?php echo json_encode(__('dashboard.success_name'), 15, 512) ?>;
+            const responseItemErrorName = <?php echo json_encode(__('dashboard.error_name'), 15, 512) ?>;
+            const responseItemThemeSuccess = <?php echo json_encode(__('dashboard.theme_success'), 15, 512) ?>;
+            const responseItemThemeError = <?php echo json_encode(__('dashboard.theme_erro'), 15, 512) ?>;
+            const responseItemCreate = <?php echo json_encode(__('dashboard.response_item_create'), 15, 512) ?>;
+            const responseItemUpdate = <?php echo json_encode(__('dashboard.response_item_update'), 15, 512) ?>;
+            const responseItemDelete = <?php echo json_encode(__('dashboard.response_item_delete'), 15, 512) ?>;
+            const responseItemOrderSuccess = <?php echo json_encode(__('dashboard.response_order_item'), 15, 512) ?>;
+            const responseItemOrderError = <?php echo json_encode(__('dashboard.response_item_error'), 15, 512) ?>;
+        </script>
+
+        <!-- Plugins js-->
+        <script src="<?php echo e(asset('build/admin/js/libs/jquery-sparkline/jquery.sparkline.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('build/admin/js/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('build/admin/js/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js')); ?>"></script>
+        <script src="<?php echo e(asset('build/admin/js/libs/sweetalert2/sweetalert2.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('build/admin/js/libs/jquery.sortable.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('build/admin/js/libs/dropzone/min/dropzone.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('build/admin/js/libs/dropify/js/dropify.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('build/admin/js/pages/form-fileuploads.init.js')); ?>"></script>
+        <script src="<?php echo e(asset('build/admin/js/main.js')); ?>"></script>
+
+
+        <!-- Dashboard 2 init -->
+        <script src="<?php echo e(asset('build/admin/js/pages/dashboard-2.init.js')); ?>"></script>       
+
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let successMessage = '<?php echo e(session('success')); ?>';
+                if (successMessage) {
+                    setTimeout(function() {
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                title: responseSuccessName,
+                                text: successMessage,
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                                timer: 1800, // O alerta desaparecerá automaticamente após 1,5 segundos
+                                showConfirmButton: false // Oculta o botão para fechar automaticamente
+                            });
+                        }
+                    }, 1000); // Exibe o alert 1,3 segundos após a página carregar
+                }
+            });
+        </script>
+
+        <?php if(Session::has('error')): ?>
+            <div id="errorMessage" class="alert alert-warning notification-message" >
+                <span class="mdi mdi-alert-circle"></span>
+                <?php echo e(Session::get('error')); ?>
+
+            </div>
+        <?php endif; ?>
+
+        <?php if($errors->any()): ?>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    let errors = '';
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        errors += '<?php echo e($error); ?>\n'; 
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    
+                    setTimeout(function() {
+                        Swal.fire({
+                            title: responseItemErrorName,
+                            text: errors,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }, 1300);
+                });
+            </script>        
+        <?php endif; ?>
+
+        <?php if(Session::has('reopenModal')): ?>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    <?php if(session('reopenModal')): ?>
+                        setTimeout(function() {
+                            var modalId = '<?php echo e(session('reopenModal')); ?>';
+                            var modalElement = document.getElementById(modalId);
+                            if (modalElement) {
+                                var myModal = new bootstrap.Modal(modalElement, {
+                                    keyboard: false
+                                });
+                                myModal.show();
+                            } else {
+                                console.error('O elemento modal não existe: ' + modalId);
+                            }
+                        }, 2800);
+                    <?php endif; ?>
+                });
+            </script>
+        <?php endif; ?>
+
+        <script>
+            var userThemeSettings = {
+                data_bs_theme: "<?php echo e(isset($settingTheme)?$settingTheme->data_bs_theme: 'dark'); ?>",
+                data_layout_width: "<?php echo e(isset($settingTheme)?$settingTheme->data_layout_width: 'default'); ?>",
+                data_layout_mode: "<?php echo e(isset($settingTheme)?$settingTheme->data_layout_mode: 'detached'); ?>",
+                data_topbar_color: "<?php echo e(isset($settingTheme)?$settingTheme->data_topbar_color: 'light'); ?>",
+                data_menu_color: "<?php echo e(isset($settingTheme)?$settingTheme->data_menu_color: 'light'); ?>",
+                data_two_column_color: "<?php echo e(isset($settingTheme)?$settingTheme->data_two_column_color: 'light'); ?>",
+                data_menu_icon: "<?php echo e(isset($settingTheme)?$settingTheme->data_menu_icon: 'default'); ?>",
+                data_sidenav_size: "<?php echo e(isset($settingTheme)?$settingTheme->data_sidenav_size: 'condensed'); ?>"
+            };
+        </script>
+    </body>
+</html><?php /**PATH C:\laragon\www\wagner\sindacsba\resources\views/admin/core/admin.blade.php ENDPATH**/ ?>
