@@ -1,40 +1,36 @@
 <div class="col-12">
     <div class="swiper announcement w-75">
         <div class="swiper-wrapper">
-            @foreach ($announcements as $announcement)                
+            @foreach ($announcements as $announcement)
                 <div class="swiper-slide py-5">
                     <div class="image rounded-3 overflow-hidden">
-                        @if(isset($announcement))
-                            <style>
-                                @media (max-width: 576px) {
-                                    .hide-on-mobile-if-no-mobile-image,
-                                    .swiper.announcement {
-                                        display: none !important;
-                                    }
-                                }
-                            </style>
+                        @php
+                            $hasImage = !empty($announcement->path_image);
+                            $hasMobileImage = !empty($announcement->path_image_mobile);
+                            $hasVerticalImage = !empty($announcement->path_image_vertical);
+                        @endphp
 
-                            @php
-                                $hideOnMobile = empty($announcement->path_image_mobile) ? 'hide-on-mobile-if-no-mobile-image' : '';
-                            @endphp
-
-                            @if (!empty($announcement->link))
-                                <a href="{{ $announcement->link }}" target="_blank" rel="nofollow noopener noreferrer">
-                                    <picture>
-                                        @if ($announcement->path_image_mobile)
-                                            <source media="(max-width: 576px)" srcset="{{ asset('storage/' . $announcement->path_image_mobile) }}">
-                                        @endif
-                                        <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100 {{ $hideOnMobile }}">
-                                    </picture>
-                                </a>
-                            @else
+                        {{-- Seu código de exibição de imagens aqui --}}
+                        @if (!empty($announcement->link))
+                            <a href="{{ $announcement->link }}" target="_blank" rel="nofollow noopener noreferrer">
                                 <picture>
-                                    @if ($announcement->path_image_mobile)
+                                    @if ($hasMobileImage)
                                         <source media="(max-width: 576px)" srcset="{{ asset('storage/' . $announcement->path_image_mobile) }}">
                                     @endif
-                                    <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100 {{ $hideOnMobile }}">
+                                    @if ($hasImage)                                            
+                                        <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100">
+                                    @endif
                                 </picture>
-                            @endif
+                            </a>
+                        @else
+                            <picture>
+                                @if ($hasMobileImage)
+                                    <source media="(max-width: 576px)" srcset="{{ asset('storage/' . $announcement->path_image_mobile) }}">
+                                @endif
+                                @if ($hasImage)                                        
+                                    <img src="{{ asset('storage/' . $announcement->path_image) }}" alt="Anuncio-{{ $announcement->id }}" class="w-100">
+                                @endif
+                            </picture>
                         @endif
                     </div>
                 </div>

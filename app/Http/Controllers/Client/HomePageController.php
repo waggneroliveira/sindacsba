@@ -32,7 +32,14 @@ class HomePageController extends Controller
         $blogHighlights = Blog::whereHas('category', function($active){
             $active->where('active', 1);
         })->highlightOnly()->active()->sorting()->limit(4)->get();
-        $announcements = Announcement::active()->sorting()->get();
+        $announcements = Announcement::active()
+        ->sorting()
+        ->where(function($query) {
+            $query->whereNotNull('path_image')
+                ->orWhereNotNull('path_image_mobile')
+                ->orWhereNotNull('path_image_vertical');
+        })
+        ->get();
         $topics = Topic::active()->sorting()->get();
         $about = About::active()->first();
         $partners = Partner::active()->sorting()->get();

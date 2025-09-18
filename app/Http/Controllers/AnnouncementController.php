@@ -47,7 +47,7 @@ class AnnouncementController extends Controller
                 Storage::putFileAs($this->pathUpload, $file, $filename);
             } else {
                 $image = $manager->read($file)
-                    ->resize(1137, null, function ($constraint) {
+                    ->resize(null, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
@@ -93,7 +93,7 @@ class AnnouncementController extends Controller
                 Storage::putFileAs($this->pathUpload, $fileMobile, $filenameMobile);
             } else {
                 $imageMobile = $manager->read($fileMobile)
-                    ->resize(355, 433, function ($constraint) {
+                    ->resize(null, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
@@ -138,7 +138,7 @@ class AnnouncementController extends Controller
                 Storage::putFileAs($this->pathUpload, $file, $filename);
             } else {
                 $image = $manager->read($file)
-                    ->resize(1137, null, function ($constraint) {
+                    ->resize(null, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
@@ -191,7 +191,7 @@ class AnnouncementController extends Controller
                 Storage::putFileAs($this->pathUpload, $fileMobile, $filenameMobile);
             } else {
                 $imageMobile = $manager->read($fileMobile)
-                    ->resize(355, 433, function ($constraint) {
+                    ->resize(null, null, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })

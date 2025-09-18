@@ -61,7 +61,7 @@
     <noscript><link href="{{ asset('build/admin/js/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css"></noscript>
     <link rel="preload" href="{{ asset('build/admin/js/libs/dropify/css/dropify.min.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="{{ asset('build/admin/js/libs/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css"></noscript>
-
+    <link href="{{ asset('build/client/lgpd/style.css') }}" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('build/client/css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link rel="preload" href="{{ asset('build/client/css/bootstrap-icons/bootstrap-icons.css') }}" as="style" onload="this.rel='stylesheet'">
@@ -393,7 +393,9 @@
             window.addEventListener('load', initCategorySwiper);
             window.addEventListener('resize', initCategorySwiper);
         </script>
-
+        
+        @include('client/includes/lgpd/lgpd')
+        
         @if (isset($contact) && $contact->whatsapp <> null)
             @php
                 // Remove caracteres não numéricos do telefone
@@ -740,8 +742,6 @@
 
     <main>
         <div  class="mt-0">
-            {{-- @include('client.includes.announcement') --}}
-
             @if ($announcements->isEmpty())
                 <style>
                     .contact, .blog-inn {
@@ -831,7 +831,7 @@
                     <li class="montserrat-regular font-16 mb-3"><a href="{{route('regional')}}">Regionais</a></li>
                     <li class="montserrat-regular font-16 mb-3"><a href="{{route('blog')}}">Notícias</a></li>
                     <li class="montserrat-regular font-16 mb-3"><a href="{{route('noticies')}}">Editais</a></li>
-                    <li class="montserrat-regular font-16 mb-3"><a href="{{route('contact')}}">Contato</a></li>
+                    <li class="montserrat-regular font-16 mb-3"><a href="https://policies.google.com/privacy?hl=pt-BR" target="_blank" rel="noopener noreferrer">Política de Privacidade</a></li>
                 </ul>
                 <div class="d-flex justify-content-end flex-column w-auto montserrat-semiBold">
                     <span>
@@ -914,6 +914,7 @@
     <script src="{{ asset('build/admin/js/pages/form-fileuploads.init.js') }}"></script>
     <script src="{{ asset('build/client/css/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('build/client/css/typed.js/typed.umd.js') }}"></script>
+    <script src="{{ asset('build/client/lgpd/script.js') }}"></script>
     <script src="{{ asset('build/client/js/default.js') }}"></script>
 
 

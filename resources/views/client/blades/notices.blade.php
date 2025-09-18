@@ -1,7 +1,9 @@
 @extends('client.core.client')
 @section('content')
     <section class="notices mb-5">
+        @include('client.includes.announcement') 
         <div class="container py-4">
+
             @if ($groupedNoticies->count())                
                 <h1 class="montserrat-bold font-30 mb-2 title-blue">EDITAIS PUBLICADOS</h1>
 

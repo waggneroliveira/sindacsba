@@ -1,11 +1,6 @@
 @extends('client.core.client')
 
 @section('content')
-    <style>
-        .announcement{
-            display: none;
-        }
-    </style>
     <div class="d-flex justify-content-start gap-2 align-items-start flex-nowrap mt-5 mb-3">
         <span class="firula-contact mt-2"></span>
         <div class="description">

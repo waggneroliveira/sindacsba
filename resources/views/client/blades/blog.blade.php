@@ -45,6 +45,9 @@
 <section class="blog mb-5">
     <div class="container-fluid">
        <div class="row">
+         
+          @include('client.includes.announcement') 
+
           <div class="col-lg-7 p-0">
              <!-- Swiper Main Carousel -->
              <div class="swiper main-swiper">

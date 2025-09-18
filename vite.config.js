@@ -12,6 +12,10 @@ export default defineConfig({
         viteStaticCopy({
             targets: [
                 {
+                    src: 'resources/assets/client/lgpd/',
+                    dest: 'client'
+                },
+                {
                     src: 'resources/assets/client/css/',
                     dest: 'client'
                 },

@@ -1,5 +1,6 @@
 @extends('client.core.client')
 @section('content')
+    @include('client.includes.announcement') 
     <!-- News With Sidebar Start -->
     <div class="container-fluid mb-5 blog-inn mt-4">
         <div class="container">
