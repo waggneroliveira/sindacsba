@@ -1569,7 +1569,6 @@
          height: 100%;
      }
      .image-hero {
-         aspect-ratio: 195 / 293;
          object-position: top center;
      }
      .client-img {
@@ -1620,6 +1619,9 @@
  }
 
  @media (max-width:576px) {
+    .hero picture{
+        height: 440px;
+    }
     #lgpd-banner{
         bottom: 60px;
     }
