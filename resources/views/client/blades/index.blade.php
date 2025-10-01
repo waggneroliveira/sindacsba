@@ -164,7 +164,7 @@
         <div class="container">
             @if ($about <> null)                
                 <div id="about-1" class="d-flex justify-content-between align-items-start about flex-wrap w-100 pt-3 pb-3 pt-lg-5">
-                    <div class="col-12 col-lg-7 animate-on-scroll" data-animation="animate__fadeInLeft">
+                    <div class="col-12 col-lg-7 animate-on-scroll full" data-animation="animate__fadeInLeft">
                         <div class="border-bottom mb-0">
                             <h2 class="section-title rounded-top-left d-table px-4 w-auto m-0 montserrat-bold font-18 title-blue">{{$about->title}}</h2>
                         </div>
@@ -177,11 +177,19 @@
                             <a href="{{route('about')}}#{{$about->slug}}" class="background-red montserrat-semiBold font-15 py-2 px-4 rounded-4">Saiba mais</a>
                         </div>
                     </div>
-                    <div class="col-11 col-lg-4 animate-on-scroll mb-3" data-animation="animate__fadeInRight">
-                        <div class="image d-flex justify-content-end">
-                            <img src="{{asset('storage/' . $about->path_image)}}" loading="lazy" alt="About" class="w-100 h-100 about-image d-sm-block" loading="lazy">
+                    @if ($about->path_image <> null)                        
+                        <div class="col-11 col-lg-4 animate-on-scroll mb-3" data-animation="animate__fadeInRight">
+                            <div class="image d-flex justify-content-end">
+                                <img src="{{asset('storage/' . $about->path_image)}}" loading="lazy" alt="About" class="w-100 h-100 about-image d-sm-block" loading="lazy">
+                            </div>
                         </div>
-                    </div>
+                        @else
+                        <style>
+                            .full{
+                                width: 100%
+                            }
+                        </style>
+                    @endif
                 </div>     
             @endif
             
