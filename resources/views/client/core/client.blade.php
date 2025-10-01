@@ -14,13 +14,13 @@
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="og:type" content="article">
         <meta property="og:title" content="{{ $blogInner->title }}">
-        <meta property="og:description" content="{{ Str::limit(strip_tags($blogInner->content), 150) }}">
+        <meta property="og:description" content="{{ Str::limit(strip_tags($blogInner->text), 150) }}">
         <meta property="og:image" content="{{ asset('storage/' . $blogInner->path_image_thumbnail) }}">
 
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:url" content="{{ url()->current() }}">
         <meta name="twitter:title" content="{{ $blogInner->title }}">
-        <meta name="twitter:description" content="{{ Str::limit(strip_tags($blogInner->content), 150) }}">
+        <meta name="twitter:description" content="{{ Str::limit(strip_tags($blogInner->text), 150) }}">
         <meta name="twitter:image" content="{{ asset('storage/' . $blogInner->path_image_thumbnail) }}">
     @else
         <meta property="og:url" content="{{ url()->current() }}">
