@@ -225,9 +225,9 @@
                                             </g>
                                         </svg>
                                     </svg>
-                                    <h4 class="title montserrat-medium font-16 mb-0 col-10">
+                                    <h3 class="title montserrat-medium font-16 mb-0 col-10">
                                         {{ $video->title ?? 'Vídeo' }}
-                                    </h4>
+                                    </h3>
                                 </div>
                             @endforeach
                         </div>
@@ -242,6 +242,7 @@
                 <div class="right col-7 bg-black d-flex justify-content-center align-items-center">
                     <iframe id="videoPlayer" class="w-100 h-100"
                             src=""
+                            title="Vídeo"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe>
                 </div>
