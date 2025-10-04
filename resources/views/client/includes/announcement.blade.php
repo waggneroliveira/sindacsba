@@ -47,7 +47,7 @@
 <style>
     @media (max-width: 576px) {
         .swiper.announcement-mobile{
-            widows: 95% !important;
+            width: 95% !important;
         }
     }
 </style>
