@@ -43,3 +43,11 @@
         </div>
     </div>
 </div>
+
+<style>
+    @media (max-width: 576px) {
+        .swiper.announcement-mobile{
+            widows: 95% !important;
+        }
+    }
+</style>
