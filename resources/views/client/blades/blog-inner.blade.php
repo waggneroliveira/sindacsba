@@ -203,7 +203,7 @@
                                                     <p class="text-color mb-0 montserrat-regular font-12">{{$dataFormatada}}</p>
                                                 </div>
                                                 <a href="{{route('blog-inner', ['slug' => $relacionado->slug])}}" class="underline">
-                                                    <h3 class="h6 m-0 text-uppercase montserrat-bold font-14 title-blue">{{substr(strip_tags($relacionado->title), 0, 90)}}</h3>
+                                                    <h3 class="h6 m-0 text-uppercase montserrat-bold font-14 title-blue">{{substr(strip_tags($relacionado->title), 0, 60)}}...</h3>
                                                 </a>
                                             </div>
                                         </div>
