@@ -514,7 +514,7 @@
                 `;
 
                 // Fazer requisição AJAX
-                fetch(`home/blog/filter/${categorySlug}`)
+                fetch(`blog/filter/${categorySlug}`)
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Erro na rede');
